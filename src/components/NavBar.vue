@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar flat app class="secondary lighten-1">
+    <v-toolbar height="60" flat app class="secondary lighten-1">
       <AppTitle/>
     </v-toolbar>
   </nav>
