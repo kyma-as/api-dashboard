@@ -28,8 +28,9 @@
 </template>
 
 <script>
-  export default {
-    components: {
+    import AppTitle from "@/components/AppTitle"
+    export default {
+        name:'login',
+        components:{AppTitle}
     }
-  }
 </script>
