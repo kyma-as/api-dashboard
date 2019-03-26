@@ -52,7 +52,7 @@
                 let password = this.input.password;
               if(validateLogin(username,password)){
                   // Authenticate against kyma api
-                  if(authenticateLogin()){
+                  if(authenticateLogin(username,password)){
                       // Set state authenticated
                       // Route to Home
                       this.$router.replace({name:'home'})
