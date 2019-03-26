@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <v-content>
-      <h1>Hello</h1>
+      <router-link to="/">
+      <h1>Logout</h1>
+      </router-link>
     </v-content>
   </div>
 </template>
