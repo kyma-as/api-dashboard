@@ -52,8 +52,8 @@
               if(this.input.username != "" && this.input.password != ""){
                   // Authenticate against kyma api
                   if(true){
-                      this.$emit("authenticated",true);
-                      this.$router.replace({name: "home"})
+                      // Set state authenticated
+                      // Route to Home
                   }
               }else{
                   console.log("Must have a username and password")
