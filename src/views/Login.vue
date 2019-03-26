@@ -10,9 +10,13 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field v-model="input.username" prepend-icon="person" name="login" label="Login" type="text" id="username"></v-text-field>
-                  <v-text-field v-model="input.password" prepend-icon="lock" name="password" label="Password" id="password"
-                                type="password"></v-text-field>
+                  <v-text-field v-model="input.username" prepend-icon="person" name="login"
+                                label="Login" type="text" id="username">
+
+                  </v-text-field>
+                  <v-text-field v-model="input.password" prepend-icon="lock" name="password"
+                                label="Password" id="password" type="password">
+                  </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -34,6 +38,7 @@
 
     export default {
         name:'login',
+        components:{AppTitle},
         data() {
             return{
               input:{
@@ -42,11 +47,17 @@
               }
             }
         },
-        components:{AppTitle},
-
         methods:{
             login(){
-
+              if(this.input.username != "" && this.input.password != ""){
+                  // Authenticate against kyma api
+                  if(true){
+                      this.$emit("authenticated",true);
+                      this.$router.replace({name: "home"})
+                  }
+              }else{
+                  console.log("Must have a username and password")
+              }
             }
         }
     }
