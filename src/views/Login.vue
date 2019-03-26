@@ -47,19 +47,22 @@
             }
         },
         methods:{
-            login(){
+            async login() {
                 let username = this.input.username;
                 let password = this.input.password;
-              if(validateLogin(username,password)){
-                  // Authenticate against kyma api
-                  if(authenticateLogin(username,password)){
-                      // Set state authenticated
-                      // Route to Home
-                      this.$router.replace({name:'home'})
-                  }
-              }else{
-                  console.log("Must have an email and password")
-              }
+                if (validateLogin(username, password)) {
+                    // Authenticate against kyma api
+                    if (authenticateLogin(username, password)) {
+                        // Set state authenticated
+                        // Route to Home
+                        console.log(authenticateLogin(username, password))
+                        this.$router.replace({name: 'home'})
+                    } else {
+                        console.log("Could not authenticate with the server")
+                    }
+                } else {
+                    console.log("Must have an email and password")
+                }
             }
         }
     }
