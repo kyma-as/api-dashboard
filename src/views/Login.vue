@@ -33,8 +33,7 @@
 
 <script>
     import AppTitle from "@/components/AppTitle"
-
-
+    import {validateLogin,authenticateLogin} from "../scripts/authentication";
 
     export default {
         name:'login',
@@ -49,15 +48,17 @@
         },
         methods:{
             login(){
-              if(this.input.username != "" && this.input.password != ""){
+                let username = this.input.username;
+                let password = this.input.password;
+              if(validateLogin(username,password)){
                   // Authenticate against kyma api
-                  if(true){
+                  if(authenticateLogin()){
                       // Set state authenticated
                       // Route to Home
                       this.$router.replace({name:'home'})
                   }
               }else{
-                  console.log("Must have a username and password")
+                  console.log("Must have an email and password")
               }
             }
         }
