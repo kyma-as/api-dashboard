@@ -54,6 +54,7 @@
                   if(true){
                       // Set state authenticated
                       // Route to Home
+                      this.$router.replace({name:'home'})
                   }
               }else{
                   console.log("Must have a username and password")
