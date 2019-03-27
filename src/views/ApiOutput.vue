@@ -9,18 +9,17 @@
 <script>
     export default {
         name: "ApiOutput",
-        data(){
-            return{
+        data() {
+            return {}
+        },
+        methods: {
+            async getData() {
 
+            },
+            // Runs on creating page
+            created() {
+                //this.getData();
             }
-        },
-        methods:{
-            async getData(){
-
-        },
-        // Runs on creating page
-        created() {
-            //this.getData();
         }
     }
 </script>
