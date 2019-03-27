@@ -50,12 +50,15 @@
             async login() {
                 let username = this.input.username;
                 let password = this.input.password;
+                console.log("Validating input...");
                 if (validateLogin(username, password)) {
+                    console.log("Input valid!");
                     // Authenticate against kyma api
+                    console.log("Authenticating with server...")
                     if (await authenticateLogin(username, password)) {
+                        console.log("Authenticated!")
                         // Set state authenticated
                         // Route to Home
-                        console.log(authenticateLogin(username, password))
                         this.$router.replace({name: 'home'})
                     } else {
                         console.log("Could not authenticate with the server")
