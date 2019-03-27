@@ -9,7 +9,7 @@
                 <AppTitle/>
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form @keydown.native.enter="login">
                   <v-text-field v-model="input.username" prepend-icon="person" name="login"
                                 label="Login" type="text" id="username">
 
