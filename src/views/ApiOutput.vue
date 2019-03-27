@@ -1,7 +1,14 @@
 <template>
   <div>
     <v-content>
-      <span>Api-Test</span>
+      <router-link to="/home">
+        <span>Api-Test</span>
+      </router-link>
+      <v-list v-for="row in rows">
+        <v-list-tile>
+          {{row}}
+        </v-list-tile>
+      </v-list>
     </v-content>
   </div>
 </template>
@@ -10,16 +17,38 @@
     export default {
         name: "ApiOutput",
         data() {
-            return {}
+            return {
+                loading: false,
+                rows:[]
+            }
         },
         methods: {
-            async getData() {
+            getApiData() {
+                let url = 'https://demo.kyma.no/api/v1/vessels';
+                let user = 'ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==';
+                this.loading = true;
+                console.log("Trying to fetch data...")
+                fetch(url, {
+                    headers: {
+                        Authorization: 'Basic ' + user
+                    }
+                })
+                    .then(res => res.json())
+                    .then((json) => {
+                        console.log(json);
+                        this.loading = false;
+                        for(let entry of json){
+                            for(let key in entry){
+                                let str = `${key} --> ${entry[key]}`
+                                this.rows.push(str)
+                            }
+                        }
+                    });
 
-            },
-            // Runs on creating page
-            created() {
-                //this.getData();
             }
+        },
+        created() {
+            this.getApiData();
         }
     }
 </script>
