@@ -8,7 +8,7 @@
           </router-link>
         </v-list-tile>
         <v-list-tile>
-          <router-link to="">
+          <router-link to="/apioutput">
             <span>API-output</span>
           </router-link>
         </v-list-tile>
