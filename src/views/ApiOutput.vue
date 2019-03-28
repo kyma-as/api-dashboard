@@ -5,9 +5,11 @@
         <span>Api-Test</span>
       </router-link>
       <v-list v-for="row in rows">
+        <v-divider/>
         <v-list-tile>
           {{row}}
         </v-list-tile>
+        <v-divider/>
       </v-list>
     </v-content>
   </div>
