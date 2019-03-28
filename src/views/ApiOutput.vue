@@ -7,7 +7,12 @@
                         label="Url Parameter"
                         v-model="urlParam"
           ></v-text-field>
+                    <v-text-field class="white"
+                        label="VesselID"
+                        v-model="urlParam"
+          ></v-text-field>
           <v-btn @click="getApiData">Fetch Data</v-btn>
+          <v-btn @click="getApiDataVessel">Vessels</v-btn>
           <v-btn @click="clearData">Clear Data</v-btn>
           <v-progress-circular
               v-if="loading"
@@ -28,7 +33,9 @@
 </template>
 
 <script>
-    export default {
+    import {getApiData} from "../scripts/getData";
+    import {getApiDataVessel} from "../scripts/getData";    
+    export default {   
         name: "ApiOutput",
         data() {
             return {
@@ -38,39 +45,24 @@
             }
         },
         methods: {
-            getApiData() {
-                if(this.rows.length >0){
-                    this.clearData();
-                }
-                let url = 'https://demo.kyma.no/api/v1/' + this.urlParam;
-                let user = 'ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==';
+            getApiData(){
                 this.loading = true;
                 console.log("Trying to fetch data...")
-                fetch(url, {
-                    headers: {
-                        Authorization: 'Basic ' + user
-                    }
-                })
-                    .then(res => res.json())
-                    .then((json) => {
-                        this.loading = false;
-                        for (let entry of json) {
-                            for (let key in entry) {
-                                let str = `${key} --> ${entry[key]}`
-                                this.rows.push(str)
-                            }
-                        }
-                    });
-
+                getApiData(this.urlParam, this.rows, this.loading)
+                this.loading = false;
+            },
+            getApiDataVessel() {
+                this.loading = true;
+                console.log("Trying to fetch data...")
+                getApiDataVessel(this.urlParam, this.rows)
+                this.loading = false;
             },
             clearData() {
                 this.rows = []
             }
-        },
-        created() {
-            //this.getApiData();
         }
     }
+
 </script>
 
 <style scoped>
