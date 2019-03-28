@@ -1,11 +1,11 @@
-export function getApiData(urlParam, rows) {
+export async function getApiData(urlParam, rows) {
   if (rows.length > 0) {
     rows = [];
   }
   let url = "https://demo.kyma.no/api/v1/" + urlParam;
   let user = "ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==";
 
-  fetch(url, {
+  await fetch(url, {
     headers: {
       Authorization: "Basic " + user
     }
@@ -18,8 +18,8 @@ export function getApiData(urlParam, rows) {
           rows.push(str);
         }
       }
-      return rows;
     });
+  return rows;
 }
 
 export function getApiDataVessel(urlParam, rows) {

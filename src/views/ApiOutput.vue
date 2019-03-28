@@ -15,7 +15,7 @@
           <v-btn @click="getApiDataVessel">Vessels</v-btn>
           <v-btn @click="clearData">Clear Data</v-btn>
           <v-progress-circular
-              v-if="loading"
+              v-if="true"
               :indeterminate="loading"
               color="primary"
           ></v-progress-circular>
@@ -47,15 +47,19 @@
         methods: {
             getApiData(){
                 this.loading = true;
-                console.log("Trying to fetch data...")
-                getApiData(this.urlParam, this.rows, this.loading)
-                this.loading = false;
+                console.log("Trying to fetch data...");
+                getApiData(this.urlParam, this.rows)
+                    .then(res=>{
+                        console.log(res)
+                        this.loading = false;
+                    });
             },
             getApiDataVessel() {
                 this.loading = true;
-                console.log("Trying to fetch data...")
-                getApiDataVessel(this.urlParam, this.rows)
+                console.log("Trying to fetch data...");
+                getApiDataVessel(this.urlParam, this.rows);
                 this.loading = false;
+                console.log("not loading")
             },
             clearData() {
                 this.rows = []
