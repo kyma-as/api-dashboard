@@ -1,6 +1,16 @@
 <template>
   <div>
     <v-content>
+      <v-layout row wrap>
+        <v-flex>
+          <v-text-field class="white"
+                        label="Url Parameter"
+                        v-model="urlParam"
+          ></v-text-field>
+          <v-btn @click="getApiData">Fetch Data</v-btn>
+          <v-btn @click="clearData">Clear Data</v-btn>
+        </v-flex>
+      </v-layout>
       <v-list v-for="row in rows" class="primary">
         <v-divider/>
         <v-list-tile class="tertiary">
@@ -18,12 +28,16 @@
         data() {
             return {
                 loading: false,
-                rows:[]
+                urlParam: "vessels",
+                rows: []
             }
         },
         methods: {
             getApiData() {
-                let url = 'https://demo.kyma.no/api/v1/vessels';
+                if(this.rows.length >0){
+                    this.clearData();
+                }
+                let url = 'https://demo.kyma.no/api/v1/' + this.urlParam;
                 let user = 'ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==';
                 this.loading = true;
                 console.log("Trying to fetch data...")
@@ -36,18 +50,21 @@
                     .then((json) => {
                         console.log(json);
                         this.loading = false;
-                        for(let entry of json){
-                            for(let key in entry){
+                        for (let entry of json) {
+                            for (let key in entry) {
                                 let str = `${key} --> ${entry[key]}`
                                 this.rows.push(str)
                             }
                         }
                     });
 
+            },
+            clearData() {
+                this.rows = []
             }
         },
         created() {
-            this.getApiData();
+            //this.getApiData();
         }
     }
 </script>
