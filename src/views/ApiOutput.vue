@@ -1,9 +1,6 @@
 <template>
   <div>
     <v-content>
-      <router-link to="/home">
-        <span>Api-Test</span>
-      </router-link>
       <v-list v-for="row in rows">
         <v-divider/>
         <v-list-tile>
