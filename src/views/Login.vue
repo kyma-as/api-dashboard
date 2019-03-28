@@ -20,6 +20,11 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
+                <v-progress-circular
+                    v-if="loading"
+                    :indeterminate="loading"
+                    color="primary"
+                ></v-progress-circular>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" flat @click="login">Login</v-btn>
               </v-card-actions>
@@ -33,34 +38,38 @@
 
 <script>
     import AppTitle from "@/components/AppTitle"
-    import {validateLogin,authenticateLogin} from "../scripts/authentication";
+    import {validateLogin, authenticateLogin} from "../scripts/authentication";
 
     export default {
-        name:'login',
-        components:{AppTitle},
+        name: 'login',
+        components: {AppTitle},
         data() {
-            return{
-              input:{
-                  username:"",
-                  password:""
-              }
+            return {
+                loading: false,
+                input: {
+                    username: "",
+                    password: ""
+                }
             }
         },
-        methods:{
+        methods: {
             async login() {
                 let username = this.input.username;
                 let password = this.input.password;
                 console.log("Validating input...");
+                this.loading = true
                 if (validateLogin(username, password)) {
                     console.log("Input valid!");
                     // Authenticate against kyma api
                     console.log("Authenticating with server...")
                     if (await authenticateLogin(username, password)) {
+                        this.loading = false;
                         console.log("Authenticated!")
                         // Set state authenticated
                         // Route to Home
                         this.$router.replace({name: 'home'})
                     } else {
+                        this.loading = false;
                         console.log("Could not authenticate with the server")
                     }
                 } else {
