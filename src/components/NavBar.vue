@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar height="60" flat app class="secondary lighten-1">
+    <v-toolbar height="60" flat app class="secondary">
       <router-link to="/home">
         <AppTitle/>
       </router-link>

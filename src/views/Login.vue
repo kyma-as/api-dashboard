@@ -5,7 +5,7 @@
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
-              <v-toolbar dark color="secondary lighten-1">
+              <v-toolbar dark color="secondary">
                 <AppTitle/>
               </v-toolbar>
               <v-card-text>
