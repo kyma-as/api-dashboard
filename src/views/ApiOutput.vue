@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-content>
-      <v-list v-for="row in rows">
+      <v-list v-for="row in rows" class="primary">
         <v-divider/>
-        <v-list-tile>
+        <v-list-tile class="tertiary">
           {{row}}
         </v-list-tile>
         <v-divider/>
