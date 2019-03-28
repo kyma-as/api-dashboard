@@ -9,6 +9,10 @@
           ></v-text-field>
           <v-btn @click="getApiData">Fetch Data</v-btn>
           <v-btn @click="clearData">Clear Data</v-btn>
+          <v-progress-circular
+              :indeterminate="loading"
+              color="primary"
+          ></v-progress-circular>
         </v-flex>
       </v-layout>
       <v-list v-for="row in rows" class="primary">
@@ -48,7 +52,6 @@
                 })
                     .then(res => res.json())
                     .then((json) => {
-                        console.log(json);
                         this.loading = false;
                         for (let entry of json) {
                             for (let key in entry) {
