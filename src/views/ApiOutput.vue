@@ -49,19 +49,20 @@
                 this.loading = true;
                 console.log("Trying to fetch data...");
                 getApiData(this.urlParam, this.rows)
-                    .then(res=>{
-                        console.log(res)
+                    .finally(()=>{
                         this.loading = false;
                     });
             },
-            getApiDataVessel() {
+            getApiDataVessel: function () {
                 this.loading = true;
                 console.log("Trying to fetch data...");
-                getApiDataVessel(this.urlParam, this.rows);
-                this.loading = false;
-                console.log("not loading")
+                getApiDataVessel(this.urlParam, this.rows)
+                    .finally(()=>{
+                        this.loading = false;
+                    });
             },
             clearData() {
+                this.loading = false;
                 this.rows = []
             }
         }
