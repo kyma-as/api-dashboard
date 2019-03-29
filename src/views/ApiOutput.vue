@@ -11,7 +11,7 @@
           <v-btn @click="getApiDataVessel">Vessels</v-btn>
           <v-btn @click="clearData">Clear Data</v-btn>
           <v-progress-circular
-              v-if="true"
+              v-if="loading"
               :indeterminate="loading"
               color="primary"
           ></v-progress-circular>
