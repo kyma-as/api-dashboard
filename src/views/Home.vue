@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <NavDrawer />
     <v-content>
       <v-list>
         <v-list-tile>
@@ -19,8 +20,11 @@
 
 
 <script>
-
+import NavDrawer from "@/components/NavDrawer"
     export default {
-        name: "home"
+        name: "home",
+        components: {
+          NavDrawer
+        }
     }
 </script>
