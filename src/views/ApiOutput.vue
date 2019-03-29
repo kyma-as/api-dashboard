@@ -7,10 +7,6 @@
                         label="Url Parameter"
                         v-model="urlParam"
           ></v-text-field>
-                    <v-text-field class="white"
-                        label="VesselID"
-                        v-model="urlParam"
-          ></v-text-field>
           <v-btn @click="getApiData">Fetch Data</v-btn>
           <v-btn @click="getApiDataVessel">Vessels</v-btn>
           <v-btn @click="clearData">Clear Data</v-btn>
