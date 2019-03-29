@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-toolbar-title class="title">
-      <span style="font-size: x-large" class="font-weight-light primary--text">kyma</span>
-      <span style="font-size: x-large" class="font-weight-heavy primary--text">API</span>
+      <span style="font-size: x-large" class="font-weight-light primary--text text--lighten-1">kyma</span>
+      <span style="font-size: x-large" class="font-weight-heavy primary--text text--lighten-1">API</span>
     </v-toolbar-title>
   </div>
 </template>
