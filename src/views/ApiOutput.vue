@@ -10,6 +10,7 @@
           <v-btn @click="getApiData">Fetch Data</v-btn>
           <v-btn @click="getApiDataVessel">Vessels</v-btn>
           <v-btn @click="clearData">Clear Data</v-btn>
+          <v-btn @click="getApiDataTest">Testing Ahem Testing</v-btn>
           <v-progress-circular
               v-if="loading"
               :indeterminate="loading"
@@ -30,7 +31,8 @@
 
 <script>
     import {getApiData} from "../scripts/getData";
-    import {getApiDataVessel} from "../scripts/getData";    
+    import {getApiDataVessel} from "../scripts/getData";
+    import {getApiDataTest} from "../scripts/getData";    
     export default {   
         name: "ApiOutput",
         data() {
@@ -53,6 +55,14 @@
                 this.loading = true;
                 console.log("Trying to fetch data...");
                 getApiDataVessel(this.urlParam, this.rows)
+                    .finally(()=>{
+                        this.loading = false;
+                    });
+            },
+            getApiDataTest: function () {
+                this.loading = true;
+                console.log("Trying to fetch testdata...");
+                getApiDataTest( this.rows)
                     .finally(()=>{
                         this.loading = false;
                     });
