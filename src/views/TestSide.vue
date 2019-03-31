@@ -12,7 +12,7 @@
       </v-list>
         <svg width="1200" height="1200">
             <g v-for="(value, i) in rows"
-            :transform="'translate(50, ${i * 500})'">
+            :transform="'translate(0, 0)'">
              <rect height="20" v-bind:width="25 * value" v-bind:y="i*30+20" fill="green"
              ></rect>
              <text v-bind:y="i*30 + 5" fill="White">{{value}}</text>
