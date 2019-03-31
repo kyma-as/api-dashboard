@@ -13,6 +13,10 @@
             <span>API-output</span>
           </router-link>
         </v-list-tile>
+          <router-link to="/testside">
+            <span>Test</span>
+          </router-link>
+        </v-list-tile>
       </v-list>
     </v-content>
   </div>
