@@ -49,7 +49,9 @@ export async function getApiDataTest(rows) {
   if (rows.length > 0) {
     rows = [];
   }
-  let url = "https://demo.kyma.no/api/v1/logdata/find?logVariableId=9177&granularity=QuarterHour&fromDate=2019-01-01&toDate=2020-01-01";
+  let Testarray =[];
+  let value
+  let url = "https://demo.kyma.no/api/v1/logdata/find?logVariableId=9177&granularity=Hour&fromDate=2019-01-01&toDate=2019-01-02";
   let user = "ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==";
 
   await fetch(url, {
@@ -61,8 +63,12 @@ export async function getApiDataTest(rows) {
     .then(json => {
       for (let entry in json.data) {
         let str = `${entry} --> ${json.data[entry]}`;
-        rows.push(str);
+        value = `${json.data[entry]}`;
+        Testarray.push(json.data[entry])
+        rows.push(json.data[entry]);
       }
+      console.log(Testarray)
+      console.log(rows)
     });
   return rows;
 }

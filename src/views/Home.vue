@@ -2,6 +2,8 @@
   <div class="home">
     <NavDrawer />
     <v-content>
+      <v-list>
+      </v-list>
     </v-content>
   </div>
 </template>
