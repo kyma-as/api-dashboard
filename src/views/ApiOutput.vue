@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NavDrawer/>
     <v-content>
       <v-layout row wrap>
         <v-flex>
@@ -30,11 +31,13 @@
 </template>
 
 <script>
-    import {getApiData} from "../scripts/getData";
-    import {getApiDataVessel} from "../scripts/getData";
-    import {getApiDataTest} from "../scripts/getData";    
-    export default {   
+    import {getApiData,getApiDataVessel,getApiDataTest} from "../scripts/getData";
+    import NavDrawer from "@/components/NavDrawer"
+    export default {
         name: "ApiOutput",
+        components:{
+          NavDrawer
+        },
         data() {
             return {
                 loading: false,
