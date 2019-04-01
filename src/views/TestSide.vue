@@ -4,9 +4,6 @@
     <v-content>
       <v-list>
         <v-list-tile>
-          <router-link to="/home">
-            <span>Home</span>
-          </router-link>
           <v-btn @click="getApiDataTest">Testing Ahem Testing</v-btn>
         </v-list-tile>
       </v-list>

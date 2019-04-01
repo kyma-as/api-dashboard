@@ -62,17 +62,13 @@ export async function getApiDataTest(rows) {
     .then(res => res.json())
     .then(json => {
       for (let entry in json.data) {
-        let str = `${entry} --> ${json.data[entry]}`;     
+        let str = `${entry} --> ${json.data[entry]}`;
         value = `${json.data[entry]}`;
-        Testarray.push(json.data[entry])  
+        Testarray.push(json.data[entry])
         rows.push(json.data[entry]);
       }
       console.log(Testarray)
       console.log(rows)
-      
-      
-
-
     });
   return rows;
 }
