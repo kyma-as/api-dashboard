@@ -43,8 +43,8 @@
                 items: [
                     {title: 'Home', icon: 'dashboard',path:"/home"},
                     {title: 'Vessels', icon: 'directions_boat',path:"/apioutput"},
-                    {title: 'Logout', icon: 'question_answer',path:"/"},
-                    {title: 'Test', icon: 'question_answer',path:"/testside"}
+                    {title: 'Test', icon: 'question_answer',path:"/testside"},
+                    {title: 'Logout', icon: 'question_answer',path:"/"}
 
                 ],
                 right: null

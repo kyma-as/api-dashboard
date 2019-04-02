@@ -9,8 +9,8 @@
       </v-list>
         <svg width="1200" height="1200">
             <g v-for="(value, i) in rows"
-            :transform="'translate(0, 0)'">
-             <rect height="20" v-bind:width="25 * value" v-bind:y="i*30+20" fill="green"
+            :transform="'translate(60, 600) rotate(270)'">
+             <rect height="20" v-bind:width="25 * value" v-bind:y="i*30+20" fill="green" 
              ></rect>
              <text v-bind:y="i*30 + 35" fill="White">{{value}}</text>
             </g>
@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import NavDrawer from "@/components/NavDrawer"
+import NavDrawer from "@/components/NavDrawer";
 import {getApiDataTest} from "../scripts/getData";   
     export default {
         name: "testside",
@@ -37,6 +37,7 @@ import {getApiDataTest} from "../scripts/getData";
             getApiDataTest: function () {
                 console.log("Trying to fetch testdata...");
                 getApiDataTest( this.rows)
+                
             },
         }
     }
