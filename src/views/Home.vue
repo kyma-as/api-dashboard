@@ -3,11 +3,12 @@
     <NavDrawer />
     <v-content>
       <v-btn @click=" getApiDataTest" >get info</v-btn>
-      <v-btn @click="calculatePath" >Tegn</v-btn>                         
-
-  <svg width="1200" height="800">
-    <g  :transform="'translate(0, 50)'">
-      <path :d="line" stroke="blue" fill="none"/>
+      <v-btn @click="calculatePath" >Tegn</v-btn> 
+    </v-content> 
+    <v-content>                       
+  <svg width="600" height="400" style="background: white" :transform="'translate(20, 0)'" >
+    <g >
+      <path :d="line" stroke="black" fill="none" />
     </g>
   </svg>
     </v-content>
@@ -26,7 +27,6 @@ import {getApiDataTest} from "../scripts/getData";
       data() {
       return {
       rows: [],
-      
       line: '',
     };
   },
@@ -36,8 +36,8 @@ import {getApiDataTest} from "../scripts/getData";
   },
      methods:{
     getScales() {
-      const x = d3.scaleTime().range([550, 0]);
-      const y = d3.scaleLinear().range([550, 0]);
+      const x = d3.scaleTime().range([550, 20]);
+      const y = d3.scaleLinear().range([350, 20]);
       d3.axisLeft().scale(x);
       d3.axisBottom().scale(y);
       x.domain(d3.extent(this.rows, (d, i) => i));
@@ -55,8 +55,7 @@ import {getApiDataTest} from "../scripts/getData";
                 this.rows = []
                 console.log("Trying to fetch testdata...");
                 await getApiDataTest(this.rows)
-                console.log("asdasdsad" + this.rows)
-                
+                this.rows.reverse();                
       },
   }
 };

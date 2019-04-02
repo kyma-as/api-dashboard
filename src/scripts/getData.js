@@ -46,8 +46,8 @@ export async function getApiDataVessel(urlParam, rows) {
   return rows;
 }
 export async function getApiDataTest(rows) {
- 
-  let url = "https://demo.kyma.no/api/v1/logdata/find?logVariableId=9177&granularity=Hour&fromDate=2019-01-01&toDate=2019-01-02";
+
+  let url = "https://demo.kyma.no/api/v1/logdata/find?logVariableId=9177&granularity=Hour&fromDate=2019-01-01&toDate=2019-01-07";
   let user = "ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==";
 
   await fetch(url, {

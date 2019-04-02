@@ -34,7 +34,8 @@ import {getApiDataTest} from "../scripts/getData";
           NavDrawer, 
         },
         methods: {
-            getApiDataTest: function () {
+            getApiDataTest: async function () {
+               this.rows = []
                 console.log("Trying to fetch testdata...");
                 getApiDataTest( this.rows)
                 
