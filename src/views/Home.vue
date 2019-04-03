@@ -8,9 +8,9 @@
     <v-content>                       
   <svg width="600" height="400" style="background: white" :transform="'translate(20, 0)'">
     <g >
-      <path :d="line" stroke="blue" fill="none" />
-      <path :d="aksen" stroke="black" fill="none" :transform="'translate(-520, 20)'"/>
-      <path :d="aksen" stroke="black" fill="none" :transform="'translate(375, -175) rotate (90)'"/>
+      <path :d="line" stroke="blue" fill="none" :transform="'translate(20, 0)'" />
+      <path :d="aksen" stroke="black" fill="none" :transform="'translate(-520, 0)'"/>
+      <path :d="aksen" stroke="black" fill="none" :transform="'translate(375, -196) rotate (90)'"/>
     </g>
   </svg>
     </v-content>
@@ -29,9 +29,9 @@ import {getApiDataTest} from "../scripts/getData";
       data() {
       return {
       rows: [],
-      aksedata: [100000,0],
+      aksedata: [1000000,0],
       line: '',
-      aksen: '',      
+      aksen: '',
     };
   },
   mounted() {
@@ -40,7 +40,7 @@ import {getApiDataTest} from "../scripts/getData";
   },
      methods:{
     getScales() {
-      const x = d3.scaleTime().range([550, 40]);
+      const x = d3.scaleTime().range([550, 20]);
       const y = d3.scaleLinear().range([350, 20]);
       d3.axisLeft().scale(x);
       d3.axisBottom().scale(y);
