@@ -31,9 +31,7 @@ import {getApiDataTest} from "../scripts/getData";
       rows: [],
       aksedata: [100000,0],
       line: '',
-      yaksen: '',
-      xaksen: '',
-      
+      aksen: '',      
     };
   },
   mounted() {
