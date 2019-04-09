@@ -12,7 +12,24 @@ export default new Vuex.Store({
     currentVessel:"", //By Id
   },
   mutations: {
+    setAllVessels(state){
+      let url = "https://demo.kyma.no/api/v1/vessels";
 
+      let allVessels = [];
+
+      fetch(url, {
+        headers: {
+          Authorization: "Basic " + state.userInfo.apiKey
+        }
+      })
+          .then(res => res.json())
+          .then(json => {
+            for (let entry of json) {
+              allVessels.push(entry);
+            }
+            state.allVessels = allVessels;
+          });
+    }
   },
   actions: {}
 });
