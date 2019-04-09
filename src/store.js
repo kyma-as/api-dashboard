@@ -29,6 +29,9 @@ export default new Vuex.Store({
             }
             state.allVessels = allVessels;
           });
+    },
+    setCurrentVessel(state,vesselId){
+      state.currentVessel = vesselId;
     }
   },
   actions: {}
