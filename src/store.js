@@ -7,7 +7,9 @@ export default new Vuex.Store({
   state: {
     userInfo:{
       apiKey:"ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg"
-    }
+    },
+    allVessels:[], //Vessel Object
+    currentVessel:"", //By Id
   },
   mutations: {
 
