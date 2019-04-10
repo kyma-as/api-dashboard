@@ -1,58 +1,44 @@
-<template v-for="vessels in allVessels">
+<template>
   <div class="home">
-    <NavDrawer />
-    <v-content> 
-    <v-container grid-list-lg>
-      <v-layout row wrap>
-        
-        <v-flex xs12 sm6 md4 lg3 xl3>
-          <v-card>
-            <v-card-title >
-              <div>
-                <h3 class="headline mb-0">{{ vessels in allVessels }}</h3>
-                <div>Dette er et skip</div>
-              </div>
+    <NavDrawer/>
+    <v-content class="ma-2">
+      <v-container grid-list-lg>
+        <v-layout v-for="vessel in getAllVessels" :key="vessel.id" row wrap>
+          <v-card class="ma-2">
+            <v-card-title>
+              {{vessel.name}}
             </v-card-title>
-
-            <div>
-              {{ vessels.name }}
-            </div>
-          </v-card>  
-        </v-flex>
-       
-        
-      </v-layout>
-    </v-container>
+            <span class="ma-2">
+            id = {{vessel.id}}
+          </span>
+          </v-card>
+        </v-layout>
+      </v-container>
     </v-content>
   </div>
 </template>
-
-
 <script>
-import NavDrawer from "@/components/NavDrawer"
-import VesselCard from "@/components/VesselCard"
+    import NavDrawer from "@/components/NavDrawer";
+
     export default {
         name: "home",
         components: {
-          NavDrawer,
-          VesselCard
+            NavDrawer
         },
+
         data() {
-          return {
-            
-            allVessels:[
-              {name: 'vn'}
-              ]
-          }
+            return {
+                allVessels: [{name: "vessel1", id: 1}, {name: "vessel2", id: 2}],
+            };
         },
         mounted() {
-        this.$store.commit("setAllVessels")
-    },
+            this.$store.commit('setAllVessels');
+        },
+        methods: {},
         computed: {
-        getAllVessels(){
-            
-            return this.$store.getAllVessels
+            getAllVessels() {
+                return this.$store.state.allVessels
+            }
         }
-      }
-    }
+    };
 </script>
