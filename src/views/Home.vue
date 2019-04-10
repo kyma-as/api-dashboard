@@ -3,15 +3,11 @@
     <NavDrawer/>
     <v-content class="ma-2">
       <v-container grid-list-lg>
-        <v-layout v-for="vessel in getAllVessels" :key="vessel.id" row wrap>
-          <v-card class="ma-2">
-            <v-card-title>
-              {{vessel.name}}
-            </v-card-title>
-            <span class="ma-2">
-            id = {{vessel.id}}
-          </span>
-          </v-card>
+        <v-layout
+            v-for="vessel in getAllVessels"
+            :key="vessel.id"
+            row wrap>
+          <VesselCard :vessel="vessel"/>
         </v-layout>
       </v-container>
     </v-content>
@@ -19,11 +15,12 @@
 </template>
 <script>
     import NavDrawer from "@/components/NavDrawer";
+    import VesselCard from "@/components/VesselCard"
 
     export default {
         name: "home",
         components: {
-            NavDrawer
+            NavDrawer,VesselCard
         },
 
         data() {
