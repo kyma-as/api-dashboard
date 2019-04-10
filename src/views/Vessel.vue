@@ -2,7 +2,7 @@
 <div class="vessel">
     <NavDrawer />
     <v-content>
-        <span>Welcome to your Vessel!</span> 
+        <span>Welcome to {{currentVessel.name}}</span>
     </v-content>
 </div>
 </template>
@@ -12,7 +12,18 @@ import NavDrawer from "@/components/NavDrawer"
 export default {
     name: "vessel",
     components: {
-        NavDrawer
+        NavDrawer,
+    },
+    data(){
+      return {
+          currentVessel:""
+      }
+    },
+    mounted(){
+        this.currentVessel = this.$store.state.currentVessel;
+    },
+    computed:{
+
     }
     
 }
