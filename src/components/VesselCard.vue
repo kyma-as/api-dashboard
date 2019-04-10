@@ -38,8 +38,9 @@
         },
         methods: {
             routeOnClick() {
-                this.$router.replace({name: "vessel"})
-                console.log("Clicked a card")
+                this.$store.commit('setCurrentVessel',this.vessel.id);
+                this.$router.replace({name: "vessel"});
+                console.log(this.vessel.id)
             }
         },
         computed: {
