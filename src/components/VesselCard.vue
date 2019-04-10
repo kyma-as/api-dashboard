@@ -38,9 +38,8 @@
         },
         methods: {
             routeOnClick() {
-                this.$store.commit('setCurrentVessel',this.vessel.id);
+                this.$store.commit('setCurrentVessel',this.vessel);
                 this.$router.replace({name: "vessel"});
-                console.log(this.vessel.id)
             }
         },
         computed: {
