@@ -3,11 +3,11 @@
     <NavDrawer/>
     <v-content class="ma-2">
       <v-container grid-list-lg>
-        <v-layout
-            v-for="vessel in getAllVessels"
-            :key="vessel.id"
-            row wrap>
-          <VesselCard :vessel="vessel"/>
+        <v-layout row wrap>
+          <v-flex v-for="vessel in getAllVessels"
+                  :key="vessel.id" xs12 sm6 md4 lg4 xl3>
+            <VesselCard :vessel="vessel"/>
+          </v-flex>
         </v-layout>
       </v-container>
     </v-content>
@@ -20,7 +20,7 @@
     export default {
         name: "home",
         components: {
-            NavDrawer,VesselCard
+            NavDrawer, VesselCard
         },
 
         data() {
