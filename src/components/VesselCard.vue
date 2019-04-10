@@ -14,7 +14,10 @@
       <v-img>
         <h2>Placeholder for visual data</h2>
       </v-img>
-      <v-layout justify-center>
+      <v-layout row wrap>
+        <v-flex xs12 sm6>Speed: 1000 km/h</v-flex>
+        <v-flex xs12 sm6>Fuel: 1000 litre</v-flex>
+        <v-flex xs12 sm12>Vessel Status: <span class="green--text">Good</span></v-flex>
       </v-layout>
     </v-card>
   </v-hover>
