@@ -12,7 +12,6 @@
 <script>
 import NavDrawer from "@/components/NavDrawer";
 import LineExample from "@/components/LineChart.js";
-import {getApiDataTest} from "../scripts/getData"; 
     export default {
         name: "testside2",
         components: {
