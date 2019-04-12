@@ -60,7 +60,6 @@ export async function getApiDataTest(rows) {
       for (let entry in json.data) {
         rows.push(json.data[entry]);
       }
-      console.log(rows)
     });
   return rows;
 }

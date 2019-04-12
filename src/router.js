@@ -4,6 +4,7 @@ import Login from "./views/Login.vue";
 import Home from "./views/Home.vue";
 import ApiOutput from "./views/ApiOutput.vue";
 import TestSide from "./views/TestSide.vue"
+import TestSide2 from "./views/TestSide2.vue"
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
       path: "/testside",
       name: "testside",
       component: TestSide
+    },
+    {
+      path: "/testside2",
+      name: "testside2",
+      component: TestSide2
     }
   ]
 });

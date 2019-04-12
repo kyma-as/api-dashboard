@@ -44,6 +44,7 @@
                     {title: 'Home', icon: 'dashboard',path:"/home"},
                     {title: 'Vessels', icon: 'directions_boat',path:"/apioutput"},
                     {title: 'Test', icon: 'question_answer',path:"/testside"},
+                    {title: 'Test2', icon: 'question_answer',path:"/testside2"},
                     {title: 'Logout', icon: 'question_answer',path:"/"}
 
                 ],
