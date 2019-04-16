@@ -61,16 +61,18 @@ export function getLogVariables(vesselId) {
  */
 export function getLogData(logVariableId, fromDate, granularity = "Hour", toDate = getCurrentDate()) {
     let headers = createHeader();
-
     let url = fetchUrl
         + `/logdata/find?logVariableId=${logVariableId} +
         &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
 
-
-    fetch(url, headers)
+    return fetch(url, headers)
         .then(res => res.json())
         .then(logData => {
-
+            let dataArray = [];
+            for(let key in logData.data){
+                dataArray.push(logData.data[key]);
+            }
+            return dataArray;
         });
 }
 
@@ -82,8 +84,7 @@ export function getLogData(logVariableId, fromDate, granularity = "Hour", toDate
 function getCurrentDate() {
     let date = new Date;
     return "" + date.getFullYear() +
-        "-" + date.getMonth() + "-" + date.getDate();
-
+        "-" + (date.getMonth()+1) + "-" + date.getDate();
 }
 
 /**
