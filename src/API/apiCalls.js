@@ -13,7 +13,7 @@ function createHeader() {
 
 /**
  * Lists all vessels and their basic information
- * @returns: {Promise:[{Vessel:{id:string, name:string}}]}
+ * @returns {Promise:[{Vessel:{id:string, name:string}}]}
  */
 export function getVessels() {
     let headers = createHeader();
@@ -37,7 +37,7 @@ export function getVessels() {
 /**
  * Finds log variables for sensors active on a vessel
  * @param: vesselId
- * @returns: {Promise:[{logVariable:{id:string, name:string, units:string, limitMin:string, limitMax:string}}]}
+ * @returns {Promise:[{logVariable:{id:string, name:string, units:string, limitMin:string, limitMax:string}}]}
  */
 export function getLogVariables(vesselId) {
     let headers = createHeader();
@@ -62,20 +62,33 @@ export function getLogVariables(vesselId) {
 
 /**
  * Finds log data for a specific sensor variable
- * @param: logVariableId:string, granularity:string, fromDate:string, toDate:string
+ * @param: logVariableId:string, fromDate:string, granularity:string, toDate:string
  * Granularity: Raw, Minute, QuarterHour, Hour, Day
  * fromDate/toDate: yyyy-mm-dd
- * @returns: {}
+ * @returns {}
  */
-export function getLogData(logVariableId, granularity, fromDate, toDate) {
+export function getLogData(logVariableId, fromDate, granularity = "Hour", toDate = getCurrentDate()) {
     let headers = createHeader();
+
     let url = fetchUrl
         + `/logdata/find?logVariableId=${logVariableId} +
         &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
+
 
     fetch(url, headers)
         .then(res => res.json())
         .then(logData => {
 
         });
+}
+
+/**
+ * Gets current date
+ * @returns {string} of date yyyy-mm-dd
+ */
+function getCurrentDate() {
+    let date = new Date;
+    return "" + date.getFullYear() +
+        "-" + date.getMonth() + "-" + date.getDate();
+
 }
