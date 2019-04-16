@@ -76,7 +76,9 @@ export function getLogData(logVariableId, fromDate, granularity = "Hour", toDate
         });
 }
 
-
+/**
+ * Sets the state store object allVessels
+ */
 export function setVesselAttributesInStore() {
     getVessels().then(vessels => {
         let vesselsArray = vessels;
@@ -84,7 +86,7 @@ export function setVesselAttributesInStore() {
             let vesselId = vessels[i].id;
             getLogVariables(vesselId).then(logVariables => {
                 vesselsArray[i].logVariables = logVariables;
-                console.log(vesselsArray);
+                //store.commit('setAllVessels',vesselsArray);
             });
         }
     });
