@@ -13,7 +13,11 @@ function createHeader() {
  * @returns: [{Vessel:{id:string, name:string}}]
  */
 export function getVessels() {
+    let headers = createHeader();
+    let url = fetchUrl + "/vessels";
 
+    fetch(url,headers)
+        .then()
 }
 
 /**
@@ -22,7 +26,11 @@ export function getVessels() {
  * @returns: [{logVariable:{id:string, name:string, units:string, limitMin:string, limitMax:string}}]
  */
 export function getLogVariables(vesselId) {
+    let headers = createHeader();
+    let url = fetchUrl + `/logvariables/find?vesselId=${vesselId}`;
 
+    fetch(url,headers)
+        .then()
 }
 
 /**
@@ -33,5 +41,9 @@ export function getLogVariables(vesselId) {
  * @returns: {}
  */
 export function getLogData(logVariableId, granularity, fromDate, toDate) {
+    let headers = createHeader();
+    let url = fetchUrl + `/logdata/find?logVariableId=${logVariableId}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
 
+    fetch(url,headers)
+        .then()
 }
