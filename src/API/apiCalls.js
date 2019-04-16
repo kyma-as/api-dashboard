@@ -23,10 +23,11 @@ export function getVessels() {
         .then(res => res.json())
         .then(vessels => {
             let vesselArray = [];
-            for(let vessel of vessels){
-                let newVessel = {};
-                newVessel.id = vessel.id;
-                newVessel.name = vessel.name;
+            for (let vessel of vessels) {
+                let newVessel = {
+                    id: vessel.id,
+                    name: vessel.name
+                };
                 vesselArray.push(newVessel);
             }
             return vesselArray;
@@ -36,16 +37,26 @@ export function getVessels() {
 /**
  * Finds log variables for sensors active on a vessel
  * @param: vesselId
- * @returns: [{logVariable:{id:string, name:string, units:string, limitMin:string, limitMax:string}}]
+ * @returns: {Promise:[{logVariable:{id:string, name:string, units:string, limitMin:string, limitMax:string}}]}
  */
 export function getLogVariables(vesselId) {
     let headers = createHeader();
     let url = fetchUrl + `/logvariables/find?vesselId=${vesselId}`;
 
-    fetch(url, headers)
+    return fetch(url, headers)
         .then(res => res.json())
         .then(logVariables => {
-
+            let logVariableArray = [];
+            for (let logVariable of logVariables) {
+                let newLogVariable = {
+                    id: logVariable.id,
+                    name: logVariable.name,
+                    limitMin: logVariable.validLimitMinimum,
+                    limitMax: logVariable.validLimitMaximum
+                };
+                logVariableArray.push(newLogVariable);
+            }
+            return logVariableArray
         });
 }
 
