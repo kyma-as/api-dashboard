@@ -57,7 +57,7 @@ export function getLogVariables(vesselId) {
  * @param fromDate:string yyyy-mm-dd
  * @param granularity:string Raw, Minute, QuarterHour, Hour, Day
  * @param toDate:string yyyy-mm-dd
- * @returns {Promise}
+ * @returns {Promise} Array of data
  */
 export function getLogData(logVariableId, fromDate, granularity = "Hour", toDate = getCurrentDate()) {
     let headers = createHeader();
@@ -69,11 +69,25 @@ export function getLogData(logVariableId, fromDate, granularity = "Hour", toDate
         .then(res => res.json())
         .then(logData => {
             let dataArray = [];
-            for(let key in logData.data){
+            for (let key in logData.data) {
                 dataArray.push(logData.data[key]);
             }
             return dataArray;
         });
+}
+
+
+export function setVesselAttributesInStore() {
+    getVessels().then(vessels => {
+        let vesselsArray = vessels;
+        for (let i = 0; i < vessels.length; i++) {
+            let vesselId = vessels[i].id;
+            getLogVariables(vesselId).then(logVariables => {
+                vesselsArray[i].logVariables = logVariables;
+                console.log(vesselsArray);
+            });
+        }
+    });
 }
 
 /**
@@ -84,7 +98,7 @@ export function getLogData(logVariableId, fromDate, granularity = "Hour", toDate
 function getCurrentDate() {
     let date = new Date;
     return "" + date.getFullYear() +
-        "-" + (date.getMonth()+1) + "-" + date.getDate();
+        "-" + (date.getMonth() + 1) + "-" + date.getDate();
 }
 
 /**
