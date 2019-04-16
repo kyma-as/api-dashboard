@@ -4,20 +4,33 @@ let fetchUrl = "https://demo.kyma.no/api/v1/";
 
 function createHeader() {
     let user = store.state.userInfo.apiKey;
-    return { headers: { Authorization: 'Basic ' + user,
-        }}
+    return {
+        headers: {
+            Authorization: 'Basic ' + user,
+        }
+    }
 }
 
 /**
  * Lists all vessels and their basic information
- * @returns: [{Vessel:{id:string, name:string}}]
+ * @returns: {Promise:[{Vessel:{id:string, name:string}}]}
  */
 export function getVessels() {
     let headers = createHeader();
     let url = fetchUrl + "/vessels";
 
-    fetch(url,headers)
-        .then()
+    return fetch(url, headers)
+        .then(res => res.json())
+        .then(vessels => {
+            let vesselArray = [];
+            for(let vessel of vessels){
+                let newVessel = {};
+                newVessel.id = vessel.id;
+                newVessel.name = vessel.name;
+                vesselArray.push(newVessel);
+            }
+            return vesselArray;
+        });
 }
 
 /**
@@ -29,8 +42,11 @@ export function getLogVariables(vesselId) {
     let headers = createHeader();
     let url = fetchUrl + `/logvariables/find?vesselId=${vesselId}`;
 
-    fetch(url,headers)
-        .then()
+    fetch(url, headers)
+        .then(res => res.json())
+        .then(logVariables => {
+
+        });
 }
 
 /**
@@ -42,8 +58,13 @@ export function getLogVariables(vesselId) {
  */
 export function getLogData(logVariableId, granularity, fromDate, toDate) {
     let headers = createHeader();
-    let url = fetchUrl + `/logdata/find?logVariableId=${logVariableId}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
+    let url = fetchUrl
+        + `/logdata/find?logVariableId=${logVariableId} +
+        &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
 
-    fetch(url,headers)
-        .then()
+    fetch(url, headers)
+        .then(res => res.json())
+        .then(logData => {
+
+        });
 }
