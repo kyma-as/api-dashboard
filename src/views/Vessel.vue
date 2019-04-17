@@ -2,13 +2,16 @@
 <div class="vessel">
     <NavDrawer />
     <v-content>
-        <span>Welcome to {{currentVessel.name}}</span>
+        <span>Welcome to ship {{vessel.name}}.
+          {{ vessel.id }} == this.$route.params.vesselid</span>
     </v-content>
 </div>
 </template>
 
 <script>
 import NavDrawer from "@/components/NavDrawer"
+import { mapState } from 'vuex';
+
 export default {
     name: "vessel",
     components: {
@@ -16,15 +19,19 @@ export default {
     },
     data(){
       return {
-          currentVessel:""
+        vessel: {}
       }
     },
-    mounted(){
-        this.currentVessel = this.$store.state.currentVessel;
+    computed: {
+      ...mapState([
+        vessels
+      ])
     },
-    computed:{
-
+    mounted() {
+      const vessel = this[vessels]
+      .find(x => x.id === this.$route.params.vesselid);
+      this.vessel = vessel;
     }
-    
+
 }
 </script>

@@ -37,12 +37,13 @@
             }
         },
         methods: {
+          // TODO: does this work?
             routeOnClick() {
-                this.$store.commit('setCurrentVessel',this.vessel);
                 this.$router.replace({name: "vessel"});
             }
         },
         computed: {
+          // TODO: Remove
             getAllVessels() {
                 console.log("test")
                 return this.$store.getAllVessels

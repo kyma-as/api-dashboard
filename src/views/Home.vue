@@ -25,17 +25,19 @@
 
         data() {
             return {
-                allVessels: [{name: "vessel1", id: 1}, {name: "vessel2", id: 2}],
-            };
+              vessels: {}
+            }
         },
         mounted() {
-            this.$store.commit('setAllVessels');
+            //call whatever fetch method in whatever js class whatever
+            //this.$store.commit('setAllVessels');
         },
         methods: {},
         computed: {
-            getAllVessels() {
-                return this.$store.state.allVessels
-            }
+            // getAllVessels() {
+            //     return this.$store.state.allVessels
+            // }
+
         }
     };
 </script>
