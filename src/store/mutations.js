@@ -1,5 +1,6 @@
 /**
  * This class updates state with orders from actions.js
+ * mutations.js has to be synchronous
  */
 
 export default {
@@ -8,5 +9,5 @@ export default {
     state[vessels].push(json);
   },
   addVariables: (state, vars) => {},
-  increment: (state) => state[apiCallCount]++;
+  increment: (state) => {state[apiCallCount]++;}
 }
