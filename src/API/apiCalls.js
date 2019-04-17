@@ -1,55 +1,4 @@
-import store from '../store.js';
-
-let fetchUrl = "https://demo.kyma.no/api/v1/";
-
-/**
- * Lists all vessels and their basic information
- * @returns {Promise} [{Vessel:{id:string, name:string}}]
- */
-export function getVessels() {
-    let headers = createHeader();
-    let url = fetchUrl + "/vessels";
-
-    return fetch(url, headers)
-        .then(res => res.json())
-        .then(vessels => {
-            let vesselArray = [];
-            for (let vessel of vessels) {
-                let newVessel = {
-                    id: vessel.id,
-                    name: vessel.name
-                };
-                vesselArray.push(newVessel);
-            }
-            return vesselArray;
-        });
-}
-
-/**
- * Finds log variables for sensors active on a vessel
- * @param vesselId
- * @returns {Promise} [{logVariable:{id:string, name:string, units:string, limitMin:string, limitMax:string}}]
- */
-export function getLogVariables(vesselId) {
-    let headers = createHeader();
-    let url = fetchUrl + `/logvariables/find?vesselId=${vesselId}`;
-
-    return fetch(url, headers)
-        .then(res => res.json())
-        .then(logVariables => {
-            let logVariableArray = [];
-            for (let logVariable of logVariables) {
-                let newLogVariable = {
-                    id: logVariable.id,
-                    name: logVariable.name,
-                    limitMin: logVariable.validLimitMinimum,
-                    limitMax: logVariable.validLimitMaximum
-                };
-                logVariableArray.push(newLogVariable);
-            }
-            return logVariableArray
-        });
-}
+import store from '../store';
 
 /**
  * Finds log data for a specific sensor variable
@@ -60,10 +9,8 @@ export function getLogVariables(vesselId) {
  * @returns {Promise} Array of data
  */
 export function getLogData(logVariableId, fromDate, granularity = "Hour", toDate = getCurrentDate()) {
-    let headers = createHeader();
-    let url = fetchUrl
-        + `/logdata/find?logVariableId=${logVariableId} +
-        &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
+    let headers = store.state.header;
+    let url = store.state.url + `logdata/find?logVariableId=${logVariableId}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
 
     return fetch(url, headers)
         .then(res => res.json())
@@ -74,22 +21,6 @@ export function getLogData(logVariableId, fromDate, granularity = "Hour", toDate
             }
             return dataArray;
         });
-}
-
-/**
- * Sets the state store object allVessels
- */
-export function setVesselAttributesInStore() {
-    getVessels().then(vessels => {
-        let vesselsArray = vessels;
-        for (let i = 0; i < vessels.length; i++) {
-            let vesselId = vessels[i].id;
-            getLogVariables(vesselId).then(logVariables => {
-                vesselsArray[i].logVariables = logVariables;
-                //store.commit('setAllVessels',vesselsArray);
-            });
-        }
-    });
 }
 
 /**
