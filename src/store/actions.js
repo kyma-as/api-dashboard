@@ -9,47 +9,50 @@
 // maybe use context.dispatch to start another fetch with the new data?
 // store.dispatch('fetchVessels').then(() => { ... }
 export default {
-    fetchVessels: async ({state, commit}) => {
+    fetchVessels: async ({state, commit, dispatch}) => {
         let url = `${state.url}vessels`;
         let header = state.header;
 
-        let res = await fetch(url,header);
+        let res = await fetch(url, header);
         let vessels = await res.json();
 
-        let vesselArray = [];
         for (let vessel of vessels) {
             let newVessel = {
                 id: vessel.id,
                 name: vessel.name
             };
-            vesselArray.push(newVessel);
+            commit('ADD_VESSELS', newVessel);
         }
-        commit('ADD_VESSELS', vesselArray);
-        // TODO: add a dispatcher to call getLogVariables
+        dispatch('getLogVariables');
         commit('INCREMENT');
     },
 
-    getLogVariables: async ({state, commit}, vesselId) => {
-        // TODO: implement header function
+    getLogVariables: async ({state, commit}) => {
         let header = state.header;
-        let url = `${state.url}'/logvariables/find?vesselId='${vesselId}`;
 
+        let vessels = state.vessels;
+        for (let i = 0; i < vessels.length; i++) {
+            let vesselId = vessels[i].id;
 
-        let res = await fetch(url, header);
-        let json = await res.json();
+            let url = `${state.url}logvariables/find?vesselId=${vesselId}`;
 
-        let logVariableArray = [];
-        for (let logVariable of json) {
-            let newLogVariable = {
-                id: logVariable.id,
-                name: logVariable.name,
-                limitMin: logVariable.validLimitMinimum,
-                limitMax: logVariable.validLimitMaximum
-            };
-            logVariableArray.push(newLogVariable);
+            let res = await fetch(url, header);
+            let json = await res.json();
+
+            let logVariableArray = [];
+            for (let logVariable of json) {
+                let newLogVariable = {
+                    id: logVariable.id,
+                    name: logVariable.name,
+                    limitMin: logVariable.validLimitMinimum,
+                    limitMax: logVariable.validLimitMaximum
+                };
+                logVariableArray.push(newLogVariable);
+            }
+            let vesselIndex = i;
+            commit('APPEND_LOG_VARIABLES', {vesselIndex:vesselIndex, logVariableArray});
+            commit('INCREMENT');
         }
-        commit('APPEND_LOG_VARIABLES', {vesselId, logVariableArray});
-        commit('INCREMENT');
     }
 
     // TODO: figure out where this function belongs
