@@ -3,7 +3,7 @@
     <NavDrawer />
     <v-content>
         <span>Welcome to ship {{vessel.name}}.
-          {{ vessel.id }} == this.$route.params.vesselid</span>
+          {{ vessel.id }} == {{ this.$route.params.vesselid }}</span>
     </v-content>
 </div>
 </template>
@@ -28,7 +28,7 @@ export default {
       ])
     },
     mounted() {
-      const vessel = this[this.vessels]
+      const vessel = this.vessels
       .find(x => x.id === this.$route.params.vesselid);
       this.vessel = vessel;
     }

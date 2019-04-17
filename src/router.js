@@ -28,8 +28,8 @@ export default new Router({
       component: ApiOutput
     },
     {
-      path: "/home/vessel/:vesselid",
-      name: "vessel",
+      path: "/vessels/:vesselid",
+      name: "vessels",
       component: Vessel
     },
     {

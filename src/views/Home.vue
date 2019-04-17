@@ -4,9 +4,9 @@
     <v-content class="ma-2">
       <v-container grid-list-lg>
         <v-layout row wrap>
-          <v-flex v-for="vessel in getAllVessels"
-                  :key="vessel.id" xs12 sm6 md4 lg4 xl3>
-            <VesselCard :vessel="vessel"/>
+          <v-flex v-for="vess in vessels"
+                  :key="vess.id" xs12 sm6 md4 lg4 xl3>
+            <VesselCard :vessel="vess"/>
           </v-flex>
         </v-layout>
       </v-container>
@@ -16,6 +16,7 @@
 <script>
     import NavDrawer from "@/components/NavDrawer";
     import VesselCard from "@/components/VesselCard"
+    import { mapState, mapActions } from 'vuex';
 
     export default {
         name: "home",
@@ -25,19 +26,16 @@
 
         data() {
             return {
-              vessels: {}
+              vessel: {}
             }
         },
         mounted() {
-            //call whatever fetch method in whatever js class whatever
-            //this.$store.commit('setAllVessels');
+            // TODO: call whatever fetch method in whatever js class whatever
         },
-        methods: {},
         computed: {
-            // getAllVessels() {
-            //     return this.$store.state.allVessels
-            // }
-
+          ...mapState([
+            'vessels'
+          ])
         }
     };
 </script>

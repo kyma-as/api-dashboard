@@ -8,7 +8,7 @@
     >
       <v-card-title primary-title>
         <div>
-          <h3 class="headline mb-0">{{vessel.name}}</h3>
+          <h3 class="headline mb-0">{{vessel.id}}</h3>
         </div>
       </v-card-title>
       <v-img>
@@ -42,7 +42,8 @@
         methods: {
           // TODO: does this work?
             routeOnClick() {
-                this.$router.replace({name: "vessel"});
+                this.$router.replace({name: "vessels", params: { vesselid: this.vessel.id }});
+                //this.$router.push({ name: 'vessels', params: { vesselid: this.vessel.id }})
             }
         }
     }
