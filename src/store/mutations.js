@@ -4,10 +4,13 @@
  */
 
 export default {
-  addVessels: (state, json) => {
+  ADD_VESSELS: (state, jsonArray) => {
     //state.vessels if it doesn't work
-    state[vessels].push(json);
+    state[vessels].push(jsonArray);
   },
-  addVariables: (state, vars) => {},
-  increment: (state) => {state[apiCallCount]++;}
+  INCREMENT: (state) => {state[apiCallCount]++;},
+  APPEND_LOG_VARIABLES: (state, { vesselId, logVariableArray }) => {
+    //state.vessels[vesselId] = logVariableArray;
+    state.vessels[vesselId].push(...logVariableArray);
+  }
 }

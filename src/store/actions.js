@@ -5,41 +5,69 @@
  * and actions.js support asynchronous functions.
  */
 
-// TODO: maybe use context.dispatch to start another fetch with the new data?
+
+// maybe use context.dispatch to start another fetch with the new data?
 // store.dispatch('fetchVessels').then(() => { ... }
 export default {
 
-  async fetchVessels({
-    commit
-  }, params) {
-    let url = 'demo.kyma.no/api/v1/' + params;
-    await fetch(url, {
-        headers: {
-          Authorization: "Basic ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg=="
-        }
-      })
-      .then(res => res.json()).then(json => {
-        //committing at any earlier point would require dispatch instead
-        commit('addVessels', json);
-        commit('increment');
-      });
+  async function fetchVessels({ state, commit }, params) {
+    let url = `${state.url}${params}`;
+    let header = state.header;
+    let res = await fetch(url,header);
+    let json = await res.json();
+
+    let vessels = [];
+    for (let vessel of json) {
+      let newVessel = {
+        id: vessel.id,
+        name: vessel.name,
+        logVariables: []
+      };
+      vessels.push(newVessel);
+    }
+    commit('ADD_VESSELS', vessels);
+    // TODO: add a dispatcher to call getLogVariables
+    commit('INCREMENT');
   },
 
+  async function getLogVariables({ state, commit }, vesselId) {
+    // TODO: implement header function
+    let header = state.header;
+    let url = `${state.url}'/logvariables/find?vesselId='${vesselId}`;
+    let res = await fetch(url, header);
+    let json = await res.json();
 
-  // Just an example method, doesn't work now
-
-  async fetchVariables({
-    commit
-  }, vars) {
-    let url = 'demo.kyma.no/api/v1/logvariables/find?' + vars;
-    await fetch(url, {
-        headers: {
-          Authorization: "Basic ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg=="
-        }
-      })
-      .then(res => res.json()).then(json => {
-        commit('addVessels', json);
-        commit('increment');
-      });
+    let logVariableArray = [];
+    for (let logVariable of logVariables) {
+      let newLogVariable = {
+        id: logVariable.id,
+        name: logVariable.name,
+        limitMin: logVariable.validLimitMinimum,
+        limitMax: logVariable.validLimitMaximum
+      };
+      logVariableArray.push(newLogVariable);
+    }
+    commit('APPEND_LOG_VARIABLES', {vesselId, logVariableArray});
+    commit('INCREMENT');
   }
+
+  // TODO: figure out where this function belongs
+  /*
+  async function getLogData( {state, commit }, logVariableId, fromDate,
+    granularity = "Hour", toDate = getCurrentDate()) {
+    let header = state.header;
+    let url = `${state.url}/logdata/find?logVariableId=${logVariableId}
+          &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
+
+    let res = await fetch(url, header);
+    let jsonLogData = res.json();
+    let dataArray = [];
+    for (let key in jsonLogData.data) {
+      dataArray.push(jsonLogData.data[key]);
+    }
+    return dataArray;
+  },*/
+
+
+
 }
