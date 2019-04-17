@@ -7,14 +7,13 @@
  */
 export default {
 
-  vessels: [{id: 1, name: "hello"}, {id: 2, name: "goodbye"}],
-  variables: [], //this is just an example
+  vessels: [],
   apiCallCount: 0,
   header: { headers: {
     Authorization: "Basic ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg=="
     }
   },
-  url: "demo.kyma.no/api/v1/"
+  url: "https://demo.kyma.no/api/v1/"
 
   //possible objects:
   //vessels = [{id:1, name:"bergen"..}, {..}];
