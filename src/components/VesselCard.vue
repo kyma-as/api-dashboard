@@ -24,6 +24,9 @@
 </template>
 
 <script>
+// TODO: in v-card wrap with template (?)
+// and add :to=`"/home/vessels/${data/hover.index}"`
+
     export default {
         data() {
             return {
@@ -40,13 +43,6 @@
           // TODO: does this work?
             routeOnClick() {
                 this.$router.replace({name: "vessel"});
-            }
-        },
-        computed: {
-          // TODO: Remove
-            getAllVessels() {
-                console.log("test")
-                return this.$store.getAllVessels
             }
         }
     }

@@ -24,11 +24,11 @@ export default {
     },
     computed: {
       ...mapState([
-        vessels
+        'vessels'
       ])
     },
     mounted() {
-      const vessel = this[vessels]
+      const vessel = this[this.vessels]
       .find(x => x.id === this.$route.params.vesselid);
       this.vessel = vessel;
     }
