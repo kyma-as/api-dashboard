@@ -28,7 +28,7 @@ export default new Router({
       component: ApiOutput
     },
     {
-      path: "/vessel",
+      path: "/home/vessel/:vesselid",
       name: "vessel",
       component: Vessel
     },
