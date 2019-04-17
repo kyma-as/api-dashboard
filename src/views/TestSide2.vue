@@ -20,9 +20,3 @@ import LineExample from "@/components/LineChart.js";
         }, 
 }
 </script>
-<style>
-.container {
-  max-width: 800px;
-  margin:  0 auto;
-}
-</style>
