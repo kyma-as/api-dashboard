@@ -6,9 +6,9 @@
 export default {
   ADD_VESSELS: (state, jsonArray) => {
     //state.vessels if it doesn't work
-    state[vessels].push(jsonArray);
+    state.vessels.push(jsonArray);
   },
-  INCREMENT: (state) => {state[apiCallCount]++;},
+  INCREMENT: (state) => {state.apiCallCount++;},
   APPEND_LOG_VARIABLES: (state, { vesselId, logVariableArray }) => {
     //state.vessels[vesselId] = logVariableArray;
     state.vessels[vesselId].push(...logVariableArray);
