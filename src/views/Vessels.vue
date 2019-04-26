@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <NavDrawer/>
     <v-content class="ma-2">
       <v-container grid-list-lg>
@@ -19,7 +19,7 @@
     import { mapState, mapActions } from 'vuex';
 
     export default {
-        name: "home",
+        name: "vessels",
         components: {
             NavDrawer, VesselCard
         },

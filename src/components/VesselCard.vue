@@ -25,7 +25,7 @@
 
 <script>
 // TODO: in v-card wrap with template (?)
-// and add :to=`"/home/vessels/${data/hover.index}"`
+// and add :to=`"/vessels/${data/hover.index}"`
 
     export default {
         data() {
