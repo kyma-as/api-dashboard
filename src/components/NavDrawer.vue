@@ -42,10 +42,7 @@
             return {
                 items: [
                     {title: 'Vessels', icon: 'dashboard',path:"/vessels"},
-                    {title: 'Settings', icon: 'directions_boat',path:"/apioutput"},
-                    {title: 'Logout', icon: 'question_answer',path:"/"},
-                    {title: 'Test', icon: 'question_answer',path:"/testside"}
-
+                    {title: 'Logout', icon: 'question_answer',path:"/"}
                 ],
                 right: null
             }

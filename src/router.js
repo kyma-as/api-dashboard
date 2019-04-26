@@ -2,8 +2,6 @@ import Vue from "vue";
 import Router from "vue-router";
 import Login from "./views/Login.vue";
 import Vessels from "./views/Vessels.vue";
-import ApiOutput from "./views/ApiOutput.vue";
-import TestSide from "./views/TestSide.vue";
 import Vessel from "./views/Vessel.vue";
 
 Vue.use(Router);
@@ -23,19 +21,9 @@ export default new Router({
       component: Login
     },
     {
-      path: "/apioutput",
-      name: "apiOutput",
-      component: ApiOutput
-    },
-    {
       path: "/vessels/:vesselid",
-      name: "vessels",
+      name: "vessel",
       component: Vessel
-    },
-    {
-      path: "/testside",
-      name: "testside",
-      component: TestSide
     }
   ]
 });

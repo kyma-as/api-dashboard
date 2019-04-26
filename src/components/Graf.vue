@@ -8,10 +8,10 @@
              <text v-bind:y="i*30 + 35" fill="White">{{value}}</text>
             </g>
         </svg>
-    </div>   
+    </div>
  </template>
  <script>
- import {getApiDataTest} from "@/scripts/getData"; 
+ //import {getApiDataTest} from "@/scripts/getData"; 
  export default {
       data() {
             return {
@@ -27,5 +27,3 @@
         }
  }
  </script>
- 
- 

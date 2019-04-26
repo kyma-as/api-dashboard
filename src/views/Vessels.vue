@@ -31,11 +31,15 @@
         },
         mounted() {
             // TODO: call whatever fetch method in whatever js class whatever
+            
         },
         computed: {
           ...mapState([
             'vessels'
           ])
+        },
+        beforeCreate() {
+          this.$store.dispatch('fetchVessels');
         }
     };
 </script>
