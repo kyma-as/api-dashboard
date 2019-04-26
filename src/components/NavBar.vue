@@ -1,7 +1,7 @@
 <template>
   <nav>
     <v-toolbar clipped-left height="60" flat app class="secondary">
-      <router-link to="/home">
+      <router-link to="/vessels">
         <AppTitle/>
       </router-link>
     </v-toolbar>

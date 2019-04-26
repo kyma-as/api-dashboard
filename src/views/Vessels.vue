@@ -1,12 +1,12 @@
 <template>
-  <div class="home">
+  <div>
     <NavDrawer/>
     <v-content class="ma-2">
       <v-container grid-list-lg>
         <v-layout row wrap>
-          <v-flex v-for="vessel in getAllVessels"
-                  :key="vessel.id" xs12 sm6 md4 lg4 xl3>
-            <VesselCard :vessel="vessel"/>
+          <v-flex v-for="vess in vessels"
+                  :key="vess.id" xs12 sm6 md4 lg4 xl3>
+            <VesselCard :vessel="vess"/>
           </v-flex>
         </v-layout>
       </v-container>
@@ -16,26 +16,30 @@
 <script>
     import NavDrawer from "@/components/NavDrawer";
     import VesselCard from "@/components/VesselCard"
+    import { mapState, mapActions } from 'vuex';
 
     export default {
-        name: "home",
+        name: "vessels",
         components: {
             NavDrawer, VesselCard
         },
 
         data() {
             return {
-                allVessels: [{name: "vessel1", id: 1}, {name: "vessel2", id: 2}],
-            };
+              vessel: {}
+            }
         },
         mounted() {
-            this.$store.commit('setAllVessels');
+            // TODO: call whatever fetch method in whatever js class whatever
+            
         },
-        methods: {},
         computed: {
-            getAllVessels() {
-                return this.$store.state.allVessels
-            }
+          ...mapState([
+            'vessels'
+          ])
+        },
+        beforeCreate() {
+          this.$store.dispatch('fetchVessels');
         }
     };
 </script>

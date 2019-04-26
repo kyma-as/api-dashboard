@@ -1,8 +1,10 @@
 <template>
   <v-app>
     <Navbar/>
+    <keep-alive>
     <router-view>
     </router-view>
+  </keep-alive>
   </v-app>
 </template>
 

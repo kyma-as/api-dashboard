@@ -8,7 +8,7 @@
     >
       <v-card-title primary-title>
         <div>
-          <h3 class="headline mb-0">{{vessel.name}}</h3>
+          <h3 class="headline mb-0">{{vessel.id}}</h3>
         </div>
       </v-card-title>
       <v-img>
@@ -24,6 +24,9 @@
 </template>
 
 <script>
+// TODO: in v-card wrap with template (?)
+// and add :to=`"/vessels/${data/hover.index}"`
+
     export default {
         data() {
             return {
@@ -37,15 +40,10 @@
             }
         },
         methods: {
+          // TODO: does this work?
             routeOnClick() {
-                this.$store.commit('setCurrentVessel',this.vessel);
-                this.$router.replace({name: "vessel"});
-            }
-        },
-        computed: {
-            getAllVessels() {
-                console.log("test")
-                return this.$store.getAllVessels
+                this.$router.replace({name: "vessel", params: { vesselid: this.vessel.id }});
+                //this.$router.push({ name: 'vessels', params: { vesselid: this.vessel.id }})
             }
         }
     }

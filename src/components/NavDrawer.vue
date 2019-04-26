@@ -41,11 +41,8 @@
         data() {
             return {
                 items: [
-                    {title: 'Home', icon: 'dashboard',path:"/home"},
-                    {title: 'Vessels', icon: 'directions_boat',path:"/apioutput"},
-                    {title: 'Logout', icon: 'question_answer',path:"/"},
-                    {title: 'Test', icon: 'question_answer',path:"/testside"}
-
+                    {title: 'Vessels', icon: 'dashboard',path:"/vessels"},
+                    {title: 'Logout', icon: 'question_answer',path:"/"}
                 ],
                 right: null
             }

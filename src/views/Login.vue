@@ -66,8 +66,8 @@
                         this.loading = false;
                         console.log("Authenticated!")
                         // Set state authenticated
-                        // Route to Home
-                        this.$router.replace({name: 'home'})
+                        // Route to Vessels
+                        this.$router.replace({name: 'vessels'})
                     } else {
                         this.loading = false;
                         console.log("Could not authenticate with the server")
