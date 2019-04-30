@@ -5,14 +5,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    userInfo:{
-      apiKey:"ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg=="
+    userInfo: {
+      apiKey: "ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg=="
     },
-    allVessels:[], //Vessel Object
-    currentVessel:{}, //Current Vessel
+    allVessels: [], //Vessel Object
+    currentVessel: {} //Current Vessel
   },
   mutations: {
-    setAllVessels(state){
+    setAllVessels(state) {
       let url = "https://demo.kyma.no/api/v1/vessels";
 
       let allVessels = [];
@@ -22,15 +22,15 @@ export default new Vuex.Store({
           Authorization: "Basic " + state.userInfo.apiKey
         }
       })
-          .then(res => res.json())
-          .then(json => {
-            for (let entry of json) {
-              allVessels.push(entry);
-            }
-            state.allVessels = allVessels;
-          });
+        .then(res => res.json())
+        .then(json => {
+          for (let entry of json) {
+            allVessels.push(entry);
+          }
+          state.allVessels = allVessels;
+        });
     },
-    setCurrentVessel(state,vesselId){
+    setCurrentVessel(state, vesselId) {
       state.currentVessel = vesselId;
     }
   },

@@ -100,6 +100,77 @@ export async function getApiDataTestlabels(labels) {
         labels.push(entry);
       }
     });
-  console.log(labels);
   return labels;
+}
+export async function getHFO(HFO) {
+  let url =
+    "https://demo.kyma.no/api/v1/logdata/find?logVariableId=9031&granularity=Day&fromDate=2019-01-01&toDate=2019-09-01";
+  let user = "ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==";
+
+  await fetch(url, {
+    headers: {
+      Authorization: "Basic " + user
+    }
+  })
+    .then(res => res.json())
+    .then(json => {
+      for (let entry in json.data) {
+        HFO.push(json.data[entry]);
+      }
+    });
+  return HFO;
+}
+export async function getMDO(MDO) {
+  let url =
+    "https://demo.kyma.no/api/v1/logdata/find?logVariableId=9034&granularity=Day&fromDate=2019-01-01&toDate=2019-09-01";
+  let user = "ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==";
+
+  await fetch(url, {
+    headers: {
+      Authorization: "Basic " + user
+    }
+  })
+    .then(res => res.json())
+    .then(json => {
+      for (let entry in json.data) {
+        MDO.push(json.data[entry]);
+      }
+    });
+  return MDO;
+}
+export async function getMGO(MGO) {
+  let url =
+    "https://demo.kyma.no/api/v1/logdata/find?logVariableId=9035&granularity=Day&fromDate=2019-01-01&toDate=2019-09-01";
+  let user = "ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==";
+
+  await fetch(url, {
+    headers: {
+      Authorization: "Basic " + user
+    }
+  })
+    .then(res => res.json())
+    .then(json => {
+      for (let entry in json.data) {
+        MGO.push(json.data[entry]);
+      }
+    });
+  return MGO;
+}
+export async function getLSHFO(LSHFO) {
+  let url =
+    "https://demo.kyma.no/api/v1/logdata/find?logVariableId=9033&granularity=Day&fromDate=2019-01-01&toDate=2019-09-01";
+  let user = "ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg==";
+
+  await fetch(url, {
+    headers: {
+      Authorization: "Basic " + user
+    }
+  })
+    .then(res => res.json())
+    .then(json => {
+      for (let entry in json.data) {
+        LSHFO.push(json.data[entry]);
+      }
+    });
+  return LSHFO;
 }

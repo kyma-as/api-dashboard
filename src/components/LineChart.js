@@ -16,7 +16,7 @@ export default {
     await getApiDataTest(this.rows);
     await getApiDataTest2(this.logspeed);
     await getApiDataTestlabels(this.labels);
-    this.labels.length = this.rows.length
+    this.labels.length = this.rows.length;
     this.renderChart(
       {
         labels: this.labels,
@@ -24,14 +24,12 @@ export default {
           {
             label: "Speed gps",
             borderColor: "green",
-            data: this.rows,
-         
+            data: this.rows
           },
           {
             label: "Speed log",
             borderColor: "blue",
-            data: this.logspeed,
-       
+            data: this.logspeed
           }
         ]
       },

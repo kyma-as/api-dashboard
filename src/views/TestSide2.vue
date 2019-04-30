@@ -4,7 +4,10 @@
     <NavDrawer />
     <v-content>
        <div class="container">
-    <line-example/>
+    <PieExample/>
+  </div>
+  <div class="container">
+    <LineExample/>
   </div>
     </v-content>
   </div>
@@ -12,9 +15,12 @@
 <script>
 import NavDrawer from "@/components/NavDrawer";
 import LineExample from "@/components/LineChart.js";
+import PieExample from "@/components/PieChart.js";
+
     export default {
         name: "testside2",
         components: {
+          PieExample,
           NavDrawer, 
           LineExample
         }, 

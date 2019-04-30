@@ -12,7 +12,7 @@
         </div>
       </v-card-title>
       <v-img>
-        <h2>Placeholder for visual data</h2>
+        <div><LineExample/></div >
       </v-img>
       <v-layout row wrap>
         <v-flex xs12 sm6>Speed: 1000 km/h</v-flex>
@@ -24,11 +24,15 @@
 </template>
 
 <script>
+import LineExample from "@/components/LineChart.js";
     export default {
         data() {
             return {
                 //Ship data
             }
+        },
+         components: {
+            LineExample
         },
         props: {
             vessel: {
