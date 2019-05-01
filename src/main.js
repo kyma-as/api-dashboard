@@ -101,6 +101,9 @@ Vue.component('v-tooltip', {});
 
 new Vue({
   router,
+  // providing the store option to the root instance,
+  // the store will be injected into all child components of the root
+  // and will be available on them as this.$store
   store,
   render: function(h) {
     return h(App);
