@@ -29,7 +29,7 @@ export default {
                 logData: []
             };
             commit('ADD_VESSELS', newVessel);
-            dispatch('getLogVariables', {id:vessel.id,index:index}); // fetches log variables
+            dispatch('getLogVariables', {id: vessel.id, index: index}); // fetches log variables
             index++;                                // for this vessel
         }
 
@@ -60,9 +60,9 @@ export default {
             };
             logVariableArray.push(newLogVariable);
         }
-        commit('APPEND_LOG_VARIABLES', {vesselIndex:id.index, logVariableArray});
+        commit('APPEND_LOG_VARIABLES', {vesselIndex: id.index, logVariableArray});
         commit('INCREMENT');
-        dispatch('dataFetchLoop', vesselId);
+        dispatch('dataFetchLoop', id.index);
 
     },
 
@@ -71,12 +71,11 @@ export default {
      * variables. For each logvariable an action is dispatched to fetch the
      * data for that variable.
      */
-    dataFetchLoop: ({state, dispatch}, id)=> {
-      let vesselId = id;
-      let logVariableArray = state.logVariableArray;
-      for (let logVar of logVariableArray) {
-        dispatch('getLogData',{vesselId: vesselId, logVarId: logVar.id});
-      }
+    dataFetchLoop: ({state, dispatch}, index) => {
+        let logVariableArray = state.vessels[index].logVariables;
+        for (let logVar of logVariableArray) {
+            dispatch('getLogData', {vesselIndex: index, logVarId: logVar.id});
+        }
     },
 
     /**
@@ -84,33 +83,28 @@ export default {
      * and appends it into state.
      * @param state
      * @param commit
-     * @param ids:{vesselId,logVarId}
+     * @param ids:{vesselIndex,logVarId}
      */
-    getLogData: async ( {state, commit }, ids)=> {
-      let logVariableId = ids.logVarId;
-      let vesselId = ids.vesselId;
-      let fromDate = "2019-01-01";    // hardcoded; provide better default
-      let toDate = "2019-01-02";      // hardcoded; provide better default
-      let granularity = "Hour";       // good default?
-      let header = state.header;
-      let url = `${state.url}/logdata/find?logVariableId=${logVariableId}
+    getLogData: async ({state, commit}, ids) => {
+        let logVariableId = ids.logVarId;
+        let fromDate = "2019-01-01";    // hardcoded; provide better default
+        let toDate = "2019-01-02";      // hardcoded; provide better default
+        let granularity = "Day";       // good default?
+        let header = state.header;
+        let url = `${state.url}/logdata/find?logVariableId=${logVariableId}
             &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
+        let res = await fetch(url, header);
+        let jsonLogData = await res.json();
 
-      let res = await fetch(url, header);
-      let jsonLogData = await res.json();
-      let dataArray = [];
-      for (let key in jsonLogData.data) {
-        dataArray.push(jsonLogData.data[key]);
-      }
-      let dataObj = {
-        id: logVariableId,
-        unit: jsonLogData["unit"],
-        data: dataArray
+        let dataObj = {
+            id: logVariableId,
+            unit: jsonLogData["unit"],
+            data: jsonLogData.data
 
-      };
+        };
 
-      commit('APPEND_LOG_DATA', dataObj);
-      commit('INCREMENT');
+        commit('APPEND_LOG_DATA', {dataObj, index:ids.vesselIndex});
+        commit('INCREMENT');
     },
 
     /**

@@ -11,8 +11,8 @@ export default {
   APPEND_LOG_VARIABLES: (state, { vesselIndex, logVariableArray }) => {
     state.vessels[vesselIndex].logVariables=logVariableArray;
   },
-  APPEND_LOG_DATA: (state, dataObj) => {
-    state.vessels[vesselIndex].logData.push(dataObj);
+  APPEND_LOG_DATA: (state, {dataObj,index}) => {
+    state.vessels[index].logData.push(dataObj);
   },
   SET_DATE: (state, date) => {
     state.dateToday = date;
