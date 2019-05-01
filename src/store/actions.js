@@ -60,7 +60,7 @@ export default {
         }
         commit('APPEND_LOG_VARIABLES', {vesselIndex:vesselId, logVariableArray});
         commit('INCREMENT');
-        store.dispatch('dataFetchLoop', vesselId);
+        dispatch('dataFetchLoop', vesselId);
 
     },
 
