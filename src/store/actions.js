@@ -21,6 +21,7 @@ export default {
         let res = await fetch(url, header);
         let vessels = await res.json();
 
+        let index = 0;
         for (let vessel of vessels) {               // for each vessel the
             let newVessel = {                       // the vessel is stored in
                 id: vessel.id,                      // state, and log variables
@@ -28,8 +29,9 @@ export default {
                 logData: []
             };
             commit('ADD_VESSELS', newVessel);
-            dispatch('getLogVariables', vessel.id); // fetches log variables
-        }                                           // for this vessel
+            dispatch('getLogVariables', {id:vessel.id,index:index}); // fetches log variables
+            index++;                                // for this vessel
+        }
 
         commit('INCREMENT');
     },
@@ -38,11 +40,11 @@ export default {
      * Fetches log variables for the vessel (specified by the parameter id).
      * It subsequently dispatches a data fetching function to retrieve the data
      * for all log variables.
-     * @param  {int}  id       [id of a vessel]
+     * @param  {id,index}
      */
     getLogVariables: async ({state, commit, dispatch}, id) => {
         let header = state.header;
-        let vesselId = id;
+        let vesselId = id.id;
         let url = `${state.url}logvariables/find?vesselId=${vesselId}`;
 
         let res = await fetch(url, header);
@@ -58,7 +60,7 @@ export default {
             };
             logVariableArray.push(newLogVariable);
         }
-        commit('APPEND_LOG_VARIABLES', {vesselIndex:vesselId, logVariableArray});
+        commit('APPEND_LOG_VARIABLES', {vesselIndex:id.index, logVariableArray});
         commit('INCREMENT');
         dispatch('dataFetchLoop', vesselId);
 
@@ -72,8 +74,8 @@ export default {
     dataFetchLoop: ({state, dispatch}, id)=> {
       let vesselId = id;
       let logVariableArray = state.logVariableArray;
-      for (let logvar of logVariableArray) {
-        dispatch('getLogData',{vesselId: vesselId, logVarId: logvar.id});
+      for (let logVar of logVariableArray) {
+        dispatch('getLogData',{vesselId: vesselId, logVarId: logVar.id});
       }
     },
 
