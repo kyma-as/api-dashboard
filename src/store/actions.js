@@ -69,7 +69,7 @@ export default {
      * variables. For each logvariable an action is dispatched to fetch the
      * data for that variable.
      */
-    dataFetchLoop: ({state, dispatch}, id) {
+    dataFetchLoop: ({state, dispatch}, id)=> {
       let vesselId = id;
       let logVariableArray = state.logVariableArray;
       for (let logvar of logVariableArray) {
@@ -81,7 +81,7 @@ export default {
      * Fetches the data for logvariable by id directly, wraps it in an object,
      * and appends it into state.
      */
-    getLogData: async ( {state, commit }, ids) {
+    getLogData: async ( {state, commit }, ids)=> {
       let logVariableId = ids.logVarId;
       let vesselId = ids.vesselId;
       let fromDate = "2019-01-01";    // hardcoded; provide better default
@@ -102,7 +102,7 @@ export default {
         unit: jsonLogData["unit"],
         data: dataArray
 
-      }
+      };
 
       commit('APPEND_LOG_DATA', dataObj);
       commit('INCREMENT');
