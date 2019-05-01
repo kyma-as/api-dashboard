@@ -13,5 +13,8 @@ export default {
   },
   APPEND_LOG_DATA: (state, dataObj) => {
     state.vessels[vesselIndex].logData.push(dataObj);
+  },
+  SET_DATE: (state, date) => {
+    state.dateToday = date;
   }
 }

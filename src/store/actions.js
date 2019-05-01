@@ -106,8 +106,20 @@ export default {
 
       commit('APPEND_LOG_DATA', dataObj);
       commit('INCREMENT');
-    }
+    },
 
-    // TODO: add a currentDate function to store in state
+    /**
+     * Saves today's date into state. This date will be used when fetching
+     * logdata, and get the most up-to-date data.
+     *
+     * NOTE: The demo environment won't necessarily have data corresponding
+     * all the way back to today's date.
+     */
+    getCurrentDate: ({commit}) => {
+        let temp_date = new Date;
+        let date = "" + temp_date.getFullYear() +
+            "-" + (temp_date.getMonth() + 1) + "-" + temp_date.getDate();
+        commit('SET_DATE', date);
+    }
 
 }

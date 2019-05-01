@@ -6,7 +6,7 @@
  * be pulled into any component.
  */
 export default {
-  
+
   /**
    * -- [Get GPS speed (9177) of vessel 110] --
    *
@@ -20,5 +20,6 @@ export default {
     Authorization: "Basic ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg=="
     }
   },
-  url: "https://demo.kyma.no/api/v1/"
+  url: "https://demo.kyma.no/api/v1/",
+  dateToday: ""
 }
