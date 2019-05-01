@@ -23,6 +23,8 @@ export default new Router({
     {
       path: "/vessels/:vesselid",
       name: "vessel",
+      //component: () => import('@/components/Post'), the component won't get
+      // loaded on the page until the route is actually visited
       component: Vessel
     }
   ]
