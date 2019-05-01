@@ -6,7 +6,14 @@
  * be pulled into any component.
  */
 export default {
-
+  
+  /**
+   * -- [Get GPS speed (9177) of vessel 110] --
+   *
+   * correctVessel = vessels.find(x => x.id === 110);
+   * gpsSpeedArray = correctVessel["logData"].find(x => x.id === 9177);
+   *
+   */
   vessels: [],
   apiCallCount: 0,
   header: { headers: {
@@ -14,18 +21,4 @@ export default {
     }
   },
   url: "https://demo.kyma.no/api/v1/"
-
-  //possible objects:
-  //vessels = [{id:1, name:"bergen"..}, {..}];
-  //{Vessel: {
-  //  id:String,
-  //  name:String
-  //}}
-
-  //old solution
-  // userInfo:{
-  //   apiKey:"ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg=="
-  // },
-  // allVessels:[], //Vessel Object
-  // currentVessel:{}, //Current Vessel
 }

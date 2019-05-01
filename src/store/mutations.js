@@ -10,5 +10,8 @@ export default {
   INCREMENT: (state) => {state.apiCallCount++;},
   APPEND_LOG_VARIABLES: (state, { vesselIndex, logVariableArray }) => {
     state.vessels[vesselIndex].logVariables=logVariableArray;
+  },
+  APPEND_LOG_DATA: (state, dataObj) => {
+    state.vessels[vesselIndex].logData.push(dataObj);
   }
 }

@@ -9,6 +9,11 @@
 // maybe use context.dispatch to start another fetch with the new data?
 // store.dispatch('fetchVessels').then(() => { ... }
 export default {
+
+    /**
+     * Fetches all available vessels and puts them into state.
+     * Action is dispatched for each vessel to start retrieving logvariables.
+     */
     fetchVessels: async ({state, commit, dispatch}) => {
         let url = `${state.url}vessels`;
         let header = state.header;
@@ -16,61 +21,93 @@ export default {
         let res = await fetch(url, header);
         let vessels = await res.json();
 
-        for (let vessel of vessels) {
-            let newVessel = {
-                id: vessel.id,
-                name: vessel.name
+        for (let vessel of vessels) {               // for each vessel the
+            let newVessel = {                       // the vessel is stored in
+                id: vessel.id,                      // state, and log variables
+                name: vessel.name,                  // are then fetched.
+                logData: []
             };
             commit('ADD_VESSELS', newVessel);
-        }
-        dispatch('getLogVariables');
+            dispatch('getLogVariables', vessel.id); // fetches log variables
+        }                                           // for this vessel
+
         commit('INCREMENT');
     },
 
-    getLogVariables: async ({state, commit}) => {
+    /**
+     * Fetches log variables for the vessel (specified by the parameter id).
+     * It subsequently dispatches a data fetching function to retrieve the data
+     * for all log variables.
+     * @param  {int}  id       [id of a vessel]
+     */
+    getLogVariables: async ({state, commit, dispatch}, id) => {
         let header = state.header;
+        let vesselId = id;
+        let url = `${state.url}logvariables/find?vesselId=${vesselId}`;
 
-        let vessels = state.vessels;
-        for (let i = 0; i < vessels.length; i++) {
-            let vesselId = vessels[i].id;
+        let res = await fetch(url, header);
+        let json = await res.json();
 
-            let url = `${state.url}logvariables/find?vesselId=${vesselId}`;
-
-            let res = await fetch(url, header);
-            let json = await res.json();
-
-            let logVariableArray = [];
-            for (let logVariable of json) {
-                let newLogVariable = {
-                    id: logVariable.id,
-                    name: logVariable.name,
-                    limitMin: logVariable.validLimitMinimum,
-                    limitMax: logVariable.validLimitMaximum
-                };
-                logVariableArray.push(newLogVariable);
-            }
-            let vesselIndex = i;
-            commit('APPEND_LOG_VARIABLES', {vesselIndex:vesselIndex, logVariableArray});
-            commit('INCREMENT');
+        let logVariableArray = [];
+        for (let logVariable of json) {
+            let newLogVariable = {
+                id: logVariable.id,
+                name: logVariable.name,
+                limitMin: logVariable.validLimitMinimum,
+                limitMax: logVariable.validLimitMaximum
+            };
+            logVariableArray.push(newLogVariable);
         }
-    }
+        commit('APPEND_LOG_VARIABLES', {vesselIndex:vesselId, logVariableArray});
+        commit('INCREMENT');
+        store.dispatch('dataFetchLoop', vesselId);
 
-    // TODO: figure out where this function belongs
-    /*
-    async function getLogData( {state, commit }, logVariableId, fromDate,
-      granularity = "Hour", toDate = getCurrentDate()) {
+    },
+
+    /**
+     * Starts a fetch loop to indirectly gather all data for the vessel's
+     * variables. For each logvariable an action is dispatched to fetch the
+     * data for that variable.
+     */
+    dataFetchLoop: ({state, dispatch}, id) {
+      let vesselId = id;
+      let logVariableArray = state.logVariableArray;
+      for (let logvar of logVariableArray) {
+        dispatch('getLogData',{vesselId: vesselId, logVarId: logvar.id});
+      }
+    },
+
+    /**
+     * Fetches the data for logvariable by id directly, wraps it in an object,
+     * and appends it into state.
+     */
+    getLogData: async ( {state, commit }, ids) {
+      let logVariableId = ids.logVarId;
+      let vesselId = ids.vesselId;
+      let fromDate = "2019-01-01";    // hardcoded; provide better default
+      let toDate = "2019-01-02";      // hardcoded; provide better default
+      let granularity = "Hour";       // good default?
       let header = state.header;
       let url = `${state.url}/logdata/find?logVariableId=${logVariableId}
             &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
 
       let res = await fetch(url, header);
-      let jsonLogData = res.json();
+      let jsonLogData = await res.json();
       let dataArray = [];
       for (let key in jsonLogData.data) {
         dataArray.push(jsonLogData.data[key]);
       }
-      return dataArray;
-    },*/
+      let dataObj = {
+        id: logVariableId,
+        unit: jsonLogData["unit"],
+        data: dataArray
 
+      }
+
+      commit('APPEND_LOG_DATA', dataObj);
+      commit('INCREMENT');
+    }
+
+    // TODO: add a currentDate function to store in state
 
 }
