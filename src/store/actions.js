@@ -82,6 +82,9 @@ export default {
     /**
      * Fetches the data for logvariable by id directly, wraps it in an object,
      * and appends it into state.
+     * @param state
+     * @param commit
+     * @param ids:{vesselId,logVarId}
      */
     getLogData: async ( {state, commit }, ids)=> {
       let logVariableId = ids.logVarId;
