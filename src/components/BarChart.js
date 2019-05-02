@@ -1,18 +1,24 @@
-import { Pie } from "vue-chartjs";
-import { getHFO, getMDO, getMGO, getLSHFO, getISOMDO } from "../scripts/getData";
-
+import { Bar } from "vue-chartjs";
+import {
+  getHFO,
+  getMDO,
+  getMGO,
+  getLSHFO,
+  getSlip,
+  getISOMDO
+} from "../scripts/getData";
 
 export default {
-  extends: Pie,
+  extends: Bar,
   data() {
     return {
       HFO: [],
       MDO: [],
-      ISOMDO:[],
+      ISOMDO: [],
       MGO: [],
       Slip: [],
       LSHFO: [],
-      labels: ["HFO", "MDO","ISOMDO", "MGO", "LSHFO"]
+      labels: ["HFO", "MDO", "ISOMDO", "MGO", "LSHFO"]
     };
   },
 
@@ -25,13 +31,14 @@ export default {
 
     await getISOMDO(this.ISOMDO);
     const ISOMDOsumm = this.ISOMDO.reduce((prev, cur) => prev + cur, 0);
- 
+
     await getMGO(this.MGO);
     const MGOsumm = this.MGO.reduce((prev, cur) => prev + cur, 0);
- 
+
     await getLSHFO(this.LSHFO);
     const LSHFOsumm = this.LSHFO.reduce((prev, cur) => prev + cur, 0);
 
+    await getSlip(this.Slip);
 
     this.renderChart(
       {
@@ -39,7 +46,8 @@ export default {
         datasets: [
           {
             data: [HFOsumm, MDOsumm, ISOMDOsumm, MGOsumm, LSHFOsumm],
-            backgroundColor: ["blue", "red", "green", "yellow", "brown"]
+            backgroundColor: ["blue", "red", "green", "yellow", "brown"],
+            label: "Fuel"
           }
         ]
       },
