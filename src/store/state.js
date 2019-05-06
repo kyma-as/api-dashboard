@@ -21,5 +21,6 @@ export default {
     }
   },
   url: "https://demo.kyma.no/api/v1/",
-  dateToday: ""
+  dateToday: "",
+  fetchedVessels: false
 }

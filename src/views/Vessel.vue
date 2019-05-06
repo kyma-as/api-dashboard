@@ -4,6 +4,11 @@
     <v-content>
         <span>Welcome to ship {{vessel.name}}.
           {{ vessel.id }} == {{ this.$route.params.vesselid }}</span>
+          <ul id="example-1">
+            <li v-for="lvar in logVariables">
+              <p> {{ lvar.name }} ---> {{ lvar.id }} </p>
+            </li>
+          </ul>
     </v-content>
 </div>
 </template>
@@ -25,13 +30,26 @@ export default {
     computed: {
       ...mapState([
         'vessels'
-      ])
+      ]),
+      logvars() {
+        return this.vessel.logVariables;
+      }
     },
     mounted() {
       const vessel = this.vessels
       .find(x => x.id === this.$route.params.vesselid);
       this.vessel = vessel;
+    } /*,
+    watch: {
+    '$route.params': {
+        function (newValue) {
+            const { newVesselId } = newValue;
+            const vessel = this.vessels
+            .find(x => x.id === newVesselId);
+            this.vessel = vessel;
+        },
+        immediate: true,
     }
-
+}*/
 }
 </script>

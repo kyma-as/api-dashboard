@@ -15,6 +15,7 @@ export default {
      * Action is dispatched for each vessel to start retrieving logvariables.
      */
     fetchVessels: async ({state, commit, dispatch}) => {
+      if(!state.fetchedVessels) {
         let url = `${state.url}vessels`;
         let header = state.header;
 
@@ -25,26 +26,27 @@ export default {
         for (let vessel of vessels) {               // for each vessel the
             let newVessel = {                       // the vessel is stored in
                 id: vessel.id,                      // state, and log variables
-                name: vessel.name,                  // are then fetched.
-                logData: []
+                name: vessel.name                   // are then fetched.
             };
             commit('ADD_VESSELS', newVessel);
-            dispatch('getLogVariables', {id: vessel.id, index: index}); // fetches log variables
-            index++;                                // for this vessel
+            dispatch('getLogVariables', {vesselId: vessel.id, vesselIndex: index}); // fetches log variables
+            index++;                                                    // for this vessel
         }
 
         commit('INCREMENT');
+        commit('VESSELS_FETCHED');
+      }
     },
 
     /**
      * Fetches log variables for the vessel (specified by the parameter id).
      * It subsequently dispatches a data fetching function to retrieve the data
      * for all log variables.
-     * @param  {id,index}
+     * @param  ids:{vesselId,vesselIndex}
      */
-    getLogVariables: async ({state, commit, dispatch}, id) => {
+    getLogVariables: async ({state, commit, dispatch}, ids) => {
         let header = state.header;
-        let vesselId = id.id;
+        let vesselId = ids.vesselId;
         let url = `${state.url}logvariables/find?vesselId=${vesselId}`;
 
         let res = await fetch(url, header);
@@ -56,13 +58,14 @@ export default {
                 id: logVariable.id,
                 name: logVariable.name,
                 limitMin: logVariable.validLimitMinimum,
-                limitMax: logVariable.validLimitMaximum
+                limitMax: logVariable.validLimitMaximum,
+                unit: logVariable.unit.name
             };
             logVariableArray.push(newLogVariable);
         }
-        commit('APPEND_LOG_VARIABLES', {vesselIndex: id.index, logVariableArray});
+        commit('APPEND_LOG_VARIABLES', {vesselIndex: ids.vesselIndex, logVariableArray});
         commit('INCREMENT');
-        dispatch('dataFetchLoop', id.index);
+        dispatch('dataFetchLoop', ids.vesselIndex);
 
     },
 
@@ -71,19 +74,23 @@ export default {
      * variables. For each logvariable an action is dispatched to fetch the
      * data for that variable.
      */
-    dataFetchLoop: ({state, dispatch}, index) => {
-        let logVariableArray = state.vessels[index].logVariables;
+    dataFetchLoop: ({state, dispatch}, vesselIndex) => {
+        let logVariableArray = state.vessels[vesselIndex].logVariables;
+        let logIndex = 0;
         for (let logVar of logVariableArray) {
-            dispatch('getLogData', {vesselIndex: index, logVarId: logVar.id});
+            dispatch('getLogData', {
+              vesselIndex: vesselIndex,
+              logVarId: logVar.id,
+              logIndex: logIndex
+          });
+            logIndex++;
         }
     },
 
     /**
      * Fetches the data for logvariable by id directly, wraps it in an object,
      * and appends it into state.
-     * @param state
-     * @param commit
-     * @param ids:{vesselIndex,logVarId}
+     * @param ids:{vesselIndex,logVarId,logIndex}
      */
     getLogData: async ({state, commit}, ids) => {
         let logVariableId = ids.logVarId;
@@ -96,14 +103,8 @@ export default {
         let res = await fetch(url, header);
         let jsonLogData = await res.json();
 
-        let dataObj = {
-            id: logVariableId,
-            unit: jsonLogData["unit"],
-            data: jsonLogData.data
-
-        };
-
-        commit('APPEND_LOG_DATA', {dataObj, index:ids.vesselIndex});
+        commit('APPEND_LOG_DATA', {logData: jsonLogData.data,
+          vesselIndex:ids.vesselIndex, logIndex: ids.logIndex});
         commit('INCREMENT');
     },
 
@@ -119,6 +120,7 @@ export default {
         let date = "" + temp_date.getFullYear() +
             "-" + (temp_date.getMonth() + 1) + "-" + temp_date.getDate();
         commit('SET_DATE', date);
+        commit('INCREMENT');
     }
 
 }
