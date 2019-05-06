@@ -5,7 +5,7 @@
         <span>Welcome to ship {{vessel.name}}.
           {{ vessel.id }} == {{ this.$route.params.vesselid }}</span>
           <ul id="example-1">
-            <li v-for="lvar in logVariables">
+            <li v-for="lvar in logvariables">
               <p> {{ lvar.name }} ---> {{ lvar.id }} </p>
             </li>
           </ul>
@@ -31,7 +31,7 @@ export default {
       ...mapState([
         'vessels'
       ]),
-      logvars() {
+      logvariables() {
         return this.vessel.logVariables;
       }
     },
