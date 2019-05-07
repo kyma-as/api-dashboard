@@ -94,9 +94,9 @@ export default {
      */
     getLogData: async ({state, commit}, ids) => {
         let logVariableId = ids.logVarId;
-        let fromDate = "2016-06-06";    // hardcoded; provide better default
-        let toDate = "2019-01-02";      // hardcoded; provide better default
-        let granularity = "Hour";       // good default?
+        let fromDate = "2019-02-01";    // hardcoded; provide better default
+        let toDate = "2019-03-01";      // hardcoded; provide better default
+        let granularity = "Day";       // good default?
         let header = state.header;
         let url = `${state.url}/logdata/find?logVariableId=${logVariableId}
             &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
