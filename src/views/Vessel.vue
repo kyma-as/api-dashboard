@@ -4,9 +4,10 @@
     <v-content>
         <span>Welcome to ship {{vessel.name}}.
           {{ vessel.id }} == {{ this.$route.params.vesselid }}</span>
-          <ul id="example-1">
-            <li v-for="lvar in logvariables">
-              <p> {{ lvar.name }} ---> {{ lvar.id }} </p>
+            <ul id="example-2">
+            <li v-for="i, x in speed.log.data">
+              {{ x }}
+              {{ i }}
             </li>
           </ul>
       <div>
@@ -20,6 +21,7 @@
 import NavDrawer from "@/components/NavDrawer"
 import { mapState } from 'vuex';
 import lineChart from "@/components/LineChart.js";
+import { mapState, mapGetters } from 'vuex';
 
 export default {
     name: "vessel",
@@ -36,15 +38,21 @@ export default {
       ...mapState([
         'vessels'
       ]),
+      ...mapGetters([
+        'getSpeed'
+      ]),
       logvariables() {
         return this.vessel.logVariables;
+      },
+      speed() {
+        return this.getSpeed(this.$route.params.vesselid);
       }
     },
     mounted() {
       const vessel = this.vessels
       .find(x => x.id === this.$route.params.vesselid);
       this.vessel = vessel;
-    } /*,
+    }/*,
     watch: {
     '$route.params': {
         function (newValue) {
