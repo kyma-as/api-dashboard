@@ -6,7 +6,7 @@ import {
   getLSHFO,
   getSlip,
   getISOMDO
-} from "../scripts/getData";
+} from "../../scripts/getData";
 
 export default {
   extends: Bar,

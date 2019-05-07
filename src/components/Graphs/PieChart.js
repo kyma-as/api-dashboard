@@ -1,5 +1,5 @@
 import { Pie } from "vue-chartjs";
-import { getHFO, getMDO, getMGO, getLSHFO, getISOMDO } from "../scripts/getData";
+import { getHFO, getMDO, getMGO, getLSHFO, getISOMDO } from "../../scripts/getData";
 
 
 export default {
