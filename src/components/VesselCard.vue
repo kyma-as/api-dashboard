@@ -8,12 +8,9 @@
     >
       <v-card-title primary-title>
         <div>
-          <h3 class="headline mb-0">{{vessel.id}}</h3>
+          <h3 class="headline mb-0">{{vessel.name}}</h3>
         </div>
       </v-card-title>
-      <v-img>
-        <h2>Placeholder for visual data</h2>
-      </v-img>
       <v-layout row wrap>
         <v-flex xs12 sm6>Speed: 1000 km/h</v-flex>
         <v-flex xs12 sm6>Fuel: 1000 litre</v-flex>
@@ -26,12 +23,13 @@
 <script>
 // TODO: in v-card wrap with template (?)
 // and add :to=`"/vessels/${data/hover.index}"`
-
     export default {
         data() {
             return {
                 //Ship data
             }
+        },
+         components: {
         },
         props: {
             vessel: {

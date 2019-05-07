@@ -9,6 +9,9 @@
               <p> {{ lvar.name }} ---> {{ lvar.id }} </p>
             </li>
           </ul>
+      <div>
+        <line-chart/>
+      </div>
     </v-content>
 </div>
 </template>
@@ -16,11 +19,13 @@
 <script>
 import NavDrawer from "@/components/NavDrawer"
 import { mapState } from 'vuex';
+import lineChart from "@/components/LineChart.js";
 
 export default {
     name: "vessel",
     components: {
         NavDrawer,
+        lineChart
     },
     data(){
       return {
