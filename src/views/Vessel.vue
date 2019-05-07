@@ -1,58 +1,58 @@
 <template>
-<div class="vessel">
-    <NavDrawer />
+  <div class="vessel">
+    <NavDrawer/>
     <v-content>
         <span>Welcome to ship {{vessel.name}}.
           {{ vessel.id }} == {{ this.$route.params.vesselid }}</span>
-            <ul id="example-2">
-            <li v-for="i, x in speed.log.data">
-              {{ x }}
-              {{ i }}
-            </li>
-          </ul>
       <div>
-        <line-chart/>
+        <lineChart/>
       </div>
+      <ul id="example-2">
+        <li v-for="i, x in speed.log.data">
+          {{ x }}
+          {{ i }}
+        </li>
+      </ul>
+
     </v-content>
-</div>
+  </div>
 </template>
 
 <script>
-import NavDrawer from "@/components/NavDrawer"
-import { mapState } from 'vuex';
-import lineChart from "@/components/LineChart.js";
-import { mapState, mapGetters } from 'vuex';
+    import NavDrawer from "@/components/NavDrawer"
+    import lineChart from "@/components/Graphs/LineChart.js";
+    import {mapState, mapGetters} from 'vuex';
 
-export default {
-    name: "vessel",
-    components: {
-        NavDrawer,
-        lineChart
-    },
-    data(){
-      return {
-        vessel: {}
-      }
-    },
-    computed: {
-      ...mapState([
-        'vessels'
-      ]),
-      ...mapGetters([
-        'getSpeed'
-      ]),
-      logvariables() {
-        return this.vessel.logVariables;
-      },
-      speed() {
-        return this.getSpeed(this.$route.params.vesselid);
-      }
-    },
-    mounted() {
-      const vessel = this.vessels
-      .find(x => x.id === this.$route.params.vesselid);
-      this.vessel = vessel;
-    }/*,
+    export default {
+        name: "vessel",
+        components: {
+            NavDrawer,
+            lineChart
+        },
+        data() {
+            return {
+                vessel: {}
+            }
+        },
+        computed: {
+            ...mapState([
+                'vessels'
+            ]),
+            ...mapGetters([
+                'getSpeed'
+            ]),
+            logvariables() {
+                return this.vessel.logVariables;
+            },
+            speed() {
+                return this.getSpeed(this.$route.params.vesselid);
+            }
+        },
+        mounted() {
+            const vessel = this.vessels
+                .find(x => x.id === this.$route.params.vesselid);
+            this.vessel = vessel;
+        }/*,
     watch: {
     '$route.params': {
         function (newValue) {
@@ -64,5 +64,5 @@ export default {
         immediate: true,
     }
 }*/
-}
+    }
 </script>
