@@ -5,9 +5,10 @@
         <span>Welcome to ship {{vessel.name}}.
           {{ vessel.id }} == {{ this.$route.params.vesselid }}</span>
             <ul id="example-2">
-            <li v-for="i, x in speed.log.data">
-              {{ x }}
-              {{ i }}
+            <li v-for="props in fuel">
+              <li v-for"y in props.data">
+                {{ y.data }}
+              </li>
             </li>
           </ul>
     </v-content>
@@ -33,13 +34,17 @@ export default {
         'vessels'
       ]),
       ...mapGetters([
-        'getSpeed'
+        'getSpeed',
+        'getFuel'
       ]),
       logvariables() {
         return this.vessel.logVariables;
       },
       speed() {
         return this.getSpeed(this.$route.params.vesselid);
+      },
+      fuel() {
+        return this.getFuel(this.$route.params.vesselid);
       }
     },
     mounted() {
