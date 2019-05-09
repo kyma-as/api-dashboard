@@ -12,33 +12,24 @@ export default {
     };
   },
 
-   mounted() {
+  mounted() {
     this.fuel = this.getFuel(this.$route.params.vesselid);
     let labels = [];
     let dataen = [];
     let array = [];
-    let variabel
     let i = 0;
 
     for (i = 0; i < Object.keys(this.fuel).length; i++) {
-      labels.push(Object.keys(this.fuel)[i])
-
-      variabel = Object.keys(this.fuel)[i]
-    } 
-    for (let key in this.fuel) {
-      console.log(this.fuel.boilerfo)
-      for (let key2 in this.fuel[key].data){
-        array.push(this.fuel[key].data[key2])
-      }
- 
-      let Summ = array.reduce((prev, cur) => prev + cur, 0);
-      dataen.push(Summ)
+      labels.push(Object.keys(this.fuel)[i]);
     }
+    for (let key in this.fuel) {
+      for (let key2 in this.fuel[key].data) {
+        array.push(this.fuel[key].data[key2]);
+      }
 
-    console.log(dataen)
-    
-  
-
+      let Summ = array.reduce((prev, cur) => prev + cur, 0);
+      dataen.push(Summ);
+    }
 
     this.renderChart(
       {
@@ -46,9 +37,17 @@ export default {
         datasets: [
           {
             data: dataen,
-            backgroundColor: ["blue", "red", "green", "yellow", "orange","purple","black"],
-            label: "Fuel",
-          },
+            backgroundColor: [
+              "blue",
+              "red",
+              "green",
+              "yellow",
+              "orange",
+              "purple",
+              "black"
+            ],
+            label: "Fuel"
+          }
         ]
       },
       { responsive: true, maintainAspectRatio: false }

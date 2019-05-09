@@ -101,7 +101,7 @@ export default {
     let logVariableId = ids.logVarId;
     let fromDate = "2019-02-01"; // hardcoded; provide better default
     let toDate = "2019-03-01"; // hardcoded; provide better default
-    let granularity = "Day"; // good default?
+    let granularity = "Hour"; // good default?
     let header = state.header;
     let url = `${state.url}/logdata/find?logVariableId=${logVariableId}
             &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
