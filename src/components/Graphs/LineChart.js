@@ -34,10 +34,10 @@ export default {
             let Diffvar1 = gpsSpeed[i];
             let Diffvar2 = logSpeed[i];
             if (Diffvar1 > Diffvar2) {
-                diff.push(Diffvar1 - Diffvar2);
+                diff.push((Diffvar1 - Diffvar2));
             }
-            if (Diffvar1 < Diffvar2) {
-                diff.push(Diffvar2 - Diffvar1);
+            if (Diffvar1 <= Diffvar2) {
+                diff.push((Diffvar2 - Diffvar1));
             }
 
         }
