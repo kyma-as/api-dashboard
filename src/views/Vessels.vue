@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavDrawer/>
-    <v-content class="ma-2">
+    <v-content>
       <v-container grid-list-lg>
         <v-layout row wrap>
           <v-flex v-for="vess in vessels"

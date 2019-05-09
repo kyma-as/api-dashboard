@@ -3,7 +3,7 @@
     <NavDrawer/>
     <v-content>
         <span>Welcome to ship {{vessel.name}}.
-          {{ vessel.id }} == {{ this.$route.params.vesselid }}</span>
+         </span>
     <div>
         <lineChart/>
     </div>
@@ -75,3 +75,5 @@ export default {
 }*/
     }
 </script>
+
+

@@ -18,7 +18,6 @@ export default {
     let dataen = [];
     let array = [];
     let i = 0;
-
     for (i = 0; i < Object.keys(this.fuel).length; i++) {
       labels.push(Object.keys(this.fuel)[i]);
     }
@@ -28,7 +27,9 @@ export default {
       }
 
       let Summ = array.reduce((prev, cur) => prev + cur, 0);
+      array = [];
       dataen.push(Summ);
+      Summ = 0;
     }
 
     this.renderChart(
