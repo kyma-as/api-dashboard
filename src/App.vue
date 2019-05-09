@@ -1,8 +1,10 @@
 <template>
   <v-app>
     <Navbar/>
-    <router-view>
+    
+    <router-view class="ma-2">
     </router-view>
+
   </v-app>
 </template>
 
