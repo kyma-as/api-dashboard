@@ -1,21 +1,38 @@
 <template>
-<div class="vessel">
-    <NavDrawer />
+  <div class="vessel">
+    <NavDrawer/>
     <v-content>
         <span>Welcome to ship {{vessel.name}}.
-          {{ vessel.id }} == {{ this.$route.params.vesselid }}</span>
+         </span>
+    <div>
+        <lineChart/>
+    </div>
+    <div>
+        <pieChart/>
+    </div>
+    <div>
+        <barChart/>
+    </div>
     </v-content>
-</div>
+  </div>
 </template>
 
 <script>
-import NavDrawer from "@/components/NavDrawer"
-import { mapState } from 'vuex';
+    import NavDrawer from "@/components/NavDrawer"
+    import lineChart from "@/components/Graphs/LineChart.js";
+    import pieChart from "@/components/Graphs/PieChart.js";
+    import barChart from "@/components/Graphs/BarChart.js";
+    import {mapState, mapGetters} from 'vuex';
+
+
 
 export default {
     name: "vessel",
     components: {
         NavDrawer,
+        lineChart,
+        barChart,
+        pieChart,
     },
     data(){
       return {
@@ -25,13 +42,38 @@ export default {
     computed: {
       ...mapState([
         'vessels'
-      ])
+      ]),
+      ...mapGetters([
+        'getSpeed',
+        'getFuel'
+      ]),
+      logvariables() {
+        return this.vessel.logVariables;
+      },
+      speed() {
+        return this.getSpeed(this.$route.params.vesselid);
+      },
+      fuel() {
+        return this.getFuel(this.$route.params.vesselid);
+      }
     },
     mounted() {
       const vessel = this.vessels
       .find(x => x.id === this.$route.params.vesselid);
       this.vessel = vessel;
+    }/*,
+    watch: {
+    '$route.params': {
+        function (newValue) {
+            const { newVesselId } = newValue;
+            const vessel = this.vessels
+            .find(x => x.id === newVesselId);
+            this.vessel = vessel;
+        },
+        immediate: true,
     }
-
-}
+}*/
+    }
 </script>
+
+

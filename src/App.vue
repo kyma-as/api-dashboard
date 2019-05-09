@@ -1,10 +1,10 @@
 <template>
   <v-app>
     <Navbar/>
-    <keep-alive>
-    <router-view>
+    
+    <router-view class="ma-2">
     </router-view>
-  </keep-alive>
+
   </v-app>
 </template>
 
