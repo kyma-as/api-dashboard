@@ -4,16 +4,15 @@
     <v-content>
         <span>Welcome to ship {{vessel.name}}.
           {{ vessel.id }} == {{ this.$route.params.vesselid }}</span>
-      <div>
+    <div>
         <lineChart/>
-      </div>
-      <ul id="example-2">
-        <li v-for="i, x in speed.log.data">
-          {{ x }}
-          {{ i }}
-        </li>
-      </ul>
-
+    </div>
+    <div>
+        <pieChart/>
+    </div>
+    <div>
+        <barChart/>
+    </div>
     </v-content>
   </div>
 </template>
@@ -21,38 +20,48 @@
 <script>
     import NavDrawer from "@/components/NavDrawer"
     import lineChart from "@/components/Graphs/LineChart.js";
+    import pieChart from "@/components/Graphs/PieChart.js";
+    import barChart from "@/components/Graphs/BarChart.js";
     import {mapState, mapGetters} from 'vuex';
 
-    export default {
-        name: "vessel",
-        components: {
-            NavDrawer,
-            lineChart
-        },
-        data() {
-            return {
-                vessel: {}
-            }
-        },
-        computed: {
-            ...mapState([
-                'vessels'
-            ]),
-            ...mapGetters([
-                'getSpeed'
-            ]),
-            logvariables() {
-                return this.vessel.logVariables;
-            },
-            speed() {
-                return this.getSpeed(this.$route.params.vesselid);
-            }
-        },
-        mounted() {
-            const vessel = this.vessels
-                .find(x => x.id === this.$route.params.vesselid);
-            this.vessel = vessel;
-        }/*,
+
+
+export default {
+    name: "vessel",
+    components: {
+        NavDrawer,
+        lineChart,
+        barChart,
+        pieChart,
+    },
+    data(){
+      return {
+        vessel: {}
+      }
+    },
+    computed: {
+      ...mapState([
+        'vessels'
+      ]),
+      ...mapGetters([
+        'getSpeed',
+        'getFuel'
+      ]),
+      logvariables() {
+        return this.vessel.logVariables;
+      },
+      speed() {
+        return this.getSpeed(this.$route.params.vesselid);
+      },
+      fuel() {
+        return this.getFuel(this.$route.params.vesselid);
+      }
+    },
+    mounted() {
+      const vessel = this.vessels
+      .find(x => x.id === this.$route.params.vesselid);
+      this.vessel = vessel;
+    }/*,
     watch: {
     '$route.params': {
         function (newValue) {

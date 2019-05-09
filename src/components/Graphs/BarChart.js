@@ -1,54 +1,54 @@
 import { Bar } from "vue-chartjs";
-import {
-  getHFO,
-  getMDO,
-  getMGO,
-  getLSHFO,
-  getSlip,
-  getISOMDO
-} from "../../scripts/getData";
+import { mapGetters } from "vuex";
 
 export default {
   extends: Bar,
+  computed: {
+    ...mapGetters(["getFuel"])
+  },
   data() {
     return {
-      HFO: [],
-      MDO: [],
-      ISOMDO: [],
-      MGO: [],
-      Slip: [],
-      LSHFO: [],
-      labels: ["HFO", "MDO", "ISOMDO", "MGO", "LSHFO"]
+      fuel: {}
     };
   },
 
-  async mounted() {
-    await getHFO(this.HFO);
-    const HFOsumm = this.HFO.reduce((prev, cur) => prev + cur, 0);
+   mounted() {
+    this.fuel = this.getFuel(this.$route.params.vesselid);
+    let labels = [];
+    let dataen = [];
+    let array = [];
+    let variabel
+    let i = 0;
 
-    await getMDO(this.MDO);
-    const MDOsumm = this.MDO.reduce((prev, cur) => prev + cur, 0);
+    for (i = 0; i < Object.keys(this.fuel).length; i++) {
+      labels.push(Object.keys(this.fuel)[i])
 
-    await getISOMDO(this.ISOMDO);
-    const ISOMDOsumm = this.ISOMDO.reduce((prev, cur) => prev + cur, 0);
+      variabel = Object.keys(this.fuel)[i]
+    } 
+    for (let key in this.fuel) {
+      console.log(this.fuel.boilerfo)
+      for (let key2 in this.fuel[key].data){
+        array.push(this.fuel[key].data[key2])
+      }
+ 
+      let Summ = array.reduce((prev, cur) => prev + cur, 0);
+      dataen.push(Summ)
+    }
 
-    await getMGO(this.MGO);
-    const MGOsumm = this.MGO.reduce((prev, cur) => prev + cur, 0);
+    console.log(dataen)
+    
+  
 
-    await getLSHFO(this.LSHFO);
-    const LSHFOsumm = this.LSHFO.reduce((prev, cur) => prev + cur, 0);
-
-    await getSlip(this.Slip);
 
     this.renderChart(
       {
-        labels: this.labels,
+        labels: Object.keys(this.fuel),
         datasets: [
           {
-            data: [HFOsumm, MDOsumm, ISOMDOsumm, MGOsumm, LSHFOsumm],
-            backgroundColor: ["blue", "red", "green", "yellow", "brown"],
-            label: "Fuel"
-          }
+            data: dataen,
+            backgroundColor: ["blue", "red", "green", "yellow", "orange","purple","black"],
+            label: "Fuel",
+          },
         ]
       },
       { responsive: true, maintainAspectRatio: false }

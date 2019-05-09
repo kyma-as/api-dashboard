@@ -1,45 +1,51 @@
 import { Pie } from "vue-chartjs";
-import { getHFO, getMDO, getMGO, getLSHFO, getISOMDO } from "../../scripts/getData";
-
+import { mapGetters } from "vuex";
 
 export default {
   extends: Pie,
+  computed: {
+    ...mapGetters(["getFuel"])
+  },
   data() {
     return {
-      HFO: [],
-      MDO: [],
-      ISOMDO:[],
-      MGO: [],
-      Slip: [],
-      LSHFO: [],
-      labels: ["HFO", "MDO","ISOMDO", "MGO", "LSHFO"]
+      fuel: {}
     };
   },
 
-  async mounted() {
-    await getHFO(this.HFO);
-    const HFOsumm = this.HFO.reduce((prev, cur) => prev + cur, 0);
+  mounted() {
+    this.fuel = this.getFuel(this.$route.params.vesselid);
+    let labels = [];
+    let dataen = [];
+    let array = [];
+    let variabel
+    let i = 0;
 
-    await getMDO(this.MDO);
-    const MDOsumm = this.MDO.reduce((prev, cur) => prev + cur, 0);
+    for (i = 0; i < Object.keys(this.fuel).length; i++) {
+      labels.push(Object.keys(this.fuel)[i])
 
-    await getISOMDO(this.ISOMDO);
-    const ISOMDOsumm = this.ISOMDO.reduce((prev, cur) => prev + cur, 0);
+      variabel = Object.keys(this.fuel)[i]
+    } 
+    for (let key in this.fuel) {
+      for (let key2 in this.fuel[key].data){
+        array.push(this.fuel[key].data[key2])
+      }
  
-    await getMGO(this.MGO);
-    const MGOsumm = this.MGO.reduce((prev, cur) => prev + cur, 0);
- 
-    await getLSHFO(this.LSHFO);
-    const LSHFOsumm = this.LSHFO.reduce((prev, cur) => prev + cur, 0);
+      let Summ = array.reduce((prev, cur) => prev + cur, 0);
+      dataen.push(Summ)
+    }
+
+    console.log(dataen)
+    
+  
 
 
     this.renderChart(
       {
-        labels: this.labels,
+        labels: Object.keys(this.fuel),
         datasets: [
           {
-            data: [HFOsumm, MDOsumm, ISOMDOsumm, MGOsumm, LSHFOsumm],
-            backgroundColor: ["blue", "red", "green", "yellow", "brown"]
+            data: dataen,
+            backgroundColor: ["blue", "red", "green", "yellow", "orange","purple","black"]
           }
         ]
       },
