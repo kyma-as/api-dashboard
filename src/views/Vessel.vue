@@ -13,6 +13,12 @@
     <div>
         <barChart/>
     </div>
+    <div>
+        <barChartEmission/>
+    </div>
+     <div>
+        <barChartDistance/>
+    </div>
     </v-content>
   </div>
 </template>
@@ -22,6 +28,8 @@
     import lineChart from "@/components/Graphs/LineChart.js";
     import pieChart from "@/components/Graphs/PieChart.js";
     import barChart from "@/components/Graphs/BarChart.js";
+    import barChartEmission from "@/components/Graphs/BarChartEmission.js";
+    import barChartDistance from "@/components/Graphs/BarChartDistance.js";
     import {mapState, mapGetters} from 'vuex';
 
 
@@ -33,6 +41,8 @@ export default {
         lineChart,
         barChart,
         pieChart,
+        barChartEmission,
+        barChartDistance
     },
     data(){
       return {
@@ -45,7 +55,8 @@ export default {
       ]),
       ...mapGetters([
         'getSpeed',
-        'getFuel'
+        'getFuel',
+        'getEmission'
       ]),
       logvariables() {
         return this.vessel.logVariables;
@@ -55,6 +66,9 @@ export default {
       },
       fuel() {
         return this.getFuel(this.$route.params.vesselid);
+      },
+      emission() {
+        return this.getEmission(this.$route.params.vesselid);
       }
     },
     mounted() {

@@ -56,5 +56,32 @@ export default {
       default:
         return "No matching vessel id";
     }
+  },
+  getEmission: state => vesselid => {
+    const vessel = state.vessels.find(vessel => vessel.id === vesselid);
+    switch (vesselid) {
+      case 110:
+        return {
+          C02: vessel.logVariables.find(x => x.id === 9049),
+          S02: vessel.logVariables.find(x => x.id === 9051)
+        };
+      case 121:
+        return {
+          C02: vessel.logVariables.find(x => x.id === 10415),
+          S02: vessel.logVariables.find(x => x.id === 10417)
+        };
+      case 123:
+        return {
+          C02: vessel.logVariables.find(x => x.id === 10730),
+          S02: vessel.logVariables.find(x => x.id === 10732)
+        };
+      case 133:
+        return {
+          C02: vessel.logVariables.find(x => x.id === 12125),
+          S02: vessel.logVariables.find(x => x.id === 12127)
+        };
+      default:
+        return "No matching vessel id";
+    }
   }
 };
