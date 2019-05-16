@@ -24,8 +24,10 @@ export default {
       gpsDistanceKM.push(this.speed.gps.data[key] * 1.852);
     }
     let Summnaut = gpsDistancenaut.reduce((prev, cur) => prev + cur, 0);
+    Summnaut = Summnaut.toFixed(2);
     dataen.push(Summnaut);
     let Summ = gpsDistanceKM.reduce((prev, cur) => prev + cur, 0);
+    Summ = Summ.toFixed(2);
     dataen.push(Summ);
 
 

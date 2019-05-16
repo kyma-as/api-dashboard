@@ -22,18 +22,23 @@ export default {
       labels.push(key);
     }
     for (let key in this.speed.log.data) {
-      logSpeed.push(this.speed.log.data[key]);
+      logSpeed.push(this.speed.log.data[key]).toFixed(2);
     }
 
     let diff = [];
+    let decimal;
     for (let i = 0; i < gpsSpeed.length; i++) {
       let Diffvar1 = gpsSpeed[i];
       let Diffvar2 = logSpeed[i];
       if (Diffvar1 > Diffvar2) {
-        diff.push(Diffvar1 - Diffvar2);
+        decimal = Diffvar1 - Diffvar2;
+        decimal = decimal.toFixed(2);
+        diff.push(decimal);
       }
       if (Diffvar1 <= Diffvar2) {
-        diff.push(Diffvar2 - Diffvar1);
+        decimal = Diffvar2 - Diffvar1;
+        decimal = decimal.toFixed(2);
+        diff.push(decimal);
       }
     }
     this.renderChart(

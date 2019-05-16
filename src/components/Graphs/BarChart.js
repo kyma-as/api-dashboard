@@ -28,6 +28,7 @@ export default {
 
       let Summ = array.reduce((prev, cur) => prev + cur, 0);
       array = [];
+      Summ = Summ.toFixed(2);
       dataen.push(Summ);
       Summ = 0;
     }
