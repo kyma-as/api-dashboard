@@ -1,0 +1,32 @@
+@startuml
+User->Login.vue:Input
+activate Login.vue
+
+Login.vue->AuthenticationUtil.js:Validate Input
+activate AuthenticationUtil.js
+
+alt Successful Validation
+
+ AuthenticationUtil.js->KymaServer:Authenticate Login
+ activate KymaServer
+ alt Successful Authentication
+
+  KymaServer-->AuthenticationUtil.js: 200 OK
+  AuthenticationUtil.js-->Login.vue:Boolean: Authenticated
+  Login.vue-->User:Route to Home Dashboard
+ else Authentication Failure
+
+  KymaServer-->AuthenticationUtil.js: 401 Authentication Error
+  deactivate KymaServer
+  AuthenticationUtil.js-->Login.vue:Boolean: Authenticated
+  Login.vue-->User:Display Error Message
+  end
+
+else Validation Failure
+
+ AuthenticationUtil.js-->Login.vue: Return: Error Message
+ deactivate AuthenticationUtil.js
+ Login.vue-->User:Display Error Message
+ deactivate Login.vue
+ end
+@enduml
