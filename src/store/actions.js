@@ -26,7 +26,8 @@ export default {
       for (let vessel of vessels) {
         let newVessel = {
           id: vessel.id,
-          name: vessel.name
+          name: vessel.name,
+          logVariables: []
         };
         commit("ADD_VESSELS", newVessel);
         dispatch("dataFetchLoop2", {
@@ -49,6 +50,7 @@ export default {
   dataFetchLoop2: async ({state, commit, dispatch}, ids) => {
     let header = state.header;
     let vesselId = ids.vesselId;
+    let vesselIndex = ids.vesselIndex;
     // a subset of variables for this vessel
     let varObj = state.default_vars.find(x => x.id === vesselId);
     let i = 0;
@@ -63,7 +65,7 @@ export default {
       }
       // pushes this logvariable to state without data
       commit('APPEND_LOG_VARIABLE', {
-        vesselId,
+        vesselIndex,
         logVar
       });
 
