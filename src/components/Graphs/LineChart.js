@@ -17,12 +17,12 @@ export default {
     let gpsSpeed = [];
     let logSpeed = [];
     let labels = [];
-    for (let key in this.speed.gps.data) {
-      gpsSpeed.push(this.speed.gps.data[key]);
+    for (let key in this.speed.gps.dayData) {
+      gpsSpeed.push(this.speed.gps.dayData[key]);
       labels.push(key);
     }
-    for (let key in this.speed.log.data) {
-      logSpeed.push(this.speed.log.data[key]).toFixed(2);
+    for (let key in this.speed.log.dayData) {
+      logSpeed.push(this.speed.log.dayData[key]).toFixed(2);
     }
 
     let diff = [];
