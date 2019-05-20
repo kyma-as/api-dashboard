@@ -54,10 +54,10 @@ export default {
     // a subset of variables for this vessel
     let varObj = state.default_vars.find(x => x.id === vesselId);
     let i = 0;
-    for(let key in varObj) {
+    for(let key in varObj.variables) {
       let logVar = {
-        id: varObj[key].id,
-        name: varObj[key].name,
+        id: varObj.variables[key].id,
+        name: varObj.variables[key].name,
         unit: "",
         dayData: [],
         hourData: [],
@@ -72,24 +72,24 @@ export default {
       dispatch("getLogData", {
           vesselIndex: ids.vesselIndex,
           vesselId: ids.vesselId,
-          varId: varObj[key].id,
-          name: varObj[key].name,
+          varId: varObj.variables[key].id,
+          name: varObj.variables[key].name,
           granularity: "Day",
           logIndex: i
       });
       dispatch("getLogData", {
           vesselIndex: ids.vesselIndex,
           vesselId: ids.vesselId,
-          varId: varObj[key].id,
-          name: varObj[key].name,
+          varId: varObj.variables[key].id,
+          name: varObj.variables[key].name,
           granularity: "Hour",
           logIndex: i
       });
       dispatch("getLogData", {
           vesselIndex: ids.vesselIndex,
           vesselId: ids.vesselId,
-          varId: varObj[key].id,
-          name: varObj[key].name,
+          varId: varObj.variables[key].id,
+          name: varObj.variables[key].name,
           granularity: "QuarterHour",
           logIndex: i
       });
