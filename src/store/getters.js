@@ -1,4 +1,8 @@
 export default {
+  /**
+   * Returns predefined objects of state data.
+   * Different granularities are accessible through "getSpeed.gps.dayData"
+   */
   getSpeed: state => vesselid => {
     const vessel = state.vessels.find(vessel => vessel.id === vesselid);
     switch (vesselid) {

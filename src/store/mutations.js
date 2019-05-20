@@ -10,12 +10,29 @@ export default {
   INCREMENT: state => {
     state.apiCallCount++;
   },
-  APPEND_LOG_VARIABLES: (state, { vesselIndex, logVariableArray }) => {
-    state.vessels[vesselIndex].logVariables = logVariableArray;
+  // -- NOT USED IN THIS VERSION --
+  // APPEND_LOG_VARIABLES: (state, { vesselIndex, logVariableArray }) => {
+  //   state.vessels[vesselIndex].logVariables = logVariableArray;
+  // },
+
+  // TODO: mutation for adding quick default data to state
+  APPEND_QUICK_DATA: (state, { vesselIndex, logvar }) => {
+
   },
-  APPEND_LOG_DATA: (state, { logData, vesselIndex, logIndex }) => {
-    state.vessels[vesselIndex].logVariables[logIndex].data = logData;
+  APPEND_LOG_VARIABLE: (state, { vesselIndex, logVar }) => {
+    state.vessels[vesselIndex].logVariables.push(logVar);
   },
+  APPEND_DAY_DATA: (state, { logData, vesselIndex, logIndex }) => {
+    state.vessels[vesselIndex].logVariables[logIndex].dayData = logData;
+  },
+  APPEND_HOUR_DATA: (state, { logData, vesselIndex, logIndex }) => {
+    state.vessels[vesselIndex].logVariables[logIndex].hourData = logData;
+  },
+  APPEND_QUARTERHOUR_DATA: (state, { logData, vesselIndex, logIndex }) => {
+    state.vessels[vesselIndex].logVariables[logIndex].quarterhourData = logData;
+  },
+
+
   SET_DATE: (state, date) => {
     state.dateToday = date;
   },
