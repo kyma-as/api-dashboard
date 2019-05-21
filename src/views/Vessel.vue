@@ -4,7 +4,6 @@
     <v-content>
       <span>Welcome to ship {{vessel.name}}.</span>
     <GraphCard />
- 
     </v-content>
   </div>
 </template>
@@ -12,18 +11,12 @@
 <script>
     import GraphCard from "@/components/GraphCard";
     import NavDrawer from "@/components/NavDrawer";
-   
     import {mapState, mapGetters} from 'vuex';
-
-
-
 export default {
     name: "vessel",
     components: {
         GraphCard,
-        NavDrawer
-        
-        
+        NavDrawer        
     },
     data(){
       return {
