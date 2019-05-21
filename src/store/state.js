@@ -4,10 +4,13 @@
  */
 export default {
   /**
-   * -- [Get GPS speed (9177) of vessel 110] --
-   *
-   * correctVessel = vessels.find(x => x.id === 110);
-   * gpsSpeedArray = correctVessel["logData"].find(x => x.id === 9177);
+   * Initially, the application fetches and stores the following in state:
+   *  - Fuel variables (Daily/Hourly) for 3 years
+   *  - Fuel variables (Quarterhourly) for 2 weeks
+   *  - Speed variables (Daily/Hourly) for 3 years
+   *  - Speed variables (Quarterhourly) for 2 weeks
+   *  - Emission variables (Daily/Hourly) for 3 years
+   *  - Emission variables (Quarterhourly) for 2 weeks
    *
    */
   vessels: [],

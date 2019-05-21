@@ -87,5 +87,151 @@ export default {
       default:
         return "No matching vessel id";
     }
+  },
+  getSpeedDay: (state) => (vesselid, from, to) => {
+    const vessel = state.vessels.find(vessel => vessel.id === vesselid);
+    let f = -1;
+    let t = -1;
+    switch (vesselid) {
+      case 110:
+        {
+          let gpsArray = vessel.logVariables.find(x => x.id === 9177);
+          let logArray = vessel.logVariables.find(x => x.id === 9178);
+          let start = false;
+          let gpsData = {};
+          let logData = {};
+          for (let key in gpsArray.dayData) {
+            if (key == from) {
+              start = true;
+            }
+            if (key == to) {
+              start = false;
+            }
+            if(start) {
+              gpsData[key] = gpsArray.dayData[key];
+              logData[key] = logArray.dayData[key];
+            }
+          }
+          return {
+            gps: {
+              id: gpsArray.id,
+              name: gpsArray.name,
+              unit: gpsArray.unit,
+              data: gpsData
+            },
+            log: {
+              id: logArray.id,
+              name: logArray.name,
+              unit: logArray.unit,
+              data: logData
+            }
+          }
+        };
+      case 121:
+        {
+          let gpsArray = vessel.logVariables.find(x => x.id === 10481);
+          let logArray = vessel.logVariables.find(x => x.id === 10482);
+          let start = false;
+          let gpsData = {};
+          let logData = {};
+          for (let key in gpsArray.dayData) {
+            if (key == from) {
+              start = true;
+            }
+            if (key == to) {
+              start = false;
+            }
+            if(start) {
+              gpsData[key] = gpsArray.dayData[key];
+              logData[key] = logArray.dayData[key];
+            }
+          }
+          return {
+            gps: {
+              id: gpsArray.id,
+              name: gpsArray.name,
+              unit: gpsArray.unit,
+              data: gpsData
+            },
+            log: {
+              id: logArray.id,
+              name: logArray.name,
+              unit: logArray.unit,
+              data: logData
+            }
+          }
+        };
+      case 133:
+        {
+          let gpsArray = vessel.logVariables.find(x => x.id === 12191);
+          let logArray = vessel.logVariables.find(x => x.id === 12192);
+          let start = false;
+          let gpsData = {};
+          let logData = {};
+          for (let key in gpsArray.dayData) {
+            if (key == from) {
+              start = true;
+            }
+            if (key == to) {
+              start = false;
+            }
+            if(start) {
+              gpsData[key] = gpsArray.dayData[key];
+              logData[key] = logArray.dayData[key];
+            }
+          }
+          return {
+            gps: {
+              id: gpsArray.id,
+              name: gpsArray.name,
+              unit: gpsArray.unit,
+              data: gpsData
+            },
+            log: {
+              id: logArray.id,
+              name: logArray.name,
+              unit: logArray.unit,
+              data: logData
+            }
+          }
+        };
+      case 123:
+        {
+          gpsArray = vessel.logVariables.find(x => x.id === 10803);
+          logArray = vessel.logVariables.find(x => x.id === 10804);
+          let start = false;
+          let gpsData = {};
+          let logData = {};
+          for (let key in gpsArray.dayData) {
+            if (key == from) {
+              start = true;
+            }
+            if (key == to) {
+              start = false;
+            }
+            if(start) {
+              gpsData[key] = gpsArray.dayData[key];
+              logData[key] = logArray.dayData[key];
+            }
+          }
+          return {
+            gps: {
+              id: gpsArray.id,
+              name: gpsArray.name,
+              unit: gpsArray.unit,
+              data: gpsData
+            },
+            log: {
+              id: logArray.id,
+              name: logArray.name,
+              unit: logArray.unit,
+              data: logData
+            }
+          }
+        };
+      default:
+        return "No matching vessel id";
+    }
+
   }
 };
