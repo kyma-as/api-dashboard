@@ -12,11 +12,11 @@
       <v-list class="pa-0">
         <v-list-tile avatar>
           <v-list-tile-avatar>
-            <v-icon>menu</v-icon>
+            <v-icon class="primary--text">menu</v-icon>
           </v-list-tile-avatar>
 
           <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
+            <v-list-tile-title class="primary--text">Menu</v-list-tile-title>
           </v-list-tile-content>
 
           <v-list-tile-action>
@@ -24,7 +24,7 @@
               icon
               @click.stop="mini = !mini"
             >
-              <v-icon>chevron_left</v-icon>
+              <v-icon class="primary--text">chevron_left</v-icon>
             </v-btn>
           </v-list-tile-action>
         </v-list-tile>
@@ -42,8 +42,9 @@
       >
       
       <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon class="primary--text">{{ item.icon }}</v-icon>
         </v-list-tile-action>
+
 
         <v-list-tile-content>
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>
