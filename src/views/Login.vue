@@ -11,11 +11,13 @@
               <v-card-text>
                 <v-form @keydown.native.enter="login">
                   <v-text-field v-model="input.username" prepend-icon="person" name="login"
-                                label="Login" type="text" id="username">
+                                label="Login" type="text" id="username"
+                                :rules="[rules.email, rules.required]">
 
                   </v-text-field>
                   <v-text-field v-model="input.password" prepend-icon="lock" name="password"
-                                label="Password" id="password" type="password">
+                                label="Password" id="password" type="password"
+                                :rules="[rules.required]">
                   </v-text-field>
                 </v-form>
               </v-card-text>
@@ -49,6 +51,14 @@
                 input: {
                     username: "",
                     password: ""
+                },
+                rules:{
+                    required:value=>!!value||'Required',
+                    email: (value)=>{
+                        const emailReg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                        return emailReg.test(value) ||'Must be email'
+                    }
+
                 }
             }
         },
