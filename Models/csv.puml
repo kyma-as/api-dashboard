@@ -1,0 +1,26 @@
+@startuml
+User->Csv.vue:Specify Ship from Dropdown Menu
+activate Csv.vue
+
+Csv.vue->VuexState:GetLogVar
+activate VuexState
+Csv.vue<--VuexState:Return LogVar
+deactivate VuexState
+
+User<--Csv.vue:Show LogVar for ship
+User->Csv.vue:Specify LogVar+Time+Granularity
+
+Csv.vue->KymaServer:GetData as CSV
+activate KymaServer
+Csv.vue<--KymaServer:Return CSV Data
+deactivate KymaServer
+
+Csv.vue->mainThread:Event: Create CSV File
+activate mainThread
+mainThread<-mainThread:write file
+return Event: File Write Complete
+
+User<--Csv.vue:Feedback: CSV file created
+
+deactivate Csv.vue
+@enduml

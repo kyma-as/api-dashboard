@@ -17,12 +17,15 @@ export default {
     let gpsSpeed = [];
     let logSpeed = [];
     let labels = [];
+    let formatting
     for (let key in this.speed.gps.data) {
-      gpsSpeed.push(this.speed.gps.data[key]);
-      labels.push(key);
+      gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
+      formatting = key
+      formatting = formatting.substring(0,10) // om du vil has tidspunkt og ikkje dato ta fra substing(10,)
+      labels.push(formatting);
     }
     for (let key in this.speed.log.data) {
-      logSpeed.push(this.speed.log.data[key]).toFixed(2);
+      logSpeed.push(this.speed.log.data[key].toFixed(2));
     }
 
     let diff = [];
