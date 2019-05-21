@@ -76,7 +76,7 @@
                     console.log("Authenticated!");
                     // Set state authenticated
                     // Route to Vessels
-                    this.$store.dispatch('setLoggedIn');
+                    this.$store.dispatch('setLoggedIn',{loggedIn:true});
                     this.$router.replace({name: 'vessels'})
                 } else {
                     this.loading = false;
@@ -84,6 +84,9 @@
                 }
             }
 
+        },
+        mounted() {
+            this.$store.dispatch('setLoggedIn',{loggedIn:false});
         }
     }
 
