@@ -141,5 +141,6 @@ export default {
    */
   setLoggedIn:({commit},payload)=>{
     commit("SET_LOGGED_IN",payload.loggedIn);
+    commit("SET_HEADER",payload.headerParams);
   }
 };
