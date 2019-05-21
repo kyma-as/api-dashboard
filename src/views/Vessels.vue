@@ -21,7 +21,8 @@
     export default {
         name: "vessels",
         components: {
-            NavDrawer, VesselCard
+            NavDrawer, 
+            VesselCard
         },
 
         data() {

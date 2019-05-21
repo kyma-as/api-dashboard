@@ -1,48 +1,101 @@
 <template>
-  <v-hover>
-    <v-card
-        @click="routeOnClick"
-        class="pa-2 mx-auto"
-        slot-scope="{ hover }"
-        :class="`elevation-${hover ? 12 : 2 }`"
-    >
-      <v-card-title primary-title>
-        <div>
-          <h3 class="headline mb-0">{{vessel.name}}</h3>
-        </div>
-      </v-card-title>
-      <v-layout row wrap>
-        <v-flex xs12 sm6>Speed: 1000 km/h</v-flex>
-        <v-flex xs12 sm6>Fuel: 1000 litre</v-flex>
-        <v-flex xs12 sm12>Vessel Status: <span class="green--text">Good</span></v-flex>
-      </v-layout>
-    </v-card>
-  </v-hover>
+  <div class="text-xs-left">
+    <v-menu open-on-hover offset-y>
+      
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Graph
+        </v-btn>
+      </template>
+      
+      <v-list>
+        <v-list-tile
+          v-for="(item, index) in graphs"
+          :key="index"
+          @click="showGraph(item.title)" 
+        >
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    
+    </v-menu>
+    
+    <lineChart v-if="selected == 'Line-Chart'" />
+    <barChart v-if="selected == 'Bar-Chart'" />
+    <pieChart v-if="selected == 'Pie-Chart'" />
+    <barChartEmission v-if="selected == 'Bar-Chart Emission'" />
+    <barChartDistance v-if="selected == 'Bar-Chart Distance'" />
+  </div>
 </template>
 
 <script>
-// TODO: in v-card wrap with template (?)
-// and add :to=`"/vessels/${data/hover.index}"`
-    export default {
-        data() {
-            return {
-                //Ship data
-            }
-        },
-         components: {
-        },
-        props: {
-            vessel: {
-                type: Object,
-                required: true
-            }
-        },
-        methods: {
-          // TODO: does this work?
-            routeOnClick() {
-                this.$router.replace({name: "vessel", params: { vesselid: this.vessel.id }});
-                //this.$router.push({ name: 'vessels', params: { vesselid: this.vessel.id }})
-            }
+
+import lineChart from "@/components/Graphs/LineChart.js";
+import pieChart from "@/components/Graphs/PieChart.js";
+import barChart from "@/components/Graphs/BarChart.js";
+import barChartEmission from "@/components/Graphs/BarChartEmission.js";
+import barChartDistance from "@/components/Graphs/BarChartDistance.js";
+import {mapState, mapGetters} from 'vuex';
+  
+  export default {
+    data: () => ({
+      graphs: [
+        {title: 'Line-Chart'},
+        {title: 'Bar-Chart'},
+        {title: 'Pie-Chart'},
+        {title: 'Bar-Chart Emission'},
+        {title: 'Bar-Chart Distance'}
+      ],
+      selected:""
+    }),
+    components: {
+      lineChart,
+      barChart,
+      pieChart,
+      barChartEmission,
+      barChartDistance
+    },
+    methods: {
+      showGraph: function(input){
+        console.log(input);
+        this.selected = input
+      }
+    },
+    computed: {
+      ...mapState([
+        'vessels'
+      ]),
+      ...mapGetters([
+        'getSpeed',
+        'getFuel',
+        'getEmission'
+      ]),
+      logvariables() {
+        return this.vessel.logVariables;
+      },
+      speed() {
+        return this.getSpeed(this.$route.params.vesselid);
+      },
+      fuel() {
+        return this.getFuel(this.$route.params.vesselid);
+      },
+      emission() {
+        return this.getEmission(this.$route.params.vesselid);
+      }
+    },
+    mounted() {
+      const vessel = this.vessels
+      .find(x => x.id === this.$route.params.vesselid);
+      this.vessel = vessel;
+    },
+    props: {
+      
         }
+       
     }
 </script>
+
