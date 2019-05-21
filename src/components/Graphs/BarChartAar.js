@@ -33,7 +33,6 @@ export default {
 
     for (i = 0; i < labels.length; i++) {
       counter = 0;
-
       for (let key in this.fuel) {
         for (let key2 in this.fuel[key].data) {
           array.push(this.fuel[key].data[key2]);
@@ -68,39 +67,38 @@ export default {
     this.renderChart(
       {
         labels: labels,
-        datasets:
-          dataset[
-            ({
-              label: Object.keys(this.fuel)[0],
-              backgroundColor: "blue",
-              data: boiler
-            },
-            {
-              label: Object.keys(this.fuel)[1],
-              backgroundColor: "red",
-              data: gcu
-            },
-            {
-              label: Object.keys(this.fuel)[2],
-              backgroundColor: "green",
-              data: ge1
-            },
-            {
-              label: Object.keys(this.fuel)[3],
-              backgroundColor: "yellow",
-              data: ge2
-            },
-            {
-              label: Object.keys(this.fuel)[4],
-              backgroundColor: "orange",
-              data: ge3
-            },
-            {
-              label: Object.keys(this.fuel)[5],
-              backgroundColor: "purple",
-              data: ge4
-            })
-          ]
+        datasets: [
+          {
+            label: Object.keys(this.fuel)[0],
+            backgroundColor: "blue",
+            data: boiler
+          },
+          {
+            label: Object.keys(this.fuel)[1],
+            backgroundColor: "red",
+            data: gcu
+          },
+          {
+            label: Object.keys(this.fuel)[2],
+            backgroundColor: "green",
+            data: ge1
+          },
+          {
+            label: Object.keys(this.fuel)[3],
+            backgroundColor: "yellow",
+            data: ge2
+          },
+          {
+            label: Object.keys(this.fuel)[4],
+            backgroundColor: "orange",
+            data: ge3
+          },
+          {
+            label: Object.keys(this.fuel)[5],
+            backgroundColor: "purple",
+            data: ge4
+          }
+        ]
       },
       { responsive: true, maintainAspectRatio: false }
     );
