@@ -5,7 +5,7 @@
         <span>Welcome to ship {{vessel.name}}.
          </span>
     <div>
-        <lineChart/>
+        <barChartAar/>
     </div>
     <div>
         <pieChart/>
@@ -28,6 +28,7 @@
     import lineChart from "@/components/Graphs/LineChart.js";
     import pieChart from "@/components/Graphs/PieChart.js";
     import barChart from "@/components/Graphs/BarChart.js";
+    import barChartAar from "@/components/Graphs/BarChartAar.js";
     import barChartEmission from "@/components/Graphs/BarChartEmission.js";
     import barChartDistance from "@/components/Graphs/BarChartDistance.js";
     import {mapState, mapGetters} from 'vuex';
@@ -42,7 +43,8 @@ export default {
         barChart,
         pieChart,
         barChartEmission,
-        barChartDistance
+        barChartDistance,
+        barChartAar
     },
     data(){
       return {
