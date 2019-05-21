@@ -40,7 +40,7 @@
 
 <script>
     import AppTitle from "@/components/AppTitle"
-    import {validateLogin, authenticateLogin} from "../scripts/authentication";
+    import {authenticateLogin} from "../scripts/authentication";
 
     export default {
         name: 'login',
@@ -66,27 +66,24 @@
             async login() {
                 let username = this.input.username;
                 let password = this.input.password;
-                console.log("Validating input...");
-                this.loading = true
-                if (validateLogin(username, password)) {
-                    console.log("Input valid!");
-                    // Authenticate against kyma api
-                    console.log("Authenticating with server...")
-                    if (await authenticateLogin(username, password)) {
-                      // TODO: move fetchVessels action here?
-                        this.loading = false;
-                        console.log("Authenticated!")
-                        // Set state authenticated
-                        // Route to Vessels
-                        this.$router.replace({name: 'vessels'})
-                    } else {
-                        this.loading = false;
-                        console.log("Could not authenticate with the server")
-                    }
+                this.loading = true;
+
+                // Authenticate against kyma api
+                console.log("Authenticating with server...");
+                if (await authenticateLogin(username, password)) {
+                    // TODO: move fetchVessels action here?
+                    this.loading = false;
+                    console.log("Authenticated!");
+                    // Set state authenticated
+                    // Route to Vessels
+                    this.$store.dispatch('setLoggedIn');
+                    this.$router.replace({name: 'vessels'})
                 } else {
-                    console.log("Must have an email and password")
+                    this.loading = false;
+                    console.log("Could not authenticate with the server")
                 }
             }
+
         }
     }
 
