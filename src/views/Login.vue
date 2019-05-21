@@ -40,7 +40,7 @@
 
 <script>
     import AppTitle from "@/components/AppTitle"
-    import {authenticateLogin} from "../scripts/authentication";
+    import {authenticateLogin, convertToBase64} from "../scripts/authentication";
 
     export default {
         name: 'login',
@@ -69,8 +69,9 @@
                 this.loading = true;
 
                 // Authenticate against kyma api
+                let headerParams = convertToBase64(username,password);
                 console.log("Authenticating with server...");
-                if (await authenticateLogin(username, password)) {
+                if (await authenticateLogin(headerParams)) {
                     // TODO: move fetchVessels action here?
                     this.loading = false;
                     console.log("Authenticated!");

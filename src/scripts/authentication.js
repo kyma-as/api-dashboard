@@ -1,12 +1,14 @@
 export function validateLogin(username, password) {
   return is_email(username) && is_password(password);
 }
-export async function authenticateLogin(username, password) {
-  const params = convertToBase64(username, password);
-  return callApi(params);
+export async function authenticateLogin(headerParams) {
+  return callApi(headerParams);
 }
 
-function convertToBase64(username, password) {
+/*
+Creates a header object to use with fetch
+ */
+export function convertToBase64(username, password) {
   const userInfo = Buffer.from(`${username}:${password}`).toString("base64");
   return { headers: { Authorization: "Basic " + userInfo } };
 }
