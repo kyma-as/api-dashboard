@@ -134,5 +134,12 @@ export default {
       temp_date.getDate();
     commit("SET_DATE", date);
     commit("INCREMENT");
+  },
+  /**
+   * After authenticating in login will set the user to loggedIn
+   * and login info in header
+   */
+  setLoggedIn:({commit})=>{
+    commit("SET_LOGGED_IN",true);
   }
 };

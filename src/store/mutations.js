@@ -21,5 +21,8 @@ export default {
   },
   VESSELS_FETCHED: state => {
     state.fetchedVessels = true;
+  },
+  SET_LOGGED_IN:(state,payload)=>{
+    state.loggedIn = payload;
   }
 };
