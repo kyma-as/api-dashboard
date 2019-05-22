@@ -19,9 +19,9 @@ export default {
     let dataen = [];
 
     let labels = ["Naut","KM"];
-    for (let key in this.speed.gps.data) {
-      gpsDistancenaut.push(this.speed.gps.data[key]);
-      gpsDistanceKM.push(this.speed.gps.data[key] * 1.852);
+    for (let key in this.speed.gps.dayData) {
+      gpsDistancenaut.push(this.speed.gps.dayData[key]);
+      gpsDistanceKM.push(this.speed.gps.dayData[key] * 1.852);
     }
     let Summnaut = gpsDistancenaut.reduce((prev, cur) => prev + cur, 0);
     Summnaut = Summnaut.toFixed(2);
