@@ -63,6 +63,7 @@
             return {
                 items: [
                     {title: 'Vessels', icon: 'directions_boat',path:"/vessels"},
+                    {title: 'CSV',icon:'description',path:"/csv"},
                     {title: 'Logout', icon: 'exit_to_app',path:"/"}
                 ],
                 mini: true,
