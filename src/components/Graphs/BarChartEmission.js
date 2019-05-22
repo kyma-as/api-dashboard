@@ -22,8 +22,8 @@ export default {
       labels.push(Object.keys(this.emission)[i]);
     }
     for (let key in this.emission) {
-      for (let key2 in this.emission[key].data) {
-        array.push(this.emission[key].data[key2]);
+      for (let key2 in this.emission[key].dayData) {
+        array.push(this.emission[key].dayData[key2]);
       }
 
       let Summ = array.reduce((prev, cur) => prev + cur, 0);

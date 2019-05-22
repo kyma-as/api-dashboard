@@ -1,16 +1,21 @@
 @startuml
-User->Csv.vue:Specify Ship from Dropdown Menu
+User->Csv.vue:Enter the CSV view
 activate Csv.vue
 
+Csv.vue->VuexState:GetVessels
+activate VuexState
+return Return Vessels
+return Show Vessels in Dropdown Menu
+
+User->Csv.vue:Specify Ship from Dropdown Menu
 Csv.vue->VuexState:GetLogVar
 activate VuexState
-Csv.vue<--VuexState:Return LogVar
-deactivate VuexState
+return Return LogVar
 
 User<--Csv.vue:Show LogVar for ship
 User->Csv.vue:Specify LogVar+Time+Granularity
 
-Csv.vue->KymaServer:GetData as CSV
+Csv.vue->KymaServer:Get Batch of Data as CSV
 activate KymaServer
 Csv.vue<--KymaServer:Return CSV Data
 deactivate KymaServer

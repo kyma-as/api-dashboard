@@ -5,12 +5,14 @@
  * and actions.js support asynchronous functions.
  */
 
-// maybe use context.dispatch to start another fetch with the new data?
-// store.dispatch('fetchVessels').then(() => { ... }
+
 export default {
+  // TODO: Actions to fetch quick default data to state
+
   /**
    * Fetches all available vessels and puts them into state.
-   * Action is dispatched for each vessel to start retrieving logvariables.
+   * Action is dispatched for each vessel to start retrieving
+   * a subset of available logvariables.
    */
   fetchVessels: async ({ state, commit, dispatch }) => {
     if (!state.fetchedVessels) {
@@ -22,26 +24,80 @@ export default {
 
       let index = 0;
       for (let vessel of vessels) {
-        // for each vessel the
         let newVessel = {
-          // the vessel is stored in
-          id: vessel.id, // state, and log variables
-          name: vessel.name // are then fetched.
+          id: vessel.id,
+          name: vessel.name,
+          logVariables: []
         };
         commit("ADD_VESSELS", newVessel);
-        dispatch("getLogVariables", {
+        dispatch("dataFetchLoop2", {
           vesselId: vessel.id,
           vesselIndex: index
-        }); // fetches log variables
-        index++; // for this vessel
+        });
+        index++;
       }
-
       commit("INCREMENT");
       commit("VESSELS_FETCHED");
     }
   },
 
   /**
+   * Initializes array of logvariables.
+   * Dispatches actions to fetch data by different granularities.
+   * @param  ids:{vesselId,vesselIndex}
+   *
+   */
+  dataFetchLoop2: async ({state, commit, dispatch}, ids) => {
+    let header = state.header;
+    let vesselId = ids.vesselId;
+    let vesselIndex = ids.vesselIndex;
+    // a subset of variables for this vessel
+    let varObj = state.default_vars.find(x => x.id === vesselId);
+    let i = 0;
+    for(let key in varObj.variables) {
+      let logVar = {
+        id: varObj.variables[key].id,
+        name: varObj.variables[key].name,
+        unit: "",
+        dayData: [],
+        hourData: [],
+        quarterhourData: []
+      }
+      // pushes this logvariable to state without data
+      commit('APPEND_LOG_VARIABLE', {
+        vesselIndex,
+        logVar
+      });
+
+      dispatch("getLogData", {
+          vesselIndex: ids.vesselIndex,
+          vesselId: ids.vesselId,
+          varId: varObj.variables[key].id,
+          name: varObj.variables[key].name,
+          granularity: "Day",
+          logIndex: i
+      });
+      dispatch("getLogData", {
+          vesselIndex: ids.vesselIndex,
+          vesselId: ids.vesselId,
+          varId: varObj.variables[key].id,
+          name: varObj.variables[key].name,
+          granularity: "Hour",
+          logIndex: i
+      });
+      dispatch("getLogData", {
+          vesselIndex: ids.vesselIndex,
+          vesselId: ids.vesselId,
+          varId: varObj.variables[key].id,
+          name: varObj.variables[key].name,
+          granularity: "QuarterHour",
+          logIndex: i
+      });
+      i++;
+    }
+  },
+
+  /** -- NOT USED IN THIS VERSION --
    * Fetches log variables for the vessel (specified by the parameter id).
    * It subsequently dispatches a data fetching function to retrieve the data
    * for all log variables.
@@ -74,7 +130,7 @@ export default {
     dispatch("dataFetchLoop", ids.vesselIndex);
   },
 
-  /**
+  /** -- NOT USED IN THIS VERSION --
    * Starts a fetch loop to indirectly gather all data for the vessel's
    * variables. For each logvariable an action is dispatched to fetch the
    * data for that variable.
@@ -95,24 +151,47 @@ export default {
   /**
    * Fetches the data for logvariable by id directly, wraps it in an object,
    * and appends it into state.
-   * @param ids:{vesselIndex,logVarId,logIndex}
+   * @param payload:{vesselIndex,vesselId,varId,granularity,logIndex}
    */
-  getLogData: async ({ state, commit }, ids) => {
-    let logVariableId = ids.logVarId;
-    let fromDate = "2019-04-01"; // hardcoded; provide better default
-    let toDate = "2019-05-01"; // hardcoded; provide better default
-    let granularity = "Day"; // good default?
+  getLogData: async ({ state, commit }, payload) => {
+    let logVariableId = payload.varId;
+    let fromDate = "2016-01-01";
+    let toDate = "2019-05-01";
+    let granularity = payload.granularity;
+    if(granularity == "QuarterHour")
+    {
+      fromDate = "2019-04-15";  // ~ two tweeks
+    }
     let header = state.header;
     let url = `${state.url}/logdata/find?logVariableId=${logVariableId}
             &granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`;
+
     let res = await fetch(url, header);
     let jsonLogData = await res.json();
 
-    commit("APPEND_LOG_DATA", {
-      logData: jsonLogData.data,
-      vesselIndex: ids.vesselIndex,
-      logIndex: ids.logIndex
-    });
+    switch (granularity)  {
+      case 'Day':
+        commit('APPEND_DAY_DATA',{
+          logData: jsonLogData.data,
+          vesselIndex: payload.vesselIndex,
+          logIndex: payload.logIndex
+        });
+        break;
+      case 'Hour':
+        commit('APPEND_HOUR_DATA',{
+          logData: jsonLogData.data,
+          vesselIndex: payload.vesselIndex,
+          logIndex: payload.logIndex
+        });
+        break;
+      case 'QuarterHour':
+        commit('APPEND_QUARTERHOUR_DATA',{
+          logData: jsonLogData.data,
+          vesselIndex: payload.vesselIndex,
+          logIndex: payload.logIndex
+        });
+      }
+
     commit("INCREMENT");
   },
 
@@ -143,4 +222,4 @@ export default {
     commit("SET_LOGGED_IN",payload.loggedIn);
     commit("SET_HEADER",payload.headerParams);
   }
-};
+}

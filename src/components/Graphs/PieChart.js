@@ -24,8 +24,8 @@ export default {
       labels.push(Object.keys(this.fuel)[i]);
     }
     for (let key in this.fuel) {
-      for (let key2 in this.fuel[key].data) {
-        array.push(this.fuel[key].data[key2]);
+      for (let key2 in this.fuel[key].dayData) {
+        array.push(this.fuel[key].dayData[key2]);
       }
       Summ = array.reduce((prev, cur) => prev + cur, 0);
       Summ = Summ.toFixed(2);
