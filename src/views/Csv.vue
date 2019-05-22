@@ -3,17 +3,33 @@
     <div class="ma-5">
       <v-container>
         <v-layout row wrap>
-          <v-flex md6>
-            <v-card dark tile flat color="error">
-
-            </v-card>
-          </v-flex>
-          <v-flex md6>
-            <v-card dark tile flat color="blue">
+          <v-flex md3>
+            <v-card dark tile flat color="red">
               <v-card-text>
-                #2
+                Vessel Input
               </v-card-text>
             </v-card>
+          </v-flex>
+          <v-flex md3>
+            <v-card dark tile flat color="blue">
+              <v-card-text>
+                Granularity
+              </v-card-text>
+            </v-card>
+          </v-flex>
+          <v-flex md3>
+            <v-card dark tile flat color="green">
+              <v-card-text>
+                timeFrom
+              </v-card-text>
+            </v-card>
+            <v-flex md3>
+              <v-card dark tile flat color="yellow">
+                <v-card-text>
+                  timeTo
+                </v-card-text>
+              </v-card>
+            </v-flex>
           </v-flex>
           <v-flex md12>
             <v-data-table
@@ -47,29 +63,61 @@
 <script>
     export default {
         mounted() {
-
+            this.getLogVariables(110);
         },
         methods: {
             getVessels() {
-
+                let fetchUrl = `${this.fetchUrl}vessels`
+                fetch(fetchUrl, this.fetchHeader)
+                    .then(res => res.json())
+                    .then(vessels => {
+                        this.vessels = vessels;
+                        console.log(this.vessels);
+                    })
             },
-            getLogVariables() {
-
+            getLogVariables(vesselId) {
+                let fetchUrl = `${this.fetchUrl}logvariables/find?vesselId=${vesselId}`;
+                fetch(fetchUrl, this.fetchHeader)
+                    .then(res => res.json())
+                    .then(logVariables => {
+                        this.logVariables = logVariables;
+                        console.log(this.logVariables);
+                    })
             },
-            getLogData() {
+            getLogDataCsv(logVariableId, isBatch) {
+                if (!!isBatch) {
+                    // TODO fix url with loop
+                    let fetchUrl = `${this.fetchUrl}logdata/BatchFind?logVariableIds=${logVariableId1},${logVariableId2}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`
+                    //Do batch call
+                } else {
 
+                }
             }
         },
         computed: {
-            vessels() {
-
+            fetchUrl() {
+                return this.$store.state.url;
             },
-
-            logData() {
-
-            },
-            logVariables() {
-                return [{
+            fetchHeader() {
+                return this.$store.state.header;
+            }
+        },
+        data() {
+            return {
+                selected: [],
+                headers: [
+                    {
+                        text: 'ID',
+                        align: 'left',
+                        value: 'id'
+                    },
+                    {text: 'Variable Name', value: 'name', align: 'right'},
+                    {text: 'logDataMinDate', value: 'logDataMinDate', align: 'right'},
+                    {text: 'logDataMaxDate', value: 'logDataMaxDate', align: 'right'},
+                ],
+                vessels:{},
+                logData:{},
+                logVariables:[{
                     id: 1,
                     name: "test",
                     logDataMinDate: 1,
@@ -81,22 +129,6 @@
                         logDataMinDate: 1,
                         logDataMaxDate: 3
                     }
-                ]
-            }
-        },
-        data() {
-            return {
-                url:"https://demo.kyma.no/api/v1/",
-                selected: [],
-                headers: [
-                    {
-                        text: 'ID',
-                        align: 'left',
-                        value: 'id'
-                    },
-                    {text: 'Variable Name', value: 'name', align: 'right'},
-                    {text: 'logDataMinDate', value: 'logDataMinDate', align: 'right'},
-                    {text: 'logDataMaxDate', value: 'logDataMaxDate', align: 'right'},
                 ]
             }
         }
