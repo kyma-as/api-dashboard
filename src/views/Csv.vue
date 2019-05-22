@@ -87,12 +87,7 @@
             getLogDataCsv(logVariableId, granularity, fromDate, toDate, isBatch) {
                 if (!!isBatch) {
                     // TODO fix url with loop, logVar as array
-                    let fetchUrl = `${this.fetchUrl}logdata/BatchFind?
-                    logVariableIds=${logVariableId[1]},${logVariableId[2]}
-                    &granularity=${granularity}
-                    &fromDate=${fromDate}
-                    &toDate=${toDate}
-                    &format=csv`
+                    let fetchUrl = `${this.fetchUrl}logdata/BatchFind?logVariableIds=${logVariableId[1]},${logVariableId[2]}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}&format=csv`;
 
                     fetch(fetchUrl, this.fetchHeader)
                         .then(res => res.blob())
@@ -108,7 +103,7 @@
                         })
 
                 } else {
-                    let fetchUrl = `${this.fetchUrl}logdata/Find?logVariableId=${logVariableId}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}&format=csv`
+                    let fetchUrl = `${this.fetchUrl}logdata/Find?logVariableId=${logVariableId}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}&format=csv`;
 
                     fetch(fetchUrl, this.fetchHeader)
                         .then(res => res.blob())
