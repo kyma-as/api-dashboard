@@ -1,11 +1,12 @@
 @startuml
-User->Login.vue:Input
+User->Login.vue:Input(e-mail,password)
 activate Login.vue
 
-Login.vue->AuthenticationUtil.js:Validate Input
-activate AuthenticationUtil.js
+Login.vue->Login.vue:Validate Input
 
 alt Successful Validation
+Login.vue->AuthenticationUtil.js
+activate AuthenticationUtil.js
 
  AuthenticationUtil.js->KymaServer:Authenticate Login
  activate KymaServer
