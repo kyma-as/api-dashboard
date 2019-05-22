@@ -63,7 +63,7 @@
 <script>
     export default {
         mounted() {
-            this.getLogVariables(110);
+            this.getLogDataCsv(9049,"Day","2016-08-01","2016-09-13",false);
         },
         methods: {
             getVessels() {
@@ -84,13 +84,44 @@
                         console.log(this.logVariables);
                     })
             },
-            getLogDataCsv(logVariableId, isBatch) {
+            getLogDataCsv(logVariableId, granularity, fromDate, toDate, isBatch) {
                 if (!!isBatch) {
-                    // TODO fix url with loop
-                    let fetchUrl = `${this.fetchUrl}logdata/BatchFind?logVariableIds=${logVariableId1},${logVariableId2}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}`
-                    //Do batch call
-                } else {
+                    // TODO fix url with loop, logVar as array
+                    let fetchUrl = `${this.fetchUrl}logdata/BatchFind?
+                    logVariableIds=${logVariableId[1]},${logVariableId[2]}
+                    &granularity=${granularity}
+                    &fromDate=${fromDate}
+                    &toDate=${toDate}
+                    &format=csv`
 
+                    fetch(fetchUrl, this.fetchHeader)
+                        .then(res => res.blob())
+                        .then(logData => {
+                            // For testing to read csv input
+                            console.log(logData);
+                            var myReader = new FileReader();
+                            myReader.onload = function(event){
+                                console.log(JSON.stringify(myReader.result));
+                            };
+                            myReader.readAsText(logData);
+                            // For testing to read csv input
+                        })
+
+                } else {
+                    let fetchUrl = `${this.fetchUrl}logdata/Find?logVariableId=${logVariableId}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}&format=csv`
+
+                    fetch(fetchUrl, this.fetchHeader)
+                        .then(res => res.blob())
+                        .then(logData => {
+                            // For testing to read csv input
+                            console.log(logData);
+                            var myReader = new FileReader();
+                            myReader.onload = function(event){
+                                console.log(JSON.stringify(myReader.result));
+                            };
+                            myReader.readAsText(logData);
+                            // For testing to read csv input
+                        })
                 }
             }
         },
@@ -117,19 +148,7 @@
                 ],
                 vessels:{},
                 logData:{},
-                logVariables:[{
-                    id: 1,
-                    name: "test",
-                    logDataMinDate: 1,
-                    logDataMaxDate: 2
-                },
-                    {
-                        id: 2,
-                        name: "tost",
-                        logDataMinDate: 1,
-                        logDataMaxDate: 3
-                    }
-                ]
+                logVariables:[{}]
             }
         }
     }
