@@ -90,6 +90,253 @@ export default {
         return "No matching vessel id";
     }
   },
+  getEmission: (state) => (vesselid, from, to, gran) => {
+    const vessel = state.vessels.find(vessel => vessel.id === vesselid);
+    switch (vesselid) {
+      case 110:
+        {
+          let co2Array = vessel.logVariables.find(x => x.id === 9049);
+          let so2Array = vessel.logVariables.find(x => x.id === 9051);
+          let start = false;
+
+          let co2Data = {};
+          let so2Data = {};
+
+          let keyArray;
+          switch (gran) {
+            case state.granularities.day:
+              keyArray = co2Array.dayData;
+              break;
+            case state.granularities.hour:
+              keyArray = co2Array.hourData;
+              break;
+            case state.granularities.quarterhour:
+              keyArray = co2Array.quarterhourData;
+              break;
+          }
+          for (let key in keyArray) {
+            if (key == from) {
+              start = true;
+            }
+            if (key == to) {
+              start = false;
+            }
+            if (start) {
+              switch (gran) {
+                case state.granularities.day:
+                  co2Data[key] = co2Array.dayData[key];
+                  so2Data[key] = so2Array.dayData[key];
+                  break;
+                case state.granularities.hour:
+                  co2Data[key] = co2Array.hourData[key];
+                  so2Data[key] = so2Array.hourData[key];
+                  break;
+                case state.granularities.quarterhour:
+                  co2Data[key] = co2Array.quarterhourData[key];
+                  so2Data[key] = so2Array.quarterhourData[key];
+                  break;
+              }
+            }
+          }
+          return {
+            co2: {
+              id: co2Array.id,
+              name: co2Array.name,
+              unit: co2Array.unit,
+              data: co2Data
+            },
+            so2: {
+              id: so2Array.id,
+              name: so2Array.name,
+              unit: so2Array.unit,
+              data: so2Data
+            }
+          };
+        }
+      case 121:
+        {
+          let co2Array = vessel.logVariables.find(x => x.id === 10415);
+          let so2Array = vessel.logVariables.find(x => x.id === 10417);
+          let start = false;
+
+          let co2Data = {};
+          let so2Data = {};
+
+          let keyArray;
+          switch (gran) {
+            case state.granularities.day:
+              keyArray = co2Array.dayData;
+              break;
+            case state.granularities.hour:
+              keyArray = co2Array.hourData;
+              break;
+            case state.granularities.quarterhour:
+              keyArray = co2Array.quarterhourData;
+              break;
+          }
+          for (let key in keyArray) {
+            if (key == from) {
+              start = true;
+            }
+            if (key == to) {
+              start = false;
+            }
+            if (start) {
+              switch (gran) {
+                case state.granularities.day:
+                  co2Data[key] = co2Array.dayData[key];
+                  so2Data[key] = so2Array.dayData[key];
+                  break;
+                case state.granularities.hour:
+                  co2Data[key] = co2Array.hourData[key];
+                  so2Data[key] = so2Array.hourData[key];
+                  break;
+                case state.granularities.quarterhour:
+                  co2Data[key] = co2Array.quarterhourData[key];
+                  so2Data[key] = so2Array.quarterhourData[key];
+                  break;
+              }
+            }
+          }
+          return {
+            co2: {
+              id: co2Array.id,
+              name: co2Array.name,
+              unit: co2Array.unit,
+              data: co2Data
+            },
+            so2: {
+              id: so2Array.id,
+              name: so2Array.name,
+              unit: so2Array.unit,
+              data: so2Data
+            }
+          };
+        }
+      case 133:
+        {
+          let co2Array = vessel.logVariables.find(x => x.id === 12125);
+          let so2Array = vessel.logVariables.find(x => x.id === 12127);
+          let start = false;
+
+          let co2Data = {};
+          let so2Data = {};
+
+          let keyArray;
+          switch (gran) {
+            case state.granularities.day:
+              keyArray = co2Array.dayData;
+              break;
+            case state.granularities.hour:
+              keyArray = co2Array.hourData;
+              break;
+            case state.granularities.quarterhour:
+              keyArray = co2Array.quarterhourData;
+              break;
+          }
+          for (let key in keyArray) {
+            if (key == from) {
+              start = true;
+            }
+            if (key == to) {
+              start = false;
+            }
+            if (start) {
+              switch (gran) {
+                case state.granularities.day:
+                  co2Data[key] = co2Array.dayData[key];
+                  so2Data[key] = so2Array.dayData[key];
+                  break;
+                case state.granularities.hour:
+                  co2Data[key] = co2Array.hourData[key];
+                  so2Data[key] = so2Array.hourData[key];
+                  break;
+                case state.granularities.quarterhour:
+                  co2Data[key] = co2Array.quarterhourData[key];
+                  so2Data[key] = so2Array.quarterhourData[key];
+                  break;
+              }
+            }
+          }
+          return {
+            co2: {
+              id: co2Array.id,
+              name: co2Array.name,
+              unit: co2Array.unit,
+              data: co2Data
+            },
+            so2: {
+              id: so2Array.id,
+              name: so2Array.name,
+              unit: so2Array.unit,
+              data: so2Data
+            }
+          };
+        }
+      case 123:
+        {
+          let co2Array = vessel.logVariables.find(x => x.id === 10730);
+          let so2Array = vessel.logVariables.find(x => x.id === 10732);
+          let start = false;
+
+          let co2Data = {};
+          let so2Data = {};
+
+          let keyArray;
+          switch (gran) {
+            case state.granularities.day:
+              keyArray = co2Array.dayData;
+              break;
+            case state.granularities.hour:
+              keyArray = co2Array.hourData;
+              break;
+            case state.granularities.quarterhour:
+              keyArray = co2Array.quarterhourData;
+              break;
+          }
+          for (let key in keyArray) {
+            if (key == from) {
+              start = true;
+            }
+            if (key == to) {
+              start = false;
+            }
+            if (start) {
+              switch (gran) {
+                case state.granularities.day:
+                  co2Data[key] = co2Array.dayData[key];
+                  so2Data[key] = so2Array.dayData[key];
+                  break;
+                case state.granularities.hour:
+                  co2Data[key] = co2Array.hourData[key];
+                  so2Data[key] = so2Array.hourData[key];
+                  break;
+                case state.granularities.quarterhour:
+                  co2Data[key] = co2Array.quarterhourData[key];
+                  so2Data[key] = so2Array.quarterhourData[key];
+                  break;
+              }
+            }
+          }
+          return {
+            co2: {
+              id: co2Array.id,
+              name: co2Array.name,
+              unit: co2Array.unit,
+              data: co2Data
+            },
+            so2: {
+              id: so2Array.id,
+              name: so2Array.name,
+              unit: so2Array.unit,
+              data: so2Data
+            }
+          };
+        }
+
+
+    }
+  },
   getSpeed: (state) => (vesselid, from, to, gran) => {
     const vessel = state.vessels.find(vessel => vessel.id === vesselid);
     switch (vesselid) {
@@ -380,25 +627,25 @@ export default {
                   boilerfuelData[key] = boilerfuelArray.dayData[key];
                   gcuData[key] = gcuArray.dayData[key];
                   ge1Data[key] = ge1Array.dayData[key];
-                  ge2Data[key] = ge1Array.dayData[key];
-                  ge3Data[key] = ge1Array.dayData[key];
-                  ge4Data[key] = ge1Array.dayData[key];
+                  ge2Data[key] = ge2Array.dayData[key];
+                  ge3Data[key] = ge3Array.dayData[key];
+                  ge4Data[key] = ge4Array.dayData[key];
                   break;
                 case state.granularities.hour:
                   boilerfuelData[key] = boilerfuelArray.hourData[key];
                   gcuData[key] = gcuArray.hourData[key];
                   ge1Data[key] = ge1Array.hourData[key];
-                  ge2Data[key] = ge1Array.hourData[key];
-                  ge3Data[key] = ge1Array.hourData[key];
-                  ge4Data[key] = ge1Array.hourData[key];
+                  ge2Data[key] = ge2Array.hourData[key];
+                  ge3Data[key] = ge3Array.hourData[key];
+                  ge4Data[key] = ge4Array.hourData[key];
                   break;
                 case state.granularities.quarterhour:
                   boilerfuelData[key] = boilerfuelArray.quarterhourData[key];
                   gcuData[key] = gcuArray.quarterhourData[key];
                   ge1Data[key] = ge1Array.quarterhourData[key];
-                  ge2Data[key] = ge1Array.quarterhourData[key];
-                  ge3Data[key] = ge1Array.quarterhourData[key];
-                  ge4Data[key] = ge1Array.quarterhourData[key];
+                  ge2Data[key] = ge2Array.quarterhourData[key];
+                  ge3Data[key] = ge3Array.quarterhourData[key];
+                  ge4Data[key] = ge4Array.quarterhourData[key];
                   break;
               }
             }
@@ -474,15 +721,15 @@ export default {
             if (start) {
               switch (gran) {
                 case state.granularities.day:
-                  boilerfo[key] = boilerfoArray.dayData[key];
+                  boilerfoData[key] = boilerfoArray.dayData[key];
                   boilergasData[key] = boilergasArray.dayData[key];
                   break;
                 case state.granularities.hour:
-                  boilerfo[key] = boilerfoArray.hourData[key];
+                  boilerfoData[key] = boilerfoArray.hourData[key];
                   boilergasData[key] = boilergasArray.hourData[key];
                   break;
                 case state.granularities.quarterhour:
-                  boilerfo[key] = boilerfoArray.quarterhourData[key];
+                  boilerfoData[key] = boilerfoArray.quarterhourData[key];
                   boilergasData[key] = boilergasArray.quarterhourData[key];
                   break;
               }
@@ -490,7 +737,7 @@ export default {
           }
           return {
             boilerfo: {
-              id: boilefoArray.id,
+              id: boilerfoArray.id,
               name: boilerfoArray.name,
               unit: boilerfoArray.unit,
               data: boilerfoData
@@ -534,15 +781,15 @@ export default {
             if (start) {
               switch (gran) {
                 case state.granularities.day:
-                  boilerfo[key] = boilerfoArray.dayData[key];
+                  boilerfoData[key] = boilerfoArray.dayData[key];
                   boilergasData[key] = boilergasArray.dayData[key];
                   break;
                 case state.granularities.hour:
-                  boilerfo[key] = boilerfoArray.hourData[key];
+                  boilerfoData[key] = boilerfoArray.hourData[key];
                   boilergasData[key] = boilergasArray.hourData[key];
                   break;
                 case state.granularities.quarterhour:
-                  boilerfo[key] = boilerfoArray.quarterhourData[key];
+                  boilerfoData[key] = boilerfoArray.quarterhourData[key];
                   boilergasData[key] = boilergasArray.quarterhourData[key];
                   break;
               }
@@ -550,7 +797,7 @@ export default {
           }
           return {
             boilerfo: {
-              id: boilefoArray.id,
+              id: boilerfoArray.id,
               name: boilerfoArray.name,
               unit: boilerfoArray.unit,
               data: boilerfoData
@@ -594,15 +841,15 @@ export default {
             if (start) {
               switch (gran) {
                 case state.granularities.day:
-                  boilerfo[key] = boilerfoArray.dayData[key];
+                  boilerfoData[key] = boilerfoArray.dayData[key];
                   boilergasData[key] = boilergasArray.dayData[key];
                   break;
                 case state.granularities.hour:
-                  boilerfo[key] = boilerfoArray.hourData[key];
+                  boilerfoData[key] = boilerfoArray.hourData[key];
                   boilergasData[key] = boilergasArray.hourData[key];
                   break;
                 case state.granularities.quarterhour:
-                  boilerfo[key] = boilerfoArray.quarterhourData[key];
+                  boilerfoData[key] = boilerfoArray.quarterhourData[key];
                   boilergasData[key] = boilergasArray.quarterhourData[key];
                   break;
               }
@@ -610,7 +857,7 @@ export default {
           }
           return {
             boilerfo: {
-              id: boilefoArray.id,
+              id: boilerfoArray.id,
               name: boilerfoArray.name,
               unit: boilerfoArray.unit,
               data: boilerfoData
