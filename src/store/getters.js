@@ -88,7 +88,7 @@ export default {
         return "No matching vessel id";
     }
   },
-  getSpeedDay: (state) => (vesselid, from, to) => {
+  getSpeedDay: (state) => (vesselid, from, to, gran) => {
     const vessel = state.vessels.find(vessel => vessel.id === vesselid);
     let f = -1;
     let t = -1;
@@ -100,7 +100,20 @@ export default {
           let start = false;
           let gpsData = {};
           let logData = {};
-          for (let key in gpsArray.dayData) {
+
+          let dataArray;
+          switch(gran) {
+            case state.granularities.day:
+              dataArray = gpsArray.dayData;
+              break;
+            case state.granularities.hour:
+              dataArray = gpsArray.hourData;
+              break;
+            case state.granularities.quarterhour:
+              dataArray = gpsArray.quarterhourData;
+              break;
+          }
+          for (let key in dataArray) {
             if (key == from) {
               start = true;
             }
@@ -108,8 +121,20 @@ export default {
               start = false;
             }
             if(start) {
-              gpsData[key] = gpsArray.dayData[key];
-              logData[key] = logArray.dayData[key];
+              switch(gran) {
+                case state.granularities.day:
+                  gpsData[key] = gpsArray.dayData[key];
+                  logData[key] = logArray.dayData[key];
+                  break;
+                case state.granularities.hour:
+                  gpsData[key] = gpsArray.hourData[key];
+                  logData[key] = logArray.hourData[key];
+                  break;
+                case state.granularities.quarterhour:
+                  gpsData[key] = gpsArray.quarterhourData[key];
+                  logData[key] = logArray.quarterhourData[key];
+                  break;
+              }
             }
           }
           return {
@@ -134,7 +159,20 @@ export default {
           let start = false;
           let gpsData = {};
           let logData = {};
-          for (let key in gpsArray.dayData) {
+
+          let dataArray;
+          switch(gran) {
+            case state.granularities.day:
+              dataArray = gpsArray.dayData;
+              break;
+            case state.granularities.hour:
+              dataArray = gpsArray.hourData;
+              break;
+            case state.granularities.quarterhour:
+              dataArray = gpsArray.quarterhourData;
+              break;
+          }
+          for (let key in dataArray) {
             if (key == from) {
               start = true;
             }
@@ -142,8 +180,20 @@ export default {
               start = false;
             }
             if(start) {
-              gpsData[key] = gpsArray.dayData[key];
-              logData[key] = logArray.dayData[key];
+              switch(gran) {
+                case state.granularities.day:
+                  gpsData[key] = gpsArray.dayData[key];
+                  logData[key] = logArray.dayData[key];
+                  break;
+                case state.granularities.hour:
+                  gpsData[key] = gpsArray.hourData[key];
+                  logData[key] = logArray.hourData[key];
+                  break;
+                case state.granularities.quarterhour:
+                  gpsData[key] = gpsArray.quarterhourData[key];
+                  logData[key] = logArray.quarterhourData[key];
+                  break;
+              }
             }
           }
           return {
@@ -168,7 +218,20 @@ export default {
           let start = false;
           let gpsData = {};
           let logData = {};
-          for (let key in gpsArray.dayData) {
+
+          let dataArray;
+          switch(gran) {
+            case state.granularities.day:
+              dataArray = gpsArray.dayData;
+              break;
+            case state.granularities.hour:
+              dataArray = gpsArray.hourData;
+              break;
+            case state.granularities.quarterhour:
+              dataArray = gpsArray.quarterhourData;
+              break;
+          }
+          for (let key in dataArray) {
             if (key == from) {
               start = true;
             }
@@ -176,8 +239,20 @@ export default {
               start = false;
             }
             if(start) {
-              gpsData[key] = gpsArray.dayData[key];
-              logData[key] = logArray.dayData[key];
+              switch(gran) {
+                case state.granularities.day:
+                  gpsData[key] = gpsArray.dayData[key];
+                  logData[key] = logArray.dayData[key];
+                  break;
+                case state.granularities.hour:
+                  gpsData[key] = gpsArray.hourData[key];
+                  logData[key] = logArray.hourData[key];
+                  break;
+                case state.granularities.quarterhour:
+                  gpsData[key] = gpsArray.quarterhourData[key];
+                  logData[key] = logArray.quarterhourData[key];
+                  break;
+              }
             }
           }
           return {
@@ -202,7 +277,20 @@ export default {
           let start = false;
           let gpsData = {};
           let logData = {};
-          for (let key in gpsArray.dayData) {
+
+          let dataArray;
+          switch(gran) {
+            case state.granularities.day:
+              dataArray = gpsArray.dayData;
+              break;
+            case state.granularities.hour:
+              dataArray = gpsArray.hourData;
+              break;
+            case state.granularities.quarterhour:
+              dataArray = gpsArray.quarterhourData;
+              break;
+          }
+          for (let key in dataArray) {
             if (key == from) {
               start = true;
             }
@@ -210,8 +298,20 @@ export default {
               start = false;
             }
             if(start) {
-              gpsData[key] = gpsArray.dayData[key];
-              logData[key] = logArray.dayData[key];
+              switch(gran) {
+                case state.granularities.day:
+                  gpsData[key] = gpsArray.dayData[key];
+                  logData[key] = logArray.dayData[key];
+                  break;
+                case state.granularities.hour:
+                  gpsData[key] = gpsArray.hourData[key];
+                  logData[key] = logArray.hourData[key];
+                  break;
+                case state.granularities.quarterhour:
+                  gpsData[key] = gpsArray.quarterhourData[key];
+                  logData[key] = logArray.quarterhourData[key];
+                  break;
+              }
             }
           }
           return {

@@ -24,6 +24,11 @@ export default {
   dateToday: "",
   fetchedVessels: false,
   // TODO: Replace this list as a loadable json file
+  granularities: {
+    day: "Day",
+    hour: "Hour",
+    quarterhour: "QuarterHour"
+  },
   default_vars: [{
       "id": 110,
       "variables": {
