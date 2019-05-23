@@ -99,17 +99,25 @@ ipcMain.on('write-csv',(event,csv)=>{
 
 });
 
+
 /**
  * Should return the default system path
  */
 function getPath(specifiedPath){
+  const path = require('path');
   // https://shapeshed.com/writing-cross-platform-node/#home-directories
   // Path for different systems
   // *nix = process.env.HOME Unix /home, Mac /Users
   // Windows = process.env.HOMEPATH Windows C:\\Users
-  // default* + join(documents,kymaApiData) /downloads/kymaApiData
+  // path.join(homeDir,downloads) /downloads/data.csv
 
   let homeDir = (process.platform === 'win32') ? process.env.HOMEPATH : process.env.HOME;
+  let url = "";
+  if(!!specifiedPath){
+    url = path.join(homeDir,specifiedPath)
+  } else{
+    url = path.join(homeDir,"downloads")
+  }
   // Maybe if(!!specifiedPath) join specified path?
-  return homeDir;
+  return url;
 }
