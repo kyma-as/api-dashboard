@@ -111,49 +111,52 @@
                     })
             },
 
-            /** Gets the data specified with parameters set by
-             *  user initialises a event to write the data
-             *  to CSV file in Main Thread
-             * @param logVariableId
+            /** Fetches data for 10 variables per fetch.
+             *  Data is returned as a blob, and all blobs are concatenated
+             *  into one blob and sent as payload to 'sendCsvEventToMain'
+             * @param logVariableIds list of variable ids
              * @param granularity Day,Hour,QuarterHour,Minute,Raw(15sec)
              * @param fromDate YYYY-MM-DD
              * @param toDate YYYY-MM-DD
-             * @param isBatch can be ignored if one really don't want to do a batch call
              */
-            getLogDataCsv(logVariableId, granularity, fromDate, toDate, isBatch) {
-                if (!!isBatch) {
-                    // TODO fix url with loop, logVar as array
-                    let fetchUrl = `${this.fetchUrl}logdata/BatchFind?logVariableIds=${logVariableId[1]},${logVariableId[2]}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}&format=csv`;
+            getLogDataCsv(logVariableIds, granularity, fromDate, toDate) {
+              if(logVariableIds.length > 0) {
+                let csvArray;
+                let idParameters = "";
+                let idArray;
+                let fetchUrl = "";
 
-                    fetch(fetchUrl, this.fetchHeader)
-                        .then(res => res.blob())
-                        .then(logData => {
-                            // TODO For testing to read csv input
-                            console.log(logData);
-                            var myReader = new FileReader();
-                            myReader.onload = function(event){
-                                console.log(JSON.stringify(myReader.result));
-                            };
-                            myReader.readAsText(logData);
-                            // TODO For testing to read csv input
-                        })
-
-                } else {
-                    let fetchUrl = `${this.fetchUrl}logdata/Find?logVariableId=${logVariableId}&granularity=${granularity}&fromDate=${fromDate}&toDate=${toDate}&format=csv`;
-
-                    fetch(fetchUrl, this.fetchHeader)
-                        .then(res => res.blob())
-                        .then(logData => {
-                            // TODO For testing to read csv input
-                            console.log(logData);
-                            var myReader = new FileReader();
-                            myReader.onload = function(event){
-                                console.log(JSON.stringify(myReader.result));
-                            };
-                            myReader.readAsText(logData);
-                            // TODO For testing to read csv input
-                        })
+                //creates strings of id parameters for each fetch url
+                for (int i = 0; i < logVariableIds.length; i++) {
+                  idParameters += logVariableIds[i];
+                  //10 variables max per fetch url
+                  if(i % 10 == 9) {
+                    idArray.push(idParameters);
+                    idParameters = "";
+                  } else {
+                    idParameters += ",";
+                  }
                 }
+
+                //fetches each response as blobs and build them into one blob
+                //which is sent
+                let blobBuilder;
+                for(int i = 0; i < idArray.length; i++) {
+                  fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
+                  + idArray[i] + "&granularity=" + granularity + "&fromDate="
+                  + fromDate + "&toDate=" + toDate + "&format=csv";
+
+                  fetch(fetchUrl, this.fetchHeader)
+                      .then(res => res.blob())
+                      .then(blobData => {
+                        blobBuilder.append(blobData);
+                      });
+
+                }
+
+                let finalBlob = new Blob(blobBuilder, { type: "text/plain" });
+                this.sendCsvEventToMain(finalBlob);
+              }
             }
         },
         computed: {
