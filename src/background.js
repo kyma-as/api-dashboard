@@ -90,9 +90,29 @@ if (isDevelopment) {
  */
 const {ipcMain} = require('electron');
 ipcMain.on('write-csv',(event,csv)=>{
-  //Write csv to file method
+
+  let homeDir = getPath();
+  // Write csv to file method
   console.log(csv);
-  //Then event.reply('write-csv-reply',reply)
-  //Reply should be path of file and if successful
+  // Then event.reply('write-csv-reply',reply)
+  // Reply should be path of file and if successful
 
 });
+
+/**
+ * Should return the default system path
+ */
+function getPath(specifiedPath){
+  // https://shapeshed.com/writing-cross-platform-node/#home-directories
+  // Path for different systems
+  // *nix = process.env.HOME
+  // Windows = process.env.HOMEPATH
+  // Unix /home
+  // Mac /Users
+  // Windows C:\\Users
+  // default* + join(documents,kymaApiData) /documents/kymaApiData
+
+  let homeDir = (process.platform === 'win32') ? process.env.HOMEPATH : process.env.HOME;
+  // Maybe if(!!specifiedPath) join specified path?
+  return homeDir;
+}
