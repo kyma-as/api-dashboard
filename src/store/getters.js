@@ -90,10 +90,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -150,10 +150,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -210,10 +210,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -276,10 +276,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -335,10 +335,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -394,10 +394,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -453,10 +453,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -530,10 +530,10 @@ export default {
           }
 
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -627,10 +627,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -687,10 +687,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
@@ -747,10 +747,10 @@ export default {
               break;
           }
           for (let key in keyArray) {
-            if (key == from) {
+            if (key.substring(0,10) == from.substring(0,10)) {
               start = true;
             }
-            if (key == to) {
+            if (key.substring(0,10) == to.substring(0,10)) {
               start = false;
             }
             if (start) {
