@@ -11,10 +11,8 @@ export default {
     };
   },
   mounted() {
-    let fromDate = "2018-01-01T00:00:00";
-    let toDate = "2018-01-14T00:00:00";
-
-    let week = [];
+    let fromDate = "2018-01-13T00:00:00";
+    let toDate = "2018-01-16T00:00:00";
     let day = [];
     let elementer = [];
     let data1 = [];
@@ -45,8 +43,17 @@ export default {
       "November",
       "December"
     ];
+    let days = [
+      "Monday",
+      "Tuesday",
+      "Wednsday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ];
     let month = [];
-    let monthbool = false;
+    let bool = false;
     this.fuel = this.getFuel(
       this.$route.params.vesselid,
       fromDate,
@@ -58,16 +65,45 @@ export default {
     if (fromDate.substring(0, 4) == toDate.substring(0, 4)) {
       for (let k = 0; k < 13; k++) {
         if (0 + k == fromDate.substring(5, 7)) {
-          monthbool = true;
+          bool = true;
         }
-        if (monthbool) {
+        if (bool) {
           month.push(months[k - 1]);
         }
         if (0 + k == toDate.substring(5, 7)) {
-          monthbool = false;
+          bool = false;
         }
       }
       labels = month;
+    }
+
+    if (fromDate.substring(0, 4) == toDate.substring(0, 4)) {
+      if (fromDate.substring(5, 7) == toDate.substring(5, 7)) {
+        for (let k = 0; k < 10; k++) {
+          if ("0" + k == fromDate.substring(8, 10)) {
+            bool = true;
+          }
+          if (bool) {
+            day.push("0"+k);
+          }
+          if ("0" + k == toDate.substring(8, 10)) {
+            bool = false;
+          }
+        }
+        for (let k = 10; k < 32; k++) {
+          if ( k == fromDate.substring(8, 10)) {
+            bool = true;
+          }
+          if (bool) {
+            day.push(k);
+          }
+          if (0 + k == toDate.substring(8, 10)) {
+            bool = false;
+          }
+        }
+      }
+      console.log(day)
+      labels = day
     }
 
     if (labels == kvartal) {
@@ -92,22 +128,22 @@ export default {
           Summ = array.reduce((prev, cur) => prev + cur, 0);
           Summ = Summ.toFixed(2);
 
-          if (counter == 0 || counter == 6 || counter == 12 || counter == 18) {
+          if (counter == 0) {
             data1.push(Summ);
           }
-          if (counter == 1 || counter == 7 || counter == 13 || counter == 19) {
+          if (counter == 1) {
             data2.push(Summ);
           }
-          if (counter == 2 || counter == 8 || counter == 14 || counter == 20) {
+          if (counter == 2) {
             data3.push(Summ);
           }
-          if (counter == 3 || counter == 9 || counter == 15 || counter == 21) {
+          if (counter == 3) {
             data4.push(Summ);
           }
-          if (counter == 4 || counter == 10 || counter == 16 || counter == 22) {
+          if (counter == 4) {
             data5.push(Summ);
           }
-          if (counter == 5 || counter == 11 || counter == 17 || counter == 23) {
+          if (counter == 5) {
             data6.push(Summ);
           }
           counter++;
@@ -115,69 +151,7 @@ export default {
           array = [];
         }
       }
-
-      if (elementer.length > 2) {
-        this.renderChart(
-          {
-            labels: labels,
-            datasets: [
-              {
-                label: Object.keys(this.fuel)[0],
-                backgroundColor: "blue",
-                data: data1
-              },
-              {
-                label: Object.keys(this.fuel)[1],
-                backgroundColor: "red",
-                data: data2
-              },
-              {
-                label: Object.keys(this.fuel)[2],
-                backgroundColor: "green",
-                data: data3
-              },
-              {
-                label: Object.keys(this.fuel)[3],
-                backgroundColor: "yellow",
-                data: data4
-              },
-              {
-                label: Object.keys(this.fuel)[4],
-                backgroundColor: "orange",
-                data: data5
-              },
-              {
-                label: Object.keys(this.fuel)[5],
-                backgroundColor: "purple",
-                data: data6
-              }
-            ]
-          },
-          { responsive: true, maintainAspectRatio: false }
-        );
-      }
-      if (elementer.length == 2) {
-        this.renderChart(
-          {
-            labels: labels,
-            datasets: [
-              {
-                label: Object.keys(this.fuel)[0],
-                backgroundColor: "blue",
-                data: data1
-              },
-              {
-                label: Object.keys(this.fuel)[1],
-                backgroundColor: "red",
-                data: data2
-              }
-            ]
-          },
-          { responsive: true, maintainAspectRatio: false }
-        );
-      }
     }
-
     if (labels == month) {
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
@@ -199,89 +173,135 @@ export default {
           Summ = array.reduce((prev, cur) => prev + cur, 0);
           Summ = Summ.toFixed(2);
           array = [];
-          if (counter == 0 || counter == 6 || counter == 12 || counter == 18) {
+
+          if (counter == 0) {
             data1.push(Summ);
           }
-          if (counter == 1 || counter == 7 || counter == 13 || counter == 19) {
+          if (counter == 1) {
             data2.push(Summ);
           }
-          if (counter == 2 || counter == 8 || counter == 14 || counter == 20) {
+          if (counter == 2) {
             data3.push(Summ);
           }
-          if (counter == 3 || counter == 9 || counter == 15 || counter == 21) {
+          if (counter == 3) {
             data4.push(Summ);
           }
-          if (counter == 4 || counter == 10 || counter == 16 || counter == 22) {
+          if (counter == 4) {
             data5.push(Summ);
           }
-          if (counter == 5 || counter == 11 || counter == 17 || counter == 23) {
+          if (counter == 5) {
+            data6.push(Summ);
+          }
+
+          counter++;
+          Summ = 0;
+        }
+      }
+    }
+    if (labels == day) {
+      for (let p = 0; p < Object.keys(this.fuel).length; p++) {
+        elementer.push(Object.keys(this.fuel)[i]);
+      }
+      for (i = 0; i < labels.length; i++) {
+        counter = 0;
+        hjelpeslicer1 = hjelpeslicer2;
+        for (let key in this.fuel) {
+          for (let key2 in this.fuel[key].data) {
+            array.push(this.fuel[key].data[key2]);
+          }
+
+          hjelpeslicer2 = ((i + 1) * array.length) / labels.length;
+          array = array.slice(
+            hjelpeslicer1,
+            ((i + 1) * array.length) / labels.length
+          );
+
+          Summ = array.reduce((prev, cur) => prev + cur, 0);
+          Summ = Summ.toFixed(2);
+          array = [];
+          if (counter == 0) {
+            data1.push(Summ);
+          }
+          if (counter == 1) {
+            data2.push(Summ);
+          }
+          if (counter == 2) {
+            data3.push(Summ);
+          }
+          if (counter == 3) {
+            data4.push(Summ);
+          }
+          if (counter == 4) {
+            data5.push(Summ);
+          }
+          if (counter == 5) {
             data6.push(Summ);
           }
           counter++;
           Summ = 0;
         }
       }
+    }
 
-      if (elementer.length > 2) {
-        this.renderChart(
-          {
-            labels: labels,
-            datasets: [
-              {
-                label: Object.keys(this.fuel)[0],
-                backgroundColor: "blue",
-                data: data1
-              },
-              {
-                label: Object.keys(this.fuel)[1],
-                backgroundColor: "red",
-                data: data2
-              },
-              {
-                label: Object.keys(this.fuel)[2],
-                backgroundColor: "green",
-                data: data3
-              },
-              {
-                label: Object.keys(this.fuel)[3],
-                backgroundColor: "yellow",
-                data: data4
-              },
-              {
-                label: Object.keys(this.fuel)[4],
-                backgroundColor: "orange",
-                data: data5
-              },
-              {
-                label: Object.keys(this.fuel)[5],
-                backgroundColor: "purple",
-                data: data6
-              }
-            ]
-          },
-          { responsive: true, maintainAspectRatio: false }
-        );
-      }
-      if (elementer.length == 2) {
-        this.renderChart(
-          {
-            labels: labels,
-            datasets: [
-              {
-                label: Object.keys(this.fuel)[0],
-                backgroundColor: "blue",
-                data: data1
-              },
-              {
-                label: Object.keys(this.fuel)[1],
-                backgroundColor: "red",
-                data: data2
-              }
-            ]
-          },
-          { responsive: true, maintainAspectRatio: false }
-        );
-      }
+    if (elementer.length > 2) {
+      this.renderChart(
+        {
+          labels: labels,
+          datasets: [
+            {
+              label: Object.keys(this.fuel)[0],
+              backgroundColor: "blue",
+              data: data1
+            },
+            {
+              label: Object.keys(this.fuel)[1],
+              backgroundColor: "red",
+              data: data2
+            },
+            {
+              label: Object.keys(this.fuel)[2],
+              backgroundColor: "green",
+              data: data3
+            },
+            {
+              label: Object.keys(this.fuel)[3],
+              backgroundColor: "yellow",
+              data: data4
+            },
+            {
+              label: Object.keys(this.fuel)[4],
+              backgroundColor: "orange",
+              data: data5
+            },
+            {
+              label: Object.keys(this.fuel)[5],
+              backgroundColor: "purple",
+              data: data6
+            }
+          ]
+        },
+        { responsive: true, maintainAspectRatio: false }
+      );
+    }
+    if (elementer.length == 2) {
+      this.renderChart(
+        {
+          labels: labels,
+          datasets: [
+            {
+              label: Object.keys(this.fuel)[0],
+              backgroundColor: "blue",
+              data: data1
+            },
+            {
+              label: Object.keys(this.fuel)[1],
+              backgroundColor: "red",
+              data: data2
+            }
+          ]
+        },
+        { responsive: true, maintainAspectRatio: false }
+      );
     }
   }
 };
