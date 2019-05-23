@@ -63,7 +63,6 @@
                     // Authenticate against kyma api
                     console.log("Authenticating with server...")
                     if (await authenticateLogin(username, password)) {
-                      // TODO: move fetchVessels action here?
                         this.loading = false;
                         console.log("Authenticated!")
                         // Set state authenticated

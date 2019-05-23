@@ -23,7 +23,7 @@ export default {
   url: "https://demo.kyma.no/api/v1/",
   dateToday: "",
   fetchedVessels: false,
-  // TODO: Replace this list as a loadable json file
+  // TODO: Replace this list as a loadable json/xml file
   default_vars: [{
       "id": 110,
       "variables": {

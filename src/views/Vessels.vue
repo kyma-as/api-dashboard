@@ -21,7 +21,7 @@
     export default {
         name: "vessels",
         components: {
-            NavDrawer, 
+            NavDrawer,
             VesselCard
         },
 
@@ -29,10 +29,6 @@
             return {
               vessel: {}
             }
-        },
-        mounted() {
-            // TODO: call whatever fetch method in whatever js class whatever
-            
         },
         computed: {
           ...mapState([
