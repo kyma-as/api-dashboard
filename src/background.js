@@ -105,11 +105,8 @@ ipcMain.on('write-csv',(event,csv)=>{
 function getPath(specifiedPath){
   // https://shapeshed.com/writing-cross-platform-node/#home-directories
   // Path for different systems
-  // *nix = process.env.HOME
-  // Windows = process.env.HOMEPATH
-  // Unix /home
-  // Mac /Users
-  // Windows C:\\Users
+  // *nix = process.env.HOME Unix /home, Mac /Users
+  // Windows = process.env.HOMEPATH Windows C:\\Users
   // default* + join(documents,kymaApiData) /documents/kymaApiData
 
   let homeDir = (process.platform === 'win32') ? process.env.HOMEPATH : process.env.HOME;
