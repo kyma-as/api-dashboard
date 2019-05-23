@@ -83,10 +83,16 @@ if (isDevelopment) {
   }
 }
 
-// Write CSV File
+/** An event listener
+ *  takes a event from CSV.vue
+ *  and creates a csv file
+ *  at a default path
+ */
 const {ipcMain} = require('electron');
 ipcMain.on('write-csv',(event,csv)=>{
   //Write csv to file method
   console.log(csv);
   //Then event.reply('write-csv-reply',reply)
+  //Reply should be path of file and if successful
+
 });

@@ -64,12 +64,28 @@
   const {ipcRenderer}=require('electron');
     export default {
         mounted() {
+            // TODO used for testing
             this.getLogDataCsv(9049,"Day","2016-08-01","2016-09-13",false);
         },
+        /**
+         * The methods in here does everything by
+         * fetching the data from the KymaAPI so
+         * to a try to be dynamic for use by more
+         * than just the demo environment
+         * * URL path may have to be altered
+        */
         methods: {
+            /** Sending CSV blob data to main thread
+             *  for it to be printed to file
+             * @param csv
+             */
             sendCsvEventToMain(csv){
                 ipcRenderer.send("write-csv",csv);
             },
+
+            /** To get the vessels needed for the
+             *  dropdown list
+             */
             getVessels() {
                 let fetchUrl = `${this.fetchUrl}vessels`
                 fetch(fetchUrl, this.fetchHeader)
@@ -79,6 +95,12 @@
                         console.log(this.vessels);
                     })
             },
+
+            /** Uses the vessel specified in the
+             *  dropdown list to show logVariables
+             *  that exists on this vessel
+             * @param vesselId
+             */
             getLogVariables(vesselId) {
                 let fetchUrl = `${this.fetchUrl}logvariables/find?vesselId=${vesselId}`;
                 fetch(fetchUrl, this.fetchHeader)
@@ -88,6 +110,16 @@
                         console.log(this.logVariables);
                     })
             },
+
+            /** Gets the data specified with parameters set by
+             *  user initialises a event to write the data
+             *  to CSV file in Main Thread
+             * @param logVariableId
+             * @param granularity Day,Hour,QuarterHour,Minute,Raw(15sec)
+             * @param fromDate YYYY-MM-DD
+             * @param toDate YYYY-MM-DD
+             * @param isBatch can be ignored if one really don't want to do a batch call
+             */
             getLogDataCsv(logVariableId, granularity, fromDate, toDate, isBatch) {
                 if (!!isBatch) {
                     // TODO fix url with loop, logVar as array
@@ -96,14 +128,14 @@
                     fetch(fetchUrl, this.fetchHeader)
                         .then(res => res.blob())
                         .then(logData => {
-                            // For testing to read csv input
+                            // TODO For testing to read csv input
                             console.log(logData);
                             var myReader = new FileReader();
                             myReader.onload = function(event){
                                 console.log(JSON.stringify(myReader.result));
                             };
                             myReader.readAsText(logData);
-                            // For testing to read csv input
+                            // TODO For testing to read csv input
                         })
 
                 } else {
@@ -112,20 +144,23 @@
                     fetch(fetchUrl, this.fetchHeader)
                         .then(res => res.blob())
                         .then(logData => {
-                            // For testing to read csv input
+                            // TODO For testing to read csv input
                             console.log(logData);
                             var myReader = new FileReader();
                             myReader.onload = function(event){
                                 console.log(JSON.stringify(myReader.result));
                             };
                             myReader.readAsText(logData);
-                            // For testing to read csv input
+                            // TODO For testing to read csv input
                         })
                 }
             }
         },
         computed: {
             fetchUrl() {
+                /** For dynamic use may have to allow
+                 *  being altered.
+                 */
                 return this.$store.state.url;
             },
             fetchHeader() {
