@@ -91,9 +91,8 @@ if (isDevelopment) {
 const {ipcMain} = require('electron');
 ipcMain.on('write-csv',(event,csv)=>{
 
-  let homeDir = getPath();
   // Write csv to file method
-  console.log(csv);
+
   // Then event.reply('write-csv-reply',reply)
   // Reply should be path of file and if successful
 
@@ -101,7 +100,11 @@ ipcMain.on('write-csv',(event,csv)=>{
 
 
 /**
- * Should return the default system path
+ * Creates a system specified path
+ * Can take a specifiedPath else it
+ * defaults to /downloads
+ * @param specifiedPath
+ * @return {string} system default path
  */
 function getPath(specifiedPath){
   const path = require('path');
