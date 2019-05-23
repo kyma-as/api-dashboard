@@ -85,8 +85,8 @@ if (isDevelopment) {
 
 // Write CSV File
 const {ipcMain} = require('electron');
-ipcMain.on('write-csv-message',(event,csv)=>{
-  //Write csv to file
-
+ipcMain.on('write-csv',(event,csv)=>{
+  //Write csv to file method
+  console.log(csv);
   //Then event.reply('write-csv-reply',reply)
 });

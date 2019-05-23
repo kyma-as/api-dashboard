@@ -61,11 +61,15 @@
   </div>
 </template>
 <script>
+  const {ipcRenderer}=require('electron');
     export default {
         mounted() {
             this.getLogDataCsv(9049,"Day","2016-08-01","2016-09-13",false);
         },
         methods: {
+            sendCsvEventToMain(csv){
+                ipcRenderer.send("write-csv",csv);
+            },
             getVessels() {
                 let fetchUrl = `${this.fetchUrl}vessels`
                 fetch(fetchUrl, this.fetchHeader)
