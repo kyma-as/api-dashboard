@@ -91,9 +91,12 @@ if (isDevelopment) {
 const {ipcMain} = require('electron');
 ipcMain.on('write-csv',(event,csv)=>{
   console.log("Write-Csv event recieved");
+
   let path = getPath();
   // Write csv to file method
+  csv = parseTextToCsv(csv);
   writeFile(path, "csv",csv,()=>{
+    console.log(csv);
     console.log("callback called")
   });
   // TODO: event reply
@@ -102,8 +105,16 @@ ipcMain.on('write-csv',(event,csv)=>{
 
 });
 
+function parseTextToCsv(csv) {
+
+  let parsed = "";
+  parsed = csv.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
+  parsed = parsed.replace(/\\/g, " ");
+  return parsed;
+}
+
 /**
- *
+ * Creates a file
  */
 function writeFile(path, extension,content, callBack) {
   const fs = require('fs');
