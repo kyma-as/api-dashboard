@@ -1,7 +1,8 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <div>
-    <div class="ma-5">
-      <v-container>
+    <nav-drawer/>
+    <div>
+      <v-content>
         <v-layout row wrap>
           <v-flex md3>
             <v-card dark tile flat color="red">
@@ -56,16 +57,21 @@
             </v-data-table>
           </v-flex>
         </v-layout>
-      </v-container>
+      </v-content>
     </div>
   </div>
 </template>
 <script>
-  const {ipcRenderer}=require('electron');
+    import NavDrawer from "@/components/NavDrawer";
+
+    const {ipcRenderer} = require('electron');
     export default {
+        components:{
+            NavDrawer
+        },
         mounted() {
             // TODO used for testing
-            this.getLogDataCsv(9049,"Day","2016-08-01","2016-09-13",false);
+            //this.getLogDataCsv([9049], "Day", "2016-08-01", "2016-09-13");
         },
         /**
          * The methods in here does everything by
@@ -73,21 +79,22 @@
          * to a try to be dynamic for use by more
          * than just the demo environment
          * * URL path may have to be altered
-        */
+         */
         methods: {
             /** Sending CSV blob data to main thread
              *  for it to be printed to file
              * @param csv
              */
-            sendCsvEventToMain(csv){
-                ipcRenderer.send("write-csv",csv);
+            sendCsvEventToMain(csv) {
+                console.log("Sending event to MainThread");
+                ipcRenderer.send("write-csv", csv);
             },
 
             /** To get the vessels needed for the
              *  dropdown list
              */
             getVessels() {
-                let fetchUrl = `${this.fetchUrl}vessels`
+                let fetchUrl = `${this.fetchUrl}vessels`;
                 fetch(fetchUrl, this.fetchHeader)
                     .then(res => res.json())
                     .then(vessels => {
@@ -120,43 +127,21 @@
              * @param toDate YYYY-MM-DD
              */
             getLogDataCsv(logVariableIds, granularity, fromDate, toDate) {
-              if(logVariableIds.length > 0) {
-                let csvArray;
-                let idParameters = "";
-                let idArray;
-                let fetchUrl = "";
+                let fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
+                    + logVariableIds[0] + "&granularity=" + granularity + "&fromDate="
+                    + fromDate + "&toDate=" + toDate + "&format=csv";
+                fetch(fetchUrl, this.fetchHeader)
+                    .then(res => res.blob())
+                    .then(blobOutput => {
+                        console.log("Fetch complete");
+                        let myReader = new FileReader();
 
-                //creates strings of id parameters for each fetch url
-                for (int i = 0; i < logVariableIds.length; i++) {
-                  idParameters += logVariableIds[i];
-                  //10 variables max per fetch url
-                  if(i % 10 == 9) {
-                    idArray.push(idParameters);
-                    idParameters = "";
-                  } else {
-                    idParameters += ",";
-                  }
-                }
-
-                //fetches each response as blobs and build them into one blob
-                //which is sent
-                let blobBuilder;
-                for(int i = 0; i < idArray.length; i++) {
-                  fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
-                  + idArray[i] + "&granularity=" + granularity + "&fromDate="
-                  + fromDate + "&toDate=" + toDate + "&format=csv";
-
-                  fetch(fetchUrl, this.fetchHeader)
-                      .then(res => res.blob())
-                      .then(blobData => {
-                        blobBuilder.append(blobData);
-                      });
-
-                }
-
-                let finalBlob = new Blob(blobBuilder, { type: "text/plain" });
-                this.sendCsvEventToMain(finalBlob);
-              }
+                        myReader.onload = function (event) {
+                            console.log("test");
+                            ipcRenderer.send("write-csv", JSON.stringify(myReader.result));
+                        };
+                        myReader.readAsText(blobOutput);
+                    })
             }
         },
         computed: {
@@ -183,9 +168,9 @@
                     {text: 'logDataMinDate', value: 'logDataMinDate', align: 'right'},
                     {text: 'logDataMaxDate', value: 'logDataMaxDate', align: 'right'},
                 ],
-                vessels:{},
-                logData:{},
-                logVariables:[{}]
+                vessels: {},
+                logData: {},
+                logVariables: [{}]
             }
         }
     }
