@@ -90,14 +90,34 @@ if (isDevelopment) {
  */
 const {ipcMain} = require('electron');
 ipcMain.on('write-csv',(event,csv)=>{
-
+  console.log("Write-Csv event recieved");
+  let path = getPath();
   // Write csv to file method
+  writeFile(path, "csv",csv,()=>{
+    console.log("callback called")
+  });
 
   // Then event.reply('write-csv-reply',reply)
   // Reply should be path of file and if successful
 
 });
 
+/**
+ *
+ */
+function writeFile(path, extension,content, callBack) {
+  const fs = require('fs');
+
+  let filePath = path+"/"+"kymaTest."+extension;
+
+  fs.writeFile(filePath,content,(err)=>{
+    if(err)throw err;
+    console.log(filePath);
+    console.log('file saved');
+    callBack();
+  });
+
+}
 
 /**
  * Creates a system specified path
@@ -121,6 +141,5 @@ function getPath(specifiedPath){
   } else{
     url = path.join(homeDir,"downloads")
   }
-  // Maybe if(!!specifiedPath) join specified path?
   return url;
 }
