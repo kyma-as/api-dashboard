@@ -24,13 +24,13 @@
                 timeFrom
               </v-card-text>
             </v-card>
-            <v-flex md3>
-              <v-card dark tile flat color="yellow">
-                <v-card-text>
-                  timeTo
-                </v-card-text>
-              </v-card>
-            </v-flex>
+          </v-flex>
+          <v-flex md3>
+            <v-card dark tile flat color="yellow">
+              <v-card-text>
+                timeTo
+              </v-card-text>
+            </v-card>
           </v-flex>
           <v-flex md12>
             <v-data-table
@@ -66,7 +66,7 @@
 
     const {ipcRenderer} = require('electron');
     export default {
-        components:{
+        components: {
             NavDrawer
         },
         mounted() {
