@@ -1,15 +1,15 @@
 <template>
-  <div class="text-xs-center">
+  <div class>
     <v-menu
       v-model="menu"
       :close-on-content-click="false"
       :nudge-width="200"
       offset-overflow
-      offset-y="true"
+      offset-y
     >
       <template v-slot:activator="{ on }">
         <v-btn
-          color="indigo"
+          color="primary"
           dark
           v-on="on"
         >
@@ -20,11 +20,12 @@
       <v-card>
         <FromDate />
         <ToDate />
-        <v-card-actions>
+      
+      <v-card-actions>
           <v-spacer></v-spacer>
 
           <v-btn flat @click="menu = false">Cancel</v-btn>
-          <v-btn color="primary" flat @click="menu = false">Save</v-btn>
+          <v-btn color="primary" flat @click="menu = false">Ok</v-btn>
         </v-card-actions>
       </v-card>
     </v-menu>
@@ -32,16 +33,17 @@
 </template>
 
 <script>
-import ToDate from "@/components/ToDate";
 import FromDate from "@/components/FromDate";
+import ToDate from "@/components/ToDate";
 export default{
     data: () => ({
       menu: false
     }),
     components: {
-      ToDate,
-      FromDate
+      FromDate,
+      ToDate
     }
+  
   }
 
 </script>
