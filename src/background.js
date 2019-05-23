@@ -107,7 +107,7 @@ function getPath(specifiedPath){
   // Path for different systems
   // *nix = process.env.HOME Unix /home, Mac /Users
   // Windows = process.env.HOMEPATH Windows C:\\Users
-  // default* + join(documents,kymaApiData) /documents/kymaApiData
+  // default* + join(documents,kymaApiData) /downloads/kymaApiData
 
   let homeDir = (process.platform === 'win32') ? process.env.HOMEPATH : process.env.HOME;
   // Maybe if(!!specifiedPath) join specified path?

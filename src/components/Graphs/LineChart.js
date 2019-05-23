@@ -6,8 +6,6 @@ export default {
   computed: {
     ...mapGetters([
       "getSpeed",
-      "getSpeedDay"
-
     ])
   },
   data() {
@@ -17,9 +15,8 @@ export default {
   },
 
   mounted() {
-    this.speed = this.getSpeedDay(this.$route.params.vesselid,
-    "2018-01-01T00:00:00","2018-01-15T00:00:00");
-    console.log(this.speed);
+    this.speed = this.getSpeed(this.$route.params.vesselid,
+    "2019-04-20T00:00:00","2019-05-01T00:00:00", "QuarterHour");
     let gpsSpeed = [];
     let logSpeed = [];
     let labels = [];
