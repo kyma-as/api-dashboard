@@ -1,10 +1,9 @@
 <template>
   <div class>
     <v-menu
-      v-model="menu"
+      v-model="menu" 
       :close-on-content-click="false"
       :nudge-width="200"
-      offset-overflow
       offset-y
     >
       <template v-slot:activator="{ on }">
@@ -18,14 +17,23 @@
       </template>
 
       <v-card>
-        <FromDate />
-        <ToDate />
+        <FromDate :fdate="this.fdate" @get-from-date="getFromDate"/>
+        <ToDate :tdate="this.tdate" @get-to-date="getToDate"/>
       
       <v-card-actions>
           <v-spacer></v-spacer>
 
           <v-btn flat @click="menu = false">Cancel</v-btn>
-          <v-btn color="primary" flat @click="menu = false">Ok</v-btn>
+          
+          <v-btn 
+          color="primary" 
+          flat 
+          @click="menu = false, 
+          getFromDate(fdate),
+          getToDate(tdate)"
+          >
+          Ok
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-menu>
@@ -35,15 +43,28 @@
 <script>
 import FromDate from "@/components/FromDate";
 import ToDate from "@/components/ToDate";
+
 export default{
-    data: () => ({
-      menu: false
-    }),
     components: {
       FromDate,
       ToDate
+    },
+    data() {
+      return {
+        fdate: Date(),
+        tdate: Date(),
+        menu: false
+      }
+    },
+    methods: {
+      getFromDate(f){
+        this.fdate = f
+        console.log(f)
+      },
+      getToDate(t){
+        this.tdate = t
+        console.log(t)
+      }
     }
-  
   }
-
 </script>

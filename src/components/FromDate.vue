@@ -1,7 +1,7 @@
 <template>
 <v-container grid-list-md>
   <v-layout row wrap>
-    <v-flex xs12 sm6 md4>
+    <v-flex>
       <v-menu
         ref="menu"
         v-model="menu"
@@ -26,10 +26,15 @@
           ></v-text-field>
         </template>
         
-        <v-date-picker v-model="date" no-title scrollable>
+        <v-date-picker 
+        v-model="date" 
+        no-title 
+        scrollable
+        min="2016-01-01"
+        >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+          <v-btn flat color="primary" @click="$refs.menu.save(date), sendDate(dateFormatted)">OK</v-btn>
         </v-date-picker>
       </v-menu>
     </v-flex>
@@ -39,10 +44,25 @@
 
 <script>
  export default {
-    data: () => ({
+    data: vm => ({
       date: new Date().toJSON().substr(0, 10),
+      dateFormatted: vm.formatDate(new Date().toJSON().substr(0, 19)),
       menu: false
-      
-    })
- }
+    }),
+    watch: {
+      date (val) {
+        this.dateFormatted = this.formatDate(this.date)
+      }
+    },
+    methods: {
+      formatDate (date) {
+        if(!date) return null
+        const [year, month, day] = date.split('-')
+        return `${year}-${month}-${day}T00:00:00`
+      },
+      sendDate(dateFormatted) {
+        this.$emit('get-from-date', dateFormatted)
+      }
+    }
+  }
 </script>

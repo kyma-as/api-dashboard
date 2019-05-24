@@ -65,7 +65,6 @@ import {mapState, mapGetters} from 'vuex';
     },
     methods: {
       showGraph: function(input){
-        console.log(input);
         this.selected = input
       }
     },
@@ -96,10 +95,6 @@ import {mapState, mapGetters} from 'vuex';
       .find(x => x.id === this.$route.params.vesselid);
       this.vessel = vessel;
     },
-    props: {
-      
-        }
-       
-    }
+  }
 </script>
 
