@@ -3,7 +3,7 @@
     <NavDrawer/>
     <v-content>
       <span>Welcome to ship {{vessel.name}}.</span>
-    <v-layout>
+    <v-layout column>
       <GraphCard />
       <DateTime />
     </v-layout>
@@ -40,7 +40,8 @@ export default {
       const vessel = this.vessels
       .find(x => x.id === this.$route.params.vesselid);
       this.vessel = vessel;
-    }/*,
+    }
+    /*,
     watch: {
     '$route.params': {
         function (newValue) {

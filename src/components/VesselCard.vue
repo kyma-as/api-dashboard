@@ -3,6 +3,7 @@
     <v-card
         @click="routeOnClick"
         class="pa-2 mx-auto"
+        lazy
         slot-scope="{ hover }"
         :class="`elevation-${hover ? 12 : 2 }`"
     >
