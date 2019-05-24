@@ -13,7 +13,8 @@ export default {
   },
 
   mounted() {
-    this.fuel = this.getFuel(this.$route.params.vesselid);
+    this.fuel = this.getFuel(this.$route.params.vesselid,
+    "2018-01-01T00:00:00","2019-01-01T00:00:00", "Hour");
     let labels = [];
     let dataen = [];
     let array = [];
@@ -22,8 +23,8 @@ export default {
       labels.push(Object.keys(this.fuel)[i]);
     }
     for (let key in this.fuel) {
-      for (let key2 in this.fuel[key].dayData) {
-        array.push(this.fuel[key].dayData[key2]);
+      for (let key2 in this.fuel[key].data) {
+        array.push(this.fuel[key].data[key2]);
       }
 
       let Summ = array.reduce((prev, cur) => prev + cur, 0);

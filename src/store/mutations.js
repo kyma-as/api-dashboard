@@ -15,10 +15,6 @@ export default {
   //   state.vessels[vesselIndex].logVariables = logVariableArray;
   // },
 
-  // TODO: mutation for adding quick default data to state
-  APPEND_QUICK_DATA: (state, { vesselIndex, logvar }) => {
-
-  },
   APPEND_LOG_VARIABLE: (state, { vesselIndex, logVar }) => {
     state.vessels[vesselIndex].logVariables.push(logVar);
   },

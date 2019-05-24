@@ -7,8 +7,6 @@
 
 
 export default {
-  // TODO: Actions to fetch quick default data to state
-
   /**
    * Fetches all available vessels and puts them into state.
    * Action is dispatched for each vessel to start retrieving

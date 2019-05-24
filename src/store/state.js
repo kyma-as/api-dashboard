@@ -20,8 +20,16 @@ export default {
   url: "https://demo.kyma.no/api/v1/",
   dateToday: "",
   fetchedVessels: false,
+
   loggedIn:false,
+
   // TODO: Replace this list as a loadable json file
+  granularities: {
+    day: "Day",
+    hour: "Hour",
+    quarterhour: "QuarterHour"
+  },
+
   default_vars: [{
       "id": 110,
       "variables": {

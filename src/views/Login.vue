@@ -66,19 +66,20 @@
             async login() {
                 let username = this.input.username;
                 let password = this.input.password;
+
                 this.loading = true;
 
                 // Authenticate against kyma api
                 let headerParams = convertToBase64(username,password);
                 console.log("Authenticating with server...");
                 if (await authenticateLogin(headerParams)) {
-                    // TODO: move fetchVessels action here?
                     this.loading = false;
                     console.log("Authenticated!");
                     // Set state authenticated
                     // Route to Vessels
                     this.$store.dispatch('setLoggedIn',{loggedIn:true, headerParams:headerParams});
                     this.$router.replace({name: 'vessels'})
+
                 } else {
                     this.loading = false;
                     console.log("Could not authenticate with the server")

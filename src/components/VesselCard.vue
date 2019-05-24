@@ -3,6 +3,7 @@
     <v-card
         @click="routeOnClick"
         class="pa-2 mx-auto"
+        lazy
         slot-scope="{ hover }"
         :class="`elevation-${hover ? 12 : 2 }`"
     >
@@ -21,8 +22,6 @@
 </template>
 
 <script>
-// TODO: in v-card wrap with template (?)
-// and add :to=`"/vessels/${data/hover.index}"`
     export default {
         data() {
             return {
@@ -38,10 +37,8 @@
             }
         },
         methods: {
-          // TODO: does this work?
             routeOnClick() {
                 this.$router.replace({name: "vessel", params: { vesselid: this.vessel.id }});
-                //this.$router.push({ name: 'vessels', params: { vesselid: this.vessel.id }})
             }
         }
     }

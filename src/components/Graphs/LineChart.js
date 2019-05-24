@@ -6,8 +6,6 @@ export default {
   computed: {
     ...mapGetters([
       "getSpeed",
-      "getSpeedDay"
-
     ])
   },
   data() {
@@ -17,9 +15,8 @@ export default {
   },
 
   mounted() {
-    this.speed = this.getSpeedDay(this.$route.params.vesselid,
-    "2018-01-01T00:00:00","2018-01-15T00:00:00");
-    console.log(this.speed);
+    this.speed = this.getSpeed(this.$route.params.vesselid,
+    "2019-04-24T00:00:00","2019-05-11T00:00:00", "QuarterHour");
     let gpsSpeed = [];
     let logSpeed = [];
     let labels = [];
@@ -39,16 +36,12 @@ export default {
     for (let i = 0; i < gpsSpeed.length; i++) {
       let Diffvar1 = gpsSpeed[i];
       let Diffvar2 = logSpeed[i];
-      if (Diffvar1 > Diffvar2) {
+      
         decimal = Diffvar1 - Diffvar2;
         decimal = decimal.toFixed(2);
+        decimal = Math.abs(decimal)
         diff.push(decimal);
-      }
-      if (Diffvar1 <= Diffvar2) {
-        decimal = Diffvar2 - Diffvar1;
-        decimal = decimal.toFixed(2);
-        diff.push(decimal);
-      }
+      
     }
     this.renderChart(
       {
