@@ -16,13 +16,12 @@ export default {
   vessels: [],
   apiCallCount: 0,
   header: {
-    headers: {
-      Authorization: "Basic ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg=="
-    }
   },
   url: "https://demo.kyma.no/api/v1/",
   dateToday: "",
   fetchedVessels: false,
+
+  loggedIn:false,
 
   // TODO: Replace this list as a loadable json file
   granularities: {
@@ -164,5 +163,4 @@ export default {
       }
     }
   ]
-
 }
