@@ -5,34 +5,50 @@
       <v-content>
         <v-layout row wrap>
           <v-flex md3>
-            <v-card dark tile flat color="red">
-              <v-card-text>
-                Vessel Input
-              </v-card-text>
+            <v-card dark tile flat class="primary darken-1">
+              <v-card-actions class="v-btn--large">
+                <v-select class=""
+                          v-model="selectedVessels"
+                          :items="vessels"
+                          label="Select Vessel"
+                          single-line
+                          @input="getLogVariables(selectedVessels)"
+                ></v-select>
+              </v-card-actions>
             </v-card>
           </v-flex>
           <v-flex md3>
-            <v-card dark tile flat color="blue">
-              <v-card-text>
-                Granularity
-              </v-card-text>
+            <v-card dark tile flat class="primary darken-1">
+              <v-card-actions class="v-btn--large">
+                <v-select class=""
+                          :items="granularity"
+                          label="Select Granularity"
+                          single-line
+                ></v-select>
+              </v-card-actions>
             </v-card>
           </v-flex>
           <v-flex md3>
-            <v-card dark tile flat color="green">
-              <v-card-text>
-                timeFrom
-              </v-card-text>
+            <v-card dark tile flat class="primary darken-1">
+              <v-card-actions class="v-btn--large">
+                <v-select class=""
+                          :items="granularity"
+                          label="Select Date"
+                          single-line
+                ></v-select>
+              </v-card-actions>
             </v-card>
           </v-flex>
           <v-flex md3>
-            <v-card dark tile flat color="yellow">
-              <v-card-text>
-                timeTo
-              </v-card-text>
+            <v-card dark tile flat class="primary darken-1">
+              <v-card-actions class="v-btn--large">
+                <v-btn class="primary primary darken-3" flat large>
+                  Print Csv File
+                </v-btn>
+              </v-card-actions>
             </v-card>
           </v-flex>
-          <v-flex md12>
+          <v-flex md12 class="">
             <v-data-table
                 v-model="selected"
                 :headers="headers"
@@ -70,6 +86,7 @@
             NavDrawer
         },
         mounted() {
+            this.getVessels();
             // TODO used for testing
             //this.getLogDataCsv([9049], "Day", "2016-08-01", "2016-09-13");
         },
@@ -98,8 +115,10 @@
                 fetch(fetchUrl, this.fetchHeader)
                     .then(res => res.json())
                     .then(vessels => {
-                        this.vessels = vessels;
-                        console.log(this.vessels);
+
+                        for (let entry of vessels) {
+                            this.vessels.push(entry.id);
+                        }
                     })
             },
 
@@ -109,6 +128,7 @@
              * @param vesselId
              */
             getLogVariables(vesselId) {
+                console.log("test")
                 let fetchUrl = `${this.fetchUrl}logvariables/find?vesselId=${vesselId}`;
                 fetch(fetchUrl, this.fetchHeader)
                     .then(res => res.json())
@@ -168,7 +188,9 @@
                     {text: 'logDataMinDate', value: 'logDataMinDate', align: 'right'},
                     {text: 'logDataMaxDate', value: 'logDataMaxDate', align: 'right'},
                 ],
-                vessels: {},
+                vessels: [],
+                selectedVessels: [],
+                granularity: ['Day', 'Hour', 'QuarterHour', 'Minute', 'Raw'],
                 logData: {},
                 logVariables: [{}]
             }
