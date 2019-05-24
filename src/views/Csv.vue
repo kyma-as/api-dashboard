@@ -21,6 +21,7 @@
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select class=""
+                          v-model="selectedGranularity"
                           :items="granularity"
                           label="Select Granularity"
                           single-line
@@ -190,6 +191,7 @@
                 ],
                 vessels: [],
                 selectedVessels: [],
+                selectedGranularity:[],
                 granularity: ['Day', 'Hour', 'QuarterHour', 'Minute', 'Raw'],
                 logData: {},
                 logVariables: [{}]

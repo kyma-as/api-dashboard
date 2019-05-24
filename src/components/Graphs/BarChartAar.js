@@ -13,7 +13,7 @@ export default {
   },
   mounted() {
     let fromDate = "2018-01-13T00:00:00";
-    let toDate = "2018-01-17T00:00:00";
+    let toDate = "2018-12-17T00:00:00";
     let day = [];
     let elementer = [];
     let data1 = [];
