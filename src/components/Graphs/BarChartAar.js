@@ -1,5 +1,6 @@
 import { Bar } from "vue-chartjs";
 import { mapGetters } from "vuex";
+
 export default {
   extends: Bar,
   computed: {
@@ -12,7 +13,7 @@ export default {
   },
   mounted() {
     let fromDate = "2018-01-13T00:00:00";
-    let toDate = "2018-01-16T00:00:00";
+    let toDate = "2018-01-17T00:00:00";
     let day = [];
     let elementer = [];
     let data1 = [];
@@ -100,10 +101,10 @@ export default {
           if (0 + k == toDate.substring(8, 10)) {
             bool = false;
           }
-        }
+        }  labels = day
       }
       console.log(day)
-      labels = day
+    
     }
 
     if (labels == kvartal) {
