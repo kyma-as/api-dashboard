@@ -21,17 +21,14 @@
     export default {
         name: "vessels",
         components: {
-            NavDrawer, VesselCard
+            NavDrawer,
+            VesselCard
         },
 
         data() {
             return {
               vessel: {}
             }
-        },
-        mounted() {
-            // TODO: call whatever fetch method in whatever js class whatever
-            
         },
         computed: {
           ...mapState([

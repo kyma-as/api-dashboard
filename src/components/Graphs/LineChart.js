@@ -13,28 +13,36 @@ export default {
   },
 
   mounted() {
-    this.speed = this.getSpeed(this.$route.params.vesselid);
+    this.speed = this.getSpeed(
+      this.$route.params.vesselid,
+      "2019-04-24T00:00:00",
+      "2019-05-11T00:00:00",
+      "QuarterHour"
+    );
     let gpsSpeed = [];
     let logSpeed = [];
     let labels = [];
+    let formatting;
     for (let key in this.speed.gps.data) {
-      gpsSpeed.push(this.speed.gps.data[key]);
-      labels.push(key);
+      gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
+      formatting = key;
+      formatting = formatting.substring(0, 10); // om du vil has tidspunkt og ikkje dato ta fra substing(10,)
+      labels.push(formatting);
     }
     for (let key in this.speed.log.data) {
-      logSpeed.push(this.speed.log.data[key]);
+      logSpeed.push(this.speed.log.data[key].toFixed(2));
     }
 
     let diff = [];
+    let decimal;
     for (let i = 0; i < gpsSpeed.length; i++) {
       let Diffvar1 = gpsSpeed[i];
       let Diffvar2 = logSpeed[i];
-      if (Diffvar1 > Diffvar2) {
-        diff.push(Diffvar1 - Diffvar2);
-      }
-      if (Diffvar1 <= Diffvar2) {
-        diff.push(Diffvar2 - Diffvar1);
-      }
+
+      decimal = Diffvar1 - Diffvar2;
+      decimal = decimal.toFixed(2);
+      decimal = Math.abs(decimal);
+      diff.push(decimal);
     }
     this.renderChart(
       {

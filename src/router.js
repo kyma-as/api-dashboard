@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Login from "./views/Login.vue";
 import Vessels from "./views/Vessels.vue";
 import Vessel from "./views/Vessel.vue";
+import Csv from "./views/Csv.vue";
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: "/vessels/:vesselid",
       name: "vessel",
       component: Vessel
+    },
+    {
+      path: "/csv",
+      name: "csv",
+      component: Csv
     }
   ]
 });

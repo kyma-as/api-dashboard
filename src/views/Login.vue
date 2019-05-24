@@ -11,11 +11,13 @@
               <v-card-text>
                 <v-form @keydown.native.enter="login">
                   <v-text-field v-model="input.username" prepend-icon="person" name="login"
-                                label="Login" type="text" id="username">
+                                label="Login" type="text" id="username"
+                                :rules="[rules.email, rules.required]">
 
                   </v-text-field>
                   <v-text-field v-model="input.password" prepend-icon="lock" name="password"
-                                label="Password" id="password" type="password">
+                                label="Password" id="password" type="password"
+                                :rules="[rules.required]">
                   </v-text-field>
                 </v-form>
               </v-card-text>
@@ -38,7 +40,7 @@
 
 <script>
     import AppTitle from "@/components/AppTitle"
-    import {validateLogin, authenticateLogin} from "../scripts/authentication";
+    import {authenticateLogin, convertToBase64} from "../scripts/authentication";
 
     export default {
         name: 'login',
@@ -49,6 +51,14 @@
                 input: {
                     username: "",
                     password: ""
+                },
+                rules:{
+                    required:value=>!!value||'Required',
+                    email: (value)=>{
+                        const emailReg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                        return emailReg.test(value) ||'Must be email'
+                    }
+
                 }
             }
         },
@@ -56,27 +66,29 @@
             async login() {
                 let username = this.input.username;
                 let password = this.input.password;
-                console.log("Validating input...");
-                this.loading = true
-                if (validateLogin(username, password)) {
-                    console.log("Input valid!");
-                    // Authenticate against kyma api
-                    console.log("Authenticating with server...")
-                    if (await authenticateLogin(username, password)) {
-                      // TODO: move fetchVessels action here?
-                        this.loading = false;
-                        console.log("Authenticated!")
-                        // Set state authenticated
-                        // Route to Vessels
-                        this.$router.replace({name: 'vessels'})
-                    } else {
-                        this.loading = false;
-                        console.log("Could not authenticate with the server")
-                    }
+
+                this.loading = true;
+
+                // Authenticate against kyma api
+                let headerParams = convertToBase64(username,password);
+                console.log("Authenticating with server...");
+                if (await authenticateLogin(headerParams)) {
+                    this.loading = false;
+                    console.log("Authenticated!");
+                    // Set state authenticated
+                    // Route to Vessels
+                    this.$store.dispatch('setLoggedIn',{loggedIn:true, headerParams:headerParams});
+                    this.$router.replace({name: 'vessels'})
+
                 } else {
-                    console.log("Must have an email and password")
+                    this.loading = false;
+                    console.log("Could not authenticate with the server")
                 }
             }
+
+        },
+        mounted() {
+            this.$store.dispatch('setLoggedIn',{loggedIn:false});
         }
     }
 

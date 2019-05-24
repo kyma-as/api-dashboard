@@ -1,37 +1,68 @@
 <template>
-  <div>
     <v-navigation-drawer
-        app
-        permanent
-        clipped
-        mobile-break-point="991"
-        width="200"
-    >
-      <v-toolbar flat>
-        <v-list>
-          <v-list-tile>
-            <v-list-tile-title class="title">
-              <span class="primary--text">Dashboard</span>
+    app
+    permanent
+    clipped
+    :mini-variant.sync="mini"
+    hide-overlay
+    width="180"
+
+  >
+    <v-toolbar flat class="transparent">
+      <v-list class="pa-0">
+        <v-list-tile avatar>
+          <v-list-tile-action v-if="mini">
+            <v-btn
+                icon
+                @click.stop="mini = !mini"
+            >
+            <v-icon class="primary--text">menu</v-icon>
+            </v-btn>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+            <v-list-tile-title style="font-size: larger" class="primary--text">
+              <span class="font-weight-bold">Menu</span>
             </v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-toolbar>
-      <v-divider class="primary lighten-1"/>
-      <v-list dense class="pt-0" v-for="item in items">
-        <router-link :to="item.path">
-          <v-list-tile class="primary--text" :key="item.title" @click="">
-            <v-list-tile-action>
-              <v-icon class="primary--text">{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </router-link>
-        <v-divider/>
+          </v-list-tile-content>
+
+          <v-list-tile-action>
+            <v-btn
+              icon
+              @click.stop="mini = !mini"
+            >
+              <v-icon class="primary--text">chevron_left</v-icon>
+            </v-btn>
+          </v-list-tile-action>
+        </v-list-tile>
       </v-list>
-    </v-navigation-drawer>
-  </div>
+    </v-toolbar>
+
+    <v-divider class="primary darken-1"/>
+      <v-list class="pt-0" dense v-for="item in items">
+      <router-link :to="item.path">
+      
+      <v-list-tile
+      class="primary--text"
+      :key="item.title"
+      @click=""
+      >
+      
+      <v-list-tile-action>
+          <v-icon class="primary--text">{{ item.icon }}</v-icon>
+        </v-list-tile-action>
+
+
+        <v-list-tile-content>
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile-content>
+        
+      </v-list-tile>
+      </router-link>
+        <v-divider class="primary lighten-1"/>
+
+      </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -40,11 +71,19 @@
         data() {
             return {
                 items: [
-                    {title: 'Vessels', icon: 'dashboard',path:"/vessels"},
-                    {title: 'Logout', icon: 'question_answer',path:"/"}
+                    {title: 'Vessels', icon: 'directions_boat',path:"/vessels"},
+                    {title: 'Print CSV Log',icon:'description',path:"/csv"},
+                    {title: 'Logout', icon: 'exit_to_app',path:"/"}
                 ],
+                mini: false,
                 right: null
             }
         }
     };
 </script>
+
+<style scoped>
+  a {
+    text-decoration: none;
+  }
+</style>

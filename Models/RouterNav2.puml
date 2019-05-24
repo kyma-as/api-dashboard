@@ -1,0 +1,37 @@
+@startuml
+User->Router:Start App
+activate Router
+
+User<--Router:Route to Login.vue
+User->Login.vue:Input Username & Password
+activate Login.vue
+
+alt Correct Input
+
+ Router<--Login.vue:Successful Login
+
+else Incorrect Input
+
+ User<--Login.vue:Error Message
+ deactivate Login.vue
+ end
+
+User<-Router:Route to Vessels.vue
+
+User->Vessels.vue:Click on Vessel
+activate Vessels.vue
+
+Router<--Vessels.vue:Return vessel ID
+deactivate Vessels.vue
+
+User<--Router:Route to /vessels/ID
+
+User->vessel.vue:Look at Graphs
+activate vessel.vue
+vessel.vue<-vessel.vue:Create Graphs
+User<--vessel.vue:Show Graphs
+deactivate vessel.vue
+
+
+deactivate Router
+@enduml

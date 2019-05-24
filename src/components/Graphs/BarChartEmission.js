@@ -4,31 +4,31 @@ import { mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapGetters(["getFuel"])
+    ...mapGetters(["getEmission"])
   },
   data() {
     return {
-      fuel: {}
+      emission: {}
     };
   },
 
   mounted() {
-    this.fuel = this.getFuel(
+    this.emission = this.getEmission(
       this.$route.params.vesselid,
-      "2018-01-01T00:00:00",
-      "2019-01-01T00:00:00",
+      "2019-04-20",
+      "2019-05-01",
       "Hour"
     );
     let labels = [];
     let dataen = [];
     let array = [];
     let i = 0;
-    for (i = 0; i < Object.keys(this.fuel).length; i++) {
-      labels.push(Object.keys(this.fuel)[i]);
+    for (i = 0; i < Object.keys(this.emission).length; i++) {
+      labels.push(Object.keys(this.emission)[i]);
     }
-    for (let key in this.fuel) {
-      for (let key2 in this.fuel[key].data) {
-        array.push(this.fuel[key].data[key2]);
+    for (let key in this.emission) {
+      for (let key2 in this.emission[key].data) {
+        array.push(this.emission[key].data[key2]);
       }
 
       let Summ = array.reduce((prev, cur) => prev + cur, 0);
@@ -40,7 +40,7 @@ export default {
 
     this.renderChart(
       {
-        labels: Object.keys(this.fuel),
+        labels: Object.keys(this.emission),
         datasets: [
           {
             data: dataen,
@@ -53,7 +53,7 @@ export default {
               "purple",
               "black"
             ],
-            label: "Fuel"
+            label: "emission"
           }
         ]
       },

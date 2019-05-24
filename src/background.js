@@ -82,3 +82,73 @@ if (isDevelopment) {
     });
   }
 }
+
+/** An event listener
+ *  takes a event from CSV.vue
+ *  and creates a csv file
+ *  at a default path
+ */
+const { ipcMain } = require("electron");
+ipcMain.on("write-csv", (event, csv) => {
+  console.log("Write-Csv event recieved");
+
+  let path = getPath();
+  // Write csv to file method
+  csv = parseTextToCsv(csv);
+  writeFile(path, "csv", csv, () => {
+    console.log(csv);
+    console.log("callback called");
+  });
+  // TODO: event reply
+  // Then event.reply('write-csv-reply',reply)
+  // Reply should be path of file and if successful
+});
+
+function parseTextToCsv(csv) {
+  let parsed = "";
+  parsed = csv.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
+  parsed = parsed.replace(/\\/g, " ");
+  return parsed;
+}
+
+/**
+ * Creates a file
+ */
+function writeFile(path, extension, content, callBack) {
+  const fs = require("fs");
+
+  let filePath = path + "/" + "kymaTest." + extension;
+
+  fs.writeFile(filePath, content, err => {
+    if (err) throw err;
+    console.log(filePath);
+    console.log("file saved");
+    callBack();
+  });
+}
+
+/**
+ * Creates a system specified path
+ * Can take a specifiedPath else it
+ * defaults to /downloads
+ * @param specifiedPath
+ * @return {string} system default path
+ */
+function getPath(specifiedPath) {
+  const path = require("path");
+  // https://shapeshed.com/writing-cross-platform-node/#home-directories
+  // Path for different systems
+  // *nix = process.env.HOME Unix /home, Mac /Users
+  // Windows = process.env.HOMEPATH Windows C:\\Users
+  // path.join(homeDir,downloads) /downloads/data.csv
+
+  let homeDir =
+    process.platform === "win32" ? process.env.HOMEPATH : process.env.HOME;
+  let url = "";
+  if (specifiedPath) {
+    url = path.join(homeDir, specifiedPath);
+  } else {
+    url = path.join(homeDir, "downloads");
+  }
+  return url;
+}
