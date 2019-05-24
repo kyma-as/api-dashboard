@@ -88,7 +88,14 @@
 
         },
         mounted() {
-            this.$store.dispatch('setLoggedIn',{loggedIn:false});
+          // TODO: remove in production
+            this.$store.dispatch('setLoggedIn',{loggedIn:true,
+            headerParams: {
+              headers: {
+                Authorization: "Basic ZGVtb0BreW1hZGF0YS5jb206ZGVtb2JydWtlcg=="
+              }
+            }
+          });
         }
     }
 

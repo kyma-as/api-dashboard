@@ -15,6 +15,7 @@ export default {
     if (!state.fetchedVessels) {
       let url = `${state.url}vessels`;
       let header = state.header;
+      console.log(state.header);
 
       let res = await fetch(url, header);
       let vessels = await res.json();
