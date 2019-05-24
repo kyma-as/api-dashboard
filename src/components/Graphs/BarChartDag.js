@@ -12,8 +12,8 @@ export default {
     };
   },
   mounted() {
-    let fromDate = "2018-01-01T00:00:00";
-    let toDate = "2019-01-01T00:00:00";
+    let fromDate = "2019-04-01T00:00:00";
+    let toDate = "2019-04-14T00:00:00";
     let day = [];
     let elementer = [];
     let data1 = [];

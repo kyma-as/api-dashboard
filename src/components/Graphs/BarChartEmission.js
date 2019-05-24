@@ -13,8 +13,12 @@ export default {
   },
 
   mounted() {
-    this.emission = this.getEmission(this.$route.params.vesselid,
-    "2019-04-20","2019-05-01", "Hour");
+    this.emission = this.getEmission(
+      this.$route.params.vesselid,
+      "2019-04-20",
+      "2019-05-01",
+      "Hour"
+    );
     let labels = [];
     let dataen = [];
     let array = [];

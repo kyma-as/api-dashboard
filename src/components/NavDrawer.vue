@@ -5,18 +5,25 @@
     clipped
     :mini-variant.sync="mini"
     hide-overlay
-    width="210"
-    
+    width="180"
+
   >
     <v-toolbar flat class="transparent">
       <v-list class="pa-0">
         <v-list-tile avatar>
-          <v-list-tile-avatar>
+          <v-list-tile-action v-if="mini">
+            <v-btn
+                icon
+                @click.stop="mini = !mini"
+            >
             <v-icon class="primary--text">menu</v-icon>
-          </v-list-tile-avatar>
+            </v-btn>
+          </v-list-tile-action>
 
           <v-list-tile-content>
-            <v-list-tile-title class="primary--text">Menu</v-list-tile-title>
+            <v-list-tile-title style="font-size: larger" class="primary--text">
+              <span class="font-weight-bold">Menu</span>
+            </v-list-tile-title>
           </v-list-tile-content>
 
           <v-list-tile-action>
@@ -31,7 +38,7 @@
       </v-list>
     </v-toolbar>
 
-    <v-divider class="primary lighten-1"/>
+    <v-divider class="primary darken-1"/>
       <v-list class="pt-0" dense v-for="item in items">
       <router-link :to="item.path">
       
@@ -52,7 +59,9 @@
         
       </v-list-tile>
       </router-link>
-    </v-list>
+        <v-divider class="primary lighten-1"/>
+
+      </v-list>
   </v-navigation-drawer>
 </template>
 
@@ -63,11 +72,18 @@
             return {
                 items: [
                     {title: 'Vessels', icon: 'directions_boat',path:"/vessels"},
+                    {title: 'Print CSV Log',icon:'description',path:"/csv"},
                     {title: 'Logout', icon: 'exit_to_app',path:"/"}
                 ],
-                mini: true,
+                mini: false,
                 right: null
             }
         }
     };
 </script>
+
+<style scoped>
+  a {
+    text-decoration: none;
+  }
+</style>

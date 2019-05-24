@@ -28,11 +28,16 @@ export default {
     state.vessels[vesselIndex].logVariables[logIndex].quarterhourData = logData;
   },
 
-
   SET_DATE: (state, date) => {
     state.dateToday = date;
   },
   VESSELS_FETCHED: state => {
     state.fetchedVessels = true;
+  },
+  SET_LOGGED_IN: (state, payload) => {
+    state.loggedIn = payload;
+  },
+  SET_HEADER: (state, payload) => {
+    state.header = payload;
   }
 };

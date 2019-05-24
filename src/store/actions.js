@@ -5,10 +5,7 @@
  * and actions.js support asynchronous functions.
  */
 
-
 export default {
-  // TODO: Actions to fetch quick default data to state
-
   /**
    * Fetches all available vessels and puts them into state.
    * Action is dispatched for each vessel to start retrieving
@@ -47,14 +44,14 @@ export default {
    * @param  ids:{vesselId,vesselIndex}
    *
    */
-  dataFetchLoop2: async ({state, commit, dispatch}, ids) => {
+  dataFetchLoop2: async ({ state, commit, dispatch }, ids) => {
     let header = state.header;
     let vesselId = ids.vesselId;
     let vesselIndex = ids.vesselIndex;
     // a subset of variables for this vessel
     let varObj = state.default_vars.find(x => x.id === vesselId);
     let i = 0;
-    for(let key in varObj.variables) {
+    for (let key in varObj.variables) {
       let logVar = {
         id: varObj.variables[key].id,
         name: varObj.variables[key].name,
@@ -62,36 +59,36 @@ export default {
         dayData: [],
         hourData: [],
         quarterhourData: []
-      }
+      };
       // pushes this logvariable to state without data
-      commit('APPEND_LOG_VARIABLE', {
+      commit("APPEND_LOG_VARIABLE", {
         vesselIndex,
         logVar
       });
 
       dispatch("getLogData", {
-          vesselIndex: ids.vesselIndex,
-          vesselId: ids.vesselId,
-          varId: varObj.variables[key].id,
-          name: varObj.variables[key].name,
-          granularity: "Day",
-          logIndex: i
+        vesselIndex: ids.vesselIndex,
+        vesselId: ids.vesselId,
+        varId: varObj.variables[key].id,
+        name: varObj.variables[key].name,
+        granularity: "Day",
+        logIndex: i
       });
       dispatch("getLogData", {
-          vesselIndex: ids.vesselIndex,
-          vesselId: ids.vesselId,
-          varId: varObj.variables[key].id,
-          name: varObj.variables[key].name,
-          granularity: "Hour",
-          logIndex: i
+        vesselIndex: ids.vesselIndex,
+        vesselId: ids.vesselId,
+        varId: varObj.variables[key].id,
+        name: varObj.variables[key].name,
+        granularity: "Hour",
+        logIndex: i
       });
       dispatch("getLogData", {
-          vesselIndex: ids.vesselIndex,
-          vesselId: ids.vesselId,
-          varId: varObj.variables[key].id,
-          name: varObj.variables[key].name,
-          granularity: "QuarterHour",
-          logIndex: i
+        vesselIndex: ids.vesselIndex,
+        vesselId: ids.vesselId,
+        varId: varObj.variables[key].id,
+        name: varObj.variables[key].name,
+        granularity: "QuarterHour",
+        logIndex: i
       });
       i++;
     }
@@ -158,9 +155,8 @@ export default {
     let fromDate = "2016-01-01";
     let toDate = "2019-05-01";
     let granularity = payload.granularity;
-    if(granularity == "QuarterHour")
-    {
-      fromDate = "2019-04-15";  // ~ two tweeks
+    if (granularity == "QuarterHour") {
+      fromDate = "2019-04-15"; // ~ two tweeks
     }
     let header = state.header;
     let url = `${state.url}/logdata/find?logVariableId=${logVariableId}
@@ -169,28 +165,28 @@ export default {
     let res = await fetch(url, header);
     let jsonLogData = await res.json();
 
-    switch (granularity)  {
-      case 'Day':
-        commit('APPEND_DAY_DATA',{
+    switch (granularity) {
+      case "Day":
+        commit("APPEND_DAY_DATA", {
           logData: jsonLogData.data,
           vesselIndex: payload.vesselIndex,
           logIndex: payload.logIndex
         });
         break;
-      case 'Hour':
-        commit('APPEND_HOUR_DATA',{
+      case "Hour":
+        commit("APPEND_HOUR_DATA", {
           logData: jsonLogData.data,
           vesselIndex: payload.vesselIndex,
           logIndex: payload.logIndex
         });
         break;
-      case 'QuarterHour':
-        commit('APPEND_QUARTERHOUR_DATA',{
+      case "QuarterHour":
+        commit("APPEND_QUARTERHOUR_DATA", {
           logData: jsonLogData.data,
           vesselIndex: payload.vesselIndex,
           logIndex: payload.logIndex
         });
-      }
+    }
 
     commit("INCREMENT");
   },
@@ -213,5 +209,13 @@ export default {
       temp_date.getDate();
     commit("SET_DATE", date);
     commit("INCREMENT");
+  },
+  /**
+   * After authenticating in login will set the user to loggedIn
+   * and login info in header
+   */
+  setLoggedIn: ({ commit }, payload) => {
+    commit("SET_LOGGED_IN", payload.loggedIn);
+    commit("SET_HEADER", payload.headerParams);
   }
-}
+};
