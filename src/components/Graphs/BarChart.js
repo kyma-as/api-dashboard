@@ -13,8 +13,12 @@ export default {
   },
 
   mounted() {
-    this.fuel = this.getFuel(this.$route.params.vesselid,
-    "2018-01-01T00:00:00","2019-01-01T00:00:00", "Hour");
+    this.fuel = this.getFuel(
+      this.$route.params.vesselid,
+      "2018-01-01T00:00:00",
+      "2019-01-01T00:00:00",
+      "Hour"
+    );
     let labels = [];
     let dataen = [];
     let array = [];

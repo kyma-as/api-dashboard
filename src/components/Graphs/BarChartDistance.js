@@ -13,13 +13,17 @@ export default {
   },
 
   mounted() {
-    this.speed = this.getSpeed(this.$route.params.vesselid,
-    "2019-04-20T00:00:00","2019-05-01T00:00:00", "Hour");
+    this.speed = this.getSpeed(
+      this.$route.params.vesselid,
+      "2019-04-20T00:00:00",
+      "2019-05-01T00:00:00",
+      "Hour"
+    );
     let gpsDistancenaut = [];
     let gpsDistanceKM = [];
     let dataen = [];
 
-    let labels = ["Naut","KM"];
+    let labels = ["Naut", "KM"];
     for (let key in this.speed.gps.data) {
       gpsDistancenaut.push(this.speed.gps.data[key]);
       gpsDistanceKM.push(this.speed.gps.data[key] * 1.852);
@@ -30,7 +34,6 @@ export default {
     let Summ = gpsDistanceKM.reduce((prev, cur) => prev + cur, 0);
     Summ = Summ.toFixed(2);
     dataen.push(Summ);
-
 
     this.renderChart(
       {

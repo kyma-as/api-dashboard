@@ -30,6 +30,6 @@ export default new Router({
       path: "/csv",
       name: "csv",
       component: Csv
-    },
+    }
   ]
 });

@@ -85,14 +85,14 @@ export default {
             bool = true;
           }
           if (bool) {
-            day.push("0"+k);
+            day.push("0" + k);
           }
           if ("0" + k == toDate.substring(8, 10)) {
             bool = false;
           }
         }
         for (let k = 10; k < 32; k++) {
-          if ( k == fromDate.substring(8, 10)) {
+          if (k == fromDate.substring(8, 10)) {
             bool = true;
           }
           if (bool) {
@@ -101,10 +101,10 @@ export default {
           if (0 + k == toDate.substring(8, 10)) {
             bool = false;
           }
-        }  labels = day
+        }
+        labels = day;
       }
-      console.log(day)
-    
+      console.log(day);
     }
 
     if (labels == kvartal) {
