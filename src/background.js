@@ -83,6 +83,10 @@ if (isDevelopment) {
   }
 }
 
+/**
+ * *FUNCTIONS FROM RENDER THREAD EVENTS*
+ */
+
 /** An event listener
  *  takes a event from CSV.vue
  *  and creates a csv file
@@ -95,15 +99,20 @@ ipcMain.on("write-csv", (event, csv) => {
   let path = getPath();
   // Write csv to file method
   csv = parseTextToCsv(csv);
-  writeFile(path, "csv", csv, () => {
-    console.log(csv);
-    console.log("callback called");
+  writeFile(path, "csv", csv, (cb) => {
+    event.sender.send("write-csv-callback",cb);
   });
-  // TODO: event reply
-  // Then event.reply('write-csv-reply',reply)
-  // Reply should be path of file and if successful
+
 });
 
+/**
+ * Parsing text to csv format
+ * may require adjusting or replacing
+ * to a known library function, thoughts on d3
+ *
+ * @param csv in text format
+ * @return {string} in csv format
+ */
 function parseTextToCsv(csv) {
   let parsed = "";
   parsed = csv.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
@@ -120,10 +129,13 @@ function writeFile(path, extension, content, callBack) {
   let filePath = path + "/" + "kymaTest." + extension;
 
   fs.writeFile(filePath, content, err => {
-    if (err) throw err;
-    console.log(filePath);
-    console.log("file saved");
-    callBack();
+    if (err){
+      callBack({filePath:filePath,error:err});
+      console.error("File save error: " + err);
+      throw err;
+    }
+    console.log("File saved: " + filePath);
+    callBack({filePath:filePath});
   });
 }
 
