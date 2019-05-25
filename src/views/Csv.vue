@@ -169,9 +169,9 @@
                         myReader.onload = function (event) {
                             console.log("test");
                             ipcRenderer.send("write-csv", JSON.stringify(myReader.result));
-                            this.loading = false;
                         };
                         myReader.readAsText(blobOutput);
+                        this.loading = false;
                     })
             }
         },
