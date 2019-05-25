@@ -140,6 +140,18 @@
                 this.snackbarColor = "success";
             },
 
+            /**
+             * Handling errors in fetch() http-request
+             * @param response
+             * @return {{ok}|*}
+             */
+            handleErrors(response) {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response;
+            },
+
             /** To get the vessels needed for the
              *  dropdown list
              */
