@@ -45,6 +45,78 @@ export default {
           id: 9024,
           name: "Blr Fuel Mass"
         },
+        boilerhfo: {
+          id: 9031,
+          name: "Blr HFO Mass"
+        },
+        boilerlshfo: {
+          id: 9033,
+          name: "Blr LSHFO Mass"
+        },
+        boilermdo: {
+          id: 9034,
+          name: "Blr MDO Mass"
+        },
+        boilermgo: {
+          id: 9035,
+          name: "Blr MGO Mass"
+        },
+        ge12hfo: {
+          id: 9080,
+          name: "GE 1+2 HFO Mass"
+        },
+        ge12iso: {
+          id: 9081,
+          name: "GE 1+2 ISO Eq MDO"
+        },
+        ge12lshfo: {
+          id: 9082,
+          name: "GE 1+2 LSHFO Mass"
+        },
+        ge12mdo: {
+          id: 9083,
+          name: "GE 1+2 MDO Mass"
+        },
+        g12mgo: {
+          id: 9084,
+          name: "GE 1+2 MGO Mass"
+        },
+        g12pilot: {
+          id: 9085,
+          name: "GE 1+2 Pilot Fuel"
+        },
+        ge34fuel: {
+          id: 9109,
+          name: "GE 3+4 Fuel Mass"
+        },
+        g34temp: {
+          id: 9112,
+          name: "GE 3+4 Fuel Temp"
+        },
+        ge34hfo: {
+          id: 9114,
+          name: "GE 3+4 HFO Mass"
+        },
+        ge34iso: {
+          id: 9115,
+          name: "GE 3+4 ISO Eq MDO"
+        },
+        ge34lshfo: {
+          id: 9116,
+          name: "GE 3+4 LSHFO Mass"
+        },
+        ge34mdo: {
+          id: 9117,
+          name: "GE 3+4 MDO Mass"
+        },
+        ge34mgo: {
+          id: 9118,
+          name: "GE 3+4 MGO Mass"
+        },
+        ge34pilot: {
+          id: 9119,
+          name: "GE 3+4 Pilot Fuel"
+        },
         gcu: {
           id: 9060,
           name: "GCU Gas Mass"
