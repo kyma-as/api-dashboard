@@ -90,6 +90,7 @@
 </template>
 <script>
     import NavDrawer from "@/components/NavDrawer";
+
     const {ipcRenderer} = require('electron');
 
     /**
@@ -112,10 +113,6 @@
         mounted() {
             this.loading = true;
             this.getVessels();
-            this.snackBarError("Error");
-            this.snackBarSuccess("Success");
-            // TODO used for testing
-            //this.getLogDataCsv([9049], "Day", "2016-08-01", "2016-09-13");
         },
         /**
          * The methods in here does everything by
