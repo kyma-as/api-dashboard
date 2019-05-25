@@ -775,3 +775,16 @@ export default {
     }
   }
 };
+
+// ----------------- Private Helper Function ----------------- //
+
+function arrayOfKeys(gran, sampleArray) {
+  switch (gran) {
+    case state.granularities.day:
+      return sampleArray.dayData;
+    case state.granularities.hour:
+      return sampleArray.hourData;
+    case state.granularities.quarterhour:
+      return sampleArray.quarterhourData;
+  }
+}
