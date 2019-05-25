@@ -80,10 +80,9 @@
         </v-layout>
         <v-snackbar v-model="snackbar"
                     :color="snackbarColor"
-                    bottom="true"
-                    timeout="0"
-                    vertical="true">
-          Test
+                    :bottom="true"
+                    :timeout="5000">
+          {{snackbarText}}
         </v-snackbar>
       </v-content>
     </div>
@@ -91,24 +90,20 @@
 </template>
 <script>
     import NavDrawer from "@/components/NavDrawer";
-
     const {ipcRenderer} = require('electron');
 
     /**
      * Handles event callback after writing csv file
      */
-    ipcRenderer.on("write-csv-callback",(event,arg)=>{
+    ipcRenderer.on("write-csv-callback", (event, arg) => {
         console.log(arg);
         // Handle error
-        if(!!arg.error){
+        if (!!arg.error) {
             snackBarError();
-        }else{
+        } else {
             snackBarSuccess();
         }
     });
-
-
-
 
     export default {
         components: {
@@ -117,6 +112,8 @@
         mounted() {
             this.loading = true;
             this.getVessels();
+            this.snackBarError("Error");
+            this.snackBarSuccess("Success");
             // TODO used for testing
             //this.getLogDataCsv([9049], "Day", "2016-08-01", "2016-09-13");
         },
@@ -128,6 +125,23 @@
          * * URL path may have to be altered
          */
         methods: {
+            /**
+             * Changes snackbar to output error message
+             */
+            snackBarError(errorMsg) {
+                this.snackbar = true;
+                this.snackbarText = errorMsg;
+                this.snackbarColor = "error";
+            },
+
+            /**
+             * Changes snackbar to output success message
+             */
+            snackBarSuccess(successMsg) {
+                this.snackbar = true;
+                this.snackbarText = successMsg;
+                this.snackbarColor = "success";
+            },
 
             /** To get the vessels needed for the
              *  dropdown list
@@ -190,7 +204,7 @@
                         this.loading = false;
                     })
             },
-            writeFileEventFeedback:function(event){
+            writeFileEventFeedback: function (event) {
 
             }
         },
@@ -210,11 +224,16 @@
         },
         data() {
             return {
-                snackbar:false,
-                snackbarText:"",
-                snackbarColor:"",
-                loading: false,
-                selected: [],
+                //Snackbar
+                snackbar: false,
+                snackbarText: "",
+                snackbarColor: "",
+                // Outputs
+                vessels: [],
+                granularity: ['Day', 'Hour', 'QuarterHour', 'Minute', 'Raw'],
+                logData: {},
+                logVariables: [{}],
+                // Header for dataTable
                 headers: [
                     {
                         text: 'ID',
@@ -225,14 +244,14 @@
                     {text: 'logDataMinDate', value: 'logDataMinDate', align: 'right'},
                     {text: 'logDataMaxDate', value: 'logDataMaxDate', align: 'right'},
                 ],
-                vessels: [],
+                // Selections
+                selected: [],
                 selectedVessels: [],
                 selectedGranularity: [],
                 selectedFromDate: ["2019-05-01"],
                 selectedToDate: ["2019-05-10"],
-                granularity: ['Day', 'Hour', 'QuarterHour', 'Minute', 'Raw'],
-                logData: {},
-                logVariables: [{}]
+                // Misc
+                loading: false,
             }
         }
     }
