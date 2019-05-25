@@ -10,48 +10,14 @@ export default {
       case 110: {
         let co2Array = vessel.logVariables.find(x => x.id === 9049);
         let so2Array = vessel.logVariables.find(x => x.id === 9051);
-        let start = false;
 
-        let co2Data = {};
-        let so2Data = {};
+        let keyArray = arrayOfKeys(state, gran, co2Array);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [co2Array, so2Array]);
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = co2Array.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = co2Array.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = co2Array.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            console.log(key.substring(0, 10));
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                co2Data[key] = co2Array.dayData[key];
-                so2Data[key] = so2Array.dayData[key];
-                break;
-              case state.granularities.hour:
-                co2Data[key] = co2Array.hourData[key];
-                so2Data[key] = so2Array.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                co2Data[key] = co2Array.quarterhourData[key];
-                so2Data[key] = so2Array.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let co2Data = dataArray[0];
+        let so2Data = dataArray[1];
+
         return {
           co2: {
             id: co2Array.id,
@@ -70,47 +36,14 @@ export default {
       case 121: {
         let co2Array = vessel.logVariables.find(x => x.id === 10415);
         let so2Array = vessel.logVariables.find(x => x.id === 10417);
-        let start = false;
 
-        let co2Data = {};
-        let so2Data = {};
+        let keyArray = arrayOfKeys(state, gran, co2Array);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [co2Array, so2Array]);
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = co2Array.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = co2Array.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = co2Array.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                co2Data[key] = co2Array.dayData[key];
-                so2Data[key] = so2Array.dayData[key];
-                break;
-              case state.granularities.hour:
-                co2Data[key] = co2Array.hourData[key];
-                so2Data[key] = so2Array.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                co2Data[key] = co2Array.quarterhourData[key];
-                so2Data[key] = so2Array.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let co2Data = dataArray[0];
+        let so2Data = dataArray[1];
+
         return {
           co2: {
             id: co2Array.id,
@@ -129,47 +62,14 @@ export default {
       case 133: {
         let co2Array = vessel.logVariables.find(x => x.id === 12125);
         let so2Array = vessel.logVariables.find(x => x.id === 12127);
-        let start = false;
 
-        let co2Data = {};
-        let so2Data = {};
+        let keyArray = arrayOfKeys(state, gran, co2Array);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [co2Array, so2Array]);
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = co2Array.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = co2Array.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = co2Array.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                co2Data[key] = co2Array.dayData[key];
-                so2Data[key] = so2Array.dayData[key];
-                break;
-              case state.granularities.hour:
-                co2Data[key] = co2Array.hourData[key];
-                so2Data[key] = so2Array.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                co2Data[key] = co2Array.quarterhourData[key];
-                so2Data[key] = so2Array.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let co2Data = dataArray[0];
+        let so2Data = dataArray[1];
+
         return {
           co2: {
             id: co2Array.id,
@@ -188,47 +88,14 @@ export default {
       case 123: {
         let co2Array = vessel.logVariables.find(x => x.id === 10730);
         let so2Array = vessel.logVariables.find(x => x.id === 10732);
-        let start = false;
 
-        let co2Data = {};
-        let so2Data = {};
+        let keyArray = arrayOfKeys(state, gran, co2Array);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [co2Array, so2Array]);
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = co2Array.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = co2Array.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = co2Array.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                co2Data[key] = co2Array.dayData[key];
-                so2Data[key] = so2Array.dayData[key];
-                break;
-              case state.granularities.hour:
-                co2Data[key] = co2Array.hourData[key];
-                so2Data[key] = so2Array.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                co2Data[key] = co2Array.quarterhourData[key];
-                so2Data[key] = so2Array.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let co2Data = dataArray[0];
+        let so2Data = dataArray[1];
+
         return {
           co2: {
             id: co2Array.id,
@@ -252,46 +119,14 @@ export default {
       case 110: {
         let gpsArray = vessel.logVariables.find(x => x.id === 9177);
         let logArray = vessel.logVariables.find(x => x.id === 9178);
-        let start = false;
-        let gpsData = {};
-        let logData = {};
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = gpsArray.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = gpsArray.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = gpsArray.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                gpsData[key] = gpsArray.dayData[key];
-                logData[key] = logArray.dayData[key];
-                break;
-              case state.granularities.hour:
-                gpsData[key] = gpsArray.hourData[key];
-                logData[key] = logArray.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                gpsData[key] = gpsArray.quarterhourData[key];
-                logData[key] = logArray.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let keyArray = arrayOfKeys(state, gran, gpsArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [gpsArray, logArray]);
+
+        let gpsData = dataArray[0];
+        let logData = dataArray[1];
+
         return {
           gps: {
             id: gpsArray.id,
@@ -310,46 +145,14 @@ export default {
       case 121: {
         let gpsArray = vessel.logVariables.find(x => x.id === 10481);
         let logArray = vessel.logVariables.find(x => x.id === 10482);
-        let start = false;
-        let gpsData = {};
-        let logData = {};
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = gpsArray.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = gpsArray.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = gpsArray.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                gpsData[key] = gpsArray.dayData[key];
-                logData[key] = logArray.dayData[key];
-                break;
-              case state.granularities.hour:
-                gpsData[key] = gpsArray.hourData[key];
-                logData[key] = logArray.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                gpsData[key] = gpsArray.quarterhourData[key];
-                logData[key] = logArray.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let keyArray = arrayOfKeys(state, gran, gpsArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [gpsArray, logArray]);
+
+        let gpsData = dataArray[0];
+        let logData = dataArray[1];
+
         return {
           gps: {
             id: gpsArray.id,
@@ -368,46 +171,14 @@ export default {
       case 133: {
         let gpsArray = vessel.logVariables.find(x => x.id === 12191);
         let logArray = vessel.logVariables.find(x => x.id === 12192);
-        let start = false;
-        let gpsData = {};
-        let logData = {};
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = gpsArray.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = gpsArray.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = gpsArray.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                gpsData[key] = gpsArray.dayData[key];
-                logData[key] = logArray.dayData[key];
-                break;
-              case state.granularities.hour:
-                gpsData[key] = gpsArray.hourData[key];
-                logData[key] = logArray.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                gpsData[key] = gpsArray.quarterhourData[key];
-                logData[key] = logArray.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let keyArray = arrayOfKeys(state, gran, gpsArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [gpsArray, logArray]);
+
+        let gpsData = dataArray[0];
+        let logData = dataArray[1];
+
         return {
           gps: {
             id: gpsArray.id,
@@ -426,46 +197,14 @@ export default {
       case 123: {
         let gpsArray = vessel.logVariables.find(x => x.id === 10803);
         let logArray = vessel.logVariables.find(x => x.id === 10804);
-        let start = false;
-        let gpsData = {};
-        let logData = {};
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = gpsArray.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = gpsArray.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = gpsArray.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                gpsData[key] = gpsArray.dayData[key];
-                logData[key] = logArray.dayData[key];
-                break;
-              case state.granularities.hour:
-                gpsData[key] = gpsArray.hourData[key];
-                logData[key] = logArray.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                gpsData[key] = gpsArray.quarterhourData[key];
-                logData[key] = logArray.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let keyArray = arrayOfKeys(state, gran, gpsArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [gpsArray, logArray]);
+
+        let gpsData = dataArray[0];
+        let logData = dataArray[1];
+
         return {
           gps: {
             id: gpsArray.id,
@@ -495,64 +234,17 @@ export default {
         let ge2Array = vessel.logVariables.find(x => x.id === 9088);
         let ge3Array = vessel.logVariables.find(x => x.id === 9098);
         let ge4Array = vessel.logVariables.find(x => x.id === 9122);
-        let start = false;
 
-        let boilerfuelData = {};
-        let gcuData = {};
-        let ge1Data = {};
-        let ge2Data = {};
-        let ge3Data = {};
-        let ge4Data = {};
+        let keyArray = arrayOfKeys(state, gran, boilerfuelArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [boilerfuelArray, gcuArray, ge1Array, ge2Array, ge3Array, ge4Array]);
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = gcuArray.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = gcuArray.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = gcuArray.quarterhourData;
-            break;
-        }
-
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                boilerfuelData[key] = boilerfuelArray.dayData[key];
-                gcuData[key] = gcuArray.dayData[key];
-                ge1Data[key] = ge1Array.dayData[key];
-                ge2Data[key] = ge2Array.dayData[key];
-                ge3Data[key] = ge3Array.dayData[key];
-                ge4Data[key] = ge4Array.dayData[key];
-                break;
-              case state.granularities.hour:
-                boilerfuelData[key] = boilerfuelArray.hourData[key];
-                gcuData[key] = gcuArray.hourData[key];
-                ge1Data[key] = ge1Array.hourData[key];
-                ge2Data[key] = ge2Array.hourData[key];
-                ge3Data[key] = ge3Array.hourData[key];
-                ge4Data[key] = ge4Array.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                boilerfuelData[key] = boilerfuelArray.quarterhourData[key];
-                gcuData[key] = gcuArray.quarterhourData[key];
-                ge1Data[key] = ge1Array.quarterhourData[key];
-                ge2Data[key] = ge2Array.quarterhourData[key];
-                ge3Data[key] = ge3Array.quarterhourData[key];
-                ge4Data[key] = ge4Array.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let boilerfuelData = dataArray[0];
+        let gcuData = dataArray[1];
+        let ge1Data = dataArray[2];
+        let ge2Data = dataArray[3];
+        let ge3Data = dataArray[4];
+        let ge4Data = dataArray[5];
 
         return {
           boilerfuel: {
@@ -596,47 +288,13 @@ export default {
       case 121: {
         let boilerfoArray = vessel.logVariables.find(x => x.id === 10391);
         let boilergasArray = vessel.logVariables.find(x => x.id === 10396);
-        let start = false;
 
-        let boilerfoData = {};
-        let boilergasData = {};
+        let keyArray = arrayOfKeys(state, gran, boilerfoArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [boilerfoArray, boilergasArray]);
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = boilerfoArray.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = boilerfoArray.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = boilerfoArray.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                boilerfoData[key] = boilerfoArray.dayData[key];
-                boilergasData[key] = boilergasArray.dayData[key];
-                break;
-              case state.granularities.hour:
-                boilerfoData[key] = boilerfoArray.hourData[key];
-                boilergasData[key] = boilergasArray.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                boilerfoData[key] = boilerfoArray.quarterhourData[key];
-                boilergasData[key] = boilergasArray.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let boilerfoData = dataArray[0];
+        let boilergasData = dataArray[1];
         return {
           boilerfo: {
             id: boilerfoArray.id,
@@ -655,47 +313,14 @@ export default {
       case 123: {
         let boilerfoArray = vessel.logVariables.find(x => x.id === 10700);
         let boilergasArray = vessel.logVariables.find(x => x.id === 10705);
-        let start = false;
 
-        let boilerfoData = {};
-        let boilergasData = {};
+        let keyArray = arrayOfKeys(state, gran, boilerfoArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [boilerfoArray, boilergasArray]);
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = boilerfoArray.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = boilerfoArray.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = boilerfoArray.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                boilerfoData[key] = boilerfoArray.dayData[key];
-                boilergasData[key] = boilergasArray.dayData[key];
-                break;
-              case state.granularities.hour:
-                boilerfoData[key] = boilerfoArray.hourData[key];
-                boilergasData[key] = boilergasArray.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                boilerfoData[key] = boilerfoArray.quarterhourData[key];
-                boilergasData[key] = boilergasArray.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let boilerfoData = dataArray[0];
+        let boilergasData = dataArray[1];
+
         return {
           boilerfo: {
             id: boilerfoArray.id,
@@ -714,47 +339,14 @@ export default {
       case 133: {
         let boilerfoArray = vessel.logVariables.find(x => x.id === 12101);
         let boilergasArray = vessel.logVariables.find(x => x.id === 12106);
-        let start = false;
 
-        let boilerfoData = {};
-        let boilergasData = {};
+        let keyArray = arrayOfKeys(state, gran, boilerfoArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [boilerfoArray, boilergasArray]);
 
-        let keyArray;
-        switch (gran) {
-          case state.granularities.day:
-            keyArray = boilerfoArray.dayData;
-            break;
-          case state.granularities.hour:
-            keyArray = boilerfoArray.hourData;
-            break;
-          case state.granularities.quarterhour:
-            keyArray = boilerfoArray.quarterhourData;
-            break;
-        }
-        for (let key in keyArray) {
-          if (key.substring(0, 10) == from.substring(0, 10)) {
-            start = true;
-          }
-          if (key.substring(0, 10) == to.substring(0, 10)) {
-            start = false;
-          }
-          if (start) {
-            switch (gran) {
-              case state.granularities.day:
-                boilerfoData[key] = boilerfoArray.dayData[key];
-                boilergasData[key] = boilergasArray.dayData[key];
-                break;
-              case state.granularities.hour:
-                boilerfoData[key] = boilerfoArray.hourData[key];
-                boilergasData[key] = boilergasArray.hourData[key];
-                break;
-              case state.granularities.quarterhour:
-                boilerfoData[key] = boilerfoArray.quarterhourData[key];
-                boilergasData[key] = boilergasArray.quarterhourData[key];
-                break;
-            }
-          }
-        }
+        let boilerfoData = dataArray[0];
+        let boilergasData = dataArray[1];
+
         return {
           boilerfo: {
             id: boilerfoArray.id,
@@ -778,7 +370,15 @@ export default {
 
 // ----------------- Private Helper Function ----------------- //
 
-function arrayOfKeys(gran, sampleArray) {
+/**
+ * Returns an array of keys which can be used to get corresponding values.
+ *
+ * @param state       to access state
+ * @param gran        to get correct keys (Hour has 24x more than Day)
+ * @param sampleArray an array that has the keys (dates)
+ * @return            array of keys
+ */
+function arrayOfKeys(state, gran, sampleArray) {
   switch (gran) {
     case state.granularities.day:
       return sampleArray.dayData;
@@ -787,4 +387,53 @@ function arrayOfKeys(gran, sampleArray) {
     case state.granularities.quarterhour:
       return sampleArray.quarterhourData;
   }
+}
+
+/**
+ * Returns a subset of data between from-date and to-date
+ *
+ * @param state    to access state
+ * @param gran     to return the correct granularity of data
+ * @param from     date
+ * @param to       date
+ * @param keyArray array of dates used to get the corresponding data
+ * @param arrays   arrays to be made subsets of
+ * @return         array of data subsets
+ */
+
+function subsetOfData(state, gran, from, to, keyArray, arrays) {
+  let start = false;
+  var dataArrays = [];
+  for(let i = 0; i < arrays.length; i++) {
+    dataArrays.push({});
+  }
+
+  for (let key in keyArray) {
+    if (key.substring(0, 10) == from.substring(0, 10)) {
+      start = true;
+    }
+    if (key.substring(0, 10) == to.substring(0, 10)) {
+      start = false;
+    }
+    if (start) {
+      switch (gran) {
+        case state.granularities.day:
+          for(let i = 0; i < arrays.length; i++) {
+            dataArrays[i][key] = arrays[i].dayData[key];
+          }
+          break;
+        case state.granularities.hour:
+          for(let i = 0; i < arrays.length; i++) {
+            dataArrays[i][key] = arrays[i].hourData[key];
+          }
+          break;
+        case state.granularities.quarterhour:
+          for(let i = 0; i < arrays.length; i++) {
+            dataArrays[i][key] = arrays[i].quarterhourData[key];
+          }
+          break;
+      }
+    }
+  }
+  return dataArrays;
 }
