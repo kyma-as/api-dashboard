@@ -78,6 +78,13 @@
             </v-data-table>
           </v-flex>
         </v-layout>
+        <v-snackbar v-model="snackbar"
+                    :color="snackbarColor"
+                    bottom="true"
+                    timeout="0"
+                    vertical="true">
+          Test
+        </v-snackbar>
       </v-content>
     </div>
   </div>
@@ -86,6 +93,23 @@
     import NavDrawer from "@/components/NavDrawer";
 
     const {ipcRenderer} = require('electron');
+
+    /**
+     * Handles event callback after writing csv file
+     */
+    ipcRenderer.on("write-csv-callback",(event,arg)=>{
+        console.log(arg);
+        // Handle error
+        if(!!arg.error){
+            snackBarError();
+        }else{
+            snackBarSuccess();
+        }
+    });
+
+
+
+
     export default {
         components: {
             NavDrawer
@@ -104,14 +128,6 @@
          * * URL path may have to be altered
          */
         methods: {
-            /** Sending CSV blob data to main thread
-             *  for it to be printed to file
-             * @param csv
-             */
-            sendCsvEventToMain(csv) {
-                console.log("Sending event to MainThread");
-                ipcRenderer.send("write-csv", csv);
-            },
 
             /** To get the vessels needed for the
              *  dropdown list
@@ -194,6 +210,9 @@
         },
         data() {
             return {
+                snackbar:false,
+                snackbarText:"",
+                snackbarColor:"",
                 loading: false,
                 selected: [],
                 headers: [
