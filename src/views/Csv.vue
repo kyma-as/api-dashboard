@@ -43,7 +43,8 @@
           <v-flex md3>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
-                <v-btn class="primary primary darken-3" flat large>
+                <v-btn class="primary primary darken-3" flat large
+                @click="getLogDataCsv(selected,granularity,selectedFromDate,selectedToDate)">
                   Print Csv File
                 </v-btn>
               </v-card-actions>
@@ -148,9 +149,10 @@
              * @param toDate YYYY-MM-DD
              */
             getLogDataCsv(logVariableIds, granularity, fromDate, toDate) {
+
                 let fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
-                    + logVariableIds[0] + "&granularity=" + granularity + "&fromDate="
-                    + fromDate + "&toDate=" + toDate + "&format=csv";
+                    + logVariableIds[0].id + "&granularity=" + granularity[0] + "&fromDate="
+                    + fromDate[0] + "&toDate=" + toDate[0] + "&format=csv";
                 fetch(fetchUrl, this.fetchHeader)
                     .then(res => res.blob())
                     .then(blobOutput => {
@@ -192,6 +194,8 @@
                 vessels: [],
                 selectedVessels: [],
                 selectedGranularity:[],
+                selectedFromDate:["2019-05-01"],
+                selectedToDate:["2019-05-10"],
                 granularity: ['Day', 'Hour', 'QuarterHour', 'Minute', 'Raw'],
                 logData: {},
                 logVariables: [{}]
