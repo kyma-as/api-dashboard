@@ -44,7 +44,7 @@
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-btn class="primary primary darken-3" flat large
-                @click="getLogDataCsv(selected,granularity,selectedFromDate,selectedToDate)">
+                       @click="getLogDataCsv(selected,granularity,selectedFromDate,selectedToDate)">
                   Print Csv File
                 </v-btn>
               </v-card-actions>
@@ -173,6 +173,9 @@
                         myReader.readAsText(blobOutput);
                         this.loading = false;
                     })
+            },
+            writeFileEventFeedback:function(event){
+
             }
         },
         computed: {
@@ -185,13 +188,13 @@
             fetchHeader() {
                 return this.$store.state.header;
             },
-            isLoading(){
+            isLoading() {
                 return this.loading
             }
         },
         data() {
             return {
-                loading:false,
+                loading: false,
                 selected: [],
                 headers: [
                     {
@@ -205,9 +208,9 @@
                 ],
                 vessels: [],
                 selectedVessels: [],
-                selectedGranularity:[],
-                selectedFromDate:["2019-05-01"],
-                selectedToDate:["2019-05-10"],
+                selectedGranularity: [],
+                selectedFromDate: ["2019-05-01"],
+                selectedToDate: ["2019-05-10"],
                 granularity: ['Day', 'Hour', 'QuarterHour', 'Minute', 'Raw'],
                 logData: {},
                 logVariables: [{}]
