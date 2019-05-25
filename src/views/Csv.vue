@@ -58,13 +58,16 @@
                 item-key="name"
                 select-all
                 class="elevation-1"
+                :loading="isLoading"
             >
+              <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear>
               <template v-slot:items="props">
                 <td>
                   <v-checkbox
                       v-model="props.selected"
                       primary
                       hide-details
+                      mandatory
                   ></v-checkbox>
                 </td>
                 <td>{{ props.item.id }}</td>
@@ -88,6 +91,7 @@
             NavDrawer
         },
         mounted() {
+            this.loading = true;
             this.getVessels();
             // TODO used for testing
             //this.getLogDataCsv([9049], "Day", "2016-08-01", "2016-09-13");
@@ -121,6 +125,7 @@
                         for (let entry of vessels) {
                             this.vessels.push(entry.id);
                         }
+                        this.loading = false;
                     })
             },
 
@@ -130,13 +135,14 @@
              * @param vesselId
              */
             getLogVariables(vesselId) {
-                console.log("test")
+                console.log("test");
                 let fetchUrl = `${this.fetchUrl}logvariables/find?vesselId=${vesselId}`;
+                this.loading = true;
                 fetch(fetchUrl, this.fetchHeader)
                     .then(res => res.json())
                     .then(logVariables => {
                         this.logVariables = logVariables;
-                        console.log(this.logVariables);
+                        this.loading = false;
                     })
             },
 
@@ -149,6 +155,7 @@
              * @param toDate YYYY-MM-DD
              */
             getLogDataCsv(logVariableIds, granularity, fromDate, toDate) {
+                this.loading = true;
 
                 let fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
                     + logVariableIds[0].id + "&granularity=" + granularity[0] + "&fromDate="
@@ -162,6 +169,7 @@
                         myReader.onload = function (event) {
                             console.log("test");
                             ipcRenderer.send("write-csv", JSON.stringify(myReader.result));
+                            this.loading = false;
                         };
                         myReader.readAsText(blobOutput);
                     })
@@ -176,10 +184,14 @@
             },
             fetchHeader() {
                 return this.$store.state.header;
+            },
+            isLoading(){
+                return this.loading
             }
         },
         data() {
             return {
+                loading:false,
                 selected: [],
                 headers: [
                     {
