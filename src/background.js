@@ -98,8 +98,8 @@ ipcMain.on("write-csv", (event, csv) => {
 
   let path = getPath();
   // Write csv to file method
-  csv = parseTextToCsv(csv);
-  writeFile(path, "csv", csv, (cb) => {
+  csv.file = parseTextToCsv(csv.file);
+  writeFile(path, ".csv", csv, (cb) => {
     event.sender.send("write-csv-callback",cb);
   });
 
@@ -126,9 +126,10 @@ function parseTextToCsv(csv) {
 function writeFile(path, extension, content, callBack) {
   const fs = require("fs");
 
-  let filePath = path + "/" + "kymaTest." + extension;
+  let filePath = path + "/" + content.fileName + extension;
 
-  fs.writeFile(filePath, content, err => {
+  console.log(filePath);
+  fs.writeFile(filePath, content.file, err => {
     if (err){
       callBack({filePath:filePath,error:err});
       console.error("File save error: " + err);
