@@ -365,6 +365,182 @@ export default {
       default:
         return "No matching vessel id";
     }
+  },
+  getFuelTypes: (state) => (vesselid, from, to, gran) => {
+    const vessel = state.vessels.find(vessel => vessel.id === vesselid);
+    switch(vesselid) {
+      case 110: {
+        let boilerfuelArray = vessel.logVariables.find(x => x.id === 9024);
+        let boilerhfoArray = vessel.logVariables.find(x => x.id === 9031);
+        let boilerlshfoArray = vessel.logVariables.find(x => x.id === 9033);
+        let boilermdoArray = vessel.logVariables.find(x => x.id === 9034);
+        let boilermgoArray = vessel.logVariables.find(x => x.id === 9035);
+        let ge12hfoArray = vessel.logVariables.find(x => x.id === 9080);
+        let ge12isoArray = vessel.logVariables.find(x => x.id === 9081);
+        let ge12lshfoArray = vessel.logVariables.find(x => x.id === 9082);
+        let ge12mdoArray = vessel.logVariables.find(x => x.id === 9083);
+        let ge12mgoArray = vessel.logVariables.find(x => x.id === 9084);
+        let ge12pilotArray = vessel.logVariables.find(x => x.id === 9085);
+        let ge34fuelArray = vessel.logVariables.find(x => x.id === 9109);
+        let ge34tempArray = vessel.logVariables.find(x => x.id === 9112);
+        let ge34hfoArray = vessel.logVariables.find(x => x.id === 9114);
+        let ge34isoArray = vessel.logVariables.find(x => x.id === 9115);
+        let ge34lshfoArray = vessel.logVariables.find(x => x.id === 9116);
+        let ge34mdoArray = vessel.logVariables.find(x => x.id === 9117);
+        let ge34mgoArray = vessel.logVariables.find(x => x.id === 9118);
+        let ge34pilotArray = vessel.logVariables.find(x => x.id === 9119);
+
+        let keyArray = arrayOfKeys(state, gran, boilerfuelArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [boilerfuelArray, boilerhfoArray, boilerlshfoArray, boilermdoArray,
+        boilermgoArray, ge12hfoArray, ge12isoArray, ge12lshfoArray,
+        ge12mdoArray, ge12mgoArray, ge12pilotArray, ge34fuelArray,
+        ge34tempArray, ge34hfoArray, ge34isoArray, ge34lshfoArray,
+        ge34mdoArray, ge34mgoArray, ge34pilotArray]);
+
+        let boilerfuelData = dataArray[0];
+        let boilerhfoData = dataArray[1];
+        let boilerlshfoData = dataArray[2];
+        let boilermdoData = dataArray[3];
+        let boilermgoData = dataArray[4];
+        let ge12hfoData = dataArray[5];
+        let ge12isoData = dataArray[6];
+        let ge12lshfoData = dataArray[7];
+        let ge12mdoData = dataArray[8];
+        let ge12mgoData = dataArray[9];
+        let ge12pilotData = dataArray[10];
+        let ge34fuelData = dataArray[11];
+        let ge34tempData = dataArray[12];
+        let ge34hfoData = dataArray[13];
+        let ge34isoData = dataArray[14];
+        let ge34lshfoData = dataArray[15];
+        let ge34mdoData = dataArray[16];
+        let ge34mgoData = dataArray[17];
+        let ge34pilotData = dataArray[18];
+
+        return {
+          boilerfuel: {
+            id: boilerfuelArray.id,
+            name: boilerfuelArray.name,
+            unit: boilerfuelArray.unit,
+            data: boilerfuelData
+          },
+          boilerhfo: {
+            id: boilerhfoArray.id,
+            name: boilerhfoArray.name,
+            unit: boilerhfoArray.unit,
+            data: boilerhfoData
+          },
+          boilerlshfo: {
+            id: boilerlshfoArray.id,
+            name: boilerlshfoArray.name,
+            unit: boilerlshfoArray.unit,
+            data: boilerlshfoData
+          },
+          boilermdo: {
+            id: boilermdoArray.id,
+            name: boilermdoArray.name,
+            unit: boilermdoArray.unit,
+            data: boilermdoData
+          },
+          boilermgo: {
+            id: boilermgoArray.id,
+            name: boilermgoArray.name,
+            unit: boilermgoArray.unit,
+            data: boilermgoData
+          },
+          ge12hfo: {
+            id: ge12hfoArray.id,
+            name: ge12hfoArray.name,
+            unit: ge12hfoArray.unit,
+            data: ge12hfoData
+          },
+          ge12iso: {
+            id: ge12isoArray.id,
+            name: ge12isoArray.name,
+            unit: ge12isoArray.unit,
+            data: ge12isoData
+          },
+          ge12lshfo: {
+            id: ge12lshfoArray.id,
+            name: ge12lshfoArray.name,
+            unit: ge12lshfoArray.unit,
+            data: ge12lshfoData
+          },
+          ge12mdo: {
+            id: ge12mdoArray.id,
+            name: ge12mdoArray.name,
+            unit: ge12mdoArray.unit,
+            data: ge12mdoData
+          },
+          ge12mgo: {
+            id: ge12mgoArray.id,
+            name: ge12mgoArray.name,
+            unit: ge12mgoArray.unit,
+            data: ge12mgoData
+          },
+          ge12pilot: {
+            id: ge12pilotArray.id,
+            name: ge12pilotArray.name,
+            unit: ge12pilotArray.unit,
+            data: ge12pilotData
+          },
+          ge34fuel: {
+            id: ge34fuelArray.id,
+            name: ge34fuelArray.name,
+            unit: ge34fuelArray.unit,
+            data: ge34fuelData
+          },
+          ge34temp: {
+            id: ge34tempArray.id,
+            name: ge34tempArray.name,
+            unit: ge34tempArray.unit,
+            data: ge34tempData
+          },
+          ge34hfo: {
+            id: ge34hfoArray.id,
+            name: ge34hfoArray.name,
+            unit: ge34hfoArray.unit,
+            data: ge34hfoData
+          },
+          ge34iso: {
+            id: ge34isoArray.id,
+            name: ge34isoArray.name,
+            unit: ge34isoArray.unit,
+            data: ge34isoData
+          },
+          ge34lshfo: {
+            id: ge34lshfoArray.id,
+            name: ge34lshfoArray.name,
+            unit: ge34lshfoArray.unit,
+            data: ge34lshfoData
+          },
+          ge34mdo: {
+            id: ge34mdoArray.id,
+            name: ge34mdoArray.name,
+            unit: ge34mdoArray.unit,
+            data: ge34mdoData
+          },
+          ge34mgo: {
+            id: ge34mgoArray.id,
+            name: ge34mgoArray.name,
+            unit: ge34mgoArray.unit,
+            data: ge34mgoData
+          },
+          ge34pilot: {
+            id: ge34pilotArray.id,
+            name: ge34pilotArray.name,
+            unit: ge34pilotArray.unit,
+            data: ge34pilotData
+          }
+        };
+      }
+      case 121:
+      case 123:
+      case 133:
+      default:
+        return "Only data for vessel 110 currently";
+    }
   }
 };
 
