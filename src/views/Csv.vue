@@ -216,9 +216,6 @@
                         myReader.readAsText(blobOutput);
                         this.loading = false;
                     })
-            },
-            writeFileEventFeedback: function (event) {
-
             }
         },
         computed: {
