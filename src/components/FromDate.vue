@@ -34,7 +34,7 @@
         >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.menu.save(date), sendDate(dateFormatted)">OK</v-btn>
+          <v-btn flat color="primary" @click="$refs.menu.save(date), sendDate(fromDateFormatted)">OK</v-btn>
         </v-date-picker>
       </v-menu>
     </v-flex>
@@ -43,15 +43,16 @@
 </template>
 
 <script>
+import { EventBus } from "@/event-bus.js";
  export default {
     data: vm => ({
       date: new Date().toJSON().substr(0, 10),
-      dateFormatted: vm.formatDate(new Date().toJSON().substr(0, 19)),
+      fromDateFormatted: vm.formatDate(new Date().toJSON().substr(0, 19)),
       menu: false
     }),
     watch: {
       date (val) {
-        this.dateFormatted = this.formatDate(this.date)
+        this.fromDateFormatted = this.formatDate(this.date)
       }
     },
     methods: {
@@ -60,8 +61,8 @@
         const [year, month, day] = date.split('-')
         return `${year}-${month}-${day}T00:00:00`
       },
-      sendDate(dateFormatted) {
-        this.$emit('get-from-date', dateFormatted)
+      sendDate(fromDateFormatted) {
+        EventBus.$emit('get-from-date', fromDateFormatted);
       }
     }
   }
