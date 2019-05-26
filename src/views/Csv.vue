@@ -207,11 +207,11 @@
                 this.loading = true;
 
                 // Creating filename from logVars
-                let fileName = `v${this.selectedVessels}_${granularity}_${fromDate}-${toDate}`;
+                let fileName = `v${this.selectedVessels}_${granularity}_${fromDate}_${toDate}`;
 
                 // Fetching data and sending event to create file
                 let fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
-                    + logVariableIds[0].id + "&granularity=" + granularity[0] + "&fromDate="
+                    + logVariableIds[0].id + "&granularity=" + granularity + "&fromDate="
                     + fromDate[0] + "&toDate=" + toDate[0] + "&format=csv";
                 fetch(fetchUrl, this.fetchHeader)
                     .then(this.handleErrors)
@@ -219,10 +219,9 @@
                     .then(blobOutput => {
                         let myReader = new FileReader();
                         let _this = this;
-                        console.log(fileName);
                         myReader.onload = function (event) {
-                            ipcRenderer.send("write-csv", JSON.stringify(myReader.result));
                             console.log(fileName);
+                            ipcRenderer.send("write-csv", {file:JSON.stringify(myReader.result),fileName:fileName});
                         };
                         myReader.readAsText(blobOutput);
                         this.loading = false;
