@@ -103,9 +103,7 @@
              * Handles event callback after writing csv file
              */
             let _this = this;
-            console.log("beforeCreate");
             ipcRenderer.on("write-csv-callback", (event, arg)=> {
-                console.log(arg);
                 // Handle error
                 if (!!arg.error) {
                     _this.snackBarError("Error writing to file.")
@@ -186,7 +184,6 @@
              * @param vesselId
              */
             getLogVariables(vesselId) {
-                console.log("test");
                 let fetchUrl = `${this.fetchUrl}logvariables/find?vesselId=${vesselId}`;
                 this.loading = true;
                 fetch(fetchUrl, this.fetchHeader)
@@ -216,11 +213,9 @@
                     .then(this.handleErrors)
                     .then(res => res.blob())
                     .then(blobOutput => {
-                        console.log("Fetch complete");
                         let myReader = new FileReader();
 
                         myReader.onload = function (event) {
-                            console.log("test");
                             ipcRenderer.send("write-csv", JSON.stringify(myReader.result));
                         };
                         myReader.readAsText(blobOutput);
