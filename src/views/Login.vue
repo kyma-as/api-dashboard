@@ -19,6 +19,7 @@
                                 label="Password" id="password" type="password"
                                 :rules="[rules.required]">
                   </v-text-field>
+                  <p v-if="errorToggle" class="red--text"> Invalid username or password </p>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -48,6 +49,7 @@
         data() {
             return {
                 loading: false,
+                errorToggle: false,
                 input: {
                     username: "",
                     password: ""
@@ -62,12 +64,18 @@
                 }
             }
         },
+        computed: {
+          errorMessage: () => {
+            return this.errorToggle;
+          }
+        },
         methods: {
             async login() {
                 let username = this.input.username;
                 let password = this.input.password;
 
                 this.loading = true;
+                this.errorToggle = false;
 
                 // Authenticate against kyma api
                 let headerParams = convertToBase64(username,password);
@@ -81,6 +89,7 @@
                     this.$router.replace({name: 'vessels'})
 
                 } else {
+                    this.errorToggle = true;
                     this.loading = false;
                     console.log("Could not authenticate with the server")
                 }

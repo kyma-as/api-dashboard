@@ -77,11 +77,11 @@ export default {
           id: 9083,
           name: "GE 1+2 MDO Mass"
         },
-        g12mgo: {
+        ge12mgo: {
           id: 9084,
           name: "GE 1+2 MGO Mass"
         },
-        g12pilot: {
+        ge12pilot: {
           id: 9085,
           name: "GE 1+2 Pilot Fuel"
         },
@@ -89,7 +89,7 @@ export default {
           id: 9109,
           name: "GE 3+4 Fuel Mass"
         },
-        g34temp: {
+        ge34temp: {
           id: 9112,
           name: "GE 3+4 Fuel Temp"
         },

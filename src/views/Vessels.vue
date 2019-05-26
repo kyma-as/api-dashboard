@@ -15,7 +15,7 @@
 </template>
 <script>
     import NavDrawer from "@/components/NavDrawer";
-    import VesselCard from "@/components/VesselCard"
+    import VesselCard from "@/components/VesselCard";
     import { mapState, mapActions } from 'vuex';
 
     export default {
@@ -39,5 +39,5 @@
         beforeCreate() {
           this.$store.dispatch('fetchVessels');
         }
-    };
+    }
 </script>
