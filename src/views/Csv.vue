@@ -93,22 +93,32 @@
 
     const {ipcRenderer} = require('electron');
 
-    /**
-     * Handles event callback after writing csv file
-     */
-    ipcRenderer.on("write-csv-callback", (event, arg) => {
-        console.log(arg);
-        // Handle error
-        if (!!arg.error) {
-            snackBarError();
-        } else {
-            snackBarSuccess();
-        }
-    });
 
     export default {
         components: {
             NavDrawer
+        },
+        created(){
+            /**
+             * Handles event callback after writing csv file
+             */
+            let _this = this;
+            console.log("beforeCreate");
+            ipcRenderer.on("write-csv-callback", (event, arg)=> {
+                console.log(arg);
+                // Handle error
+                if (!!arg.error) {
+                    _this.snackBarError("Error writing to file.")
+                } else {
+                    _this.snackBarSuccess(`File created: ${arg.filePath}`);
+                }
+            });
+        },
+        beforeDestroy(){
+            /**
+             * Remove listeners so that we don't stack them up.
+             */
+          ipcRenderer.removeAllListeners("write-csv-callback");
         },
         mounted() {
             this.loading = true;
