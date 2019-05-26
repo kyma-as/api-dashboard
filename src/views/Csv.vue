@@ -147,6 +147,7 @@
              */
             handleErrors(response) {
                 if (!response.ok) {
+                    this.snackBarError(`Fetch error: ${response.status} ${response.statusText}`);
                     throw Error(response.statusText);
                 }
                 return response;
@@ -158,6 +159,7 @@
             getVessels() {
                 let fetchUrl = `${this.fetchUrl}vessels`;
                 fetch(fetchUrl, this.fetchHeader)
+                    .then(this.handleErrors)
                     .then(res => res.json())
                     .then(vessels => {
 
@@ -178,6 +180,7 @@
                 let fetchUrl = `${this.fetchUrl}logvariables/find?vesselId=${vesselId}`;
                 this.loading = true;
                 fetch(fetchUrl, this.fetchHeader)
+                    .then(this.handleErrors)
                     .then(res => res.json())
                     .then(logVariables => {
                         this.logVariables = logVariables;
@@ -200,6 +203,7 @@
                     + logVariableIds[0].id + "&granularity=" + granularity[0] + "&fromDate="
                     + fromDate[0] + "&toDate=" + toDate[0] + "&format=csv";
                 fetch(fetchUrl, this.fetchHeader)
+                    .then(this.handleErrors)
                     .then(res => res.blob())
                     .then(blobOutput => {
                         console.log("Fetch complete");
