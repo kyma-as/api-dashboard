@@ -29,8 +29,7 @@
           color="primary" 
           flat 
           @click="menu = false, 
-          sendFromDate(fromDateFormatted),
-          sendToDate(toDateFormatted)"
+          sendDateToState()"
           >
           Ok
           </v-btn>
@@ -44,6 +43,7 @@
 import FromDate from "@/components/FromDate";
 import ToDate from "@/components/ToDate";
 import { EventBus } from '@/event-bus.js';
+import { mapActions } from 'vuex';
 
 export default{
     components: {
@@ -66,11 +66,9 @@ export default{
       }
     },
     methods: {
-      sendFromDate(fromDateFormatted){
-        
-      },
-      sendToDate(toDateFormatted){
-       
+        sendDateToState(){
+            let dates = {from:this.fromDateFormatted,to:this.toDateFormatted};
+            this.$store.dispatch('setDates',dates);
       }
     }
   }

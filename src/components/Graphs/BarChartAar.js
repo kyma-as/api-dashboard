@@ -9,11 +9,18 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getFuel"])
+    ...mapGetters(["getFuel"]),
+    fDate(){
+      return this.$store.state.fromDate;
+    },
+    tDate(){
+      return this.$store.state.toDate;
+    }
   },
   mounted() {
-    var fromDate = "2018-03-01T00:00:00";
-    var toDate = "2018-03-10T00:00:00";
+    let fromDate = this.fDate;
+    let toDate = this.tDate;
+    console.log()
     let day = [];
     let elementer = [];
     let data1 = [];
@@ -104,7 +111,6 @@ export default {
         }
         labels = day;
       }
-      console.log(day);
     }
 
     if (labels == kvartal) {

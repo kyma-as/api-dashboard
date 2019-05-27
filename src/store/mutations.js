@@ -31,6 +31,12 @@ export default {
   SET_DATE: (state, date) => {
     state.dateToday = date;
   },
+  SET_FROM_DATE:(state,fDate)=>{
+    state.fromDate = fDate;
+  },
+  SET_TO_DATE:(state,tDate)=>{
+    state.toDate = tDate;
+  },
   VESSELS_FETCHED: state => {
     state.fetchedVessels = true;
   },

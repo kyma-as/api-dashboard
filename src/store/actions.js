@@ -211,6 +211,14 @@ export default {
     commit("SET_DATE", date);
     commit("INCREMENT");
   },
+
+  setDates: ({commit},dates)=>{
+    console.log("Commiting dates to state");
+    console.log(dates);
+    commit("SET_FROM_DATE",dates.from);
+    commit("SET_TO_DATE",dates.to);
+  },
+
   /**
    * After authenticating in login will set the user to loggedIn
    * and login info in header
