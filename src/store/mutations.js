@@ -27,6 +27,9 @@ export default {
   APPEND_QUARTERHOUR_DATA: (state, { logData, vesselIndex, logIndex }) => {
     state.vessels[vesselIndex].logVariables[logIndex].quarterhourData = logData;
   },
+  APPEND_UNIT: (state, {unit, vesselIndex, logIndex}) => {
+    state.vessels[vesselIndex].logVariables[logIndex].unit = unit;
+  },
 
   SET_DATE: (state, date) => {
     state.dateToday = date;
