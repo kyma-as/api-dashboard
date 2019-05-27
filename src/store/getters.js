@@ -541,7 +541,92 @@ export default {
       default:
         return "Only data for vessel 110 currently";
     }
+  },
+  getFuelTotal: (state) => (vesselid, from, to, gran) => {
+    switch(vesselid) {
+      case 110: {
+        let totalfoArray = vessel.logVariables.find(x => x.id === 9139);
+        let totalgasArray = vessel.logVariables.find(x => x.id === 9140);
+        let totalhfoArray = vessel.logVariables.find(x => x.id === 9141);
+        let totalisoArray = vessel.logVariables.find(x => x.id === 9142);
+        let totallshfoArray = vessel.logVariables.find(x => x.id === 9143);
+        let totalmdoArray = vessel.logVariables.find(x => x.id === 9144);
+        let totalmgoArray = vessel.logVariables.find(x => x.id === 9145);
+        let totalpilotArray = vessel.logVariables.find(x => x.id === 9146);
+
+        let keyArray = arrayOfKeys(state, gran, totalfoArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [totalfoArray, totalgasArray, totalhfoArray, totalisoArray,
+        totallshfoArray, totalmdoArray, totalmgoArray, totalpilotArray]);
+
+        let totalfoData = dataArray[0];
+        let totalgasData = dataArray[1];
+        let totalhfoData = dataArray[2];
+        let totalisoData = dataArray[3];
+        let totallshfoData = dataArray[4];
+        let totalmdoData = dataArray[5];
+        let totalmgoData = dataArray[6];
+        let totalpilotData = dataArray[7];
+
+        return {
+          totalfo: {
+            id: totalfoArray.id,
+            name: totalfoArray.name,
+            unit: totalfoArray.unit,
+            data: totalfoData
+          },
+          totalgas: {
+            id: totalgasArray.id,
+            name: totalgasArray.name,
+            unit: totalgasArray.unit,
+            data: totalgasData
+          },
+          totalhfo: {
+            id: totalhfoArray.id,
+            name: totalhfoArray.name,
+            unit: totalhfoArray.unit,
+            data: totalhfoData
+          },
+          totaliso: {
+            id: totalisoArray.id,
+            name: totalisoArray.name,
+            unit: totalisoArray.unit,
+            data: totalisoData
+          },
+          totallshfo: {
+            id: totallshfoArray.id,
+            name: totallshfoArray.name,
+            unit: totallshfoArray.unit,
+            data: totallshfoData
+          },
+          totalmdo: {
+            id: totalmdoArray.id,
+            name: totalmdoArray.name,
+            unit: totalmdoArray.unit,
+            data: totalmdoData
+          },
+          totalmgo: {
+            id: totalmgoArray.id,
+            name: totalmgoArray.name,
+            unit: totalmgoArray.unit,
+            data: totalmgoData
+          },
+          totalpilot: {
+            id: totalpilotArray.id,
+            name: totalpilotArray.name,
+            unit: totalpilotArray.unit,
+            data: totalpilotData
+          }
+        }
+      }
+      case 121:
+      case 123:
+      case 133:
+      default:
+        return "Only for vessel 110 atm";
+    }
   }
+
 };
 
 // ----------------- Private Helper Function ----------------- //

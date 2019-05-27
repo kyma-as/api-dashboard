@@ -33,6 +33,9 @@ export default {
     {
       id: 110,
       variables: {
+
+        // --- Default --- //
+
         gps: {
           id: 9177,
           name: "Ship Speed GPS"
@@ -41,6 +44,9 @@ export default {
           id: 9178,
           name: "Ship Speed Log"
         },
+
+        // --- Additional fuel types --- //
+
         boilerfuel: {
           id: 9024,
           name: "Blr Fuel Mass"
@@ -117,6 +123,44 @@ export default {
           id: 9119,
           name: "GE 3+4 Pilot Fuel"
         },
+
+        // --- Total --- //
+
+        totalfo: {
+          id: 9139,
+          name: "GE Tot FO Mass"
+        },
+        totalgas: {
+          id: 9140,
+          name: "GE Tot Gas Mass"
+        },
+        totalhfo: {
+          id: 9141,
+          name: "GE Tot HFO Mass"
+        },
+        totaliso: {
+          id: 9142,
+          name: "GE Tot ISO Eq MDO"
+        },
+        totallshfo: {
+          id: 9143,
+          name: "GE Tot LSHFO Mass"
+        },
+        totalmdo: {
+          id: 9144,
+          name: "GE Tot MDO Mass"
+        },
+        totalmgo: {
+          id: 9145,
+          name: "GE Tot MGO Mass"
+        },
+        totalpilot: {
+          id: 9146,
+          name: "GE Tot Pilot Fuel"
+        },
+
+        // --- Default --- //
+
         gcu: {
           id: 9060,
           name: "GCU Gas Mass"
@@ -144,7 +188,7 @@ export default {
         so2: {
           id: 9051,
           name: "Emissions SO2"
-        }
+        },
       }
     },
     {
