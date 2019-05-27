@@ -4,7 +4,7 @@ import { mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapGetters(["getFuel"])
+    ...mapGetters(["getFuelType"])
   },
   data() {
     return {

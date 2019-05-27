@@ -22,7 +22,11 @@ export default {
     let labels = [];
     let dataen = [];
     let array = [];
+    let yakse =" Kg/Hour" ;
     let i = 0;
+
+  
+
     for (i = 0; i < Object.keys(this.fuel).length; i++) {
       labels.push(Object.keys(this.fuel)[i]);
     }
@@ -57,7 +61,24 @@ export default {
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false, 
+        scales: {
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: yakse,
+                backgroundColor:"red"
+               }
+
+              
+            }
+          ]
+        }
+      }
     );
   }
 };

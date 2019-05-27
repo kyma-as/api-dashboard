@@ -27,10 +27,9 @@
     <lineChart v-if="selected == 'Line-Chart'"/>
     <barChart v-if="selected == 'Bar-Chart'"/>
     <barChartAar v-if="selected == 'Bar-Chart Aar'"/>
+    <barChartFuelType v-if="selected == 'Bar-Chart FuelType'"/>
     <barChartMonth v-if="selected == 'Bar-Chart Month'"/>
     <barChartDag v-if="selected == 'Bar-Chart Day'"/>
-
-
     <pieChart v-if="selected == 'Pie-Chart'"/>
     <barChartEmission v-if="selected == 'Bar-Chart Emission'"/>
     <barChartDistance v-if="selected == 'Bar-Chart Distance'"/>
@@ -45,6 +44,7 @@
     import barChartAar from "@/components/Graphs/BarChartAar.js";
     import barChartMonth from "@/components/Graphs/BarChartMonth.js";
     import barChartDag from "@/components/Graphs/BarChartDag.js";
+    import BarChartFuelType from "@/components/Graphs/BarChartFuelType.js";
     import barChartEmission from "@/components/Graphs/BarChartEmission.js";
     import barChartDistance from "@/components/Graphs/BarChartDistance.js";
     import {mapState, mapGetters} from 'vuex';
@@ -58,6 +58,7 @@
                 {title: 'Bar-Chart Emission'},
                 {title: 'Bar-Chart Distance'},
                 {title: 'Bar-Chart Aar'},
+                {title: 'Bar-Chart FuelType'},
                 {title: 'Bar-Chart Month'},
                 {title: 'Bar-Chart Day'}
 
@@ -72,7 +73,8 @@
             barChartEmission,
             barChartDistance,
             barChartDag,
-            barChartMonth
+            barChartMonth,
+            BarChartFuelType
         },
         methods: {
             showGraph: function (input) {
