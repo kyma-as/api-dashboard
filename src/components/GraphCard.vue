@@ -29,8 +29,6 @@
     <barChartAar v-if="selected == 'Bar-Chart Aar'"/>
     <barChartMonth v-if="selected == 'Bar-Chart Month'"/>
     <barChartDag v-if="selected == 'Bar-Chart Day'"/>
-
-
     <pieChart v-if="selected == 'Pie-Chart'"/>
     <barChartEmission v-if="selected == 'Bar-Chart Emission'"/>
     <barChartDistance v-if="selected == 'Bar-Chart Distance'"/>

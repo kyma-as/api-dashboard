@@ -30,6 +30,7 @@
           v-model="date" 
           no-title scrollable
           min="2016-01-01"
+          max="2019-05-01"
           >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>

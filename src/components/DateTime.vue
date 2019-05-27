@@ -60,17 +60,17 @@ export default{
     },
     data() {
       return {
-        fromDateFormatted: Date(""),
-        toDateFormatted: Date(""),
+        fromDateFormatted: Date(),
+        toDateFormatted: Date(),
         menu: false
       }
     },
     methods: {
       sendFromDate(fromDateFormatted){
-        EventBus.$emit('send-from-date', fromDateFormatted);
+        
       },
       sendToDate(toDateFormatted){
-        EventBus.$emit('send-to-date', toDateFormatted);
+       
       }
     }
   }

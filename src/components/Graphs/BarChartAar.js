@@ -1,47 +1,19 @@
 import { Bar } from "vue-chartjs";
 import { mapGetters } from "vuex";
-import { EventBus } from "@/event-bus.js";
-import { ipcRenderer } from "electron";
-/** 
-EventBus.$on("send-from-date", f => {
-  console.log(f);
-});
-EventBus.$on("send-to-Date", t => {
-  console.log(t);
-});
-*/
+
 export default {
   extends: Bar,
   data() {
     return {
-      fuel: {},
-      fromDate: Date(),
-      toDate: Date()
+      fuel: {}
     };
   },
-  created() {
-    let _this = this;
-    EventBus.$on("send-from-date", fromDateFormatted => {
-      _this.fromDate = fromDateFormatted;
-    });
-    EventBus.$on("send-to-date", toDateFormatted => {
-      _this.toDate = toDateFormatted;
-    });
-  },
   computed: {
-    ...mapGetters(["getFuel"]),
-
-    updateFromDate: function() {
-      return this.fromDate;
-    },
-    updateToDate: function() {
-      return this.toDate;
-    }
+    ...mapGetters(["getFuel"])
   },
   mounted() {
-    let _this = this;
-    let fromDate = _this.fromDate;
-    let toDate = _this.toDate;
+    var fromDate = "2018-03-01T00:00:00";
+    var toDate = "2018-03-10T00:00:00";
     let day = [];
     let elementer = [];
     let data1 = [];
@@ -332,8 +304,5 @@ export default {
         { responsive: true, maintainAspectRatio: false }
       );
     }
-  },
-  beforeDestroy() {
-    ipcRenderer.removeAllListeners("send-from-date", "send-to-date");
   }
 };
