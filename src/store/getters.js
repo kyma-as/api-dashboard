@@ -224,6 +224,216 @@ export default {
         return "No matching vessel id";
     }
   },
+  getFuelTypes: state => (vesselid, from, to, gran) => {
+    const vessel = state.vessels.find(vessel => vessel.id === vesselid);
+    switch (vesselid) {
+      case 110: {
+        let boilerhfoArray = vessel.logVariables.find(x => x.id === 9031);
+        let boilerlshfoArray = vessel.logVariables.find(x => x.id === 9033);
+        let boilermdoArray = vessel.logVariables.find(x => x.id === 9034);
+        let boilermgoArray = vessel.logVariables.find(x => x.id === 9035);
+        let totalfoArray = vessel.logVariables.find(x => x.id === 9139);
+        let totalgasArray = vessel.logVariables.find(x => x.id === 9140);
+        let totalhfoArray = vessel.logVariables.find(x => x.id === 9141);
+        let totalisoArray = vessel.logVariables.find(x => x.id === 9142);
+        let totallshfoArray = vessel.logVariables.find(x => x.id === 9143);
+        let totalmdoArray = vessel.logVariables.find(x => x.id === 9144);
+        let totalmgoArray = vessel.logVariables.find(x => x.id === 9145);
+        let totalpilotArray = vessel.logVariables.find(x => x.id === 9146);
+
+        let keyArray = arrayOfKeys(state, gran, boilerhfoArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [boilerhfoArray, boilerlshfoArray, boilermdoArray, boilermgoArray,
+        totalfoArray, totalgasArray, totalhfoArray, totalisoArray,
+        totallshfoArray, totalmdoArray, totalmgoArray, totalpilotArray]);
+
+
+        let boilerhfoData = dataArray[0];
+        let boilerlshfoData = dataArray[1];
+        let boilermdoData = dataArray[2];
+        let boilermgoData = dataArray[3];
+        let totalfoData = dataArray[4];
+        let totalgasData = dataArray[5];
+        let totalhfoData = dataArray[6];
+        let totalisoData = dataArray[7];
+        let totallshfoData = dataArray[8];
+        let totalmdoData = dataArray[9];
+        let totalmgoData = dataArray[10];
+        let totalpilotData = dataArray[11];
+
+        return {
+          boilerhfo: {
+            id: boilerhfoArray.id,
+            name: boilerhfoArray.name,
+            unit: boilerhfoArray.unit,
+            data: boilerhfoData
+          },
+          boilerlshfo: {
+            id: boilerlshfoArray.id,
+            name: boilerlshfoArray.name,
+            unit: boilerlshfoArray.unit,
+            data: boilerlshfoData
+          },
+          boilermdo: {
+            id: boilermdoArray.id,
+            name: boilermdoArray.name,
+            unit: boilermdoArray.unit,
+            data: boilermdoData
+          },
+          boilermgo: {
+            id: boilermgoArray.id,
+            name: boilermgoArray.name,
+            unit: boilermgoArray.unit,
+            data: boilermgoData
+          },
+          totalfo: {
+            id: totalfoArray.id,
+            name: totalfoArray.name,
+            unit: totalfoArray.unit,
+            data: totalfoData
+          },
+          totalgas: {
+            id: totalgasArray.id,
+            name: totalgasArray.name,
+            unit: totalgasArray.unit,
+            data: totalgasData
+          },
+          totalhfo: {
+            id: totalhfoArray.id,
+            name: totalhfoArray.name,
+            unit: totalhfoArray.unit,
+            data: totalhfoData
+          },
+          totaliso: {
+            id: totalisoArray.id,
+            name: totalisoArray.name,
+            unit: totalisoArray.unit,
+            data: totalisoData
+          },
+          totallshfo: {
+            id: totallshfoArray.id,
+            name: totallshfoArray.name,
+            unit: totallshfoArray.unit,
+            data: totallshfoData
+          },
+          totalmdo: {
+            id: totalmdoArray.id,
+            name: totalmdoArray.name,
+            unit: totalmdoArray.unit,
+            data: totalmdoData
+          },
+          totalmgo: {
+            id: totalmgoArray.id,
+            name: totalmgoArray.name,
+            unit: totalmgoArray.unit,
+            data: totalmgoData
+          },
+          totalpilot: {
+            id: totalpilotArray.id,
+            name: totalpilotArray.name,
+            unit: totalpilotArray.unit,
+            data: totalpilotData
+          }
+        };
+      }
+      case 121: {
+        let boilerfoArray = vessel.logVariables.find(x => x.id === 10391);
+        let boilergasArray = vessel.logVariables.find(x => x.id === 10396);
+
+        let keyArray = arrayOfKeys(state, gran, boilerfoArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [boilerfoArray, boilergasArray]);
+
+        let boilerfoData = dataArray[0];
+        let boilergasData = dataArray[1];
+        return {
+          boilerfo: {
+            id: boilerfoArray.id,
+            name: boilerfoArray.name,
+            unit: boilerfoArray.unit,
+            data: boilerfoData
+          },
+          boilergas: {
+            id: boilergasArray.id,
+            name: boilergasArray.name,
+            unit: boilergasArray.unit,
+            data: boilergasData
+          }
+        };
+      }
+      case 123: {
+        let boilerhfoArray = vessel.logVariables.find(x => x.id === 42563);
+        let boilerlsmgoArray = vessel.logVariables.find(x => x.id === 42564);
+        let boilerfoArray = vessel.logVariables.find(x => x.id === 10700);
+        let boilergasArray = vessel.logVariables.find(x => x.id === 10705);
+
+        let keyArray = arrayOfKeys(state, gran, boilerhfoArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [boilerhfoArray, boilerlsmgoArray, boilerfoArray, boilergasArray]);
+
+        let boilerhfoData = dataArray[0];
+        let boilerlsmgoData = dataArray[1];
+        let boilerfoData = dataArray[2];
+        let boilergasData = dataArray[3];
+
+        return {
+          boilerhfo: {
+            id: boilerhfoArray.id,
+            name: boilerhfoArray.name,
+            unit: boilerhfoArray.unit,
+            data: boilerhfoData
+          },
+          boilerlsmgo: {
+            id: boilerlsmgoArray.id,
+            name: boilerlsmgoArray.name,
+            unit: boilerlsmgoArray.unit,
+            data: boilerlsmgoData
+          },
+          boilerfo: {
+            id: boilerfoArray.id,
+            name: boilerfoArray.name,
+            unit: boilerfoArray.unit,
+            data: boilerfoData
+          },
+          boilergas: {
+            id: boilergasArray.id,
+            name: boilergasArray.name,
+            unit: boilergasArray.unit,
+            data: boilergasData
+          }
+        };
+      }
+      case 133: {
+        let boilerfoArray = vessel.logVariables.find(x => x.id === 12101);
+        let boilergasArray = vessel.logVariables.find(x => x.id === 12106);
+
+        let keyArray = arrayOfKeys(state, gran, boilerfoArray);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray,
+        [boilerfoArray, boilergasArray]);
+
+        let boilerfoData = dataArray[0];
+        let boilergasData = dataArray[1];
+
+        return {
+          boilerfo: {
+            id: boilerfoArray.id,
+            name: boilerfoArray.name,
+            unit: boilerfoArray.unit,
+            data: boilerfoData
+          },
+          boilergas: {
+            id: boilergasArray.id,
+            name: boilergasArray.name,
+            unit: boilergasArray.unit,
+            data: boilergasData
+          }
+        };
+      }
+      default:
+        return "Vessel id not valid";
+
+    }
+  },
   getFuel: state => (vesselid, from, to, gran) => {
     const vessel = state.vessels.find(vessel => vessel.id === vesselid);
     switch (vesselid) {
@@ -366,7 +576,7 @@ export default {
         return "No matching vessel id";
     }
   },
-  getFuelTypes: (state) => (vesselid, from, to, gran) => {
+  getFuelTypesOld: (state) => (vesselid, from, to, gran) => {
     const vessel = state.vessels.find(vessel => vessel.id === vesselid);
     switch(vesselid) {
       case 110: {
