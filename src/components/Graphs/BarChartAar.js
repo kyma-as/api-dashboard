@@ -17,10 +17,10 @@ export default {
       return this.$store.state.toDate;
     }
   },
+
   mounted() {
     let fromDate = this.fDate;
     let toDate = this.tDate;
-    console.log()
     let day = [];
     let elementer = [];
     let data1 = [];

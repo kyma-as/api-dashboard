@@ -4,7 +4,13 @@ import { mapGetters } from "vuex";
 export default {
   extends: Line,
   computed: {
-    ...mapGetters(["getSpeed"])
+    ...mapGetters(["getSpeed"]),
+    fDate(){
+      return this.$store.state.fromDate;
+    },
+    tDate(){
+      return this.$store.state.toDate;
+    }
   },
   data() {
     return {
@@ -13,11 +19,13 @@ export default {
   },
 
   mounted() {
+    let fromDate = this.fDate;
+    let toDate = this.tDate;
     this.speed = this.getSpeed(
       this.$route.params.vesselid,
-      "2019-04-24T00:00:00",
-      "2019-05-11T00:00:00",
-      "QuarterHour"
+      fromDate,
+      toDate,
+      "Hour"
     );
     let gpsSpeed = [];
     let logSpeed = [];

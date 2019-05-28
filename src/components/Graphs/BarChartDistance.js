@@ -4,19 +4,28 @@ import { mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapGetters(["getSpeed"])
+    ...mapGetters(["getSpeed"]),
+    fDate(){
+      return this.$store.state.fromDate;
+    },
+    tDate(){
+      return this.$store.state.toDate;
+    }
   },
   data() {
     return {
       speed: {}
     };
   },
+  
 
   mounted() {
+    let fromDate = this.fDate;
+    let toDate = this.tDate;
     this.speed = this.getSpeed(
       this.$route.params.vesselid,
-      "2019-04-20T00:00:00",
-      "2019-05-01T00:00:00",
+      fromDate,
+      toDate,
       "Hour"
     );
     let gpsDistancenaut = [];

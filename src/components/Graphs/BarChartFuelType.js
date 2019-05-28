@@ -4,7 +4,13 @@ import { mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapGetters(["getFuelType"])
+    ...mapGetters(["getFuelTypes"]),
+    fDate(){
+      return this.$store.state.fromDate;
+    },
+    tDate(){
+      return this.$store.state.toDate;
+    }
   },
   data() {
     return {
@@ -12,8 +18,8 @@ export default {
     };
   },
   mounted() {
-    let fromDate = "2018-01-01T00:00:00";
-    let toDate = "2019-01-01T00:00:00";
+    let fromDate = this.fDate;
+    let toDate = this.tDate;
     let day = [];
     let elementer = [];
     let data1 = [];
@@ -22,6 +28,10 @@ export default {
     let data4 = [];
     let data5 = [];
     let data6 = [];
+    let data7 = [];
+    let data8 = [];
+    let data9 = [];
+    
     let array = [];
     let i = 0;
     let counter = 0;
@@ -44,18 +54,9 @@ export default {
       "November",
       "December"
     ];
-    let days = [
-      "Monday",
-      "Tuesday",
-      "Wednsday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ];
     let month = [];
     let bool = false;
-    this.fuel = this.getFuel(
+    this.fuel = this.getFuelTypes(
       this.$route.params.vesselid,
       fromDate,
       toDate,
@@ -146,6 +147,15 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
           counter++;
           Summ = 0;
           array = [];
@@ -192,6 +202,15 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
 
           counter++;
           Summ = 0;
@@ -237,6 +256,15 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
           counter++;
           Summ = 0;
         }
@@ -277,6 +305,21 @@ export default {
               label: Object.keys(this.fuel)[5],
               backgroundColor: "purple",
               data: data6
+            },
+            {
+              label: Object.keys(this.fuel)[6],
+              backgroundColor: "purple",
+              data: data7
+            },
+            {
+              label: Object.keys(this.fuel)[7],
+              backgroundColor: "purple",
+              data: data8
+            },
+            {
+              label: Object.keys(this.fuel)[8],
+              backgroundColor: "purple",
+              data: data9
             }
           ]
         },

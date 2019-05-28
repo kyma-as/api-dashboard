@@ -4,7 +4,13 @@ import { mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapGetters(["getEmission"])
+    ...mapGetters(["getEmission"]),
+    fDate(){
+      return this.$store.state.fromDate;
+    },
+    tDate(){
+      return this.$store.state.toDate;
+    }
   },
   data() {
     return {
@@ -13,10 +19,12 @@ export default {
   },
 
   mounted() {
+    let fromDate = this.fDate;
+    let toDate = this.tDate;
     this.emission = this.getEmission(
       this.$route.params.vesselid,
-      "2019-04-20",
-      "2019-05-01",
+      fromDate,
+      toDate,
       "Hour"
     );
     let labels = [];
