@@ -13,7 +13,7 @@
         </div>
       </v-card-title>
       <v-layout row wrap>
-        <v-flex xs12 sm6 v-model="speed">Speed: {{speed}} knots</v-flex>
+        <v-flex xs12 sm6 v-model="speed"><span class="font-weight-bold">Speed:</span> {{speed}} kt</v-flex>
         <v-flex xs12 sm6>Fuel: 1000 litre</v-flex>
         <v-flex xs12 sm12>Vessel Status: <span class="green--text">Good</span></v-flex>
       </v-layout>
@@ -60,13 +60,11 @@
                 let _this = this;
 
                 function checkSpeedTimer() {
-                    console.log(vesselId);
-                    console.log(today);
-                    console.log(yesterday);
-                    let speed = _this.getSpeed(vesselId, yesterday, today, "QuarterHour").gps.data;
-                    console.log(speed);
-                }
+                    let speed = Object.values(
+                        _this.getSpeed(vesselId, yesterday, today, "QuarterHour").gps.data)[0];
 
+                    _this.speed = speed.toFixed(2);
+                }
                 setInterval(checkSpeedTimer, 2500);
             }
         }
