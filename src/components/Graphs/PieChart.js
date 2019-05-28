@@ -30,6 +30,7 @@ export default {
     let labels = [];
     let dataen = [];
     let array = [];
+    let yakse = "Kg";
     let Summ = 0;
     let i = 0;
 
@@ -64,7 +65,18 @@ export default {
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false }
+      { responsive: true, maintainAspectRatio: false,scales: {
+        yAxes: [
+          {
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: yakse,
+              backgroundColor: "red"
+            }
+          }
+        ]
+      } }
     );
   }
 };

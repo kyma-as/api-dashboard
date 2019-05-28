@@ -8,7 +8,7 @@
             dark
             v-on="on"
         >
-          Graph
+          Graphs
         </v-btn>
       </template>
 

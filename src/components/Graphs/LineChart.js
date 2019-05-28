@@ -30,6 +30,7 @@ export default {
     let gpsSpeed = [];
     let logSpeed = [];
     let labels = [];
+    let yakse = "Knot";
     let formatting;
     for (let key in this.speed.gps.data) {
       gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
@@ -76,7 +77,18 @@ export default {
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false }
+      { responsive: true, maintainAspectRatio: false,scales: {
+        yAxes: [
+          {
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: yakse,
+              backgroundColor: "red"
+            }
+          }
+        ]
+      } }
     );
   }
 };

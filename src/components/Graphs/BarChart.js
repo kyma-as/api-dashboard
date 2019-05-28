@@ -32,7 +32,7 @@ export default {
     let labels = [];
     let dataen = [];
     let array = [];
-    let yakse =" Kg/Hour" ;
+    let yakse ="Kg" ;
     let i = 0;
 
   

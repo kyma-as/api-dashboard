@@ -21,6 +21,7 @@ export default {
     let fromDate = this.fDate;
     let toDate = this.tDate;
     let day = [];
+    let yakse= "kg";
     let elementer = [];
     let data1 = [];
     let data2 = [];
@@ -31,6 +32,9 @@ export default {
     let data7 = [];
     let data8 = [];
     let data9 = [];   
+    let data10 = [];   
+    let data11 = [];   
+    let data12 = [];   
     let array = [];
     let i = 0;
     let counter = 0;
@@ -156,6 +160,15 @@ export default {
           if (counter == 8) {
             data9.push(Summ);
           }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
           counter++;
           Summ = 0;
           array = [];
@@ -211,6 +224,15 @@ export default {
           if (counter == 8) {
             data9.push(Summ);
           }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
 
           counter++;
           Summ = 0;
@@ -265,6 +287,15 @@ export default {
           if (counter == 8) {
             data9.push(Summ);
           }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
           counter++;
           Summ = 0;
         }
@@ -285,7 +316,7 @@ export default {
             },
             {
               label: Object.keys(this.fuel)[1],
-              backgroundColor: "red",
+              backgroundColor: "maroon",
               data: data2
             },
             {
@@ -320,12 +351,38 @@ export default {
             },
             {
               label: Object.keys(this.fuel)[8],
-              backgroundColor: "brown",
+              backgroundColor: "pink",
               data: data9
+            },
+            {
+              label: Object.keys(this.fuel)[9],
+              backgroundColor: "brown",
+              data: data10
+            },
+            {
+              label: Object.keys(this.fuel)[10],
+              backgroundColor: "royalblue",
+              data: data11
+            },
+            {
+              label: Object.keys(this.fuel)[11],
+              backgroundColor: "red",
+              data: data12
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        { responsive: true, maintainAspectRatio: false,scales: {
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: yakse,
+                backgroundColor: "red"
+              }
+            }
+          ]
+        } }
       );
     }
     if (elementer.length == 2) {
@@ -340,7 +397,7 @@ export default {
             },
             {
               label: Object.keys(this.fuel)[1],
-              backgroundColor: "red",
+              backgroundColor: "maroon",
               data: data2
             }
           ]
