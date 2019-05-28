@@ -33,6 +33,9 @@ export default {
     {
       id: 110,
       variables: {
+
+        // --- Default --- //
+
         gps: {
           id: 9177,
           name: "Ship Speed GPS"
@@ -41,10 +44,123 @@ export default {
           id: 9178,
           name: "Ship Speed Log"
         },
+
+        // --- Additional fuel types --- //
+
         boilerfuel: {
           id: 9024,
           name: "Blr Fuel Mass"
         },
+        boilerhfo: {
+          id: 9031,
+          name: "Blr HFO Mass"
+        },
+        boilerlshfo: {
+          id: 9033,
+          name: "Blr LSHFO Mass"
+        },
+        boilermdo: {
+          id: 9034,
+          name: "Blr MDO Mass"
+        },
+        boilermgo: {
+          id: 9035,
+          name: "Blr MGO Mass"
+        },
+        ge12hfo: {
+          id: 9080,
+          name: "GE 1+2 HFO Mass"
+        },
+        ge12iso: {
+          id: 9081,
+          name: "GE 1+2 ISO Eq MDO"
+        },
+        ge12lshfo: {
+          id: 9082,
+          name: "GE 1+2 LSHFO Mass"
+        },
+        ge12mdo: {
+          id: 9083,
+          name: "GE 1+2 MDO Mass"
+        },
+        ge12mgo: {
+          id: 9084,
+          name: "GE 1+2 MGO Mass"
+        },
+        ge12pilot: {
+          id: 9085,
+          name: "GE 1+2 Pilot Fuel"
+        },
+        ge34fuel: {
+          id: 9109,
+          name: "GE 3+4 Fuel Mass"
+        },
+        ge34temp: {
+          id: 9112,
+          name: "GE 3+4 Fuel Temp"
+        },
+        ge34hfo: {
+          id: 9114,
+          name: "GE 3+4 HFO Mass"
+        },
+        ge34iso: {
+          id: 9115,
+          name: "GE 3+4 ISO Eq MDO"
+        },
+        ge34lshfo: {
+          id: 9116,
+          name: "GE 3+4 LSHFO Mass"
+        },
+        ge34mdo: {
+          id: 9117,
+          name: "GE 3+4 MDO Mass"
+        },
+        ge34mgo: {
+          id: 9118,
+          name: "GE 3+4 MGO Mass"
+        },
+        ge34pilot: {
+          id: 9119,
+          name: "GE 3+4 Pilot Fuel"
+        },
+
+        // --- Total --- //
+
+        totalfo: {
+          id: 9139,
+          name: "GE Tot FO Mass"
+        },
+        totalgas: {
+          id: 9140,
+          name: "GE Tot Gas Mass"
+        },
+        totalhfo: {
+          id: 9141,
+          name: "GE Tot HFO Mass"
+        },
+        totaliso: {
+          id: 9142,
+          name: "GE Tot ISO Eq MDO"
+        },
+        totallshfo: {
+          id: 9143,
+          name: "GE Tot LSHFO Mass"
+        },
+        totalmdo: {
+          id: 9144,
+          name: "GE Tot MDO Mass"
+        },
+        totalmgo: {
+          id: 9145,
+          name: "GE Tot MGO Mass"
+        },
+        totalpilot: {
+          id: 9146,
+          name: "GE Tot Pilot Fuel"
+        },
+
+        // --- Default --- //
+
         gcu: {
           id: 9060,
           name: "GCU Gas Mass"
@@ -72,7 +188,7 @@ export default {
         so2: {
           id: 9051,
           name: "Emissions SO2"
-        }
+        },
       }
     },
     {
@@ -101,7 +217,9 @@ export default {
         so2: {
           id: 10417,
           name: "Emissions SO2"
-        }
+        },
+        // --- Additional Fuel Types --- //
+
       }
     },
     {
@@ -159,6 +277,15 @@ export default {
         so2: {
           id: 10732,
           name: "Emissions SO2"
+        },
+        // --- Additional Fuel Variables --- //
+        boilerhfo: {
+          id: 42563,
+          name: "Blr HFO Mass"
+        },
+        boilerlsmgo: {
+          id: 42564,
+          name: "Blr LSMGO Mass"
         }
       }
     }
