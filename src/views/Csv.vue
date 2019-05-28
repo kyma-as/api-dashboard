@@ -32,11 +32,7 @@
           <v-flex md3>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
-                <v-select class=""
-                          :items="granularity"
-                          label="Select Date"
-                          single-line
-                ></v-select>
+                <date-time></date-time>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -44,7 +40,7 @@
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-btn class="primary primary darken-3" flat large
-                       @click="getLogDataCsv(selected,selectedGranularity,selectedFromDate,selectedToDate)">
+                       @click="getLogDataCsv(selected,selectedGranularity,fDate,tDate)">
                   Print Csv File
                 </v-btn>
               </v-card-actions>
@@ -90,13 +86,15 @@
 </template>
 <script>
     import NavDrawer from "@/components/NavDrawer";
+    import DateTime from "@/components/DateTime";
 
     const {ipcRenderer} = require('electron');
 
 
     export default {
         components: {
-            NavDrawer
+            NavDrawer,
+            DateTime
         },
         created(){
             /**
@@ -212,7 +210,7 @@
                 // Fetching data and sending event to create file
                 let fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
                     + logVariableIds[0].id + "&granularity=" + granularity + "&fromDate="
-                    + fromDate[0] + "&toDate=" + toDate[0] + "&format=csv";
+                    + fromDate + "&toDate=" + toDate + "&format=csv";
                 fetch(fetchUrl, this.fetchHeader)
                     .then(this.handleErrors)
                     .then(res => res.blob())
@@ -240,6 +238,12 @@
             },
             isLoading() {
                 return this.loading
+            },
+            fDate: function (){
+                return this.$store.state.fromDate;
+            },
+            tDate: function(){
+                return this.$store.state.toDate;
             }
         },
         data() {
@@ -268,8 +272,6 @@
                 selected: [],
                 selectedVessels: [],
                 selectedGranularity: [],
-                selectedFromDate: ["2019-05-01"],
-                selectedToDate: ["2019-05-10"],
                 // Misc
                 loading: false,
             }
