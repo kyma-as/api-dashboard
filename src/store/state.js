@@ -217,7 +217,9 @@ export default {
         so2: {
           id: 10417,
           name: "Emissions SO2"
-        }
+        },
+        // --- Additional Fuel Types --- //
+
       }
     },
     {
@@ -275,6 +277,15 @@ export default {
         so2: {
           id: 10732,
           name: "Emissions SO2"
+        },
+        // --- Additional Fuel Variables --- //
+        boilerhfo: {
+          id: 42563,
+          name: "Blr HFO Mass"
+        },
+        boilerlsmgo: {
+          id: 42564,
+          name: "Blr LSMGO Mass"
         }
       }
     }
