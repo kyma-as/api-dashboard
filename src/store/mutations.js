@@ -28,8 +28,11 @@ export default {
     state.vessels[vesselIndex].logVariables[logIndex].quarterhourData = logData;
   },
 
-  SET_DATE: (state, date) => {
+  SET_TODAY_DATE: (state, date) => {
     state.dateToday = date;
+  },
+  SET_YESTERDAY_DATE:(state,date)=>{
+    state.dateYesterday = date;
   },
   SET_FROM_DATE:(state,fDate)=>{
     state.fromDate = fDate;
