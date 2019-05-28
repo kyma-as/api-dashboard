@@ -30,8 +30,7 @@ export default {
     let data6 = [];
     let data7 = [];
     let data8 = [];
-    let data9 = [];
-    
+    let data9 = [];   
     let array = [];
     let i = 0;
     let counter = 0;
@@ -128,6 +127,7 @@ export default {
 
           Summ = array.reduce((prev, cur) => prev + cur, 0);
           Summ = Summ.toFixed(2);
+          
 
           if (counter == 0) {
             data1.push(Summ);
@@ -270,6 +270,8 @@ export default {
         }
       }
     }
+    
+
 
     if (elementer.length > 2) {
       this.renderChart(
@@ -308,17 +310,17 @@ export default {
             },
             {
               label: Object.keys(this.fuel)[6],
-              backgroundColor: "purple",
+              backgroundColor: "black",
               data: data7
             },
             {
               label: Object.keys(this.fuel)[7],
-              backgroundColor: "purple",
+              backgroundColor: "teal",
               data: data8
             },
             {
               label: Object.keys(this.fuel)[8],
-              backgroundColor: "purple",
+              backgroundColor: "brown",
               data: data9
             }
           ]
