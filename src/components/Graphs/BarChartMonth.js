@@ -13,7 +13,7 @@ export default {
   },
   mounted() {
     let fromDate = "2018-01-01T00:00:00";
-    let toDate = "2018-12-01T00:00:00";
+    let toDate = "2018-03-30T00:00:00";
     let day = [];
     let elementer = [];
     let data1 = [];
@@ -63,23 +63,15 @@ export default {
     );
 
     labels = kvartal;
-    if (fromDate.substring(0, 4) == toDate.substring(0, 4)) {
-      for (let k = 0; k < 13; k++) {
-        if (0 + k == fromDate.substring(5, 7)) {
-          bool = true;
-        }
-        if (bool) {
-          month.push(months[k - 1]);
-        }
-        if (0 + k == toDate.substring(5, 7)) {
-          bool = false;
-        }
-      }
-      labels = month;
-    }
 
-    if (fromDate.substring(0, 4) == toDate.substring(0, 4)) {
-      if (fromDate.substring(5, 7) == toDate.substring(5, 7)) {
+
+
+      
+   
+
+    
+     if (fromDate.substring(0, 4) == toDate.substring(0, 4)) {
+  for(let s = 0; s<3;s++)
         for (let k = 0; k < 10; k++) {
           if ("0" + k == fromDate.substring(8, 10)) {
             bool = true;
@@ -103,7 +95,7 @@ export default {
           }
         }
         labels = day;
-      }
+      
       console.log(day);
     }
 
@@ -153,53 +145,8 @@ export default {
         }
       }
     }
-    if (labels == month) {
-      for (let p = 0; p < Object.keys(this.fuel).length; p++) {
-        elementer.push(Object.keys(this.fuel)[i]);
-      }
-      for (i = 0; i < labels.length; i++) {
-        counter = 0;
-        hjelpeslicer1 = hjelpeslicer2;
-        for (let key in this.fuel) {
-          for (let key2 in this.fuel[key].data) {
-            array.push(this.fuel[key].data[key2]);
-          }
-
-          hjelpeslicer2 = ((i + 1) * array.length) / labels.length;
-          array = array.slice(
-            hjelpeslicer1,
-            ((i + 1) * array.length) / labels.length
-          );
-
-          Summ = array.reduce((prev, cur) => prev + cur, 0);
-          Summ = Summ.toFixed(2);
-          Summ = Summ/1000
-          array = [];
-
-          if (counter == 0) {
-            data1.push(Summ);
-          }
-          if (counter == 1) {
-            data2.push(Summ);
-          }
-          if (counter == 2) {
-            data3.push(Summ);
-          }
-          if (counter == 3) {
-            data4.push(Summ);
-          }
-          if (counter == 4) {
-            data5.push(Summ);
-          }
-          if (counter == 5) {
-            data6.push(Summ);
-          }
-
-          counter++;
-          Summ = 0;
-        }
-      }
-    }
+   
+    
     if (labels == day) {
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
