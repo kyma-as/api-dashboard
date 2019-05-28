@@ -202,25 +202,13 @@ export default {
   getCurrentDate: ({ commit }) => {
     // Today
     let date = new Date();
-    let todayDate =
-      "" +
-        date.getFullYear() +
-      "-" +
-      (date.getMonth() + 1) +
-      "-" +
-        date.getDate();
+    let todayDate = date.toJSON().substring(0,19)
     commit("SET_TODAY_DATE", todayDate);
 
     // Yesterday
     date = new Date();
     date.setDate(date.getDate()-1);
-    let yesterdayDate =
-        "" +
-        date.getFullYear() +
-        "-" +
-        (date.getMonth() + 1) +
-        "-" +
-        date.getDate();
+    let yesterdayDate = date.toJSON().substring(0,19);
 
     commit("SET_YESTERDAY_DATE", yesterdayDate);
 
