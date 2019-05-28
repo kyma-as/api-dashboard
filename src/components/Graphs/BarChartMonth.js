@@ -173,6 +173,7 @@ export default {
 
           Summ = array.reduce((prev, cur) => prev + cur, 0);
           Summ = Summ.toFixed(2);
+          Summ = Summ/1000
           array = [];
 
           if (counter == 0) {
@@ -281,7 +282,18 @@ export default {
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        { responsive: true, maintainAspectRatio: false, scales: {
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: "Divstoff brukt i Tonn",
+                backgroundColor: "red"
+              }
+            }
+          ]
+        } }
       );
     }
     if (elementer.length == 2) {

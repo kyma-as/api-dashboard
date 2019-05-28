@@ -29,6 +29,7 @@ export default {
     let hjelpeslicer1 = 0;
     let hjelpeslicer2 = 0;
     let labels;
+    let yakse = "Kg";
     let kvartal = ["Q1", "Q2", "Q3", "Q4"];
     let months = [
       "January",
@@ -280,7 +281,18 @@ export default {
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        { responsive: true, maintainAspectRatio: false,scales: {
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: yakse,
+                backgroundColor: "red"
+              }
+            }
+          ]
+        } }
       );
     }
     if (elementer.length == 2) {
