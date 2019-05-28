@@ -12,6 +12,7 @@
           <h3 class="headline mb-0">{{vessel.name}}</h3>
         </div>
       </v-card-title>
+      <v-img :src="images.vesselIcon" />
       <v-layout row wrap>
         <v-flex xs12 sm6>Speed: 1000 km/h</v-flex>
         <v-flex xs12 sm6>Fuel: 1000 litre</v-flex>
@@ -24,9 +25,11 @@
 <script>
     export default {
         data() {
-            return {
-                //Ship data
-            }
+          return {
+            images: {
+              vesselIcon: require('../assets/vessel.png')
+          }us
+      }
         },
          components: {
         },
