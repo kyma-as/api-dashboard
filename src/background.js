@@ -16,8 +16,8 @@ protocol.registerStandardSchemes(["app"], { secure: true });
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
     webPreferences: { webSecurity: false }
   });
 

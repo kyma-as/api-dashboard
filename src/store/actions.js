@@ -166,6 +166,12 @@ export default {
     let res = await fetch(url, header);
     let jsonLogData = await res.json();
 
+    commit('APPEND_UNIT', {
+      unit: jsonLogData.unit.name,
+      vesselIndex: payload.vesselIndex,
+      logIndex: payload.logIndex
+    });
+
     switch (granularity) {
       case "Day":
         commit("APPEND_DAY_DATA", {
