@@ -20,6 +20,11 @@ export default {
   dateToday: "",
   fetchedVessels: false,
 
+  // DateTime Component states
+  fromDate:"",
+  toDate:"",
+
+
   loggedIn: false,
 
   // TODO: Replace this list as a loadable json file
