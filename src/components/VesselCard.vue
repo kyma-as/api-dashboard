@@ -28,7 +28,7 @@
           return {
             images: {
               vesselIcon: require('../assets/vessel.png')
-          }us
+          }
       }
         },
          components: {
