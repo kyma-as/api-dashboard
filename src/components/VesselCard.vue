@@ -13,7 +13,7 @@
         </div>
       </v-card-title>
       <v-layout row wrap>
-        <v-flex xs12 sm6 v-model="speed"><span class="font-weight-bold">Speed:</span> {{speed}} kt</v-flex>
+        <v-flex xs12 sm6 v-model="speed"><span class="font-weight-bold">Speed:</span> {{speed}}kt</v-flex>
         <v-flex xs12 sm6>Fuel: 1000 litre</v-flex>
         <v-flex xs12 sm12>Vessel Status: <span class="green--text">Good</span></v-flex>
       </v-layout>
@@ -27,7 +27,7 @@
     export default {
         data() {
             return {
-                speed: "undefined"
+                speed: "0"
             }
         },
         components: {},
@@ -61,10 +61,12 @@
 
                 function checkSpeedTimer() {
                     let speed = Object.values(
-                        _this.getSpeed(vesselId, yesterday, today, "QuarterHour").gps.data)[0];
-
-                    _this.speed = speed.toFixed(2);
+                        _this.getSpeed(vesselId, yesterday, today, "QuarterHour").gps.data);
+                    speed = speed[speed.length - 1];
+                    if (!!speed)
+                        _this.speed = speed.toFixed(2);
                 }
+
                 setInterval(checkSpeedTimer, 2500);
             }
         }
