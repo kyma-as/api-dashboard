@@ -17,8 +17,8 @@
       </template>
 
       <v-card>
-        <FromDate :fdate="this.fdate" @get-from-date="getFromDate"/>
-        <ToDate :tdate="this.tdate" @get-to-date="getToDate"/>
+        <FromDate />
+        <ToDate />
       
       <v-card-actions>
           <v-spacer></v-spacer>
@@ -29,8 +29,8 @@
           color="primary" 
           flat 
           @click="menu = false, 
-          getFromDate(fdate),
-          getToDate(tdate)"
+          sendFromDate(fromDateFormatted),
+          sendToDate(toDateFormatted)"
           >
           Ok
           </v-btn>
@@ -43,27 +43,34 @@
 <script>
 import FromDate from "@/components/FromDate";
 import ToDate from "@/components/ToDate";
+import { EventBus } from '@/event-bus.js';
 
 export default{
     components: {
       FromDate,
       ToDate
     },
+    created(){
+      EventBus.$on("get-from-date", (fromDateFormatted) => {
+        this.fromDateFormatted = fromDateFormatted;
+      });
+      EventBus.$on("get-to-date", (toDateFormatted) => {
+        this.toDateFormatted = toDateFormatted;
+      });
+    },
     data() {
       return {
-        fdate: Date(),
-        tdate: Date(),
+        fromDateFormatted: Date(),
+        toDateFormatted: Date(),
         menu: false
       }
     },
     methods: {
-      getFromDate(f){
-        this.fdate = f
-        console.log(f)
+      sendFromDate(fromDateFormatted){
+        
       },
-      getToDate(t){
-        this.tdate = t
-        console.log(t)
+      sendToDate(toDateFormatted){
+       
       }
     }
   }

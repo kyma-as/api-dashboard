@@ -3,17 +3,17 @@ import { mapGetters } from "vuex";
 
 export default {
   extends: Bar,
-  computed: {
-    ...mapGetters(["getFuel"])
-  },
   data() {
     return {
       fuel: {}
     };
   },
+  computed: {
+    ...mapGetters(["getFuel"])
+  },
   mounted() {
-    let fromDate = "2018-01-01T00:00:00";
-    let toDate = "2019-01-01T00:00:00";
+    var fromDate = "2018-03-01T00:00:00";
+    var toDate = "2018-03-10T00:00:00";
     let day = [];
     let elementer = [];
     let data1 = [];
