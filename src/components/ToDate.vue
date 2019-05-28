@@ -30,10 +30,11 @@
           v-model="date" 
           no-title scrollable
           min="2016-01-01"
+          max="2019-05-01"
           >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.menu.save(date), sendDate(dateFormatted)">OK</v-btn>
+          <v-btn flat color="primary" @click="$refs.menu.save(date), sendDate(toDateFormatted)">OK</v-btn>
           </v-date-picker>
         </v-menu>
       </v-flex> 
@@ -42,15 +43,16 @@
 </template>
 
 <script>
+import { EventBus } from "@/event-bus.js";
 export default {
     data: vm => ({
         date: new Date().toJSON().substr(0, 10),
-        dateFormatted: vm.formatDate(new Date().toJSON().substr(0, 19)),
+        toDateFormatted: vm.formatDate(new Date().toJSON().substr(0, 19)),
         menu: false
     }),
     watch: {
       date (val) {
-        this.dateFormatted = this.formatDate(this.date)
+        this.toDateFormatted = this.formatDate(this.date)
       }
     },
     methods: {
@@ -59,8 +61,8 @@ export default {
         const [year, month, day] = date.split('-')
         return `${year}-${month}-${day}T00:00:00`
       },
-      sendDate(dateFormatted) {
-        this.$emit('get-to-date', dateFormatted)
+      sendDate(toDateFormatted) {
+        EventBus.$emit('get-to-date', toDateFormatted);
       }
     }
 }

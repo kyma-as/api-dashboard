@@ -3,17 +3,24 @@ import { mapGetters } from "vuex";
 
 export default {
   extends: Bar,
-  computed: {
-    ...mapGetters(["getFuel"])
-  },
   data() {
     return {
       fuel: {}
     };
   },
+  computed: {
+    ...mapGetters(["getFuel"]),
+    fDate(){
+      return this.$store.state.fromDate;
+    },
+    tDate(){
+      return this.$store.state.toDate;
+    }
+  },
   mounted() {
-    let fromDate = "2018-01-01T00:00:00";
-    let toDate = "2019-01-01T00:00:00";
+    let fromDate = this.fDate;
+    let toDate = this.tDate;
+    console.log()
     let day = [];
     let elementer = [];
     let data1 = [];
@@ -104,7 +111,6 @@ export default {
         }
         labels = day;
       }
-      console.log(day);
     }
 
     if (labels == kvartal) {

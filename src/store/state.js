@@ -17,8 +17,15 @@ export default {
   apiCallCount: 0,
   header: {},
   url: "https://demo.kyma.no/api/v1/",
-  dateToday: "",
   fetchedVessels: false,
+
+  // General date times
+  dateToday: "",
+  dateYesterday:"",
+  // DateTime Component states
+  fromDate:"",
+  toDate:"",
+
 
   loggedIn: false,
 
