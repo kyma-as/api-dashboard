@@ -37,7 +37,7 @@
           ])
         },
         beforeCreate() {
-          this.$store.dispatch('fetchVessels');
+            this.$store.dispatch('fetchVessels');
         }
     }
 </script>

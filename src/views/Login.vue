@@ -98,6 +98,7 @@
         },
         mounted() {
           // TODO: remove in production
+            this.$store.dispatch('getCurrentDate');
             this.$store.dispatch('setLoggedIn',{loggedIn:true,
             headerParams: {
               headers: {
