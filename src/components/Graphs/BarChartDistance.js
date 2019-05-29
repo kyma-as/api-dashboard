@@ -31,9 +31,7 @@ export default {
     let gpsDistanceKM = [];
     let dataen = [];
     let yakse = "KM";
-    let names = [];
-
-    let labels = ["Naut", "KM"];
+    let names = ["Nautikal", "KM"];
     for (let key in this.speed.gps.data) {
       gpsDistancenaut.push(this.speed.gps.data[key]);
       gpsDistanceKM.push(this.speed.gps.data[key] * 1.852);
@@ -51,23 +49,21 @@ export default {
     }
     dataen.push(Summnaut);
     dataen.push(Summ);
+    // pushes variable names to array
 
     this.renderChart(
       {
-        labels: labels,
+        labels: ["Total"],
         datasets: [
           {
-            data: dataen,
-            backgroundColor: [
-              "blue",
-              "red",
-              "green",
-              "yellow",
-              "orange",
-              "purple",
-              "black"
-            ],
-            label: "Distance"
+            data: [dataen[0]],
+            backgroundColor: ["green"],
+            label: names[0]
+          },
+          {
+            data: [dataen[1]],
+            backgroundColor: ["yellow"],
+            label: names[1]
           }
         ]
       },
@@ -85,6 +81,11 @@ export default {
               }
             }
           ]
+        },
+        title: {
+          FontSize: 90,
+          display: true,
+          text: "Distance Traveled"
         }
       }
     );

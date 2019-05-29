@@ -67,7 +67,7 @@ export default {
       "Hour"
     );
     // pushes all variable names into array
-    for(let f in this.fuel) {
+    for (let f in this.fuel) {
       names.push(this.fuel[f].name);
     }
     labels = kvartal;
@@ -342,32 +342,32 @@ export default {
               data: data6
             },
             {
-              label: Object.keys(this.fuel)[6],
+              label: names[6],
               backgroundColor: "black",
               data: data7
             },
             {
-              label: Object.keys(this.fuel)[7],
+              label: names[7],
               backgroundColor: "teal",
               data: data8
             },
             {
-              label: Object.keys(this.fuel)[8],
+              label: names[8],
               backgroundColor: "pink",
               data: data9
             },
             {
-              label: Object.keys(this.fuel)[9],
+              label: names[9],
               backgroundColor: "brown",
               data: data10
             },
             {
-              label: Object.keys(this.fuel)[10],
+              label: names[10],
               backgroundColor: "royalblue",
               data: data11
             },
             {
-              label: Object.keys(this.fuel)[11],
+              label: names[11],
               backgroundColor: "red",
               data: data12
             }
@@ -387,6 +387,11 @@ export default {
                 }
               }
             ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
           }
         }
       );
@@ -408,7 +413,27 @@ export default {
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
+              }
+            ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
+          }
+        }
       );
     }
     if (elementer.length == 4) {
@@ -417,30 +442,49 @@ export default {
           labels: labels,
           datasets: [
             {
-              label: Object.keys(this.fuel)[0],
+              label: names[0],
               backgroundColor: "blue",
               data: data1
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label: names[1],
               backgroundColor: "maroon",
               data: data2
             },
             {
-              label: Object.keys(this.fuel)[2],
+              label: names[2],
               backgroundColor: "green",
               data: data3
             },
             {
-              label: Object.keys(this.fuel)[3],
+              label: names[3],
               backgroundColor: "yellow",
               data: data4
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
+              }
+            ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
+          }
+        }
       );
     }
-    
   }
 };

@@ -30,17 +30,14 @@ export default {
     let labels = [];
     let dataen = [];
     let array = [];
-<<<<<<< HEAD
     let yakse = "Kg";
-=======
     let names = [];
->>>>>>> 9a53f99600867592c6fe73dcf117938d6846c328
     let i = 0;
     for (i = 0; i < Object.keys(this.emission).length; i++) {
       labels.push(Object.keys(this.emission)[i]);
     }
     // pushes all variable names to array
-    for(let f in this.emission) {
+    for (let f in this.emission) {
       names.push(this.emission[f].name);
     }
 
@@ -58,24 +55,17 @@ export default {
 
     this.renderChart(
       {
-        labels: names,
+        labels: ["Total"],
         datasets: [
           {
-            data:  [dataen[0]],
-            backgroundColor: [
-              "green",
-            ],
-            label: "tull"
+            data: [dataen[0]],
+            backgroundColor: ["green"],
+            label: names[0]
           },
           {
             data: [dataen[1]],
-            backgroundColor: [
-              
-            
-              
-              "black"
-            ],
-            label: "fanteri"
+            backgroundColor: ["black"],
+            label: names[1]
           }
         ]
       },
@@ -93,6 +83,11 @@ export default {
               }
             }
           ]
+        },
+        title: {
+          FontSize: 90,
+          display: true,
+          text: "Total Emissions"
         }
       }
     );

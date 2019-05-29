@@ -32,6 +32,7 @@ export default {
     let labels = [];
     let yakse = "Knot";
     let formatting;
+    let names = [];
 
     for (let key in this.speed.gps.data) {
       gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
@@ -42,6 +43,7 @@ export default {
     for (let key in this.speed.log.data) {
       logSpeed.push(this.speed.log.data[key].toFixed(2));
     }
+
 
     if (labels.length < 49) {
       logSpeed = [];
@@ -56,8 +58,9 @@ export default {
       for (let key in this.speed.log.data) {
         logSpeed.push(this.speed.log.data[key].toFixed(2));
       }
+    }
     // pushes variable names to array
-    for(let f in this.speed) {
+    for (let f in this.speed) {
       names.push(this.speed[f].name);
     }
 
@@ -72,6 +75,7 @@ export default {
       decimal = Math.abs(decimal);
       diff.push(decimal);
     }
+
     this.renderChart(
       {
         labels: labels,
@@ -110,6 +114,11 @@ export default {
               }
             }
           ]
+        }, title: {
+          FontSize: 90,
+          display: true,
+          text: "Speed",
+          
         }
       }
     );

@@ -30,7 +30,7 @@ export default {
     let labels = [];
     let dataen = [];
     let array = [];
-    let text = "Total Kg Used";
+    let text = "Total Fuel Used";
     let Summ = 0;
     let i = 0;
     let names = [];

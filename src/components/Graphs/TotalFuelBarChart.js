@@ -34,6 +34,7 @@ export default {
     let yakse = "Total Kg Used";
     let i = 0;
     let elementer = [];
+    let names =[];
     for (i = 0; i < Object.keys(this.fuel).length; i++) {
       labels.push(Object.keys(this.fuel)[i]);
     }
@@ -57,40 +58,44 @@ export default {
     for (let p = 0; p < Object.keys(this.fuel).length; p++) {
       elementer.push(Object.keys(this.fuel)[i]);
     }
+        // pushes variable names to array
+        for (let f in this.fuel) {
+          names.push(this.fuel[f].name);
+        }
 
     labels = ["Total Used"];
     if (elementer.length > 2) {
       this.renderChart(
         {
-          labels: labels,
+          labels: ["Total"],
           datasets: [
             {
-              label: Object.keys(this.fuel)[0],
+              label: names[0],
               backgroundColor: "blue",
               data: [dataen[0]]
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label: names[1],
               backgroundColor: "maroon",
               data: [dataen[1]]
             },
             {
-              label: Object.keys(this.fuel)[2],
+              label: names[2],
               backgroundColor: "green",
               data: [dataen[2]]
             },
             {
-              label: Object.keys(this.fuel)[3],
+              label: names[3],
               backgroundColor: "yellow",
               data: [dataen[3]]
             },
             {
-              label: Object.keys(this.fuel)[4],
+              label: names[4],
               backgroundColor: "orange",
               data: [dataen[4]]
             },
             {
-              label: Object.keys(this.fuel)[5],
+              label: names[5],
               backgroundColor: "teal",
               data: [dataen[5]]
             }
@@ -110,21 +115,27 @@ export default {
                 }
               }
             ]
-          }
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used ",
+        }
         }
       );
     }
     if (elementer.length == 2) {
       this.renderChart(
         {
+          labels: ["Total"],
           datasets: [
             {
-              label: Object.keys(this.fuel)[0],
+              label: names[0],
               backgroundColor: "blue",
               data: [dataen[0]]
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label:names[1],
               backgroundColor: "maroon",
               data: [dataen[1]]
             }
@@ -144,23 +155,39 @@ export default {
                 }
               }
             ]
-          }
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used ",
+        }
         }
       );
     }
     if (elementer.length == 4) {
       this.renderChart(
         {
+          labels: ["Total"],
           datasets: [
             {
-              label: Object.keys(this.fuel)[0],
+              label: names[0],
               backgroundColor: "blue",
               data: [dataen[0]]
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label: names[1],
               backgroundColor: "maroon",
               data: [dataen[1]]
+            },
+            {
+              label: names[2],
+              backgroundColor: "green",
+              data: [dataen[2]]
+            },
+            {
+              label: names[3],
+              backgroundColor: "yellow",
+              data: [dataen[3]]
             }
           ]
         },
@@ -178,8 +205,12 @@ export default {
                 }
               }
             ]
-          }
-        }
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used ",
+        }}
       );
     }
   }

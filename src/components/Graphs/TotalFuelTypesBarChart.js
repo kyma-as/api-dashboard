@@ -34,7 +34,11 @@ export default {
     let yakse = "Total Kg Used";
     let i = 0;
     let elementer = [];
-
+    let names = [];
+     // pushes variable names to array
+     for (let f in this.fuel) {
+      names.push(this.fuel[f].name);
+    }
     for (i = 0; i < Object.keys(this.fuel).length; i++) {
       labels.push(Object.keys(this.fuel)[i]);
     }
@@ -54,68 +58,72 @@ export default {
       elementer.push(Object.keys(this.fuel)[i]);
     }
     labels = ["Total Used"];
+         // pushes variable names to array
+         for (let f in this.fuel) {
+          names.push(this.fuel[f].name);
+        }
     if (elementer.length > 2) {
       this.renderChart(
         {
-          labels: labels,
+          labels: ["Total"],
           datasets: [
             {
-              label: Object.keys(this.fuel)[0],
+              label: names[0],
               backgroundColor: "blue",
               data: [dataen[0]]
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label: names[1],
               backgroundColor: "maroon",
               data: [dataen[1]]
             },
             {
-              label: Object.keys(this.fuel)[2],
+              label: names[2],
               backgroundColor: "green",
               data: [dataen[2]]
             },
             {
-              label: Object.keys(this.fuel)[3],
+              label: names[3],
               backgroundColor: "yellow",
               data: [dataen[3]]
             },
             {
-              label: Object.keys(this.fuel)[4],
+              label: names[4],
               backgroundColor: "orange",
               data: [dataen[4]]
             },
             {
-              label: Object.keys(this.fuel)[5],
+              label: names[5],
               backgroundColor: "teal",
               data: [dataen[5]]
             },
             {
-              label: Object.keys(this.fuel)[6],
+              label: names[6],
               backgroundColor: "darkgreen",
               data: [dataen[6]]
             },
             {
-              label: Object.keys(this.fuel)[7],
+              label: names[7],
               backgroundColor: "red",
               data: [dataen[7]]
             },
             {
-              label: Object.keys(this.fuel)[8],
+              label: names[8],
               backgroundColor: "brown",
               data: [dataen[8]]
             },
             {
-              label: Object.keys(this.fuel)[9],
+              label: names[9],
               backgroundColor: "royalblue",
               data: [dataen[9]]
             },
             {
-              label: Object.keys(this.fuel)[10],
+              label: names[10],
               backgroundColor: "purple",
               data: [dataen[10]]
             },
             {
-              label: Object.keys(this.fuel)[11],
+              label: names[11],
               backgroundColor: "black",
               data: [dataen[11]]
             }
@@ -135,6 +143,11 @@ export default {
                 }
               }
             ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
           }
         }
       );
@@ -142,14 +155,15 @@ export default {
     if (elementer.length == 2) {
       this.renderChart(
         {
+          labels: ["Total"],
           datasets: [
             {
-              label: Object.keys(this.fuel)[0],
+              label: names[0],
               backgroundColor: "blue",
               data: [dataen[0]]
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label:names[1],
               backgroundColor: "maroon",
               data: [dataen[1]]
             }
@@ -169,30 +183,36 @@ export default {
                 }
               }
             ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
           }
         }
       );
     }    if (elementer.length == 4) {
       this.renderChart(
         {
+          labels: ["Total"],
           datasets: [
             {
-              label: Object.keys(this.fuel)[0],
+              label: names[0],
               backgroundColor: "blue",
               data: [dataen[0]]
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label: names[1],
               backgroundColor: "maroon",
               data: [dataen[1]]
             },
             {
-              label: Object.keys(this.fuel)[2],
+              label: names[2],
               backgroundColor: "green",
               data: [dataen[2]]
             },
             {
-              label: Object.keys(this.fuel)[3],
+              label: names[3],
               backgroundColor: "yellow",
               data: [dataen[3]]
             }
@@ -212,6 +232,11 @@ export default {
                 }
               }
             ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
           }
         }
       );

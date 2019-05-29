@@ -52,15 +52,7 @@ export default {
       "November",
       "December"
     ];
-    let days = [
-      "Monday",
-      "Tuesday",
-      "Wednsday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ];
+
     let month = [];
     let bool = false;
     let names = [];
@@ -305,6 +297,11 @@ export default {
                 }
               }
             ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
           }
         }
       );
@@ -340,6 +337,11 @@ export default {
                 }
               }
             ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
           }
         }
       );

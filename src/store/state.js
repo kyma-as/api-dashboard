@@ -23,8 +23,8 @@ export default {
   dateToday: "",
   dateYesterday:"",
   // DateTime Component states
-  fromDate: "",
-  toDate: "",
+  fromDate: "2019-04-01T00:00:00",
+  toDate: "2019-04-30T00:00:00",
 
   loggedIn: false,
 
