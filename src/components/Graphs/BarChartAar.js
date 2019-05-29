@@ -40,7 +40,7 @@ export default {
     let kvartal = ["Q1", "Q2", "Q3", "Q4"];
     let months = [
       "January",
-      "Februart",
+      "February",
       "March",
       "April",
       "May",
