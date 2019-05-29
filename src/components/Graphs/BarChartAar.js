@@ -62,13 +62,16 @@ export default {
     ];
     let month = [];
     let bool = false;
+    let names = [];
     this.fuel = this.getFuel(
       this.$route.params.vesselid,
       fromDate,
       toDate,
       "Hour"
     );
-
+    for(let f in this.fuel) {
+      names.push(this.fuel[f].name);
+    }
     labels = kvartal;
     if (fromDate.substring(0, 4) == toDate.substring(0, 4)) {
       for (let k = 0; k < 13; k++) {
@@ -256,32 +259,32 @@ export default {
           labels: labels,
           datasets: [
             {
-              label: Object.keys(this.fuel)[0],
+              label: names[0],
               backgroundColor: "blue",
               data: data1
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label: names[1],
               backgroundColor: "red",
               data: data2
             },
             {
-              label: Object.keys(this.fuel)[2],
+              label: names[2],
               backgroundColor: "green",
               data: data3
             },
             {
-              label: Object.keys(this.fuel)[3],
+              label: names[3],
               backgroundColor: "yellow",
               data: data4
             },
             {
-              label: Object.keys(this.fuel)[4],
+              label: names[4],
               backgroundColor: "orange",
               data: data5
             },
             {
-              label: Object.keys(this.fuel)[5],
+              label: names[5],
               backgroundColor: "purple",
               data: data6
             }
@@ -296,12 +299,12 @@ export default {
           labels: labels,
           datasets: [
             {
-              label: Object.keys(this.fuel)[0],
+              label: names[0],
               backgroundColor: "blue",
               data: data1
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label: names[1],
               backgroundColor: "red",
               data: data2
             }

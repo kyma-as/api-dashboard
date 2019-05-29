@@ -22,10 +22,16 @@ export default {
     let labels = [];
     let dataen = [];
     let array = [];
+    let names = [];
     let i = 0;
     for (i = 0; i < Object.keys(this.emission).length; i++) {
       labels.push(Object.keys(this.emission)[i]);
     }
+    // pushes all variable names to array
+    for(let f in this.emission) {
+      names.push(this.emission[f].name);
+    }
+
     for (let key in this.emission) {
       for (let key2 in this.emission[key].data) {
         array.push(this.emission[key].data[key2]);
@@ -40,7 +46,7 @@ export default {
 
     this.renderChart(
       {
-        labels: Object.keys(this.emission),
+        labels: names,
         datasets: [
           {
             data: dataen,
@@ -53,7 +59,7 @@ export default {
               "purple",
               "black"
             ],
-            label: "emission"
+            label: "Emissions"
           }
         ]
       },

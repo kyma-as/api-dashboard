@@ -15,13 +15,14 @@ export default {
   mounted() {
     this.speed = this.getSpeed(
       this.$route.params.vesselid,
-      "2019-04-24T00:00:00",
+      "2019-04-11T00:00:00",
       "2019-05-11T00:00:00",
-      "QuarterHour"
+      "Day"
     );
     let gpsSpeed = [];
     let logSpeed = [];
     let labels = [];
+    let names = [];
     let formatting;
     for (let key in this.speed.gps.data) {
       gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
@@ -31,6 +32,11 @@ export default {
     }
     for (let key in this.speed.log.data) {
       logSpeed.push(this.speed.log.data[key].toFixed(2));
+    }
+
+    // pushes variable names to array
+    for(let f in this.speed) {
+      names.push(this.speed[f].name);
     }
 
     let diff = [];
@@ -49,13 +55,13 @@ export default {
         labels: labels,
         datasets: [
           {
-            label: "Speed gps",
+            label: names[0],
             borderColor: "green",
             data: gpsSpeed,
             pointRadius: 0
           },
           {
-            label: "Speed log",
+            label: names[1],
             borderColor: "blue",
             data: logSpeed,
             pointRadius: 0

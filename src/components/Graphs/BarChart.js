@@ -23,8 +23,12 @@ export default {
     let dataen = [];
     let array = [];
     let i = 0;
+    let names = [];
     for (i = 0; i < Object.keys(this.fuel).length; i++) {
       labels.push(Object.keys(this.fuel)[i]);
+    }
+    for(let f in this.fuel) {
+      names.push(this.fuel[f].name);
     }
     for (let key in this.fuel) {
       for (let key2 in this.fuel[key].data) {
@@ -40,7 +44,7 @@ export default {
 
     this.renderChart(
       {
-        labels: Object.keys(this.fuel),
+        labels: names,
         datasets: [
           {
             data: dataen,

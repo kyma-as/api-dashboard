@@ -22,6 +22,7 @@ export default {
     let gpsDistancenaut = [];
     let gpsDistanceKM = [];
     let dataen = [];
+    let names = [];
 
     let labels = ["Naut", "KM"];
     for (let key in this.speed.gps.data) {
