@@ -5,10 +5,10 @@ export default {
   extends: Bar,
   computed: {
     ...mapGetters(["getFuelTypes"]),
-    fDate(){
+    fDate() {
       return this.$store.state.fromDate;
     },
-    tDate(){
+    tDate() {
       return this.$store.state.toDate;
     }
   },
@@ -21,7 +21,7 @@ export default {
     let fromDate = this.fDate;
     let toDate = this.tDate;
     let day = [];
-    let yakse= "kg";
+    let yakse = "kg";
     let elementer = [];
     let data1 = [];
     let data2 = [];
@@ -31,10 +31,10 @@ export default {
     let data6 = [];
     let data7 = [];
     let data8 = [];
-    let data9 = [];   
-    let data10 = [];   
-    let data11 = [];   
-    let data12 = [];   
+    let data9 = [];
+    let data10 = [];
+    let data11 = [];
+    let data12 = [];
     let array = [];
     let i = 0;
     let counter = 0;
@@ -131,7 +131,6 @@ export default {
 
           Summ = array.reduce((prev, cur) => prev + cur, 0);
           Summ = Summ.toFixed(2);
-          
 
           if (counter == 0) {
             data1.push(Summ);
@@ -169,6 +168,7 @@ export default {
           if (counter == 11) {
             data12.push(Summ);
           }
+
           counter++;
           Summ = 0;
           array = [];
@@ -301,8 +301,6 @@ export default {
         }
       }
     }
-    
-
 
     if (elementer.length > 2) {
       this.renderChart(
@@ -371,18 +369,22 @@ export default {
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false,scales: {
-          yAxes: [
-            {
-              display: true,
-              scaleLabel: {
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
                 display: true,
-                labelString: yakse,
-                backgroundColor: "red"
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
               }
-            }
-          ]
-        } }
+            ]
+          }
+        }
       );
     }
     if (elementer.length == 2) {

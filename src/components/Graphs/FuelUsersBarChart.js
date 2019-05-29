@@ -10,10 +10,10 @@ export default {
   },
   computed: {
     ...mapGetters(["getFuel"]),
-    fDate(){
+    fDate() {
       return this.$store.state.fromDate;
     },
-    tDate(){
+    tDate() {
       return this.$store.state.toDate;
     }
   },
@@ -288,18 +288,22 @@ export default {
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false,scales: {
-          yAxes: [
-            {
-              display: true,
-              scaleLabel: {
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
                 display: true,
-                labelString: yakse,
-                backgroundColor: "red"
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
               }
-            }
-          ]
-        } }
+            ]
+          }
+        }
       );
     }
     if (elementer.length == 2) {
@@ -319,18 +323,22 @@ export default {
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false,scales: {
-          yAxes: [
-            {
-              display: true,
-              scaleLabel: {
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
                 display: true,
-                labelString: yakse,
-                backgroundColor: "red"
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
               }
-            }
-          ]
-        } }
+            ]
+          }
+        }
       );
     }
   }

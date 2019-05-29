@@ -5,10 +5,10 @@ export default {
   extends: Line,
   computed: {
     ...mapGetters(["getSpeed"]),
-    fDate(){
+    fDate() {
       return this.$store.state.fromDate;
     },
-    tDate(){
+    tDate() {
       return this.$store.state.toDate;
     }
   },
@@ -32,35 +32,31 @@ export default {
     let labels = [];
     let yakse = "Knot";
     let formatting;
-    
 
-   
+    for (let key in this.speed.gps.data) {
+      gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
+      formatting = key;
+      formatting = formatting.substring(0, 10);
+      labels.push(formatting);
+    }
+    for (let key in this.speed.log.data) {
+      logSpeed.push(this.speed.log.data[key].toFixed(2));
+    }
+
+    if (labels.length < 49) {
+      logSpeed = [];
+      labels = [];
+      gpsSpeed = [];
       for (let key in this.speed.gps.data) {
         gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
         formatting = key;
-        formatting = formatting.substring(0, 10); 
+        formatting = formatting.substring(11);
         labels.push(formatting);
       }
       for (let key in this.speed.log.data) {
         logSpeed.push(this.speed.log.data[key].toFixed(2));
       }
-
-    if(labels.length < 49){
-      logSpeed=[]
-      labels=[]
-      gpsSpeed=[]
-      for (let key in this.speed.gps.data) {
-      
-        gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
-        formatting = key;
-        formatting = formatting.substring(11, ); 
-        labels.push(formatting);
-      }
-      for (let key in this.speed.log.data) {
-        
-        logSpeed.push(this.speed.log.data[key].toFixed(2));
-      }
-  }
+    }
 
     let diff = [];
     let decimal;
@@ -97,18 +93,22 @@ export default {
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false,scales: {
-        yAxes: [
-          {
-            display: true,
-            scaleLabel: {
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
               display: true,
-              labelString: yakse,
-              backgroundColor: "red"
+              scaleLabel: {
+                display: true,
+                labelString: yakse,
+                backgroundColor: "red"
+              }
             }
-          }
-        ]
-      } }
+          ]
+        }
+      }
     );
   }
 };

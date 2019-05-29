@@ -5,10 +5,10 @@ export default {
   extends: Bar,
   computed: {
     ...mapGetters(["getEmission"]),
-    fDate(){
+    fDate() {
       return this.$store.state.fromDate;
     },
-    tDate(){
+    tDate() {
       return this.$store.state.toDate;
     }
   },
@@ -30,7 +30,7 @@ export default {
     let labels = [];
     let dataen = [];
     let array = [];
-    let yakse ="Kg";
+    let yakse = "Kg";
     let i = 0;
     for (i = 0; i < Object.keys(this.emission).length; i++) {
       labels.push(Object.keys(this.emission)[i]);
@@ -66,18 +66,22 @@ export default {
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false,scales: {
-        yAxes: [
-          {
-            display: true,
-            scaleLabel: {
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
               display: true,
-              labelString: yakse,
-              backgroundColor: "red"
+              scaleLabel: {
+                display: true,
+                labelString: yakse,
+                backgroundColor: "red"
+              }
             }
-          }
-        ]
-      } }
+          ]
+        }
+      }
     );
   }
 };

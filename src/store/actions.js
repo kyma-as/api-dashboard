@@ -166,7 +166,7 @@ export default {
     let res = await fetch(url, header);
     let jsonLogData = await res.json();
 
-    commit('APPEND_UNIT', {
+    commit("APPEND_UNIT", {
       unit: jsonLogData.unit.name,
       vesselIndex: payload.vesselIndex,
       logIndex: payload.logIndex
@@ -218,11 +218,11 @@ export default {
     commit("INCREMENT");
   },
 
-  setDates: ({commit},dates)=>{
+  setDates: ({ commit }, dates) => {
     console.log("Commiting dates to state");
     console.log(dates);
-    commit("SET_FROM_DATE",dates.from);
-    commit("SET_TO_DATE",dates.to);
+    commit("SET_FROM_DATE", dates.from);
+    commit("SET_TO_DATE", dates.to);
   },
 
   /**
