@@ -46,7 +46,7 @@ export default {
     let names = [];
     let months = [
       "January",
-      "Februart",
+      "February",
       "March",
       "April",
       "May",
