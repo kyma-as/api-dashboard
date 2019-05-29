@@ -15,7 +15,6 @@
       <v-img :src="images.vesselIcon"/>
       <v-layout row wrap>
         <v-flex xs12 sm6 v-model="speed"><span class="font-weight-bold">Speed:</span> {{speed}}kt</v-flex>
-        <v-flex xs12 sm6>Fuel: 1000 litre</v-flex>
         <v-flex xs12 sm12>Vessel Status: <span class="green--text">Good</span></v-flex>
       </v-layout>
     </v-card>

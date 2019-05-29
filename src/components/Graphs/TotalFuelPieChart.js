@@ -33,10 +33,16 @@ export default {
     let text = "Total Kg Used";
     let Summ = 0;
     let i = 0;
+    let names = [];
 
     for (i = 1; i < Object.keys(this.fuel).length; i++) {
       labels.push(Object.keys(this.fuel)[i]);
     }
+
+    for(let f in this.fuel) {
+      names.push(this.fuel[f].name);
+    }
+
     for (let key in this.fuel) {
       for (let key2 in this.fuel[key].data) {
         array.push(this.fuel[key].data[key2]);
@@ -50,7 +56,7 @@ export default {
     }
     this.renderChart(
       {
-        labels: Object.keys(this.fuel),
+        labels: names,
         datasets: [
           {
             data: dataen,

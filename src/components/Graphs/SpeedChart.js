@@ -56,6 +56,9 @@ export default {
       for (let key in this.speed.log.data) {
         logSpeed.push(this.speed.log.data[key].toFixed(2));
       }
+    // pushes variable names to array
+    for(let f in this.speed) {
+      names.push(this.speed[f].name);
     }
 
     let diff = [];
@@ -74,13 +77,13 @@ export default {
         labels: labels,
         datasets: [
           {
-            label: "Speed gps",
+            label: names[0],
             borderColor: "green",
             data: gpsSpeed,
             pointRadius: 0
           },
           {
-            label: "Speed log",
+            label: names[1],
             borderColor: "blue",
             data: logSpeed,
             pointRadius: 0

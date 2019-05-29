@@ -31,6 +31,7 @@ export default {
     let gpsDistanceKM = [];
     let dataen = [];
     let yakse = "KM";
+    let names = [];
 
     let labels = ["Naut", "KM"];
     for (let key in this.speed.gps.data) {
