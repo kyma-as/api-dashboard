@@ -52,17 +52,21 @@ export default {
         labels: Object.keys(this.emission),
         datasets: [
           {
-            data: dataen,
+            data:  [dataen[0]],
             backgroundColor: [
-              "blue",
-              "red",
               "green",
-              "yellow",
-              "orange",
-              "purple",
+            ],
+            label: "tull"
+          },
+          {
+            data: [dataen[1]],
+            backgroundColor: [
+              
+            
+              
               "black"
             ],
-            label: "emission"
+            label: "fanteri"
           }
         ]
       },

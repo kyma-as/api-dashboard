@@ -154,7 +154,7 @@ export default {
   getLogData: async ({ state, commit }, payload) => {
     let logVariableId = payload.varId;
     let fromDate = "2016-01-01";
-    let toDate = "2019-05-01";
+    let toDate = state.dateToday; // + T23:45:00???
     let granularity = payload.granularity;
     if (granularity == "QuarterHour") {
       fromDate = "2019-04-15"; // ~ two tweeks
@@ -206,16 +206,18 @@ export default {
    * all the way back to today's date.
    */
   getCurrentDate: ({ commit }) => {
-    let temp_date = new Date();
-    let date =
-      "" +
-      temp_date.getFullYear() +
-      "-" +
-      (temp_date.getMonth() + 1) +
-      "-" +
-      temp_date.getDate();
-    commit("SET_DATE", date);
-    commit("INCREMENT");
+    // Today
+    let date = new Date();
+    let todayDate = date.toJSON().substring(0,19)
+    commit("SET_TODAY_DATE", todayDate);
+
+    // Yesterday
+    date = new Date();
+    date.setDate(date.getDate()-1);
+    let yesterdayDate = date.toJSON().substring(0,19);
+
+    commit("SET_YESTERDAY_DATE", yesterdayDate);
+
   },
 
   setDates: ({ commit }, dates) => {
