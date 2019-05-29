@@ -5,10 +5,10 @@ export default {
   extends: Bar,
   computed: {
     ...mapGetters(["getSpeed"]),
-    fDate(){
+    fDate() {
       return this.$store.state.fromDate;
     },
-    tDate(){
+    tDate() {
       return this.$store.state.toDate;
     }
   },
@@ -17,7 +17,6 @@ export default {
       speed: {}
     };
   },
-  
 
   mounted() {
     let fromDate = this.fDate;
@@ -31,6 +30,7 @@ export default {
     let gpsDistancenaut = [];
     let gpsDistanceKM = [];
     let dataen = [];
+    let yakse = "KM";
 
     let labels = ["Naut", "KM"];
     for (let key in this.speed.gps.data) {
@@ -39,9 +39,16 @@ export default {
     }
     let Summnaut = gpsDistancenaut.reduce((prev, cur) => prev + cur, 0);
     Summnaut = Summnaut.toFixed(2);
-    dataen.push(Summnaut);
+
     let Summ = gpsDistanceKM.reduce((prev, cur) => prev + cur, 0);
     Summ = Summ.toFixed(2);
+
+    if (Summ.length > 3 && Summnaut.length > 3) {
+      Summ = Summ / 10;
+      Summnaut = Summnaut / 10;
+      yakse = "Total KM in 10";
+    }
+    dataen.push(Summnaut);
     dataen.push(Summ);
 
     this.renderChart(
@@ -63,7 +70,22 @@ export default {
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: yakse,
+                backgroundColor: "red"
+              }
+            }
+          ]
+        }
+      }
     );
   }
 };

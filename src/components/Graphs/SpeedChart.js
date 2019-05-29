@@ -5,10 +5,10 @@ export default {
   extends: Line,
   computed: {
     ...mapGetters(["getSpeed"]),
-    fDate(){
+    fDate() {
       return this.$store.state.fromDate;
     },
-    tDate(){
+    tDate() {
       return this.$store.state.toDate;
     }
   },
@@ -30,15 +30,32 @@ export default {
     let gpsSpeed = [];
     let logSpeed = [];
     let labels = [];
+    let yakse = "Knot";
     let formatting;
+
     for (let key in this.speed.gps.data) {
       gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
       formatting = key;
-      formatting = formatting.substring(0, 10); // om du vil has tidspunkt og ikkje dato ta fra substing(10,)
+      formatting = formatting.substring(0, 10);
       labels.push(formatting);
     }
     for (let key in this.speed.log.data) {
       logSpeed.push(this.speed.log.data[key].toFixed(2));
+    }
+
+    if (labels.length < 49) {
+      logSpeed = [];
+      labels = [];
+      gpsSpeed = [];
+      for (let key in this.speed.gps.data) {
+        gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
+        formatting = key;
+        formatting = formatting.substring(11);
+        labels.push(formatting);
+      }
+      for (let key in this.speed.log.data) {
+        logSpeed.push(this.speed.log.data[key].toFixed(2));
+      }
     }
 
     let diff = [];
@@ -76,7 +93,22 @@ export default {
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: yakse,
+                backgroundColor: "red"
+              }
+            }
+          ]
+        }
+      }
     );
   }
 };

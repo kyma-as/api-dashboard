@@ -5,7 +5,7 @@
       <span>Welcome to ship {{vessel.name}}.</span>
     <v-layout column>
       <GraphCard />
-      <DateTime />
+
     </v-layout>
     </v-content>
   </div>

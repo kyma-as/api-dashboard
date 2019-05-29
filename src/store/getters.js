@@ -12,8 +12,10 @@ export default {
         let so2Array = vessel.logVariables.find(x => x.id === 9051);
 
         let keyArray = arrayOfKeys(state, gran, co2Array);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [co2Array, so2Array]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          co2Array,
+          so2Array
+        ]);
 
         let co2Data = dataArray[0];
         let so2Data = dataArray[1];
@@ -38,8 +40,10 @@ export default {
         let so2Array = vessel.logVariables.find(x => x.id === 10417);
 
         let keyArray = arrayOfKeys(state, gran, co2Array);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [co2Array, so2Array]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          co2Array,
+          so2Array
+        ]);
 
         let co2Data = dataArray[0];
         let so2Data = dataArray[1];
@@ -64,8 +68,10 @@ export default {
         let so2Array = vessel.logVariables.find(x => x.id === 12127);
 
         let keyArray = arrayOfKeys(state, gran, co2Array);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [co2Array, so2Array]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          co2Array,
+          so2Array
+        ]);
 
         let co2Data = dataArray[0];
         let so2Data = dataArray[1];
@@ -90,8 +96,10 @@ export default {
         let so2Array = vessel.logVariables.find(x => x.id === 10732);
 
         let keyArray = arrayOfKeys(state, gran, co2Array);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [co2Array, so2Array]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          co2Array,
+          so2Array
+        ]);
 
         let co2Data = dataArray[0];
         let so2Data = dataArray[1];
@@ -121,8 +129,10 @@ export default {
         let logArray = vessel.logVariables.find(x => x.id === 9178);
 
         let keyArray = arrayOfKeys(state, gran, gpsArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [gpsArray, logArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          gpsArray,
+          logArray
+        ]);
 
         let gpsData = dataArray[0];
         let logData = dataArray[1];
@@ -147,8 +157,10 @@ export default {
         let logArray = vessel.logVariables.find(x => x.id === 10482);
 
         let keyArray = arrayOfKeys(state, gran, gpsArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [gpsArray, logArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          gpsArray,
+          logArray
+        ]);
 
         let gpsData = dataArray[0];
         let logData = dataArray[1];
@@ -173,8 +185,10 @@ export default {
         let logArray = vessel.logVariables.find(x => x.id === 12192);
 
         let keyArray = arrayOfKeys(state, gran, gpsArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [gpsArray, logArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          gpsArray,
+          logArray
+        ]);
 
         let gpsData = dataArray[0];
         let logData = dataArray[1];
@@ -199,8 +213,10 @@ export default {
         let logArray = vessel.logVariables.find(x => x.id === 10804);
 
         let keyArray = arrayOfKeys(state, gran, gpsArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [gpsArray, logArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          gpsArray,
+          logArray
+        ]);
 
         let gpsData = dataArray[0];
         let logData = dataArray[1];
@@ -242,11 +258,20 @@ export default {
         let totalpilotArray = vessel.logVariables.find(x => x.id === 9146);
 
         let keyArray = arrayOfKeys(state, gran, boilerhfoArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [boilerhfoArray, boilerlshfoArray, boilermdoArray, boilermgoArray,
-        totalfoArray, totalgasArray, totalhfoArray, totalisoArray,
-        totallshfoArray, totalmdoArray, totalmgoArray, totalpilotArray]);
-
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          boilerhfoArray,
+          boilerlshfoArray,
+          boilermdoArray,
+          boilermgoArray,
+          totalfoArray,
+          totalgasArray,
+          totalhfoArray,
+          totalisoArray,
+          totallshfoArray,
+          totalmdoArray,
+          totalmgoArray,
+          totalpilotArray
+        ]);
 
         let boilerhfoData = dataArray[0];
         let boilerlshfoData = dataArray[1];
@@ -341,8 +366,10 @@ export default {
         let boilergasArray = vessel.logVariables.find(x => x.id === 10396);
 
         let keyArray = arrayOfKeys(state, gran, boilerfoArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [boilerfoArray, boilergasArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          boilerfoArray,
+          boilergasArray
+        ]);
 
         let boilerfoData = dataArray[0];
         let boilergasData = dataArray[1];
@@ -368,8 +395,12 @@ export default {
         let boilergasArray = vessel.logVariables.find(x => x.id === 10705);
 
         let keyArray = arrayOfKeys(state, gran, boilerhfoArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [boilerhfoArray, boilerlsmgoArray, boilerfoArray, boilergasArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          boilerhfoArray,
+          boilerlsmgoArray,
+          boilerfoArray,
+          boilergasArray
+        ]);
 
         let boilerhfoData = dataArray[0];
         let boilerlsmgoData = dataArray[1];
@@ -408,8 +439,10 @@ export default {
         let boilergasArray = vessel.logVariables.find(x => x.id === 12106);
 
         let keyArray = arrayOfKeys(state, gran, boilerfoArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [boilerfoArray, boilergasArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          boilerfoArray,
+          boilergasArray
+        ]);
 
         let boilerfoData = dataArray[0];
         let boilergasData = dataArray[1];
@@ -431,7 +464,6 @@ export default {
       }
       default:
         return "Vessel id not valid";
-
     }
   },
   getFuel: state => (vesselid, from, to, gran) => {
@@ -446,8 +478,14 @@ export default {
         let ge4Array = vessel.logVariables.find(x => x.id === 9122);
 
         let keyArray = arrayOfKeys(state, gran, boilerfuelArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [boilerfuelArray, gcuArray, ge1Array, ge2Array, ge3Array, ge4Array]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          boilerfuelArray,
+          gcuArray,
+          ge1Array,
+          ge2Array,
+          ge3Array,
+          ge4Array
+        ]);
 
         let boilerfuelData = dataArray[0];
         let gcuData = dataArray[1];
@@ -500,8 +538,10 @@ export default {
         let boilergasArray = vessel.logVariables.find(x => x.id === 10396);
 
         let keyArray = arrayOfKeys(state, gran, boilerfoArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [boilerfoArray, boilergasArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          boilerfoArray,
+          boilergasArray
+        ]);
 
         let boilerfoData = dataArray[0];
         let boilergasData = dataArray[1];
@@ -525,8 +565,10 @@ export default {
         let boilergasArray = vessel.logVariables.find(x => x.id === 10705);
 
         let keyArray = arrayOfKeys(state, gran, boilerfoArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [boilerfoArray, boilergasArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          boilerfoArray,
+          boilergasArray
+        ]);
 
         let boilerfoData = dataArray[0];
         let boilergasData = dataArray[1];
@@ -551,8 +593,10 @@ export default {
         let boilergasArray = vessel.logVariables.find(x => x.id === 12106);
 
         let keyArray = arrayOfKeys(state, gran, boilerfoArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [boilerfoArray, boilergasArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          boilerfoArray,
+          boilergasArray
+        ]);
 
         let boilerfoData = dataArray[0];
         let boilergasData = dataArray[1];
@@ -576,9 +620,9 @@ export default {
         return "No matching vessel id";
     }
   },
-  getFuelTypesOld: (state) => (vesselid, from, to, gran) => {
+  getFuelTypesOld: state => (vesselid, from, to, gran) => {
     const vessel = state.vessels.find(vessel => vessel.id === vesselid);
-    switch(vesselid) {
+    switch (vesselid) {
       case 110: {
         let boilerfuelArray = vessel.logVariables.find(x => x.id === 9024);
         let boilerhfoArray = vessel.logVariables.find(x => x.id === 9031);
@@ -601,12 +645,27 @@ export default {
         let ge34pilotArray = vessel.logVariables.find(x => x.id === 9119);
 
         let keyArray = arrayOfKeys(state, gran, boilerfuelArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [boilerfuelArray, boilerhfoArray, boilerlshfoArray, boilermdoArray,
-        boilermgoArray, ge12hfoArray, ge12isoArray, ge12lshfoArray,
-        ge12mdoArray, ge12mgoArray, ge12pilotArray, ge34fuelArray,
-        ge34tempArray, ge34hfoArray, ge34isoArray, ge34lshfoArray,
-        ge34mdoArray, ge34mgoArray, ge34pilotArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          boilerfuelArray,
+          boilerhfoArray,
+          boilerlshfoArray,
+          boilermdoArray,
+          boilermgoArray,
+          ge12hfoArray,
+          ge12isoArray,
+          ge12lshfoArray,
+          ge12mdoArray,
+          ge12mgoArray,
+          ge12pilotArray,
+          ge34fuelArray,
+          ge34tempArray,
+          ge34hfoArray,
+          ge34isoArray,
+          ge34lshfoArray,
+          ge34mdoArray,
+          ge34mgoArray,
+          ge34pilotArray
+        ]);
 
         let boilerfuelData = dataArray[0];
         let boilerhfoData = dataArray[1];
@@ -752,8 +811,8 @@ export default {
         return "Only data for vessel 110 currently";
     }
   },
-  getFuelTotal: (state) => (vesselid, from, to, gran) => {
-    switch(vesselid) {
+  getFuelTotal: state => (vesselid, from, to, gran) => {
+    switch (vesselid) {
       case 110: {
         let totalfoArray = vessel.logVariables.find(x => x.id === 9139);
         let totalgasArray = vessel.logVariables.find(x => x.id === 9140);
@@ -765,9 +824,16 @@ export default {
         let totalpilotArray = vessel.logVariables.find(x => x.id === 9146);
 
         let keyArray = arrayOfKeys(state, gran, totalfoArray);
-        let dataArray = subsetOfData(state, gran, from, to, keyArray,
-        [totalfoArray, totalgasArray, totalhfoArray, totalisoArray,
-        totallshfoArray, totalmdoArray, totalmgoArray, totalpilotArray]);
+        let dataArray = subsetOfData(state, gran, from, to, keyArray, [
+          totalfoArray,
+          totalgasArray,
+          totalhfoArray,
+          totalisoArray,
+          totallshfoArray,
+          totalmdoArray,
+          totalmgoArray,
+          totalpilotArray
+        ]);
 
         let totalfoData = dataArray[0];
         let totalgasData = dataArray[1];
@@ -827,7 +893,7 @@ export default {
             unit: totalpilotArray.unit,
             data: totalpilotData
           }
-        }
+        };
       }
       case 121:
       case 123:
@@ -836,7 +902,6 @@ export default {
         return "Only for vessel 110 atm";
     }
   }
-
 };
 
 // ----------------- Private Helper Function ----------------- //
@@ -875,7 +940,7 @@ function arrayOfKeys(state, gran, sampleArray) {
 function subsetOfData(state, gran, from, to, keyArray, arrays) {
   let start = false;
   var dataArrays = [];
-  for(let i = 0; i < arrays.length; i++) {
+  for (let i = 0; i < arrays.length; i++) {
     dataArrays.push({});
   }
 
@@ -889,17 +954,17 @@ function subsetOfData(state, gran, from, to, keyArray, arrays) {
     if (start) {
       switch (gran) {
         case state.granularities.day:
-          for(let i = 0; i < arrays.length; i++) {
+          for (let i = 0; i < arrays.length; i++) {
             dataArrays[i][key] = arrays[i].dayData[key];
           }
           break;
         case state.granularities.hour:
-          for(let i = 0; i < arrays.length; i++) {
+          for (let i = 0; i < arrays.length; i++) {
             dataArrays[i][key] = arrays[i].hourData[key];
           }
           break;
         case state.granularities.quarterhour:
-          for(let i = 0; i < arrays.length; i++) {
+          for (let i = 0; i < arrays.length; i++) {
             dataArrays[i][key] = arrays[i].quarterhourData[key];
           }
           break;

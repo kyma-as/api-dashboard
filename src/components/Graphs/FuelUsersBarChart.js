@@ -3,20 +3,21 @@ import { mapGetters } from "vuex";
 
 export default {
   extends: Bar,
-  computed: {
-    ...mapGetters(["getFuelTypes"]),
-    fDate(){
-      return this.$store.state.fromDate;
-    },
-    tDate(){
-      return this.$store.state.toDate;
-    }
-  },
   data() {
     return {
       fuel: {}
     };
   },
+  computed: {
+    ...mapGetters(["getFuel"]),
+    fDate() {
+      return this.$store.state.fromDate;
+    },
+    tDate() {
+      return this.$store.state.toDate;
+    }
+  },
+
   mounted() {
     let fromDate = this.fDate;
     let toDate = this.tDate;
@@ -28,9 +29,6 @@ export default {
     let data4 = [];
     let data5 = [];
     let data6 = [];
-    let data7 = [];
-    let data8 = [];
-    let data9 = [];   
     let array = [];
     let i = 0;
     let counter = 0;
@@ -38,10 +36,11 @@ export default {
     let hjelpeslicer1 = 0;
     let hjelpeslicer2 = 0;
     let labels;
+    let yakse = "Kg";
     let kvartal = ["Q1", "Q2", "Q3", "Q4"];
     let months = [
       "January",
-      "Februart",
+      "February",
       "March",
       "April",
       "May",
@@ -53,9 +52,18 @@ export default {
       "November",
       "December"
     ];
+    let days = [
+      "Monday",
+      "Tuesday",
+      "Wednsday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ];
     let month = [];
     let bool = false;
-    this.fuel = this.getFuelTypes(
+    this.fuel = this.getFuel(
       this.$route.params.vesselid,
       fromDate,
       toDate,
@@ -127,7 +135,6 @@ export default {
 
           Summ = array.reduce((prev, cur) => prev + cur, 0);
           Summ = Summ.toFixed(2);
-          
 
           if (counter == 0) {
             data1.push(Summ);
@@ -146,15 +153,6 @@ export default {
           }
           if (counter == 5) {
             data6.push(Summ);
-          }
-          if (counter == 6) {
-            data7.push(Summ);
-          }
-          if (counter == 7) {
-            data8.push(Summ);
-          }
-          if (counter == 8) {
-            data9.push(Summ);
           }
           counter++;
           Summ = 0;
@@ -202,15 +200,6 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
-          if (counter == 6) {
-            data7.push(Summ);
-          }
-          if (counter == 7) {
-            data8.push(Summ);
-          }
-          if (counter == 8) {
-            data9.push(Summ);
-          }
 
           counter++;
           Summ = 0;
@@ -256,22 +245,11 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
-          if (counter == 6) {
-            data7.push(Summ);
-          }
-          if (counter == 7) {
-            data8.push(Summ);
-          }
-          if (counter == 8) {
-            data9.push(Summ);
-          }
           counter++;
           Summ = 0;
         }
       }
     }
-    
-
 
     if (elementer.length > 2) {
       this.renderChart(
@@ -307,25 +285,25 @@ export default {
               label: Object.keys(this.fuel)[5],
               backgroundColor: "purple",
               data: data6
-            },
-            {
-              label: Object.keys(this.fuel)[6],
-              backgroundColor: "black",
-              data: data7
-            },
-            {
-              label: Object.keys(this.fuel)[7],
-              backgroundColor: "teal",
-              data: data8
-            },
-            {
-              label: Object.keys(this.fuel)[8],
-              backgroundColor: "brown",
-              data: data9
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
+              }
+            ]
+          }
+        }
       );
     }
     if (elementer.length == 2) {
@@ -345,7 +323,22 @@ export default {
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
+              }
+            ]
+          }
+        }
       );
     }
   }

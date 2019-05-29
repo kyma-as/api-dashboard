@@ -27,17 +27,17 @@ export default {
   APPEND_QUARTERHOUR_DATA: (state, { logData, vesselIndex, logIndex }) => {
     state.vessels[vesselIndex].logVariables[logIndex].quarterhourData = logData;
   },
-  APPEND_UNIT: (state, {unit, vesselIndex, logIndex}) => {
+  APPEND_UNIT: (state, { unit, vesselIndex, logIndex }) => {
     state.vessels[vesselIndex].logVariables[logIndex].unit = unit;
   },
 
   SET_DATE: (state, date) => {
     state.dateToday = date;
   },
-  SET_FROM_DATE:(state,fDate)=>{
+  SET_FROM_DATE: (state, fDate) => {
     state.fromDate = fDate;
   },
-  SET_TO_DATE:(state,tDate)=>{
+  SET_TO_DATE: (state, tDate) => {
     state.toDate = tDate;
   },
   VESSELS_FETCHED: state => {

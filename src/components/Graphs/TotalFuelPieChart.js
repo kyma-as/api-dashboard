@@ -5,10 +5,10 @@ export default {
   extends: Pie,
   computed: {
     ...mapGetters(["getFuel"]),
-    fDate(){
+    fDate() {
       return this.$store.state.fromDate;
     },
-    tDate(){
+    tDate() {
       return this.$store.state.toDate;
     }
   },
@@ -30,6 +30,7 @@ export default {
     let labels = [];
     let dataen = [];
     let array = [];
+    let text = "Total Kg Used";
     let Summ = 0;
     let i = 0;
 
@@ -42,6 +43,7 @@ export default {
       }
       Summ = array.reduce((prev, cur) => prev + cur, 0);
       Summ = Summ.toFixed(2);
+
       dataen.push(Summ);
       array = [];
       Summ = 0;
@@ -64,7 +66,14 @@ export default {
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: text
+        }
+      }
     );
   }
 };

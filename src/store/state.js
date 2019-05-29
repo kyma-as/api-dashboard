@@ -21,9 +21,8 @@ export default {
   fetchedVessels: false,
 
   // DateTime Component states
-  fromDate:"",
-  toDate:"",
-
+  fromDate: "",
+  toDate: "",
 
   loggedIn: false,
 
@@ -38,7 +37,6 @@ export default {
     {
       id: 110,
       variables: {
-
         // --- Default --- //
 
         gps: {
@@ -193,7 +191,7 @@ export default {
         so2: {
           id: 9051,
           name: "Emissions SO2"
-        },
+        }
       }
     },
     {
@@ -222,9 +220,8 @@ export default {
         so2: {
           id: 10417,
           name: "Emissions SO2"
-        },
+        }
         // --- Additional Fuel Types --- //
-
       }
     },
     {

@@ -3,25 +3,25 @@ import { mapGetters } from "vuex";
 
 export default {
   extends: Bar,
+  computed: {
+    ...mapGetters(["getFuelTypes"]),
+    fDate() {
+      return this.$store.state.fromDate;
+    },
+    tDate() {
+      return this.$store.state.toDate;
+    }
+  },
   data() {
     return {
       fuel: {}
     };
   },
-  computed: {
-    ...mapGetters(["getFuel"]),
-    fDate(){
-      return this.$store.state.fromDate;
-    },
-    tDate(){
-      return this.$store.state.toDate;
-    }
-  },
-
   mounted() {
     let fromDate = this.fDate;
     let toDate = this.tDate;
     let day = [];
+    let yakse = "kg";
     let elementer = [];
     let data1 = [];
     let data2 = [];
@@ -29,6 +29,12 @@ export default {
     let data4 = [];
     let data5 = [];
     let data6 = [];
+    let data7 = [];
+    let data8 = [];
+    let data9 = [];
+    let data10 = [];
+    let data11 = [];
+    let data12 = [];
     let array = [];
     let i = 0;
     let counter = 0;
@@ -36,11 +42,10 @@ export default {
     let hjelpeslicer1 = 0;
     let hjelpeslicer2 = 0;
     let labels;
-    let yakse = "Kg";
     let kvartal = ["Q1", "Q2", "Q3", "Q4"];
     let months = [
       "January",
-      "February",
+      "Februart",
       "March",
       "April",
       "May",
@@ -52,18 +57,9 @@ export default {
       "November",
       "December"
     ];
-    let days = [
-      "Monday",
-      "Tuesday",
-      "Wednsday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ];
     let month = [];
     let bool = false;
-    this.fuel = this.getFuel(
+    this.fuel = this.getFuelTypes(
       this.$route.params.vesselid,
       fromDate,
       toDate,
@@ -154,6 +150,25 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
+
           counter++;
           Summ = 0;
           array = [];
@@ -200,6 +215,24 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
 
           counter++;
           Summ = 0;
@@ -245,6 +278,24 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
           counter++;
           Summ = 0;
         }
@@ -263,7 +314,7 @@ export default {
             },
             {
               label: Object.keys(this.fuel)[1],
-              backgroundColor: "red",
+              backgroundColor: "maroon",
               data: data2
             },
             {
@@ -285,21 +336,55 @@ export default {
               label: Object.keys(this.fuel)[5],
               backgroundColor: "purple",
               data: data6
+            },
+            {
+              label: Object.keys(this.fuel)[6],
+              backgroundColor: "black",
+              data: data7
+            },
+            {
+              label: Object.keys(this.fuel)[7],
+              backgroundColor: "teal",
+              data: data8
+            },
+            {
+              label: Object.keys(this.fuel)[8],
+              backgroundColor: "pink",
+              data: data9
+            },
+            {
+              label: Object.keys(this.fuel)[9],
+              backgroundColor: "brown",
+              data: data10
+            },
+            {
+              label: Object.keys(this.fuel)[10],
+              backgroundColor: "royalblue",
+              data: data11
+            },
+            {
+              label: Object.keys(this.fuel)[11],
+              backgroundColor: "red",
+              data: data12
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false,scales: {
-          yAxes: [
-            {
-              display: true,
-              scaleLabel: {
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
                 display: true,
-                labelString: yakse,
-                backgroundColor: "red"
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
               }
-            }
-          ]
-        } }
+            ]
+          }
+        }
       );
     }
     if (elementer.length == 2) {
@@ -314,7 +399,7 @@ export default {
             },
             {
               label: Object.keys(this.fuel)[1],
-              backgroundColor: "red",
+              backgroundColor: "maroon",
               data: data2
             }
           ]
@@ -322,5 +407,36 @@ export default {
         { responsive: true, maintainAspectRatio: false }
       );
     }
+    if (elementer.length == 4) {
+      this.renderChart(
+        {
+          labels: labels,
+          datasets: [
+            {
+              label: Object.keys(this.fuel)[0],
+              backgroundColor: "blue",
+              data: data1
+            },
+            {
+              label: Object.keys(this.fuel)[1],
+              backgroundColor: "maroon",
+              data: data2
+            },
+            {
+              label: Object.keys(this.fuel)[2],
+              backgroundColor: "green",
+              data: data3
+            },
+            {
+              label: Object.keys(this.fuel)[3],
+              backgroundColor: "yellow",
+              data: data4
+            }
+          ]
+        },
+        { responsive: true, maintainAspectRatio: false }
+      );
+    }
+    
   }
 };
