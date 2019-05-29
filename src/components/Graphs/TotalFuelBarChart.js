@@ -148,5 +148,39 @@ export default {
         }
       );
     }
+    if (elementer.length == 4) {
+      this.renderChart(
+        {
+          datasets: [
+            {
+              label: Object.keys(this.fuel)[0],
+              backgroundColor: "blue",
+              data: [dataen[0]]
+            },
+            {
+              label: Object.keys(this.fuel)[1],
+              backgroundColor: "maroon",
+              data: [dataen[1]]
+            }
+          ]
+        },
+
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse
+                }
+              }
+            ]
+          }
+        }
+      );
+    }
   }
 };

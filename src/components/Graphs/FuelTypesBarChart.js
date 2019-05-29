@@ -407,5 +407,36 @@ export default {
         { responsive: true, maintainAspectRatio: false }
       );
     }
+    if (elementer.length == 4) {
+      this.renderChart(
+        {
+          labels: labels,
+          datasets: [
+            {
+              label: Object.keys(this.fuel)[0],
+              backgroundColor: "blue",
+              data: data1
+            },
+            {
+              label: Object.keys(this.fuel)[1],
+              backgroundColor: "maroon",
+              data: data2
+            },
+            {
+              label: Object.keys(this.fuel)[2],
+              backgroundColor: "green",
+              data: data3
+            },
+            {
+              label: Object.keys(this.fuel)[3],
+              backgroundColor: "yellow",
+              data: data4
+            }
+          ]
+        },
+        { responsive: true, maintainAspectRatio: false }
+      );
+    }
+    
   }
 };
