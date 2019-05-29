@@ -34,14 +34,10 @@ export default {
   SET_TODAY_DATE: (state, date) => {
     state.dateToday = date;
   },
-<<<<<<< HEAD
-  SET_FROM_DATE: (state, fDate) => {
-=======
   SET_YESTERDAY_DATE:(state,date)=>{
     state.dateYesterday = date;
   },
   SET_FROM_DATE:(state,fDate)=>{
->>>>>>> ec1f6566f904e50470c6440fa8007c2d7f4cdf95
     state.fromDate = fDate;
   },
   SET_TO_DATE: (state, tDate) => {
