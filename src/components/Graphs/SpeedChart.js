@@ -4,7 +4,13 @@ import { mapGetters } from "vuex";
 export default {
   extends: Line,
   computed: {
-    ...mapGetters(["getSpeed"])
+    ...mapGetters(["getSpeed"]),
+    fDate() {
+      return this.$store.state.fromDate;
+    },
+    tDate() {
+      return this.$store.state.toDate;
+    }
   },
   data() {
     return {
@@ -13,29 +19,48 @@ export default {
   },
 
   mounted() {
+    let fromDate = this.fDate;
+    let toDate = this.tDate;
     this.speed = this.getSpeed(
       this.$route.params.vesselid,
-      "2019-04-11T00:00:00",
-      "2019-05-11T00:00:00",
-      "Day"
+      fromDate,
+      toDate,
+      "Hour"
     );
     let gpsSpeed = [];
     let logSpeed = [];
     let labels = [];
-    let names = [];
+    let yakse = "Knot";
     let formatting;
+    let names = [];
+
     for (let key in this.speed.gps.data) {
       gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
       formatting = key;
-      formatting = formatting.substring(0, 10); // om du vil has tidspunkt og ikkje dato ta fra substing(10,)
+      formatting = formatting.substring(0, 10);
       labels.push(formatting);
     }
     for (let key in this.speed.log.data) {
       logSpeed.push(this.speed.log.data[key].toFixed(2));
     }
 
+
+    if (labels.length < 49) {
+      logSpeed = [];
+      labels = [];
+      gpsSpeed = [];
+      for (let key in this.speed.gps.data) {
+        gpsSpeed.push(this.speed.gps.data[key].toFixed(2));
+        formatting = key;
+        formatting = formatting.substring(11);
+        labels.push(formatting);
+      }
+      for (let key in this.speed.log.data) {
+        logSpeed.push(this.speed.log.data[key].toFixed(2));
+      }
+    }
     // pushes variable names to array
-    for(let f in this.speed) {
+    for (let f in this.speed) {
       names.push(this.speed[f].name);
     }
 
@@ -50,6 +75,7 @@ export default {
       decimal = Math.abs(decimal);
       diff.push(decimal);
     }
+
     this.renderChart(
       {
         labels: labels,
@@ -74,7 +100,27 @@ export default {
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: yakse,
+                backgroundColor: "red"
+              }
+            }
+          ]
+        }, title: {
+          FontSize: 90,
+          display: true,
+          text: "Speed",
+          
+        }
+      }
     );
   }
 };

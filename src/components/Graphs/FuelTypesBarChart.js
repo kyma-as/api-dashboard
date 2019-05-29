@@ -4,7 +4,13 @@ import { mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapGetters(["getFuel"])
+    ...mapGetters(["getFuelTypes"]),
+    fDate() {
+      return this.$store.state.fromDate;
+    },
+    tDate() {
+      return this.$store.state.toDate;
+    }
   },
   data() {
     return {
@@ -12,9 +18,10 @@ export default {
     };
   },
   mounted() {
-    let fromDate = "2019-04-01T00:00:00";
-    let toDate = "2019-04-14T00:00:00";
+    let fromDate = this.fDate;
+    let toDate = this.tDate;
     let day = [];
+    let yakse = "kg";
     let elementer = [];
     let data1 = [];
     let data2 = [];
@@ -22,6 +29,12 @@ export default {
     let data4 = [];
     let data5 = [];
     let data6 = [];
+    let data7 = [];
+    let data8 = [];
+    let data9 = [];
+    let data10 = [];
+    let data11 = [];
+    let data12 = [];
     let array = [];
     let i = 0;
     let counter = 0;
@@ -33,7 +46,7 @@ export default {
     let names = [];
     let months = [
       "January",
-      "Februart",
+      "February",
       "March",
       "April",
       "May",
@@ -45,25 +58,16 @@ export default {
       "November",
       "December"
     ];
-    let days = [
-      "Monday",
-      "Tuesday",
-      "Wednsday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ];
     let month = [];
     let bool = false;
-    this.fuel = this.getFuel(
+    this.fuel = this.getFuelTypes(
       this.$route.params.vesselid,
       fromDate,
       toDate,
       "Hour"
     );
     // pushes all variable names into array
-    for(let f in this.fuel) {
+    for (let f in this.fuel) {
       names.push(this.fuel[f].name);
     }
     labels = kvartal;
@@ -108,7 +112,6 @@ export default {
         }
         labels = day;
       }
-      console.log(day);
     }
 
     if (labels == kvartal) {
@@ -151,6 +154,25 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
+
           counter++;
           Summ = 0;
           array = [];
@@ -197,6 +219,24 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
 
           counter++;
           Summ = 0;
@@ -242,6 +282,24 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
           counter++;
           Summ = 0;
         }
@@ -260,7 +318,7 @@ export default {
             },
             {
               label: names[1],
-              backgroundColor: "red",
+              backgroundColor: "maroon",
               data: data2
             },
             {
@@ -282,10 +340,60 @@ export default {
               label: names[5],
               backgroundColor: "purple",
               data: data6
+            },
+            {
+              label: names[6],
+              backgroundColor: "black",
+              data: data7
+            },
+            {
+              label: names[7],
+              backgroundColor: "teal",
+              data: data8
+            },
+            {
+              label: names[8],
+              backgroundColor: "pink",
+              data: data9
+            },
+            {
+              label: names[9],
+              backgroundColor: "brown",
+              data: data10
+            },
+            {
+              label: names[10],
+              backgroundColor: "royalblue",
+              data: data11
+            },
+            {
+              label: names[11],
+              backgroundColor: "red",
+              data: data12
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
+              }
+            ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
+          }
+        }
       );
     }
     if (elementer.length == 2) {
@@ -299,13 +407,83 @@ export default {
               data: data1
             },
             {
-              label: names[1],
-              backgroundColor: "red",
+              label: Object.keys(this.fuel)[1],
+              backgroundColor: "maroon",
               data: data2
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
+              }
+            ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
+          }
+        }
+      );
+    }
+    if (elementer.length == 4) {
+      this.renderChart(
+        {
+          labels: labels,
+          datasets: [
+            {
+              label: names[0],
+              backgroundColor: "blue",
+              data: data1
+            },
+            {
+              label: names[1],
+              backgroundColor: "maroon",
+              data: data2
+            },
+            {
+              label: names[2],
+              backgroundColor: "green",
+              data: data3
+            },
+            {
+              label: names[3],
+              backgroundColor: "yellow",
+              data: data4
+            }
+          ]
+        },
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
+              }
+            ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
+          }
+        }
       );
     }
   }

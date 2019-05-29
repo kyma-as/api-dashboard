@@ -10,17 +10,17 @@ export default {
   },
   computed: {
     ...mapGetters(["getFuel"]),
-    fDate(){
+    fDate() {
       return this.$store.state.fromDate;
     },
-    tDate(){
+    tDate() {
       return this.$store.state.toDate;
     }
   },
+
   mounted() {
     let fromDate = this.fDate;
     let toDate = this.tDate;
-    console.log()
     let day = [];
     let elementer = [];
     let data1 = [];
@@ -36,10 +36,11 @@ export default {
     let hjelpeslicer1 = 0;
     let hjelpeslicer2 = 0;
     let labels;
+    let yakse = "Kg";
     let kvartal = ["Q1", "Q2", "Q3", "Q4"];
     let months = [
       "January",
-      "Februart",
+      "February",
       "March",
       "April",
       "May",
@@ -51,15 +52,7 @@ export default {
       "November",
       "December"
     ];
-    let days = [
-      "Monday",
-      "Tuesday",
-      "Wednsday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ];
+
     let month = [];
     let bool = false;
     let names = [];
@@ -290,7 +283,27 @@ export default {
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
+              }
+            ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
+          }
+        }
       );
     }
     if (elementer.length == 2) {
@@ -310,7 +323,27 @@ export default {
             }
           ]
         },
-        { responsive: true, maintainAspectRatio: false }
+        {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [
+              {
+                display: true,
+                scaleLabel: {
+                  display: true,
+                  labelString: yakse,
+                  backgroundColor: "red"
+                }
+              }
+            ]
+          },
+          title: {
+            FontSize: 90,
+            display: true,
+            text: "Total Fuel Used "
+          }
+        }
       );
     }
   }

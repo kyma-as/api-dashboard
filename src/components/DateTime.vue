@@ -12,7 +12,7 @@
           dark
           v-on="on"
         >
-          Date
+          Dates
         </v-btn>
       </template>
 
