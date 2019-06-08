@@ -6,7 +6,6 @@
         ref="menu"
         v-model="menu"
         :close-on-content-click="false"
-        :nudge-right="40"
         :return-value.sync="date"
         lazy
         transition="scale-transition"
@@ -15,11 +14,9 @@
         min-width="290px"
       >
         <template v-slot:activator="{ on }">
-          <v-text-field
+          <v-text-field 
             v-model="date"
-            label="Date from"
-            hint="YYYY/MM/DD"
-            persistent-hint
+            label="From"
             prepend-icon="event"
             readonly
             v-on="on"
@@ -31,11 +28,11 @@
         no-title 
         scrollable
         min="2016-01-01"
-        max="2019-05-01"
+        max="tDate"
         >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.menu.save(date), sendDate(fromDateFormatted)">OK</v-btn>
+          <v-btn flat color="primary" @click="$refs.menu.save(date), sendDateToState(fromDateFormatted)">OK</v-btn>
         </v-date-picker>
       </v-menu>
     </v-flex>
@@ -45,6 +42,7 @@
 
 <script>
 import { EventBus } from "@/event-bus.js";
+import { mapActions } from "vuex";
  export default {
     data: vm => ({
       date: new Date().toJSON().substr(0, 10),
@@ -62,8 +60,10 @@ import { EventBus } from "@/event-bus.js";
         const [year, month, day] = date.split('-')
         return `${year}-${month}-${day}T00:00:00`
       },
-      sendDate(fromDateFormatted) {
-        EventBus.$emit('get-from-date', fromDateFormatted);
+      sendDateToState() {
+        let fdate = {from:this.fromDateFormatted};
+        this.$store.dispatch('setDates', fdate);
+        //EventBus.$emit('get-from-date', fromDateFormatted);
       }
     }
   }
