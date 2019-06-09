@@ -4,7 +4,7 @@
     <div>
       <v-content>
         <v-layout row wrap>
-          <v-flex md3>
+          <v-flex sm6 md6 lg6>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select class=""
@@ -17,7 +17,7 @@
               </v-card-actions>
             </v-card>
           </v-flex>
-          <v-flex md3>
+          <v-flex sm6 md6 lg6>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select class=""
@@ -29,14 +29,17 @@
               </v-card-actions>
             </v-card>
           </v-flex>
-          <v-flex md3>
+          <v-flex sm6 md6 lg6>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
-                <date-time></date-time>
+                <v-layout>
+                <FromDate />
+                <ToDate />
+                </v-layout>
               </v-card-actions>
             </v-card>
           </v-flex>
-          <v-flex md3>
+          <v-flex sm6 md6 lg6>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-btn class="primary primary darken-3" flat large
@@ -86,15 +89,16 @@
 </template>
 <script>
     import NavDrawer from "@/components/NavDrawer";
-    import DateTime from "@/components/DateTime";
-
+    import FromDate from "@/components/FromDate";
+    import ToDate from "@/components/ToDate";
     const {ipcRenderer} = require('electron');
 
 
     export default {
         components: {
             NavDrawer,
-            DateTime
+            FromDate,
+            ToDate
         },
         created(){
             /**
