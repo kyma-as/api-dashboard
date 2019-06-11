@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-container grid-list-md>
     <v-layout row wrap>
       <v-flex>
@@ -6,7 +6,6 @@
           ref="menu"
           v-model="menu"
           :close-on-content-click="false"
-          :nudge-right="40"
           :return-value.sync="date"
           lazy
           transition="scale-transition"
@@ -17,9 +16,7 @@
           <template v-slot:activator="{ on }">
             <v-text-field
               v-model="date"
-              label="Date to"
-              hint="YYYY/MM/DD"
-              persistent-hint
+              label="To"
               prepend-icon="event"
               readonly
               v-on="on"
@@ -28,13 +25,14 @@
           
           <v-date-picker 
           v-model="date" 
-          no-title scrollable
-          min="2016-01-01"
-          max="2019-05-01"
+          no-title 
+          scrollable
+          :min="fDate"
+          :max="dateToday"
           >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.menu.save(date), sendDate(toDateFormatted)">OK</v-btn>
+          <v-btn flat color="primary" @click="$refs.menu.save(date), sendDateToState(toDateFormatted)">OK</v-btn>
           </v-date-picker>
         </v-menu>
       </v-flex> 
@@ -44,13 +42,24 @@
 
 
 <script>
-import { EventBus } from "@/event-bus.js";
+import { mapActions } from "vuex";
 export default {
     data: vm => ({
         date: new Date().toJSON().substr(0, 10),
         toDateFormatted: vm.formatDate(new Date().toJSON().substr(0, 19)),
         menu: false
     }),
+    computed: {
+      fDate() {
+        return this.$store.state.fromDate;
+      },
+      tDate() {
+        return this.$store.state.toDate;
+      },
+      dateToday() {
+        return this.$store.state.dateToday.substr(0, 10);
+      }
+    },
     watch: {
       date (val) {
         this.toDateFormatted = this.formatDate(this.date)
@@ -62,8 +71,9 @@ export default {
         const [year, month, day] = date.split('-')
         return `${year}-${month}-${day}T00:00:00`
       },
-      sendDate(toDateFormatted) {
-        EventBus.$emit('get-to-date', toDateFormatted);
+      sendDateToState() {
+        let tdate = {to:this.toDateFormatted};
+        this.$store.dispatch('setDates', tdate);
       }
     }
 }

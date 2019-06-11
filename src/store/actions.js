@@ -223,8 +223,12 @@ export default {
   setDates: ({ commit }, dates) => {
     console.log("Commiting dates to state");
     console.log(dates);
-    commit("SET_FROM_DATE", dates.from);
-    commit("SET_TO_DATE", dates.to);
+    if (!!dates.from) {
+      commit("SET_FROM_DATE", dates.from);
+    }
+    if (!!dates.to) {
+      commit("SET_TO_DATE", dates.to);
+    }
   },
 
   /**

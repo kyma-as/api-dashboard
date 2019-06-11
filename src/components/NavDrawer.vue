@@ -62,30 +62,29 @@
         <v-divider class="primary lighten-1"/>
   
       </v-list>
-      <DateTime />
-      <v-list>
-      {{this.fDate}}-
-      {{this.tDate}}
-      </v-list>
+      
+      
   </v-navigation-drawer>
 </template>
 
 <script>
- import DateTime from "@/components/DateTime";
+ import FromDate from "@/components/FromDate";
+ import ToDate from "@/components/ToDate";
     export default {
         name: "navdrawer",
             components: {
 
-        DateTime        
+        FromDate,
+        ToDate        
     },
-    computed: {
-    fDate(){
-      return this.$store.state.fromDate.substring(0,10);
-    },
-    tDate(){
-      return this.$store.state.toDate.substring(0,10);
-    }
-  },
+    //computed: {
+    //fDate(){
+    //  return this.$store.state.fromDate.substring(0,10);
+    //},
+    //tDate(){
+    //  return this.$store.state.toDate.substring(0,10);
+    //}
+    //},
     
         data() {
             return {

@@ -126,7 +126,7 @@ function parseTextToCsv(csv) {
 function writeFile(path, extension, content, callBack) {
   const fs = require("fs");
 
-  let filePath = path + "/" + content.fileName + extension;
+  let filePath = path + "\\" + content.fileName + extension;
 
   console.log(filePath);
   fs.writeFile(filePath, content.file, err => {
@@ -139,7 +139,7 @@ function writeFile(path, extension, content, callBack) {
     callBack({filePath:filePath});
   });
 }
-
+const os = require("os");
 /**
  * Creates a system specified path
  * Can take a specifiedPath else it
@@ -155,8 +155,8 @@ function getPath(specifiedPath) {
   // Windows = process.env.HOMEPATH Windows C:\\Users
   // path.join(homeDir,downloads) /downloads/data.csv
 
-  let homeDir =
-    process.platform === "win32" ? process.env.HOMEPATH : process.env.HOME;
+  const homeDir =
+    process.platform === "win32" ? os.homedir() : process.env.HOME;
   let url = "";
   if (specifiedPath) {
     url = path.join(homeDir, specifiedPath);

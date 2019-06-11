@@ -2,10 +2,13 @@
   <div class="vessel">
     <NavDrawer/>
     <v-content>
-      <span>Welcome to ship {{vessel.name}}.</span>
+      <span style="font-size:x-large" class="font-weight-heavy">{{vessel.name}}</span>
     <v-layout column>
+      <v-layout row>
+      <FromDate />
+      <ToDate />
+      </v-layout>
       <GraphCard />
-
     </v-layout>
     </v-content>
   </div>
@@ -14,14 +17,16 @@
 <script>
     import GraphCard from "@/components/GraphCard";
     import NavDrawer from "@/components/NavDrawer";
-    import DateTime from "@/components/DateTime";
+    import FromDate from "@/components/FromDate";
+    import ToDate from "@/components/ToDate";
     import {mapState, mapGetters} from 'vuex';
 export default {
     name: "vessel",
     components: {
         GraphCard,
         NavDrawer,
-        DateTime        
+        FromDate,
+        ToDate       
     },
     data(){
       return {
