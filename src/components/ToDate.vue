@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
   <v-container grid-list-md>
     <v-layout row wrap>
       <v-flex>
@@ -25,9 +25,10 @@
           
           <v-date-picker 
           v-model="date" 
-          no-title scrollable
+          no-title 
+          scrollable
           :min="fDate"
-          :max="date"
+          :max="dateToday"
           >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
@@ -41,7 +42,6 @@
 
 
 <script>
-import { EventBus } from "@/event-bus.js";
 import { mapActions } from "vuex";
 export default {
     data: vm => ({
@@ -49,6 +49,17 @@ export default {
         toDateFormatted: vm.formatDate(new Date().toJSON().substr(0, 19)),
         menu: false
     }),
+    computed: {
+      fDate() {
+        return this.$store.state.fromDate;
+      },
+      tDate() {
+        return this.$store.state.toDate;
+      },
+      dateToday() {
+        return this.$store.state.dateToday.substr(0, 10);
+      }
+    },
     watch: {
       date (val) {
         this.toDateFormatted = this.formatDate(this.date)
@@ -63,7 +74,6 @@ export default {
       sendDateToState() {
         let tdate = {to:this.toDateFormatted};
         this.$store.dispatch('setDates', tdate);
-        //EventBus.$emit('get-to-date', toDateFormatted);
       }
     }
 }

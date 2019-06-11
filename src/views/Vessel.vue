@@ -2,7 +2,7 @@
   <div class="vessel">
     <NavDrawer/>
     <v-content>
-      <span>Welcome to ship {{vessel.name}}.</span>
+      <span style="font-size:x-large" class="font-weight-heavy">{{vessel.name}}</span>
     <v-layout column>
       <v-layout row>
       <FromDate />

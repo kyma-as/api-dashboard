@@ -28,7 +28,7 @@
         no-title 
         scrollable
         min="2016-01-01"
-        max="tDate"
+        :max="dateYesterday"
         >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { EventBus } from "@/event-bus.js";
 import { mapActions } from "vuex";
  export default {
     data: vm => ({
@@ -54,6 +53,11 @@ import { mapActions } from "vuex";
         this.fromDateFormatted = this.formatDate(this.date)
       }
     },
+   computed: {
+     dateYesterday() {
+       return this.$store.state.dateYesterday;
+     }
+   },
     methods: {
       formatDate (date) {
         if(!date) return null
@@ -63,7 +67,9 @@ import { mapActions } from "vuex";
       sendDateToState() {
         let fdate = {from:this.fromDateFormatted};
         this.$store.dispatch('setDates', fdate);
-        //EventBus.$emit('get-from-date', fromDateFormatted);
+      },
+      fDate() {
+        return this.$store.state.fromDate;
       }
     }
   }
