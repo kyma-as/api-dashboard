@@ -130,46 +130,84 @@ export default {
 
     if (timeframe == "Quarters") {
       labels = ["Q1", "Q2", "Q3", "Q4"];
+
+      datehelper = yFromDate;
       this.fuel = this.getFuelTypes(vessel, yFromDate, yToDate, "Hour");
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
       }
+
       for (let f in this.fuel) {
         names.push(this.fuel[f].name);
       }
-
-      for (let key in this.fuel) {
-        for (let key2 in this.fuel[key].data) {
-          array.push(this.fuel[key].data[key2]);
+      let k = 0;
+      for (i = 1; i < labels.length + 1; i++) {
+        if (i == 1) {
+          k = 4;
         }
+        if (i == 2) {
+          k = 7;
+        }
+        if (i == 3) {
+          k = 10;
+        }
+        datekeeper =
+          yFromDate.substring(0, 5) + "0" + k + yFromDate.substring(7);
+        if (i == 3) {
+          datekeeper = yFromDate.substring(0, 5) + k + yFromDate.substring(7);
+        }
+        if (i == 4) {
+          datekeeper = yToDate = Nyear + "-01-01T00:00:00";
+        }
+        this.fuel = this.getFuelTypes(vessel, datehelper, datekeeper, "Hour");
+        datehelper = datekeeper;
 
-        hilfe = array;
-        array = array.slice(0, 2153);
-        Summ = array.reduce((prev, cur) => prev + cur, 0);
-        Summ = Summ.toFixed(2);
-        hdata1.push(Summ);
-        array = hilfe;
-        array = array.slice(2153, 4337);
-        Summ = array.reduce((prev, cur) => prev + cur, 0);
-        Summ = Summ.toFixed(2);
-        hdata2.push(Summ);
-        array = hilfe;
-        array = array.slice(4337, 6431);
-        Summ = array.reduce((prev, cur) => prev + cur, 0);
-        Summ = Summ.toFixed(2);
-        hdata3.push(Summ);
-        array = hilfe;
-        array = array.slice(6431, 8614);
-        Summ = array.reduce((prev, cur) => prev + cur, 0);
-        Summ = Summ.toFixed(2);
-        hdata4.push(Summ);
-        Summ = 0;
-        array = [];
-      }
-
-      for (i = 0; i < arrayer.length; i++) {
-        for (let k = 0; k < harrayer.length; k++) {
-          arrayer[i].push(harrayer[k][i]);
+        let counter = 0;
+        for (let key in this.fuel) {
+          for (let key2 in this.fuel[key].data) {
+            array.push(this.fuel[key].data[key2]);
+          }
+          Summ = array.reduce((prev, cur) => prev + cur, 0);
+          array = [];
+          Summ = Summ.toFixed(2);
+          if (counter == 0) {
+            data1.push(Summ);
+          }
+          if (counter == 1) {
+            data2.push(Summ);
+          }
+          if (counter == 2) {
+            data3.push(Summ);
+          }
+          if (counter == 3) {
+            data4.push(Summ);
+          }
+          if (counter == 4) {
+            data5.push(Summ);
+          }
+          if (counter == 5) {
+            data6.push(Summ);
+          }
+          if (counter == 6) {
+            data7.push(Summ);
+          }
+          if (counter == 7) {
+            data8.push(Summ);
+          }
+          if (counter == 8) {
+            data9.push(Summ);
+          }
+          if (counter == 9) {
+            data10.push(Summ);
+          }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
+          counter++;
+          Summ = 0;
         }
       }
     }
