@@ -63,7 +63,7 @@
                   class="primary primary darken-3"
                   flat
                   large
-                  @click= "selected = 'show'"
+                  @click="selected = 'show'"
                 >Show Graph</v-btn>
               </v-card-actions>
             </v-card>
