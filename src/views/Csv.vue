@@ -4,7 +4,7 @@
     <div>
       <v-content>
         <v-layout row wrap>
-          <v-flex sm6 md6 lg6>
+          <v-flex sm6 md6 lg6 >
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select class=""
@@ -31,8 +31,8 @@
           </v-flex>
           <v-flex sm6 md6 lg6>
             <v-card dark tile flat class="primary darken-1">
-              <v-card-actions class="v-btn--large">
-                <v-layout>
+              <v-card-actions class="v-btn--large pa-0">
+                <v-layout >
                 <FromDate />
                 <ToDate />
                 </v-layout>
