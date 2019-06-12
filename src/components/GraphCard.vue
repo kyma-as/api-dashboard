@@ -80,23 +80,7 @@
             ...mapState([
                 'vessels'
             ]),
-            ...mapGetters([
-                'getSpeed',
-                'getFuel',
-                'getEmission'
-            ]),
-            logvariables() {
-                return this.vessel.logVariables;
-            },
-            speed() {
-                return this.getSpeed(this.$route.params.vesselid);
-            },
-            fuel() {
-                return this.getFuel(this.$route.params.vesselid);
-            },
-            emission() {
-                return this.getEmission(this.$route.params.vesselid);
-            }
+           
         },
         mounted() {
             const vessel = this.vessels
