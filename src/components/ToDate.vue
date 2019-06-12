@@ -1,5 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-container grid-list-md>
+  <v-container fluid class="pa-0 ma-0">
     <v-layout row wrap>
       <v-flex>
         <v-menu
@@ -17,7 +17,6 @@
             <v-text-field
               v-model="date"
               label="To"
-              prepend-icon="event"
               readonly
               v-on="on"
             ></v-text-field>
