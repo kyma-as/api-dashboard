@@ -22,8 +22,8 @@
               <v-card-actions class="v-btn--large">
                 <v-select
                   class
-                  v-model="selectedTimeframe"
-                  :items="timeframe"
+                  v-model="selectedTimeFrame"
+                  :items="timeFrame"
                   label="Select Timeframe"
                   single-line
                 ></v-select>
@@ -69,12 +69,12 @@
             </v-card>
           </v-flex>
           <v-flex sm6 md6 lg6>
-            <v-card dark tile flat class="primary darken-1"  v-if="selectedTimeframe == 'Days'">
+            <v-card dark tile flat class="primary darken-1"  v-if="selectedTimeFrame == 'Days'">
               <v-card-actions class="v-btn--large">
                 <v-select
                   class
                   v-model="selectedMonth"
-                  :items="month"
+                  :items="month" 
                   label="Select Month"
                   single-line
                 ></v-select>
@@ -82,8 +82,8 @@
             </v-card>
           </v-flex>
         </v-layout>
-        <fuelUsers  v-if="selectedData == 'Fuel Users' && selected == 'show'"/>
-        <fuelTypes v-if="selectedData == 'Fuel Types' && selected == 'show'"/>
+        <fuelUsers v-bind:selectedVessels="selectedVessels"  v-bind:selectedMonth="selectedMonth"  v-bind:selectedYear="selectedYear"  v-bind:selectedTimeFrame="selectedTimeFrame" v-if="selectedData == 'Fuel Users' && selected == 'show'"/>
+        <fuelTypes v-bind:selectedVessels="selectedVessels"  v-bind:selectedMonth="selectedMonth"  v-bind:selectedYear="selectedYear"  v-bind:selectedTimeFrame="selectedTimeFrame" v-if="selectedData == 'Fuel Types' && selected == 'show'"/>
       </v-content>
     </div>
   </div>
@@ -106,7 +106,6 @@ export default {
     fuelUsers
   },
 
-
  
   methods: {
 
@@ -115,9 +114,9 @@ export default {
   data() {
     return {
       vessels: ["110", "121", "123", "133"],
-      timeframe: ["Quarters", "Months", "Days"],
+      timeFrame: ["Quarters", "Months", "Days"],
       data: ["Fuel Types", "Fuel Users"],
-      year: ["2019", "2018", "2017", "2016", "2015"],
+      year: ["2018", "2017", "2016", "2015"],
       month: [
         "January",
         "February",
@@ -134,11 +133,12 @@ export default {
       ],
       // Selections
       selected: [],
+      selectedData: [],
+
       selectedVessels: [],
-      selectedTimeframe: [],
+      selectedTimeFrame: [],
       selectedYear: [],
       selectedMonth: [],
-      selectedData: [],
       // Misc
       loading: false
     };

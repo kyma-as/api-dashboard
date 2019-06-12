@@ -90,7 +90,7 @@
             return {
                 items: [
                     {title: 'Vessels', icon: 'directions_boat',path:"/vessels"},
-                    {title: 'Fuel Report',icon:'description',path:"/fuelreport"},
+                    {title: 'Fuel Report',icon:'assignment',path:"/fuelreport"},
                     {title: 'Print CSV Log',icon:'description',path:"/csv"},
                     {title: 'Logout', icon: 'exit_to_app',path:"/"}
                 ],

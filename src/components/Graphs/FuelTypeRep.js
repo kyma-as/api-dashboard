@@ -1,5 +1,6 @@
 import { Bar } from "vue-chartjs";
 import { mapGetters } from "vuex";
+import { parse } from "terser";
 
 export default {
   extends: Bar,
@@ -11,15 +12,24 @@ export default {
       fuel: {}
     };
   },
+  props: {
+    selectedVessels: String,
+    selectedTimeFrame: String,
+    selectedYear: String,
+    selectedMonth: String,
 
+  },
   mounted() {
-    let fromDate = "2019-02-01T00:00:00";
-    let toDate = "2019-03-01T00:00:00";
-    let vessel = 110;
-    let timeframe = "Days";
-    let year = "2018";
-    let Nyear = year + 1;
-    let month = "";
+    let vessel = parseInt(this.selectedVessels);
+    let timeframe = this.selectedTimeFrame;
+    let year = this.selectedYear;
+    let month = this.selectedMonth;
+
+    let Nyear = parseInt(year) + 1;
+
+    let fromDate = year + "-01-01T00:00:00";
+    let toDate = Nyear + "-01-01T00:00:00";
+
     let yakse = "kg";
     let labels = [];
     let names = [];
@@ -61,25 +71,21 @@ export default {
     let array = [];
     let Summ = 0;
     let datekeeper = "";
-    let datehelper=fromDate;
+    let datehelper = fromDate;
 
-    for(i=0;i<31;i++){
-      if(i<10){
-        days.push("0"+i)
+    for (i = 0; i < 31; i++) {
+      if (i < 10) {
+        days.push("0" + i);
       }
-      if(i>9){
-        days.push(i)
+      if (i > 9) {
+        days.push(i);
       }
-      
     }
 
-
     if (timeframe == "Quarters") {
-      labels = ["Q1", "Q2", "Q3", "Q4"];
 
-      (fromDate = "2018-01-01T00:00:00"),
-        (toDate = "2019-01-01T00:00:00"),
-        (this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour"));
+      labels = ["Q1", "Q2", "Q3", "Q4"];
+      this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour");
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
       }
@@ -91,6 +97,7 @@ export default {
         for (let key2 in this.fuel[key].data) {
           array.push(this.fuel[key].data[key2]);
         }
+        console.log(array)
         hilfe = array;
         array = array.slice(0, 2153);
         Summ = array.reduce((prev, cur) => prev + cur, 0);
@@ -173,11 +180,14 @@ export default {
     }
 
     if (timeframe == "Months") {
+
       labels = months;
-      (this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour"));
+      datehelper = fromDate;
+      this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour");
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
       }
+
       for (let f in this.fuel) {
         names.push(this.fuel[f].name);
       }
@@ -186,9 +196,13 @@ export default {
         datekeeper = fromDate.substring(0, 5) + "0" + i + fromDate.substring(7);
         if (i > 9) {
           datekeeper = fromDate.substring(0, 5) + i + fromDate.substring(7);
-        }      
+        }
+
+        console.log(datehelper + "-------" + datekeeper);
+
         this.fuel = this.getFuelTypes(vessel, datehelper, datekeeper, "Hour");
         datehelper = datekeeper;
+
         for (let key in this.fuel) {
           for (let key2 in this.fuel[key].data) {
             array.push(this.fuel[key].data[key2]);
@@ -226,74 +240,86 @@ export default {
           if (i == 11) {
             data10.push(Summ);
           }
-          if (i == 12) {
-            data11.push(Summ);
-          }
+          Summ = 0;
         }
       }
     }
+    let counter;
+    let hjelpeslicer1;
+    let hjelpeslicer2;
 
     if (timeframe == "Days") {
+
       labels = days;
-      (this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour"));
+      datehelper = fromDate;
+      this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour");
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
       }
       for (let f in this.fuel) {
         names.push(this.fuel[f].name);
       }
-      for (i = 2; i < labels.length + 1; i++) {
-        datekeeper = fromDate.substring(0, 8) + "0" + i + fromDate.substring(10);
-        if (i > 9) {
-          datekeeper = fromDate.substring(0, 8) + i + fromDate.substring(10);
-        }
-        this.fuel = this.getFuelTypes(vessel, datehelper, datekeeper, "Hour");
-        datehelper = datekeeper;
+
+      for (i = 0; i < labels.length; i++) {
+        counter = 0;
+        hjelpeslicer1 = hjelpeslicer2;
         for (let key in this.fuel) {
           for (let key2 in this.fuel[key].data) {
             array.push(this.fuel[key].data[key2]);
           }
+
+          hjelpeslicer2 = ((i + 1) * array.length) / labels.length;
+          array = array.slice(
+            hjelpeslicer1,
+            ((i + 1) * array.length) / labels.length
+          );
+
           Summ = array.reduce((prev, cur) => prev + cur, 0);
-          array = [0];
           Summ = Summ.toFixed(2);
-          if (i == 2) {
+          array = [];
+          if (counter == 0) {
             data1.push(Summ);
           }
-          if (i == 3) {
+          if (counter == 1) {
             data2.push(Summ);
           }
-          if (i == 4) {
+          if (counter == 2) {
             data3.push(Summ);
           }
-          if (i == 5) {
+          if (counter == 3) {
             data4.push(Summ);
           }
-          if (i == 6) {
+          if (counter == 4) {
             data5.push(Summ);
           }
-          if (i == 7) {
+          if (counter == 5) {
             data6.push(Summ);
           }
-          if (i == 8) {
+          if (counter == 6) {
             data7.push(Summ);
           }
-          if (i == 9) {
+          if (counter == 7) {
             data8.push(Summ);
           }
-          if (i == 10) {
+          if (counter == 8) {
             data9.push(Summ);
           }
-          if (i == 11) {
+          if (counter == 9) {
             data10.push(Summ);
           }
-          if (i == 12) {
+          if (counter == 10) {
             data11.push(Summ);
           }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
+          counter++;
+          Summ = 0;
         }
       }
     }
 
-    if (elementer.length > 2) {
+    if (elementer.length > 4) {
       this.renderChart(
         {
           labels: labels,
@@ -394,7 +420,7 @@ export default {
               data: data1
             },
             {
-              label: Object.keys(this.fuel)[1],
+              label: names[1],
               backgroundColor: "maroon",
               data: data2
             }
