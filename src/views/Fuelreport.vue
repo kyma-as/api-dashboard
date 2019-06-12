@@ -50,7 +50,7 @@
                   class="primary primary darken-3"
                   flat
                   large
-                  @click="selected = 'show'"
+                  @click="toggleClick"
                 >Show Graph</v-btn>
               </v-card-actions>
             </v-card>
@@ -83,8 +83,8 @@
             </v-card>
           </v-flex>
         </v-layout>
-        <fuelUsers v-bind:selectedVessels="selectedVessels"  v-bind:selectedMonth="selectedMonth"  v-bind:selectedYear="selectedYear"  v-bind:selectedTimeFrame="selectedTimeFrame" v-if="selectedData == 'Fuel Users' && selected == 'show'"/>
-        <fuelTypes v-bind:selectedVessels="selectedVessels"  v-bind:selectedMonth="selectedMonth"  v-bind:selectedYear="selectedYear"  v-bind:selectedTimeFrame="selectedTimeFrame" v-if="selectedData == 'Fuel Types' && selected == 'show'"/>
+        <fuelUsers v-bind:selectedVessels="selectedVessels"  v-bind:selectedMonth="selectedMonth"  v-bind:selectedYear="selectedYear"  v-bind:selectedTimeFrame="selectedTimeFrame" v-if="selectedData == 'Fuel Users' && toggleShow"/>
+        <fuelTypes v-bind:selectedVessels="selectedVessels"  v-bind:selectedMonth="selectedMonth"  v-bind:selectedYear="selectedYear"  v-bind:selectedTimeFrame="selectedTimeFrame" v-if="selectedData == 'Fuel Types' && toggleShow"/>
       </v-content>
     </div>
   </div>
@@ -109,11 +109,21 @@ export default {
 
  
   methods: {
-
-    
+      toggleClick(){
+          if(this.toggleShow){
+              let _this = this;
+              setTimeout(()=>{
+                  _this.toggleShow = !this.toggleShow;
+              },10)
+              _this.toggleShow = !this.toggleShow;
+          }else{
+              this.toggleShow = !this.toggleShow;
+          }
+      }
   },
   data() {
     return {
+        toggleShow:false,
       vessels: ["110", "121", "123", "133"],
       timeFrame: ["Quarters", "Months", "Days"],
       data: ["Fuel Types", "Fuel Users"],
