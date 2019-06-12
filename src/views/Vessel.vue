@@ -2,7 +2,8 @@
   <div class="vessel">
     <NavDrawer/>
     <v-content>
-      <span style="font-size:x-large" class="font-weight-heavy">{{vessel.name}}</span>
+      <span style="font-size:x-large" class="font-weight-bold">{{vessel.name}}</span>
+      <v-divider class="primary"></v-divider>
     <v-layout column>
       <v-layout row>
       <FromDate />
