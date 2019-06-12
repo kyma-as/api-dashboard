@@ -16,25 +16,14 @@ export default {
     selectedVessels: String,
     selectedTimeFrame: String,
     selectedYear: String,
-    selectedMonth: String,
-
+    selectedMonth: String
   },
   mounted() {
     let vessel = parseInt(this.selectedVessels);
     let timeframe = this.selectedTimeFrame;
     let year = this.selectedYear;
     let month = this.selectedMonth;
-
     let Nyear = parseInt(year) + 1;
-
-    let fromDate = year + "-01-01T00:00:00";
-    let toDate = Nyear + "-01-01T00:00:00";
-
-    let yakse = "kg";
-    let labels = [];
-    let names = [];
-    let elementer = [];
-
     let months = [
       "January",
       "February",
@@ -49,7 +38,30 @@ export default {
       "November",
       "December"
     ];
+    let numberMonth;
+    for (let i = 0; i < months.length; i++) {
+      if (month == months[i]) {
+        numberMonth = i;
+      }
+    }
+    if (numberMonth < 10) {
+      numberMonth = "0" + numberMonth;
+    }
+
+    let fromDate = year + "-" + numberMonth + "-01T00:00:00";
+    let toDate = Nyear + "-" + numberMonth + "-01T00:00:00";
+
+    let yFromDate = year + "-01-01T00:00:00";
+    let yToDate = Nyear + "-01-01T00:00:00";
+
+    let yakse = "kg";
+    let labels = [];
+    let names = [];
+    let elementer = [];
+
     let i = 0;
+    let arrayer = [];
+    let harrayer = [];
     let data1 = [];
     let data2 = [];
     let data3 = [];
@@ -72,20 +84,48 @@ export default {
     let Summ = 0;
     let datekeeper = "";
     let datehelper = fromDate;
-
-    for (i = 0; i < 31; i++) {
+    arrayer = [
+      data1,
+      data2,
+      data3,
+      data4,
+      data5,
+      data6,
+      data7,
+      data8,
+      data9,
+      data10,
+      data11,
+      data12
+    ];
+    harrayer = [hdata1, hdata2, hdata3, hdata4];
+    for (i = 1; i < 32; i++) {
       if (i < 10) {
         days.push("0" + i);
       }
       if (i > 9) {
         days.push(i);
       }
+      if (month == "February" && i == 28 && !(year == "2016")) {
+        break;
+      }
+      if (month == "February" && year == "2016" && i == 29) {
+        break;
+      }
+      if (
+        (month == "April" ||
+          month == "June" ||
+          month == "September" ||
+          month == "November") &&
+        i == 30
+      ) {
+        break;
+      }
     }
 
     if (timeframe == "Quarters") {
-
       labels = ["Q1", "Q2", "Q3", "Q4"];
-      this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour");
+      this.fuel = this.getFuelTypes(vessel, yFromDate, yToDate, "Hour");
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
       }
@@ -97,7 +137,7 @@ export default {
         for (let key2 in this.fuel[key].data) {
           array.push(this.fuel[key].data[key2]);
         }
-        console.log(array)
+
         hilfe = array;
         array = array.slice(0, 2153);
         Summ = array.reduce((prev, cur) => prev + cur, 0);
@@ -122,68 +162,17 @@ export default {
         array = [];
       }
 
-      i = 0;
-      data1.push(hdata1[i]);
-      data1.push(hdata2[i]);
-      data1.push(hdata3[i]);
-      data1.push(hdata4[i]);
-      i++;
-      data2.push(hdata1[i]);
-      data2.push(hdata2[i]);
-      data2.push(hdata3[i]);
-      data2.push(hdata4[i]);
-      i++;
-      data3.push(hdata1[i]);
-      data3.push(hdata2[i]);
-      data3.push(hdata3[i]);
-      data3.push(hdata4[i]);
-      i++;
-      data4.push(hdata1[i]);
-      data4.push(hdata2[i]);
-      data4.push(hdata3[i]);
-      data4.push(hdata4[i]);
-      i++;
-      data5.push(hdata1[i]);
-      data5.push(hdata2[i]);
-      data5.push(hdata3[i]);
-      data5.push(hdata4[i]);
-      i++;
-      data6.push(hdata1[i]);
-      data6.push(hdata2[i]);
-      data6.push(hdata3[i]);
-      data6.push(hdata4[i]);
-      i++;
-      data7.push(hdata1[i]);
-      data7.push(hdata2[i]);
-      data7.push(hdata3[i]);
-      data7.push(hdata4[i]);
-      i++;
-      data8.push(hdata1[i]);
-      data8.push(hdata2[i]);
-      data8.push(hdata3[i]);
-      data8.push(hdata4[i]);
-      i++;
-      data9.push(hdata1[i]);
-      data9.push(hdata2[i]);
-      data9.push(hdata3[i]);
-      data9.push(hdata4[i]);
-      i++;
-      data10.push(hdata1[i]);
-      data10.push(hdata2[i]);
-      data10.push(hdata3[i]);
-      data10.push(hdata4[i]);
-      i++;
-      data11.push(hdata1[i]);
-      data11.push(hdata2[i]);
-      data11.push(hdata3[i]);
-      data11.push(hdata4[i]);
+      for (i = 0; i < arrayer.length; i++) {
+        for (let k = 0; k < harrayer.length; k++) {
+          arrayer[i].push(harrayer[k][i]);
+        }
+      }
     }
 
     if (timeframe == "Months") {
-
       labels = months;
       datehelper = fromDate;
-      this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour");
+      this.fuel = this.getFuelTypes(vessel, yFromDate, yToDate, "Hour");
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
       }
@@ -198,85 +187,109 @@ export default {
           datekeeper = fromDate.substring(0, 5) + i + fromDate.substring(7);
         }
 
-        console.log(datehelper + "-------" + datekeeper);
+        // console.log(datehelper + "-------" + datekeeper);
 
         this.fuel = this.getFuelTypes(vessel, datehelper, datekeeper, "Hour");
         datehelper = datekeeper;
 
+        let counter = 0;
         for (let key in this.fuel) {
           for (let key2 in this.fuel[key].data) {
             array.push(this.fuel[key].data[key2]);
           }
           Summ = array.reduce((prev, cur) => prev + cur, 0);
-          array = [0];
+          array = [];
           Summ = Summ.toFixed(2);
-          if (i == 2) {
+          if (counter == 0) {
             data1.push(Summ);
           }
-          if (i == 3) {
+          if (counter == 1) {
             data2.push(Summ);
           }
-          if (i == 4) {
+          if (counter == 2) {
             data3.push(Summ);
           }
-          if (i == 5) {
+          if (counter == 3) {
             data4.push(Summ);
           }
-          if (i == 6) {
+          if (counter == 4) {
             data5.push(Summ);
           }
-          if (i == 7) {
+          if (counter == 5) {
             data6.push(Summ);
           }
-          if (i == 8) {
+          if (counter == 6) {
             data7.push(Summ);
           }
-          if (i == 9) {
+          if (counter == 7) {
             data8.push(Summ);
           }
-          if (i == 10) {
+          if (counter == 8) {
             data9.push(Summ);
           }
-          if (i == 11) {
+          if (counter == 9) {
             data10.push(Summ);
           }
+          if (counter == 10) {
+            data11.push(Summ);
+          }
+          if (counter == 11) {
+            data12.push(Summ);
+          }
+          counter++;
           Summ = 0;
         }
       }
+      //Last month so goes from 2018 to 2019 is the values for december, edgecase
+      this.fuel = this.getFuelTypes(vessel, datehelper, toDate, "Hour");
+      let j = 0;
+      for (let key in this.fuel) {
+        for (let key2 in this.fuel[key].data) {
+          array.push(this.fuel[key].data[key2]);
+        }
+        Summ = array.reduce((prev, cur) => prev + cur, 0);
+        array = [];
+        Summ = Summ.toFixed(2);
+
+        arrayer[j].push(Summ);
+        Summ = 0;
+        j++;
+      }
     }
-    let counter;
-    let hjelpeslicer1;
-    let hjelpeslicer2;
 
     if (timeframe == "Days") {
-
       labels = days;
       datehelper = fromDate;
       this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour");
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
       }
+
       for (let f in this.fuel) {
         names.push(this.fuel[f].name);
       }
+      console.log(names);
 
-      for (i = 0; i < labels.length; i++) {
-        counter = 0;
-        hjelpeslicer1 = hjelpeslicer2;
+      for (i = 2; i < labels.length + 1; i++) {
+        datekeeper =
+          fromDate.substring(0, 8) + "0" + i + fromDate.substring(10);
+        if (i > 9) {
+          datekeeper = fromDate.substring(0, 8) + i + fromDate.substring(10);
+        }
+
+        // console.log(datehelper + "-------" + datekeeper);
+
+        this.fuel = this.getFuelTypes(vessel, datehelper, datekeeper, "Hour");
+        datehelper = datekeeper;
+
+        let counter = 0;
         for (let key in this.fuel) {
           for (let key2 in this.fuel[key].data) {
             array.push(this.fuel[key].data[key2]);
           }
-
-          hjelpeslicer2 = ((i + 1) * array.length) / labels.length;
-          array = array.slice(
-            hjelpeslicer1,
-            ((i + 1) * array.length) / labels.length
-          );
-
           Summ = array.reduce((prev, cur) => prev + cur, 0);
-          Summ = Summ.toFixed(2);
           array = [];
+          Summ = Summ.toFixed(2);
           if (counter == 0) {
             data1.push(Summ);
           }
@@ -327,62 +340,62 @@ export default {
             {
               label: names[0],
               backgroundColor: "blue",
-              data: data1
+              data: arrayer[0]
             },
             {
               label: names[1],
               backgroundColor: "maroon",
-              data: data2
+              data: arrayer[1]
             },
             {
               label: names[2],
               backgroundColor: "green",
-              data: data3
+              data: arrayer[2]
             },
             {
               label: names[3],
               backgroundColor: "yellow",
-              data: data4
+              data: arrayer[3]
             },
             {
               label: names[4],
               backgroundColor: "orange",
-              data: data5
+              data: arrayer[4]
             },
             {
               label: names[5],
               backgroundColor: "purple",
-              data: data6
+              data: arrayer[5]
             },
             {
               label: names[6],
               backgroundColor: "black",
-              data: data7
+              data: arrayer[6]
             },
             {
               label: names[7],
               backgroundColor: "teal",
-              data: data8
+              data: arrayer[7]
             },
             {
               label: names[8],
               backgroundColor: "pink",
-              data: data9
+              data: arrayer[8]
             },
             {
               label: names[9],
               backgroundColor: "brown",
-              data: data10
+              data: arrayer[9]
             },
             {
               label: names[10],
               backgroundColor: "royalblue",
-              data: data11
+              data: arrayer[10]
             },
             {
               label: names[11],
               backgroundColor: "red",
-              data: data12
+              data: arrayer[11]
             }
           ]
         },
@@ -417,12 +430,12 @@ export default {
             {
               label: names[0],
               backgroundColor: "blue",
-              data: data1
+              data: arrayer[0]
             },
             {
               label: names[1],
               backgroundColor: "maroon",
-              data: data2
+              data: arrayer[1]
             }
           ]
         },
@@ -457,22 +470,22 @@ export default {
             {
               label: names[0],
               backgroundColor: "blue",
-              data: data1
+              data: arrayer[0]
             },
             {
               label: names[1],
               backgroundColor: "maroon",
-              data: data2
+              data: arrayer[1]
             },
             {
               label: names[2],
               backgroundColor: "green",
-              data: data3
+              data: arrayer[2]
             },
             {
               label: names[3],
               backgroundColor: "yellow",
-              data: data4
+              data: arrayer[3]
             }
           ]
         },

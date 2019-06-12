@@ -4,7 +4,7 @@
     <div>
       <v-content>
         <v-layout row wrap>
-          <v-flex sm6 md6 lg6>
+          <v-flex sm6 md6 lg4>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select
@@ -17,7 +17,7 @@
               </v-card-actions>
             </v-card>
           </v-flex>
-          <v-flex sm6 md6 lg6>
+          <v-flex sm6 md6 lg4>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select
@@ -30,7 +30,7 @@
               </v-card-actions>
             </v-card>
           </v-flex>
-          <v-flex sm6 md6 lg6>
+          <v-flex sm6 md6 lg4>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select
@@ -43,7 +43,19 @@
               </v-card-actions>
             </v-card>
           </v-flex>
-          <v-flex sm6 md6 lg6>
+            <v-flex sm6 md6 lg4>
+            <v-card dark tile flat class="primary darken-1">
+              <v-card-actions class="v-btn--large">
+                <v-btn
+                  class="primary primary darken-3"
+                  flat
+                  large
+                  @click="selected = 'show'"
+                >Show Graph</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+          <v-flex sm6 md6 lg4>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select
@@ -56,22 +68,11 @@
               </v-card-actions>
             </v-card>
           </v-flex>
-          <v-flex sm6 md6 lg6>
-            <v-card dark tile flat class="primary darken-1">
+        
+          <v-flex sm6 md6 lg4>
+            <v-card dark tile flat class="primary darken-1"  >
               <v-card-actions class="v-btn--large">
-                <v-btn
-                  class="primary primary darken-3"
-                  flat
-                  large
-                  @click="selected = 'show'"
-                >Show Graph</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
-          <v-flex sm6 md6 lg6>
-            <v-card dark tile flat class="primary darken-1"  v-if="selectedTimeFrame == 'Days'">
-              <v-card-actions class="v-btn--large">
-                <v-select
+                <v-select v-if="selectedTimeFrame == 'Days'"
                   class
                   v-model="selectedMonth"
                   :items="month" 
@@ -116,7 +117,7 @@ export default {
       vessels: ["110", "121", "123", "133"],
       timeFrame: ["Quarters", "Months", "Days"],
       data: ["Fuel Types", "Fuel Users"],
-      year: ["2018", "2017", "2016", "2015"],
+      year: ["2019","2018", "2017", "2016"],
       month: [
         "January",
         "February",
