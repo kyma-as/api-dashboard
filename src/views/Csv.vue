@@ -4,7 +4,7 @@
     <div>
       <v-content>
         <v-layout row wrap>
-          <v-flex sm6 md6 lg6>
+          <v-flex sm6 md6 lg6 >
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select class=""
@@ -31,8 +31,8 @@
           </v-flex>
           <v-flex sm6 md6 lg6>
             <v-card dark tile flat class="primary darken-1">
-              <v-card-actions class="v-btn--large">
-                <v-layout>
+              <v-card-actions class="v-btn--large pa-0">
+                <v-layout >
                 <FromDate />
                 <ToDate />
                 </v-layout>
@@ -200,42 +200,50 @@
             /** Fetches data for 10 variables per fetch.
              *  Data is returned as a blob, and all blobs are concatenated
              *  into one blob and sent as payload to 'sendCsvEventToMain'
-             * @param logVariableIds list of variable ids
+             * @param logVariables list of variable ids
              * @param granularity Day,Hour,QuarterHour,Minute,Raw(15sec)
              * @param fromDate YYYY-MM-DD
              * @param toDate YYYY-MM-DD
              */
-            getLogDataCsv(logVariableIds, granularity, fromDate, toDate) {
+            getLogDataCsv(logVariables, granularity, fromDate, toDate) {
                 this.loading = true;
-
+                let ids = "";
+                for(let i = 0; i < logVariables.length; i++) {
+                  ids += logVariables[i].id;
+                  ids += ',';
+                }
+                ids = ids.substring(0, ids.length -1);
+                console.log(ids);
                 // Creating filename from logVars
                 let fileName = `v${this.selectedVessels}_${granularity}_${fromDate}_${toDate}`;
-
                 // Fetching data and sending event to create file
                 let fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
-                    + logVariableIds[0].id + "&granularity=" + granularity + "&fromDate="
-                    + fromDate + "&toDate=" + toDate + "&format=csv";
-                fetch(fetchUrl, this.fetchHeader)
-                    .then(this.handleErrors)
-                    .then(res => res.blob())
-                    .then(blobOutput => {
-                        let myReader = new FileReader();
-                        let _this = this;
-                        myReader.onload = function (event) {
-                            console.log(fileName);
-                            ipcRenderer.send("write-csv", {file:JSON.stringify(myReader.result),fileName:fileName});
-                        };
-                        myReader.readAsText(blobOutput);
-                        this.loading = false;
-                    })
-            }
+                      + ids + "&granularity=" + granularity + "&fromDate="
+                      + fromDate + "&toDate=" + toDate + "&format=csv";
+                  fetch(fetchUrl, this.fetchHeader)
+                  .then(this.handleErrors)
+                  .then(res => res.blob())
+                  .then(blobOutput => {
+                    let myReader = new FileReader();
+                    let _this = this;
+                    myReader.onload = function (event) {
+                      console.log(fileName);
+                      ipcRenderer.send("write-csv", {file:JSON.stringify(myReader.result),fileName:fileName});
+                    };
+                    myReader.readAsText(blobOutput);
+                    this.loading = false;
+                  });
+
+
+              }
+
         },
         computed: {
             fetchUrl() {
                 /** For dynamic use may have to allow
                  *  being altered.
                  */
-                return this.$store.state.url;
+                return this.$store.state.url;yarn
             },
             fetchHeader() {
                 return this.$store.state.header;

@@ -126,7 +126,7 @@ function parseTextToCsv(csv) {
 function writeFile(path, extension, content, callBack) {
   const fs = require("fs");
 
-  let filePath = path + "\\" + content.fileName + extension;
+  let filePath = path + "/" + content.fileName + extension;
 
   console.log(filePath);
   fs.writeFile(filePath, content.file, err => {
@@ -161,7 +161,7 @@ function getPath(specifiedPath) {
   if (specifiedPath) {
     url = path.join(homeDir, specifiedPath);
   } else {
-    url = path.join(homeDir, "downloads");
+    url = path.join(homeDir, "Downloads");
   }
   return url;
 }

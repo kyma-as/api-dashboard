@@ -1,5 +1,5 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-<v-container grid-list-md>
+<v-container fluid class="pa-0 ma-0">
   <v-layout row wrap>
     <v-flex>
       <v-menu
@@ -14,7 +14,7 @@
         min-width="290px"
       >
         <template v-slot:activator="{ on }">
-          <v-text-field 
+          <v-text-field
             v-model="date"
             label="From"
             prepend-icon="event"
@@ -22,13 +22,13 @@
             v-on="on"
           ></v-text-field>
         </template>
-        
-        <v-date-picker 
-        v-model="date" 
-        no-title 
+
+        <v-date-picker
+        v-model="date"
+        no-title
         scrollable
         min="2016-01-01"
-        :max="dateYesterday"
+        :max="dateTo"
         >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
@@ -41,22 +41,29 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
  export default {
-    data: vm => ({
-      date: new Date().toJSON().substr(0, 10),
-      fromDateFormatted: vm.formatDate(new Date().toJSON().substr(0, 19)),
-      menu: false
-    }),
+    data: function() {
+      return {
+        date: this.dateFrom,
+        fromDateFormatted: this.formatDate(new Date().toJSON().substr(0, 19)),
+        menu: false
+      }
+    },
     watch: {
       date (val) {
+        console.log(val);
         this.fromDateFormatted = this.formatDate(this.date)
       }
     },
    computed: {
      dateYesterday() {
        return this.$store.state.dateYesterday;
-     }
+     },
+     ...mapGetters([
+       'dateFrom',
+       'dateTo'
+     ])
    },
     methods: {
       formatDate (date) {
@@ -71,6 +78,9 @@ import { mapActions } from "vuex";
       fDate() {
         return this.$store.state.fromDate;
       }
+    },
+    mounted() {
+      this.date = this.dateFrom;
     }
   }
 </script>
