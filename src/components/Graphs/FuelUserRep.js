@@ -227,8 +227,6 @@ export default {
         }
       }
       //Last month so goes from 2018 to 2019 is the values for december, edgecase
-      console.log(datehelper)
-      console.log(yToDate)
       this.fuel = this.getFuel(vessel, datehelper, yToDate, "Hour");
       let j = 0;
       for (let key in this.fuel) {
@@ -318,6 +316,8 @@ export default {
 
       if (numberMonth == 12) {
         //Last day so goes to a new year, edgecase
+        console.log(datehelper)
+        console.log(yToDate)
         this.fuel = this.getFuel(vessel, datehelper, yToDate, "Hour");
         let j = 0;
         for (let key in this.fuel) {
@@ -342,7 +342,6 @@ export default {
           Summ = array.reduce((prev, cur) => prev + cur, 0);
           array = [];
           Summ = Summ.toFixed(2);
-
           arrayer[j].push(Summ);
           Summ = 0;
           j++;

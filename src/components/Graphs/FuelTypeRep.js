@@ -38,18 +38,23 @@ export default {
       "November",
       "December"
     ];
+    let nMonth;
     let numberMonth;
     for (let i = 0; i < months.length; i++) {
       if (month == months[i]) {
-        numberMonth = i;
+        numberMonth = i + 1;
+        nMonth = i + 2;
       }
     }
     if (numberMonth < 10) {
       numberMonth = "0" + numberMonth;
     }
+    if (nMonth < 10) {
+      nMonth = "0" + nMonth;
+    }
 
     let fromDate = year + "-" + numberMonth + "-01T00:00:00";
-    let toDate = Nyear + "-" + numberMonth + "-01T00:00:00";
+    let toDate = year + "-" + nMonth + "-01T00:00:00";
 
     let yFromDate = year + "-01-01T00:00:00";
     let yToDate = Nyear + "-01-01T00:00:00";
@@ -268,7 +273,7 @@ export default {
       for (let f in this.fuel) {
         names.push(this.fuel[f].name);
       }
-      console.log(names);
+
 
       for (i = 2; i < labels.length + 1; i++) {
         datekeeper =
@@ -328,6 +333,38 @@ export default {
           }
           counter++;
           Summ = 0;
+        }
+      }
+      if (numberMonth == 12) {
+        //Last day so goes to a new year, edgecase
+        this.fuel = this.getFuelTypes(vessel, datehelper, yToDate, "Hour");
+        let j = 0;
+        for (let key in this.fuel) {
+          for (let key2 in this.fuel[key].data) {
+            array.push(this.fuel[key].data[key2]);
+          }
+          Summ = array.reduce((prev, cur) => prev + cur, 0);
+          array = [];
+          Summ = Summ.toFixed(2);
+          arrayer[j].push(Summ);
+          Summ = 0;
+          j++;
+        }
+      } else {
+        //Last day so goes to a new month, edgecase
+        this.fuel = this.getFuelTypes(vessel, datehelper, toDate, "Hour");
+        let j = 0;
+        for (let key in this.fuel) {
+          for (let key2 in this.fuel[key].data) {
+            array.push(this.fuel[key].data[key2]);
+          }
+          Summ = array.reduce((prev, cur) => prev + cur, 0);
+          array = [];
+          Summ = Summ.toFixed(2);
+
+          arrayer[j].push(Summ);
+          Summ = 0;
+          j++;
         }
       }
     }
