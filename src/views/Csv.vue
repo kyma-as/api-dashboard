@@ -4,7 +4,7 @@
     <div>
       <v-content>
         <v-layout row wrap>
-          <v-flex sm6 md6 lg6 >
+          <v-flex sm6 md6 lg6>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large">
                 <v-select class=""
@@ -32,9 +32,9 @@
           <v-flex sm6 md6 lg6>
             <v-card dark tile flat class="primary darken-1">
               <v-card-actions class="v-btn--large pa-0">
-                <v-layout >
-                <FromDate />
-                <ToDate />
+                <v-layout>
+                  <FromDate/>
+                  <ToDate/>
                 </v-layout>
               </v-card-actions>
             </v-card>
@@ -91,6 +91,7 @@
     import NavDrawer from "@/components/NavDrawer";
     import FromDate from "@/components/FromDate";
     import ToDate from "@/components/ToDate";
+
     const {ipcRenderer} = require('electron');
 
 
@@ -100,12 +101,12 @@
             FromDate,
             ToDate
         },
-        created(){
+        created() {
             /**
              * Handles event callback after writing csv file
              */
             let _this = this;
-            ipcRenderer.on("write-csv-callback", (event, arg)=> {
+            ipcRenderer.on("write-csv-callback", (event, arg) => {
                 // Handle error
                 if (!!arg.error) {
                     _this.snackBarError("Error writing to file.")
@@ -114,11 +115,11 @@
                 }
             });
         },
-        beforeDestroy(){
+        beforeDestroy() {
             /**
              * Remove listeners so that we don't stack them up.
              */
-          ipcRenderer.removeAllListeners("write-csv-callback");
+            ipcRenderer.removeAllListeners("write-csv-callback");
         },
         mounted() {
             this.loading = true;
@@ -208,34 +209,39 @@
             getLogDataCsv(logVariables, granularity, fromDate, toDate) {
                 this.loading = true;
                 let ids = "";
-                for(let i = 0; i < logVariables.length; i++) {
-                  ids += logVariables[i].id;
-                  ids += ',';
+                for (let i = 0; i < logVariables.length; i++) {
+                    ids += logVariables[i].id;
+                    ids += ',';
                 }
-                ids = ids.substring(0, ids.length -1);
+                ids = ids.substring(0, ids.length - 1);
                 console.log(ids);
                 // Creating filename from logVars
                 let fileName = `v${this.selectedVessels}_${granularity}_${fromDate}_${toDate}`;
                 // Fetching data and sending event to create file
                 let fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
-                      + ids + "&granularity=" + granularity + "&fromDate="
-                      + fromDate + "&toDate=" + toDate + "&format=csv";
-                  fetch(fetchUrl, this.fetchHeader)
-                  .then(this.handleErrors)
-                  .then(res => res.blob())
-                  .then(blobOutput => {
-                    let myReader = new FileReader();
-                    let _this = this;
-                    myReader.onload = function (event) {
-                      console.log(fileName);
-                      ipcRenderer.send("write-csv", {file:JSON.stringify(myReader.result),fileName:fileName});
-                    };
-                    myReader.readAsText(blobOutput);
-                    this.loading = false;
-                  });
+                    + ids + "&granularity=" + granularity + "&fromDate="
+                    + fromDate + "&toDate=" + toDate + "&format=csv";
+                fetch(fetchUrl, this.fetchHeader)
+                    .then(this.handleErrors)
+                    .then(res => res.blob())
+                    .then(blobOutput => {
+                        let myReader = new FileReader();
+                        let _this = this;
+                        myReader.onload = function (event) {
+                            console.log("filename = " + fileName);
+                            let formatedFileName = fileName.replace(/[/\\?%*:|"<>]/g, '_');
+                            console.log("formatedFilename = " + formatedFileName);
+                            ipcRenderer.send("write-csv", {
+                                file: JSON.stringify(myReader.result),
+                                fileName: formatedFileName
+                            });
+                        };
+                        myReader.readAsText(blobOutput);
+                        this.loading = false;
+                    });
 
 
-              }
+            }
 
         },
         computed: {
@@ -243,7 +249,8 @@
                 /** For dynamic use may have to allow
                  *  being altered.
                  */
-                return this.$store.state.url;yarn
+                return this.$store.state.url;
+                yarn
             },
             fetchHeader() {
                 return this.$store.state.header;
@@ -251,10 +258,10 @@
             isLoading() {
                 return this.loading
             },
-            fDate: function (){
+            fDate: function () {
                 return this.$store.state.fromDate;
             },
-            tDate: function(){
+            tDate: function () {
                 return this.$store.state.toDate;
             }
         },
