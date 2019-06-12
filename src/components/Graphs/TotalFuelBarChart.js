@@ -42,7 +42,7 @@ export default {
       for (let key2 in this.fuel[key].data) {
         array.push(this.fuel[key].data[key2]);
       }
-
+      console.log(array.length)
       let Summ = array.reduce((prev, cur) => prev + cur, 0);
       array = [];
       Summ = Summ.toFixed(2);
