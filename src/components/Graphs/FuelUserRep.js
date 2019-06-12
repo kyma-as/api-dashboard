@@ -24,6 +24,7 @@ export default {
     let year = this.selectedYear;
     let month = this.selectedMonth;
     let Nyear = parseInt(year) + 1;
+    let nMonth;
     let months = [
       "January",
       "February",
@@ -41,15 +42,19 @@ export default {
     let numberMonth;
     for (let i = 0; i < months.length; i++) {
       if (month == months[i]) {
-        numberMonth = i;
+        numberMonth = i + 1;
+        nMonth = i + 2;
       }
     }
     if (numberMonth < 10) {
       numberMonth = "0" + numberMonth;
     }
+    if (nMonth < 10) {
+      nMonth = "0" + nMonth;
+    }
 
     let fromDate = year + "-" + numberMonth + "-01T00:00:00";
-    let toDate = Nyear + "-" + numberMonth + "-01T00:00:00";
+    let toDate = year + "-" + nMonth + "-01T00:00:00";
 
     let yFromDate = year + "-01-01T00:00:00";
     let yToDate = Nyear + "-01-01T00:00:00";
@@ -113,15 +118,14 @@ export default {
       }
       if (
         (month == "April" ||
-        month == "June" ||
-        month == "September" ||
-        month == "November") &&
+          month == "June" ||
+          month == "September" ||
+          month == "November") &&
         i == 30
       ) {
         break;
       }
     }
-
 
     if (timeframe == "Quarters") {
       labels = ["Q1", "Q2", "Q3", "Q4"];
@@ -171,7 +175,7 @@ export default {
 
     if (timeframe == "Months") {
       labels = months;
-      datehelper = fromDate;
+      datehelper = yFromDate;
       this.fuel = this.getFuel(vessel, yFromDate, yToDate, "Hour");
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
@@ -182,9 +186,9 @@ export default {
       }
 
       for (i = 2; i < labels.length + 1; i++) {
-        datekeeper = fromDate.substring(0, 5) + "0" + i + fromDate.substring(7);
+        datekeeper = yFromDate.substring(0, 5) + "0" + i + yFromDate.substring(7);
         if (i > 9) {
-          datekeeper = fromDate.substring(0, 5) + i + fromDate.substring(7);
+          datekeeper = yFromDate.substring(0, 5) + i + yFromDate.substring(7);
         }
 
         // console.log(datehelper + "-------" + datekeeper);
@@ -218,30 +222,14 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
-          if (counter == 6) {
-            data7.push(Summ);
-          }
-          if (counter == 7) {
-            data8.push(Summ);
-          }
-          if (counter == 8) {
-            data9.push(Summ);
-          }
-          if (counter == 9) {
-            data10.push(Summ);
-          }
-          if (counter == 10) {
-            data11.push(Summ);
-          }
-          if (counter == 11) {
-            data12.push(Summ);
-          }
           counter++;
           Summ = 0;
         }
       }
       //Last month so goes from 2018 to 2019 is the values for december, edgecase
-      this.fuel = this.getFuel(vessel, datehelper, toDate, "Hour");
+      console.log(datehelper)
+      console.log(yToDate)
+      this.fuel = this.getFuel(vessel, datehelper, yToDate, "Hour");
       let j = 0;
       for (let key in this.fuel) {
         for (let key2 in this.fuel[key].data) {
@@ -268,10 +256,10 @@ export default {
       for (let f in this.fuel) {
         names.push(this.fuel[f].name);
       }
-      console.log(names);
 
       for (i = 2; i < labels.length + 1; i++) {
-        datekeeper = fromDate.substring(0, 8) + "0" + i + fromDate.substring(10);
+        datekeeper =
+          fromDate.substring(0, 8) + "0" + i + fromDate.substring(10);
         if (i > 9) {
           datekeeper = fromDate.substring(0, 8) + i + fromDate.substring(10);
         }
@@ -307,30 +295,59 @@ export default {
           if (counter == 5) {
             data6.push(Summ);
           }
-          if (counter == 6) {
-            data7.push(Summ);
-          }
-          if (counter == 7) {
-            data8.push(Summ);
-          }
-          if (counter == 8) {
-            data9.push(Summ);
-          }
-          if (counter == 9) {
-            data10.push(Summ);
-          }
-          if (counter == 10) {
-            data11.push(Summ);
-          }
-          if (counter == 11) {
-            data12.push(Summ);
-          }
+
           counter++;
           Summ = 0;
         }
       }
+      //Last day so goes to a new month, edgecase
+      this.fuel = this.getFuel(vessel, datehelper, toDate, "Hour");
+      let j = 0;
+      for (let key in this.fuel) {
+        for (let key2 in this.fuel[key].data) {
+          array.push(this.fuel[key].data[key2]);
+        }
+        Summ = array.reduce((prev, cur) => prev + cur, 0);
+        array = [];
+        Summ = Summ.toFixed(2);
 
-     
+        arrayer[j].push(Summ);
+        Summ = 0;
+        j++;
+      }
+
+      if (numberMonth == 12) {
+        //Last day so goes to a new year, edgecase
+        this.fuel = this.getFuel(vessel, datehelper, yToDate, "Hour");
+        let j = 0;
+        for (let key in this.fuel) {
+          for (let key2 in this.fuel[key].data) {
+            array.push(this.fuel[key].data[key2]);
+          }
+          Summ = array.reduce((prev, cur) => prev + cur, 0);
+          array = [];
+          Summ = Summ.toFixed(2);
+          arrayer[j].push(Summ);
+          Summ = 0;
+          j++;
+        }
+      } else {
+        //Last day so goes to a new month, edgecase
+        this.fuel = this.getFuel(vessel, datehelper, toDate, "Hour");
+        let j = 0;
+        for (let key in this.fuel) {
+          for (let key2 in this.fuel[key].data) {
+            array.push(this.fuel[key].data[key2]);
+          }
+          Summ = array.reduce((prev, cur) => prev + cur, 0);
+          array = [];
+          Summ = Summ.toFixed(2);
+
+          arrayer[j].push(Summ);
+          Summ = 0;
+          j++;
+        }
+      }
     }
 
     if (elementer.length > 4) {
@@ -367,36 +384,6 @@ export default {
               label: names[5],
               backgroundColor: "purple",
               data: arrayer[5]
-            },
-            {
-              label: names[6],
-              backgroundColor: "black",
-              data: arrayer[6]
-            },
-            {
-              label: names[7],
-              backgroundColor: "teal",
-              data: arrayer[7]
-            },
-            {
-              label: names[8],
-              backgroundColor: "pink",
-              data: arrayer[8]
-            },
-            {
-              label: names[9],
-              backgroundColor: "brown",
-              data: arrayer[9]
-            },
-            {
-              label: names[10],
-              backgroundColor: "royalblue",
-              data: arrayer[10]
-            },
-            {
-              label: names[11],
-              backgroundColor: "red",
-              data: arrayer[11]
             }
           ]
         },

@@ -171,7 +171,7 @@ export default {
 
     if (timeframe == "Months") {
       labels = months;
-      datehelper = fromDate;
+      datehelper = yFromDate;
       this.fuel = this.getFuelTypes(vessel, yFromDate, yToDate, "Hour");
       for (let p = 0; p < Object.keys(this.fuel).length; p++) {
         elementer.push(Object.keys(this.fuel)[i]);
@@ -182,9 +182,9 @@ export default {
       }
 
       for (i = 2; i < labels.length + 1; i++) {
-        datekeeper = fromDate.substring(0, 5) + "0" + i + fromDate.substring(7);
+        datekeeper = yFromDate.substring(0, 5) + "0" + i + yFromDate.substring(7);
         if (i > 9) {
-          datekeeper = fromDate.substring(0, 5) + i + fromDate.substring(7);
+          datekeeper = yFromDate.substring(0, 5) + i + yFromDate.substring(7);
         }
 
         // console.log(datehelper + "-------" + datekeeper);
@@ -241,7 +241,7 @@ export default {
         }
       }
       //Last month so goes from 2018 to 2019 is the values for december, edgecase
-      this.fuel = this.getFuelTypes(vessel, datehelper, toDate, "Hour");
+      this.fuel = this.getFuelTypes(vessel, datehelper, yToDate, "Hour");
       let j = 0;
       for (let key in this.fuel) {
         for (let key2 in this.fuel[key].data) {
