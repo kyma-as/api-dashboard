@@ -901,6 +901,12 @@ export default {
       default:
         return "Only for vessel 110 atm";
     }
+  },
+  dateFrom: state => {
+    return state.fromDate.substring(0,10);
+  },
+  dateTo: state => {
+    return state.toDate.substring(0,10);
   }
 };
 

@@ -14,7 +14,7 @@
         min-width="290px"
       >
         <template v-slot:activator="{ on }">
-          <v-text-field 
+          <v-text-field
             v-model="date"
             label="From"
             prepend-icon="event"
@@ -22,10 +22,10 @@
             v-on="on"
           ></v-text-field>
         </template>
-        
-        <v-date-picker 
-        v-model="date" 
-        no-title 
+
+        <v-date-picker
+        v-model="date"
+        no-title
         scrollable
         min="2016-01-01"
         :max="dateYesterday"
@@ -41,22 +41,28 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
  export default {
-    data: vm => ({
-      date: new Date().toJSON().substr(0, 10),
-      fromDateFormatted: vm.formatDate(new Date().toJSON().substr(0, 19)),
-      menu: false
-    }),
+    data: function() {
+      return {
+        date: this.dateFrom,
+        fromDateFormatted: this.formatDate(new Date().toJSON().substr(0, 19)),
+        menu: false
+      }
+    },
     watch: {
       date (val) {
+        console.log(val);
         this.fromDateFormatted = this.formatDate(this.date)
       }
     },
    computed: {
      dateYesterday() {
-       return this.$store.state.dateYesterday;
-     }
+       return this.$store.state.fromDate;
+     },
+     ...mapGetters([
+       'dateFrom'
+     ])
    },
     methods: {
       formatDate (date) {
@@ -71,6 +77,9 @@ import { mapActions } from "vuex";
       fDate() {
         return this.$store.state.fromDate;
       }
+    },
+    mounted() {
+      this.date = this.dateFrom;
     }
   }
 </script>

@@ -205,10 +205,10 @@ export default {
    * NOTE: The demo environment won't necessarily have data corresponding
    * all the way back to today's date.
    */
-  getCurrentDate: ({ commit }) => {
+  getCurrentDate: ({ commit, dispatch }) => {
     // Today
     let date = new Date();
-    let todayDate = date.toJSON().substring(0,19)
+    let todayDate = date.toJSON().substring(0,19);
     commit("SET_TODAY_DATE", todayDate);
 
     // Yesterday
@@ -217,6 +217,7 @@ export default {
     let yesterdayDate = date.toJSON().substring(0,19);
 
     commit("SET_YESTERDAY_DATE", yesterdayDate);
+    dispatch('setDates', {to: todayDate, from: yesterdayDate})
 
   },
 
