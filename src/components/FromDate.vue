@@ -28,7 +28,7 @@
         no-title
         scrollable
         min="2016-01-01"
-        :max="dateYesterday"
+        :max="dateTo"
         >
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
@@ -58,10 +58,11 @@ import { mapGetters } from "vuex";
     },
    computed: {
      dateYesterday() {
-       return this.$store.state.fromDate;
+       return this.$store.state.dateYesterday;
      },
      ...mapGetters([
-       'dateFrom'
+       'dateFrom',
+       'dateTo'
      ])
    },
     methods: {
