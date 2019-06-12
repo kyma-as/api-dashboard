@@ -3,7 +3,6 @@ import { mapGetters } from "vuex";
 
 export default {
   extends: Bar,
-  mixins: [mixins.reactiveProp],
   computed: {
     ...mapGetters(["getSpeed"]),
     fDate() {
