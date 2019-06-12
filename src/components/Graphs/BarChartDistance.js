@@ -1,8 +1,9 @@
-import { Bar } from "vue-chartjs";
+import { Bar, mixins } from "vue-chartjs";
 import { mapGetters } from "vuex";
 
 export default {
   extends: Bar,
+  mixins: [mixins.reactiveProp],
   computed: {
     ...mapGetters(["getSpeed"]),
     fDate() {
@@ -13,12 +14,11 @@ export default {
     },
     speed() {
       return this.getSpeed(this.$route.params.vesselid,
-      this.fdate, this.tDate, "Hour");
+      this.fDate, this.tDate, "Hour");
     }
   },
   data() {
     return {
-      speed: {},
       yakse: "KM",
       names: ["Nautikal", "KM"]
     };
