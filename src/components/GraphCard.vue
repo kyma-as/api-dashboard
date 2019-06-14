@@ -26,8 +26,6 @@
 
     <speedChart v-if="selected == 'Speed'"/>
     <barChart v-if="selected == 'Total Fuel BarChart'"/>
-    <fuelUsersBarChart v-if="selected == 'Bar-Chart FuelUsers'"/>
-    <barChartFuelType v-if="selected == 'Bar-Chart FuelType'"/>
     <BarChartFuelTypes v-if="selected == 'Total FuelTypes BarChart'"/>
     <pieChart v-if="selected == 'Pie-Chart'"/>
     <barChartEmission v-if="selected == 'Bar-Chart Emission'"/>
@@ -40,8 +38,6 @@
     import speedChart from "@/components/Graphs/SpeedChart.js";
     import pieChart from "@/components/Graphs/TotalFuelPieChart.js";
     import barChart from "@/components/Graphs/TotalFuelBarChart.js";
-    import fuelUsersBarChart from "@/components/Graphs/FuelUsersBarChart.js";
-    import BarChartFuelType from "@/components/Graphs/FuelTypesBarChart.js";
     import BarChartFuelTypes from "@/components/Graphs/TotalFuelTypesBarChart.js";
     import barChartEmission from "@/components/Graphs/BarChartEmission.js";
     import barChartDistance from "@/components/Graphs/BarChartDistance.js";
@@ -56,20 +52,15 @@
                 {title: 'Pie-Chart'},
                 {title: 'Bar-Chart Emission'},
                 {title: 'Bar-Chart Distance'},
-                {title: 'Bar-Chart FuelUsers'},
-                {title: 'Bar-Chart FuelType'},
             ],
             selected: ""
         }),
         components: {
             speedChart,
             barChart,
-            fuelUsersBarChart,
             pieChart,
             barChartEmission,
             barChartDistance,
-            BarChartFuelType,
-            BarChartFuelTypes
         },
         methods: {
             showGraph: function (input) {
