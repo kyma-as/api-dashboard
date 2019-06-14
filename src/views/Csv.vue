@@ -250,9 +250,6 @@
                     myReader.readAsText(blobOutput);
                     this.loading = false;
                   });
->>>>>>> 89c94c03e0c851655323b643bed3e943efd7d584
-
-
             }
 
         },
@@ -262,7 +259,6 @@
                  *  being altered.
                  */
                 return this.$store.state.url;
-                yarn
             },
             fetchHeader() {
                 return this.$store.state.header;
