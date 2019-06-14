@@ -213,7 +213,6 @@
                   ids += ',';
                 }
                 ids = ids.substring(0, ids.length -1);
-                console.log(ids);
                 // Creating filename from logVars
                 let fileName = `v${this.selectedVessels}_${granularity}_${fromDate}_${toDate}`;
                 // Fetching data and sending event to create file
@@ -227,7 +226,6 @@
                     let myReader = new FileReader();
                     let _this = this;
                     myReader.onload = function (event) {
-                      console.log(fileName);
                       ipcRenderer.send("write-csv", {file:JSON.stringify(myReader.result),fileName:fileName});
                     };
                     myReader.readAsText(blobOutput);

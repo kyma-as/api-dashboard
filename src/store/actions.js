@@ -15,7 +15,6 @@ export default {
     if (!state.fetchedVessels) {
       let url = `${state.url}vessels`;
       let header = state.header;
-      console.log(state.header);
 
       let res = await fetch(url, header);
       let vessels = await res.json();
@@ -222,8 +221,6 @@ export default {
   },
 
   setDates: ({ commit }, dates) => {
-    console.log("Commiting dates to state");
-    console.log(dates);
     if (!!dates.from) {
       commit("SET_FROM_DATE", dates.from);
     }
