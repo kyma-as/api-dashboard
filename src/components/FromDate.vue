@@ -52,7 +52,6 @@ import { mapGetters } from "vuex";
     },
     watch: {
       date (val) {
-        console.log(val);
         this.fromDateFormatted = this.formatDate(this.date)
       }
     },

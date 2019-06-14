@@ -25,13 +25,11 @@
     </v-menu>
 
     <speedChart v-if="selected == 'Speed'"/>
-    <barChart v-if="selected == 'Total Fuel BarChart'"/>
-    <fuelUsersBarChart v-if="selected == 'Bar-Chart FuelUsers'"/>
-    <barChartFuelType v-if="selected == 'Bar-Chart FuelType'"/>
-    <BarChartFuelTypes v-if="selected == 'Total FuelTypes BarChart'"/>
-    <pieChart v-if="selected == 'Pie-Chart'"/>
-    <barChartEmission v-if="selected == 'Bar-Chart Emission'"/>
-    <barChartDistance v-if="selected == 'Bar-Chart Distance'"/>
+    <barChart v-if="selected == 'Fuel Consumption Bar'"/>
+    <pieChart v-if="selected == 'Fuel Consumption Pie'"/>
+    <fuel-types v-if="selected == 'Fuel Types'"/>
+    <barChartEmission v-if="selected == 'Emission'"/>
+    <barChartDistance v-if="selected == 'Distance'"/>
   </div>
 </template>
 
@@ -40,36 +38,30 @@
     import speedChart from "@/components/Graphs/SpeedChart.js";
     import pieChart from "@/components/Graphs/TotalFuelPieChart.js";
     import barChart from "@/components/Graphs/TotalFuelBarChart.js";
-    import fuelUsersBarChart from "@/components/Graphs/FuelUsersBarChart.js";
-    import BarChartFuelType from "@/components/Graphs/FuelTypesBarChart.js";
-    import BarChartFuelTypes from "@/components/Graphs/TotalFuelTypesBarChart.js";
     import barChartEmission from "@/components/Graphs/BarChartEmission.js";
     import barChartDistance from "@/components/Graphs/BarChartDistance.js";
+    import fuelTypes from "@/components/Graphs/TotalFuelTypesBarChart.js";
     import {mapState, mapGetters} from 'vuex';
 
     export default {
         data: () => ({
             graphs: [
                 {title: 'Speed'},
-                {title: 'Total Fuel BarChart'},
-                {title: 'Total FuelTypes BarChart'},
-                {title: 'Pie-Chart'},
-                {title: 'Bar-Chart Emission'},
-                {title: 'Bar-Chart Distance'},
-                {title: 'Bar-Chart FuelUsers'},
-                {title: 'Bar-Chart FuelType'},
+                {title: 'Fuel Consumption Bar'},
+                {title: 'Fuel Consumption Pie'},
+                {title: 'Fuel Types'},
+                {title: 'Emission'},
+                {title: 'Distance'},
             ],
             selected: ""
         }),
         components: {
             speedChart,
             barChart,
-            fuelUsersBarChart,
             pieChart,
             barChartEmission,
             barChartDistance,
-            BarChartFuelType,
-            BarChartFuelTypes
+            fuelTypes
         },
         methods: {
             showGraph: function (input) {

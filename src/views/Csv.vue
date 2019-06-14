@@ -213,8 +213,7 @@
                     ids += logVariables[i].id;
                     ids += ',';
                 }
-                ids = ids.substring(0, ids.length - 1);
-                console.log(ids);
+
                 // Creating filename from logVars
                 let fileName = `v${this.selectedVessels}_${granularity}_${fromDate}_${toDate}`;
                 // Fetching data and sending event to create file
@@ -228,9 +227,7 @@
                         let myReader = new FileReader();
                         let _this = this;
                         myReader.onload = function (event) {
-                            console.log("filename = " + fileName);
                             let formatedFileName = fileName.replace(/[/\\?%*:|"<>]/g, '_');
-                            console.log("formatedFilename = " + formatedFileName);
                             ipcRenderer.send("write-csv", {
                                 file: JSON.stringify(myReader.result),
                                 fileName: formatedFileName
@@ -239,6 +236,21 @@
                         myReader.readAsText(blobOutput);
                         this.loading = false;
                     });
+                      + ids + "&granularity=" + granularity + "&fromDate="
+                      + fromDate + "&toDate=" + toDate + "&format=csv";
+                  fetch(fetchUrl, this.fetchHeader)
+                  .then(this.handleErrors)
+                  .then(res => res.blob())
+                  .then(blobOutput => {
+                    let myReader = new FileReader();
+                    let _this = this;
+                    myReader.onload = function (event) {
+                      ipcRenderer.send("write-csv", {file:JSON.stringify(myReader.result),fileName:fileName});
+                    };
+                    myReader.readAsText(blobOutput);
+                    this.loading = false;
+                  });
+>>>>>>> 89c94c03e0c851655323b643bed3e943efd7d584
 
 
             }
