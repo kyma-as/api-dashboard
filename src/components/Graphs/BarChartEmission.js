@@ -4,7 +4,13 @@ import { mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapGetters(["getEmission"])
+    ...mapGetters(["getEmission"]),
+    fDate() {
+      return this.$store.state.fromDate;
+    },
+    tDate() {
+      return this.$store.state.toDate;
+    }
   },
   data() {
     return {
@@ -13,19 +19,28 @@ export default {
   },
 
   mounted() {
+    let fromDate = this.fDate;
+    let toDate = this.tDate;
     this.emission = this.getEmission(
       this.$route.params.vesselid,
-      "2019-04-20",
-      "2019-05-01",
+      fromDate,
+      toDate,
       "Hour"
     );
     let labels = [];
     let dataen = [];
     let array = [];
+    let yakse = "Kg";
+    let names = [];
     let i = 0;
     for (i = 0; i < Object.keys(this.emission).length; i++) {
       labels.push(Object.keys(this.emission)[i]);
     }
+    // pushes all variable names to array
+    for (let f in this.emission) {
+      names.push(this.emission[f].name);
+    }
+
     for (let key in this.emission) {
       for (let key2 in this.emission[key].data) {
         array.push(this.emission[key].data[key2]);
@@ -40,24 +55,41 @@ export default {
 
     this.renderChart(
       {
-        labels: Object.keys(this.emission),
+        labels: ["Total"],
         datasets: [
           {
-            data: dataen,
-            backgroundColor: [
-              "blue",
-              "red",
-              "green",
-              "yellow",
-              "orange",
-              "purple",
-              "black"
-            ],
-            label: "emission"
+            data: [dataen[0]],
+            backgroundColor: ["green"],
+            label: names[0]
+          },
+          {
+            data: [dataen[1]],
+            backgroundColor: ["black"],
+            label: names[1]
           }
         ]
       },
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: yakse,
+                backgroundColor: "red"
+              }
+            }
+          ]
+        },
+        title: {
+          FontSize: 90,
+          display: true,
+          text: "Total Emissions"
+        }
+      }
     );
   }
 };

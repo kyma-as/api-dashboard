@@ -15,10 +15,10 @@ return Return LogVar
 User<--Csv.vue:Show LogVar for ship
 User->Csv.vue:Specify LogVar+Time+Granularity
 
-Csv.vue->KymaServer:Get Batch of Data as CSV
-activate KymaServer
-Csv.vue<--KymaServer:Return CSV Data
-deactivate KymaServer
+Csv.vue->KymaDataCenter:Get Batch of Data as CSV
+activate KymaDataCenter
+Csv.vue<--KymaDataCenter:Return CSV Data
+deactivate KymaDataCenter
 
 Csv.vue->mainThread:Event: Create CSV File
 activate mainThread

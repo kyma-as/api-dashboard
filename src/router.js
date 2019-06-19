@@ -4,6 +4,7 @@ import Login from "./views/Login.vue";
 import Vessels from "./views/Vessels.vue";
 import Vessel from "./views/Vessel.vue";
 import Csv from "./views/Csv.vue";
+import Fuelreport from "./views/Fuelreport.vue";
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
       path: "/csv",
       name: "csv",
       component: Csv
+    },
+    {
+      path: "/fuelreport",
+      name: "fuelreport",
+      component: Fuelreport
     }
   ]
 });

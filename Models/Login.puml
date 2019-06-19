@@ -8,17 +8,17 @@ alt Successful Validation
 Login.vue->AuthenticationUtil.js
 activate AuthenticationUtil.js
 
- AuthenticationUtil.js->KymaServer:Authenticate Login
- activate KymaServer
+ AuthenticationUtil.js->KymaDataCenter:Authenticate Login
+ activate KymaDataCenter
  alt Successful Authentication
 
-  KymaServer-->AuthenticationUtil.js: 200 OK
+  KymaDataCenter-->AuthenticationUtil.js: 200 OK
   AuthenticationUtil.js-->Login.vue:Boolean: Authenticated
   Login.vue-->User:Route to Home Dashboard
  else Authentication Failure
 
-  KymaServer-->AuthenticationUtil.js: 401 Authentication Error
-  deactivate KymaServer
+  KymaDataCenter-->AuthenticationUtil.js: 401 Authentication Error
+  deactivate KymaDataCenter
   AuthenticationUtil.js-->Login.vue:Boolean: Authenticated
   Login.vue-->User:Display Error Message
   end

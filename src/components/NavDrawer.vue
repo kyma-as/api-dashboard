@@ -52,7 +52,7 @@
           <v-icon class="primary--text">{{ item.icon }}</v-icon>
         </v-list-tile-action>
 
-
+      
         <v-list-tile-content>
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>
         </v-list-tile-content>
@@ -60,18 +60,37 @@
       </v-list-tile>
       </router-link>
         <v-divider class="primary lighten-1"/>
-
+  
       </v-list>
+      
+      
   </v-navigation-drawer>
 </template>
 
 <script>
+ import FromDate from "@/components/FromDate";
+ import ToDate from "@/components/ToDate";
     export default {
         name: "navdrawer",
+            components: {
+
+        FromDate,
+        ToDate        
+    },
+    //computed: {
+    //fDate(){
+    //  return this.$store.state.fromDate.substring(0,10);
+    //},
+    //tDate(){
+    //  return this.$store.state.toDate.substring(0,10);
+    //}
+    //},
+    
         data() {
             return {
                 items: [
                     {title: 'Vessels', icon: 'directions_boat',path:"/vessels"},
+                    {title: 'Fuel Report',icon:'assignment',path:"/fuelreport"},
                     {title: 'Print CSV Log',icon:'description',path:"/csv"},
                     {title: 'Logout', icon: 'exit_to_app',path:"/"}
                 ],

@@ -153,7 +153,7 @@ export default {
   getLogData: async ({ state, commit }, payload) => {
     let logVariableId = payload.varId;
     let fromDate = "2016-01-01";
-    let toDate = "2019-05-01";
+    let toDate = state.dateToday; // + T23:45:00???
     let granularity = payload.granularity;
     if (granularity == "QuarterHour") {
       fromDate = "2019-04-15"; // ~ two tweeks
@@ -164,6 +164,12 @@ export default {
 
     let res = await fetch(url, header);
     let jsonLogData = await res.json();
+
+    commit("APPEND_UNIT", {
+      unit: jsonLogData.unit.name,
+      vesselIndex: payload.vesselIndex,
+      logIndex: payload.logIndex
+    });
 
     switch (granularity) {
       case "Day":
@@ -198,18 +204,31 @@ export default {
    * NOTE: The demo environment won't necessarily have data corresponding
    * all the way back to today's date.
    */
-  getCurrentDate: ({ commit }) => {
-    let temp_date = new Date();
-    let date =
-      "" +
-      temp_date.getFullYear() +
-      "-" +
-      (temp_date.getMonth() + 1) +
-      "-" +
-      temp_date.getDate();
-    commit("SET_DATE", date);
-    commit("INCREMENT");
+  getCurrentDate: ({ commit, dispatch }) => {
+    // Today
+    let date = new Date();
+    let todayDate = date.toJSON().substring(0,19);
+    commit("SET_TODAY_DATE", todayDate);
+
+    // Yesterday
+    date = new Date();
+    date.setDate(date.getDate()-1);
+    let yesterdayDate = date.toJSON().substring(0,19);
+
+    commit("SET_YESTERDAY_DATE", yesterdayDate);
+    dispatch('setDates', {to: todayDate, from: yesterdayDate})
+
   },
+
+  setDates: ({ commit }, dates) => {
+    if (!!dates.from) {
+      commit("SET_FROM_DATE", dates.from);
+    }
+    if (!!dates.to) {
+      commit("SET_TO_DATE", dates.to);
+    }
+  },
+
   /**
    * After authenticating in login will set the user to loggedIn
    * and login info in header

@@ -8,7 +8,7 @@
             dark
             v-on="on"
         >
-          Graph
+          Graphs
         </v-btn>
       </template>
 
@@ -24,55 +24,44 @@
 
     </v-menu>
 
-    <lineChart v-if="selected == 'Line-Chart'"/>
-    <barChart v-if="selected == 'Bar-Chart'"/>
-    <barChartAar v-if="selected == 'Bar-Chart Aar'"/>
-    <barChartMonth v-if="selected == 'Bar-Chart Month'"/>
-    <barChartDag v-if="selected == 'Bar-Chart Day'"/>
-
-
-    <pieChart v-if="selected == 'Pie-Chart'"/>
-    <barChartEmission v-if="selected == 'Bar-Chart Emission'"/>
-    <barChartDistance v-if="selected == 'Bar-Chart Distance'"/>
+    <speedChart v-if="selected == 'Speed'"/>
+    <barChart v-if="selected == 'Fuel Consumption Bar'"/>
+    <pieChart v-if="selected == 'Fuel Consumption Pie'"/>
+    <fuel-types v-if="selected == 'Fuel Types'"/>
+    <barChartEmission v-if="selected == 'Emission'"/>
+    <barChartDistance v-if="selected == 'Distance'"/>
   </div>
 </template>
 
 <script>
 
-    import lineChart from "@/components/Graphs/LineChart.js";
-    import pieChart from "@/components/Graphs/PieChart.js";
-    import barChart from "@/components/Graphs/BarChart.js";
-    import barChartAar from "@/components/Graphs/BarChartAar.js";
-    import barChartMonth from "@/components/Graphs/BarChartMonth.js";
-    import barChartDag from "@/components/Graphs/BarChartDag.js";
+    import speedChart from "@/components/Graphs/SpeedChart.js";
+    import pieChart from "@/components/Graphs/TotalFuelPieChart.js";
+    import barChart from "@/components/Graphs/TotalFuelBarChart.js";
     import barChartEmission from "@/components/Graphs/BarChartEmission.js";
     import barChartDistance from "@/components/Graphs/BarChartDistance.js";
+    import fuelTypes from "@/components/Graphs/TotalFuelTypesBarChart.js";
     import {mapState, mapGetters} from 'vuex';
 
     export default {
         data: () => ({
             graphs: [
-                {title: 'Line-Chart'},
-                {title: 'Bar-Chart'},
-                {title: 'Pie-Chart'},
-                {title: 'Bar-Chart Emission'},
-                {title: 'Bar-Chart Distance'},
-                {title: 'Bar-Chart Aar'},
-                {title: 'Bar-Chart Month'},
-                {title: 'Bar-Chart Day'}
-
+                {title: 'Speed'},
+                {title: 'Fuel Consumption Bar'},
+                {title: 'Fuel Consumption Pie'},
+                {title: 'Fuel Types'},
+                {title: 'Emission'},
+                {title: 'Distance'},
             ],
             selected: ""
         }),
         components: {
-            lineChart,
+            speedChart,
             barChart,
-            barChartAar,
             pieChart,
             barChartEmission,
             barChartDistance,
-            barChartDag,
-            barChartMonth
+            fuelTypes
         },
         methods: {
             showGraph: function (input) {
@@ -83,29 +72,13 @@
             ...mapState([
                 'vessels'
             ]),
-            ...mapGetters([
-                'getSpeed',
-                'getFuel',
-                'getEmission'
-            ]),
-            logvariables() {
-                return this.vessel.logVariables;
-            },
-            speed() {
-                return this.getSpeed(this.$route.params.vesselid);
-            },
-            fuel() {
-                return this.getFuel(this.$route.params.vesselid);
-            },
-            emission() {
-                return this.getEmission(this.$route.params.vesselid);
-            }
+           
         },
         mounted() {
             const vessel = this.vessels
                 .find(x => x.id === this.$route.params.vesselid);
             this.vessel = vessel;
-            this.selected = 'Line-Chart';
+            this.selected = 'Speed';
         },
     }
 </script>
