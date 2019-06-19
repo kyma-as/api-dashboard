@@ -149,7 +149,7 @@ export default {
       selectedVessels: [],
       selectedTimeFrame: [],
       selectedYear: [],
-      selectedMonth: [],
+      selectedMonth: "",
       // Misc
       loading: false
     };
