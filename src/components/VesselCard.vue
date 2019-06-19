@@ -58,19 +58,21 @@
             },
             getCurrentSpeed: async function () {
                 let vesselId = this.vessel.id;
-                let today = this.$store.state.dateToday + "T00:00:00";
-                let yesterday = this.$store.state.dateYesterday + "T00:00:00";
+                let today = this.$store.state.dateToday;
+                let yesterday = this.$store.state.dateYesterday;
                 let _this = this;
+                let d = new Date();
 
+                // This was created with the thought of the data being fetched continually
                 function checkSpeedTimer() {
                     let speed = Object.values(
-                        _this.getSpeed(vesselId, yesterday, today, "QuarterHour").gps.data);
+                        _this.getSpeed(vesselId, yesterday + `T${d.getHours()}:${d.getMinutes()}:00`, today + `T${d.getHours}:${d.getMinutes()}:00`, "QuarterHour").gps.data);
                     speed = speed[speed.length - 1];
                     if (!!speed)
                         _this.speed = speed.toFixed(2);
                 }
 
-                setInterval(checkSpeedTimer, 2500);
+                setInterval(checkSpeedTimer, 1000);
             }
         }
     }
