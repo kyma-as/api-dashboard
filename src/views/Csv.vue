@@ -91,7 +91,6 @@
     import NavDrawer from "@/components/NavDrawer";
     import FromDate from "@/components/FromDate";
     import ToDate from "@/components/ToDate";
-
     const {ipcRenderer} = require('electron');
 
 
@@ -166,19 +165,16 @@
 
             /** To get the vessels needed for the
              *  dropdown list
+             *  Vessels are retrieved from state
              */
             getVessels() {
                 let fetchUrl = `${this.fetchUrl}vessels`;
-                fetch(fetchUrl, this.fetchHeader)
-                    .then(this.handleErrors)
-                    .then(res => res.json())
-                    .then(vessels => {
 
-                        for (let entry of vessels) {
-                            this.vessels.push(entry.id);
-                        }
-                        this.loading = false;
-                    })
+                let vessels = this.$store.state.vessels;
+                for(let vessel of vessels){
+                    this.vessels.push(vessel.id);
+                }
+                this.loading = false;
             },
 
             /** Uses the vessel specified in the
