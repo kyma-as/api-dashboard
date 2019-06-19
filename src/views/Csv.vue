@@ -207,38 +207,50 @@
              * @param toDate YYYY-MM-DD
              */
             getLogDataCsv(logVariables, granularity, fromDate, toDate) {
+                const maxVariables = 10;
                 this.loading = true;
                 let ids = "";
-                for (let i = 0; i < logVariables.length; i++) {
-                    ids += logVariables[i].id;
-                    ids += ',';
+
+                if(logVariables.length<1){
+                    this.snackBarError("Missing log variables");
+                    this.loading = false;
+                }else if(granularity.length<1){
+                    this.snackBarError("Missing granularity");
+                    this.loading = false;
+                }else{
+                    for (let i = 0; i < logVariables.length && i < maxVariables; i++) {
+                        ids += logVariables[i].id;
+                        ids += ',';
+                    }
+                    ids = ids.substring(0, ids.length - 1);
+                    console.log(ids);
+                    // Creating filename from logVars
+                    let fileName = `v${this.selectedVessels}_${granularity}_${fromDate}_${toDate}`;
+                    // Fetching data and sending event to create file
+                    let fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
+                        + ids + "&granularity=" + granularity + "&fromDate="
+                        + fromDate + "&toDate=" + toDate + "&format=csv";
+                    fetch(fetchUrl, this.fetchHeader)
+                        .then(this.handleErrors)
+                        .then(res => res.blob())
+                        .then(blobOutput => {
+                            let myReader = new FileReader();
+                            let _this = this;
+                            myReader.onload = function (event) {
+                                console.log("filename = " + fileName);
+                                let formatedFileName = fileName.replace(/[/\\?%*:|"<>]/g, '_');
+                                console.log("formatedFilename = " + formatedFileName);
+                                ipcRenderer.send("write-csv", {
+                                    file: JSON.stringify(myReader.result),
+                                    fileName: formatedFileName
+                                });
+                            };
+                            myReader.readAsText(blobOutput);
+                            this.loading = false;
+                        });
                 }
-                ids = ids.substring(0, ids.length - 1);
-                console.log(ids);
-                // Creating filename from logVars
-                let fileName = `v${this.selectedVessels}_${granularity}_${fromDate}_${toDate}`;
-                // Fetching data and sending event to create file
-                let fetchUrl = this.fetchUrl + "logdata/BatchFind?logVariableIds="
-                    + ids + "&granularity=" + granularity + "&fromDate="
-                    + fromDate + "&toDate=" + toDate + "&format=csv";
-                fetch(fetchUrl, this.fetchHeader)
-                    .then(this.handleErrors)
-                    .then(res => res.blob())
-                    .then(blobOutput => {
-                        let myReader = new FileReader();
-                        let _this = this;
-                        myReader.onload = function (event) {
-                            console.log("filename = " + fileName);
-                            let formatedFileName = fileName.replace(/[/\\?%*:|"<>]/g, '_');
-                            console.log("formatedFilename = " + formatedFileName);
-                            ipcRenderer.send("write-csv", {
-                                file: JSON.stringify(myReader.result),
-                                fileName: formatedFileName
-                            });
-                        };
-                        myReader.readAsText(blobOutput);
-                        this.loading = false;
-                    });
+
+
             }
 
         },
