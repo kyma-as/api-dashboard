@@ -1,6 +1,5 @@
 import { Bar } from "vue-chartjs";
 import { mapGetters } from "vuex";
-import { parse } from "terser";
 
 export default {
   extends: Bar,
@@ -12,6 +11,7 @@ export default {
       fuel: {}
     };
   },
+  //recievs data from the view Fuelreport
   props: {
     selectedVessels: String,
     selectedTimeFrame: String,
@@ -62,19 +62,12 @@ export default {
     let yakse = "kg";
     let labels = [];
     let names = [];
-    let elementer = [];
-
     let i = 0;
     let arrayer = [];
-    let harrayer = [];
     let data1 = [];
     let data2 = [];
     let data3 = [];
     let data4 = [];
-    let hdata1 = [];
-    let hdata2 = [];
-    let hdata3 = [];
-    let hdata4 = [];
     let data5 = [];
     let data6 = [];
     let data7 = [];
@@ -84,7 +77,6 @@ export default {
     let data11 = [];
     let data12 = [];
     let days = [];
-    let hilfe = [];
     let array = [];
     let Summ = 0;
     let datekeeper = "";
@@ -103,7 +95,6 @@ export default {
       data11,
       data12
     ];
-    harrayer = [hdata1, hdata2, hdata3, hdata4];
     for (i = 1; i < 32; i++) {
       if (i < 10) {
         days.push("0" + i);
@@ -128,19 +119,20 @@ export default {
       }
     }
 
+
+    //quarterly graph
     if (timeframe == "Quarters") {
       labels = ["Q1", "Q2", "Q3", "Q4"];
 
       datehelper = yFromDate;
       this.fuel = this.getFuelTypes(vessel, yFromDate, yToDate, "Hour");
-      for (let p = 0; p < Object.keys(this.fuel).length; p++) {
-        elementer.push(Object.keys(this.fuel)[i]);
-      }
-
+      //gets a list of the names of the variabels 
       for (let f in this.fuel) {
         names.push(this.fuel[f].name);
       }
+
       let k = 0;
+      // makes multiple fetches from state and makes datasets for intervalls in this case quarterly
       for (i = 1; i < labels.length + 1; i++) {
         if (i == 1) {
           k = 4;
@@ -216,9 +208,6 @@ export default {
       labels = months;
       datehelper = yFromDate;
       this.fuel = this.getFuelTypes(vessel, yFromDate, yToDate, "Hour");
-      for (let p = 0; p < Object.keys(this.fuel).length; p++) {
-        elementer.push(Object.keys(this.fuel)[i]);
-      }
 
       for (let f in this.fuel) {
         names.push(this.fuel[f].name);
@@ -304,9 +293,6 @@ export default {
       labels = days;
       datehelper = fromDate;
       this.fuel = this.getFuelTypes(vessel, fromDate, toDate, "Hour");
-      for (let p = 0; p < Object.keys(this.fuel).length; p++) {
-        elementer.push(Object.keys(this.fuel)[i]);
-      }
 
       for (let f in this.fuel) {
         names.push(this.fuel[f].name);
@@ -407,7 +393,7 @@ export default {
       }
     }
 
-    if (elementer.length > 4) {
+    if (names.length > 4) {
       this.renderChart(
         {
           labels: labels,
@@ -497,7 +483,7 @@ export default {
         }
       );
     }
-    if (elementer.length == 2) {
+    if (names.length == 2) {
       this.renderChart(
         {
           labels: labels,
@@ -537,7 +523,7 @@ export default {
         }
       );
     }
-    if (elementer.length == 4) {
+    if (names.length == 4) {
       this.renderChart(
         {
           labels: labels,
