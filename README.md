@@ -1,7 +1,11 @@
-# api-dashboard
+# SensorShip a Kyma Dashboard Application
+
+A cross platform desktop application for data for vessels in shipping. Used to demonstrate ways a customer may use the sensor data that the Kyma API provides. The application is built using JavaScript with Electron and the Vue framework.
+
+## Installation
 Requires **Yarn**
 
-## Project setup
+### Project setup
 ```
 yarn install
 ```
